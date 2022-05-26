@@ -1,0 +1,55 @@
+--- 
+title: "Inferencia Ativa"
+author: "Thomas Parr, Giovanni Pezzulo, and Karl J. Friston"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    theme: cosmo
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: O Princípio da Energia Livre na Mente, Cérebro e Comportamento.
+site: bookdown::bookdown_site
+colorlinks: yes
+lot: yes
+lof: yes
+fontsize: 12pt
+cover-image: images/Figura_1_1.png
+---
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+O Princípio da Energia Livre na Mente, Cérebro e Comportamento.
+
+# Conteúdo {-}
+(I)  
+
+1. Visão geral  
+2. O caminho mais curto para a inferência ativa  
+3. O caminho mais árduo para a inferência ativa  
+4. Os Modelos Geradores de Inferência Ativa  
+5. Passagem de mensagens e neurobiologia  
+
+(II)
+
+6. Uma receita para projetar modelos de inferência ativos
+7. Inferência ativa em tempo discreto
+8. Inferência Ativa em Tempo Contínuo
+9. Análise de dados baseada em modelo
+10. Inferência Ativa como uma Teoria Unificada do Comportamento Sentiente
+
+
+Apêndice A: Fundamentos Matemáticos  
+Apêndice B: As Equações da Inferência Ativa   
+Apêndice C: Um Exemplo comentado do Código Matlab  
+Notas  
+Referências  
+Índice  

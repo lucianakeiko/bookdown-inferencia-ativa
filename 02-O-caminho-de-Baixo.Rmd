@@ -1,0 +1,35 @@
+# O Caminho de baixo para a Inferência Ativa
+
+My thinking is first and last and always for the sake of my ­doing. —­William James
+
+
+## Introdução 
+
+Este capítulo introduz a Inferência Ativa partindo da visão helmholtziana — ou talvez kantiana — da “percepção como inferência inconsciente” (Helmholtz 1867) e ideias relacionadas que surgiram mais recentemente sob a hipótese do cérebro bayesiano. Ele explica como a Inferência Ativa engloba e estende essas ideias tratando não apenas a percepção, mas também a ação, o planejamento e o aprendizado como problemas de inferência (Bayesiana) e derivando uma aproximação baseada em princípios (variacional) para esses problemas de outra forma intratáveis.
+
+## Percepção como Inferência
+
+Há uma longa tradição de ver o cérebro como uma “máquina preditiva”, ou um órgão estatístico que infere e prevê estados externos do mundo. Essa ideia remonta à noção de “percepção como inferência inconsciente” (Helmholtz 1866). Mais recentemente, isso foi reformulado como a hipótese do “cérebro bayesiano” (Doya 2007). A partir dessa perspectiva, a percepção não é uma transdução puramente de baixo para cima de estados sensoriais (por exemplo, da retina) em representações internas do que está lá fora (por exemplo, como padrões de atividade neuronal). Em vez disso, é um processo inferencial que combina informações anteriores (de cima para baixo) sobre as causas mais prováveis ​​das sensações com estímulos sensoriais (de baixo para cima). Os processos inferenciais operam em representações probabilísticas de estados do mundo e seguem a regra de Bayes, que prescreve a atualização (ótima) à luz da evidência sensorial. A percepção não é um processo passivo de fora para dentro – no qual a informação é extraída de impressões em nosso epitélio sensorial de “lá fora”. É um processo construtivo de dentro para fora – no qual as sensações são usadas para confirmar ou refutar hipóteses sobre como elas foram geradas (MacKay 1956, Gregory 1980, Yuille e Kersten 2006, Neisser 2014, A. Clark 2015).
+
+Por sua vez, realizar a inferência Bayesiana requer um modelo generativo – às vezes chamado de modelo direto. Um modelo generativo é uma construção da teoria estatística que gera previsões sobre as observações. Pode ser formulado como a probabilidade conjunta $P({\color{Red}x,\color{Orange}y)}$ das observações $\color{Orange}y$ e os estados ocultos do mundo $\color{Red}x$ que geram essas observações. Estes últimos são referidos como estados ocultos ou latentes, pois não podem ser observados diretamente. Esta probabilidade conjunta pode ser decomposta em duas partes. O primeiro é um $P({\color{Red}x)}$ prévio, que denota o conhecimento do organismo sobre os estados ocultos do mundo antes de ver os dados sensoriais. 
+
+A segunda é a probabilidade $P( y | x)$, que denota o conhecimento do organismo de como as observações são geradas a partir de estados. A regra de Bayes nos diz como combinar esses dois elementos, essencialmente atualizando uma probabilidade anterior $P(x)$ em uma probabilidade posterior de estados ocultos após receber observações $P(x | y)$. Para os leitores que precisam de uma breve atualização sobre a teoria básica da probabilidade, o quadro 2.1 fornece um resumo.
+
+
+
+
+
+e agora?
+
+| Caixa 2.1 As regras de soma e produto de probabilidade    |
+|------------|
+| ...|  
+
+O raciocínio probabilístico é sustentado por duas regras principais: as regras de soma e produto de probabilidade, que são as seguintes (respectivamente): 
+$$\sum_{\color{Red}x} P(\color{Red}x)=1$$ 
+$$P(\color{Red}x)P(\color{Orange}y|\color{Red}x)=P(\color{Red}x,\color{Orange}y)$$ 
+
+A regra da soma diz que a probabilidade de todos os eventos possíveis $(x)$ deve somar (ou integrar) a um. A regra do produto diz que a probabilidade conjunta de duas variáveis aleatórias ($x$ e $y$) pode ser decomposta no produto da probabilidade de uma variável ($P(x)$) e a probabilidade condicional da segunda variável dada a primeira ($P(y|x)$). Uma probabilidade condicional é a probabilidade de uma variável (aqui, $y$) se soubermos o valor que a outra variável (aqui, $x$) assume. Podemos desenvolver dois resultados importantes a partir dessas regras simples. A primeira é a operação de marginalização. A segunda é a regra de Bayes. A marginalização nos permite obter uma distribuição de apenas uma das duas variáveis de uma distribuição conjunta:|
+
+$$\sum_{x}P(y|x)=P(y)P(x|y)=P(y)\sum_{x}P(x|y)=P(y)$$  
+

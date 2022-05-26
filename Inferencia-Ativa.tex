@@ -1,0 +1,656 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Inferencia Ativa},
+  pdfauthor={Thomas Parr, Giovanni Pezzulo, and Karl J. Friston},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Inferencia Ativa}
+\author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
+\date{2022-05-20}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+{[}ploc{]}O Principio da Energia Livre na Mente, Cérebro e Comportamento
+
+Thomas Parr, Giovanni Pezzulo, and Karl J. Friston
+
+\begin{enumerate}
+\def\labelenumi{(\Roman{enumi})}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Visão geral\\
+\item
+  O caminho mais curto para a inferência ativa\\
+\item
+  O caminho mais árduo para a inferência ativa\\
+\item
+  Os Modelos Geradores de Inferência Ativa\\
+\item
+  Passagem de mensagens e neurobiologia
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\Roman{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Uma receita para projetar modelos de inferência ativos
+\item
+  Inferência ativa em tempo discreto
+\item
+  Inferência Ativa em Tempo Contínuo
+\item
+  Análise de dados baseada em modelo
+\item
+  Inferência Ativa como uma Teoria Unificada do Comportamento Sentiente
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Apêndice A: Fundamentos Matemáticos
+\item
+  Apêndice B: As Equações da Inferência Ativa
+\item
+  Apêndice C: Um Exemplo comentado do Código Matlab
+\end{itemize}
+
+\begin{quote}
+Notas
+\end{quote}
+
+\begin{quote}
+Referências
+\end{quote}
+
+\begin{quote}
+Índice
+\end{quote}
+
+\hypertarget{conteudo}{%
+\chapter*{Conteudo}\label{conteudo}}
+\addcontentsline{toc}{chapter}{Conteudo}
+
+O Princípio da Energia Livre na Mente, Cérebro e Comportamento
+
+Thomas Parr, Giovanni Pezzulo, and Karl J. Friston
+
+\begin{enumerate}
+\def\labelenumi{(\Roman{enumi})}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Visão geral\\
+\item
+  O caminho mais curto para a inferência ativa\\
+\item
+  O caminho mais árduo para a inferência ativa\\
+\item
+  Os Modelos Geradores de Inferência Ativa\\
+\item
+  Passagem de mensagens e neurobiologia
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\Roman{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Uma receita para projetar modelos de inferência ativos
+\item
+  Inferência ativa em tempo discreto
+\item
+  Inferência Ativa em Tempo Contínuo
+\item
+  Análise de dados baseada em modelo
+\item
+  Inferência Ativa como uma Teoria Unificada do Comportamento Sentiente
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Apêndice A: Fundamentos Matemáticos
+\item
+  Apêndice B: As Equações da Inferência Ativa
+\item
+  Apêndice C: Um Exemplo comentado do Código Matlab
+\end{itemize}
+
+\begin{quote}
+Notas
+\end{quote}
+
+\begin{quote}
+Referências
+\end{quote}
+
+\begin{quote}
+Índice
+\end{quote}
+
+\hypertarget{prefuxe1cio}{%
+\chapter*{Prefácio}\label{prefuxe1cio}}
+\addcontentsline{toc}{chapter}{Prefácio}
+
+'\,`
+
+Karl Friston
+
+A Inferência Ativa é uma maneira de entender o comportamento sentiente. O próprio fato de você estar lendo estas linhas significa que você está se engajando na Inferência Ativa - ou seja, criando amostras do mundo - de uma forma particular - porque você acredita que vai aprender alguma
+
+\cleardoublepage
+
+\hypertarget{matematices-matematices}{%
+\chapter*{(MATEMATICES) Matematices}\label{matematices-matematices}}
+\addcontentsline{toc}{chapter}{(MATEMATICES) Matematices}
+
+\$\$
+
+\Leftarrow \Rightarrow \Leftrightarrow
+\Longleftarrow \Longrightarrow \Longleftrightarrow
+\Uparrow \Downarrow \Updownarrow
+
+\$\$
+
+This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
+
+The \textbf{bookdown} package can be installed from CRAN or Github:
+
+\url{https://pt.wikipedia.org/wiki/Ajuda:Guia_de_edi\%C3\%A7\%C3\%A3o/F\%C3\%B3rmulas_TeX}
+
+\(A = BC\)
+
+\[ A_{ij} =  \sum_{k}B_{ik}C_{kj} \]
+
+\$\$
+\Leftarrow \Rightarrow \Leftrightarrow
+\Longleftarrow \Longrightarrow \Longleftrightarrow
+\Uparrow \Downarrow \Updownarrow
+
+\[
+f(x;\mu,\sigma^2) = \frac{1}{\sigma\sqrt{2\pi}}
+e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2 }
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
+\CommentTok{\# or the development version}
+\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
+\end{Highlighting}
+\end{Shaded}
+
+Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
+
+To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
+
+\hypertarget{conteuxfado}{%
+\chapter*{Conteúdo}\label{conteuxfado}}
+\addcontentsline{toc}{chapter}{Conteúdo}
+
+'\,`
+
+O Princípio da Energia Livre na Mente, Cérebro e Comportamento
+
+Thomas Parr, Giovanni Pezzulo, and Karl J. Friston
+(I)
+
+Visão geral
+O caminho mais curto para a inferência ativa
+O caminho mais árduo para a inferência ativa
+Os Modelos Geradores de Inferência Ativa
+Passagem de mensagens e neurobiologia
+(II)
+
+Uma receita para projetar modelos de inferência ativos
+Inferência ativa em tempo discreto
+Inferência Ativa em Tempo Contínuo
+Análise de dados baseada em modelo
+Inferência Ativa como uma Teoria Unificada do Comportamento Sentiente
+
+Apêndice A: Fundamentos Matemáticos
+Apêndice B: As Equações da Inferência Ativa
+Apêndice C: Um Exemplo comentado do Código Matlab
+Notas
+Referências
+Índice
+
+\mainmatter
+
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+\hypertarget{motivation}{%
+\section{Motivation}\label{motivation}}
+
+\hypertarget{get-started}{%
+\section{Get started}\label{get-started}}
+
+The easiest way for beginners to get started with writing a book with R Markdown and \textbf{bookdown} is through the demo \texttt{bookdown-demo} on GitHub:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Download the GitHub repository \url{https://github.com/rstudio/bookdown-demo} as a \href{https://github.com/rstudio/bookdown-demo/archive/main.zip}{Zip file,} then unzip it locally.
+\item
+  Install the RStudio IDE. Note that you need a version higher than 1.0.0. Please \href{https://www.rstudio.com/products/rstudio/download/}{download the latest version} if your RStudio version is lower than 1.0.0.
+\item
+  Install the R package \textbf{bookdown}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# stable version on CRAN}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{\textquotesingle{}bookdown\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# or development version on GitHub}
+\CommentTok{\# remotes::install\_github(\textquotesingle{}rstudio/bookdown\textquotesingle{})}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Open the \texttt{bookdown-demo} repository you downloaded in RStudio by clicking \texttt{bookdown-demo.Rproj}.
+\item
+  Open the R Markdown file \texttt{index.Rmd} and click the button \texttt{Build\ Book} on the \texttt{Build} tab of RStudio.
+\end{enumerate}
+
+\begin{rmdnote}
+If you are planning on printing your book to PDF, you will need a LaTeX distribution. We recommend that you install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
+\end{rmdnote}
+
+Now you should see the index page of this book demo in the RStudio Viewer. You may add or change the R Markdown files, and hit the \texttt{Knit} button again to preview the book. If you prefer not to use RStudio, you may also compile the book through the command line. See the next section for details.
+
+Although you see quite a few files in the \texttt{bookdown-demo} example, most of them are not essential to a book. If you feel overwhelmed by the number of files, you can use this minimal example instead, which is essentially one file \texttt{index.Rmd}: \url{https://github.com/yihui/bookdown-minimal}. The \texttt{bookdown-demo} example contains some advanced settings that you may want to learn later, such as how to customize the LaTeX preamble, tweak the CSS, and build the book on GitHub, etc.
+
+\hypertarget{usage}{%
+\section{Usage}\label{usage}}
+
+A typical \textbf{bookdown} book contains multiple chapters, and one chapter lives in one R Markdown file, with the filename extension \texttt{.Rmd}. Each R Markdown file must start immediately with the chapter title using the first-level heading, e.g., \texttt{\#\ Chapter\ Title}. All R Markdown files must be encoded in UTF-8, especially when they contain multi-byte characters such as Chinese, Japanese, and Korean. Here is an example (the bullets are the filenames, followed by the file content):
+
+\begin{itemize}
+\item
+  index.Rmd
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\# Preface \{{-}\}}
+
+\NormalTok{In this book, we will introduce an interesting}
+\NormalTok{method.}
+\end{Highlighting}
+\end{Shaded}
+\item
+  01-intro.Rmd
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\# Introduction}
+
+\NormalTok{This chapter is an overview of the methods that}
+\NormalTok{we propose to solve an **important problem**.}
+\end{Highlighting}
+\end{Shaded}
+\item
+  02-literature.Rmd
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\# Literature}
+
+\NormalTok{Here is a review of existing methods.}
+\end{Highlighting}
+\end{Shaded}
+\item
+  03-method.Rmd
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\# Methods}
+
+\NormalTok{We describe our methods in this chapter.}
+\end{Highlighting}
+\end{Shaded}
+\item
+  04-application.Rmd
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\# Applications}
+
+\NormalTok{Some \_significant\_ applications are demonstrated}
+\NormalTok{in this chapter.}
+
+\FunctionTok{\#\# Example one}
+
+\FunctionTok{\#\# Example two}
+\end{Highlighting}
+\end{Shaded}
+\item
+  05-summary.Rmd
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\# Final Words}
+
+\NormalTok{We have finished a nice book.}
+\end{Highlighting}
+\end{Shaded}
+\end{itemize}
+
+By default, \textbf{bookdown} merges all Rmd files by the order of filenames, e.g., \texttt{01-intro.Rmd} will appear before \texttt{02-literature.Rmd}. Filenames that start with an underscore \texttt{\_} are skipped. If there exists an Rmd file named \texttt{index.Rmd}, it will always be treated as the first file when merging all Rmd files. The reason for this special treatment is that the HTML file \texttt{index.html} to be generated from \texttt{index.Rmd} is usually the default index file when you view a website, e.g., you are actually browsing \url{http://yihui.org/index.html} when you open \url{http://yihui.org/}.
+
+You can override the above behavior by including a configuration file named \texttt{\_bookdown.yml}\index{\_bookdown.yml} in the book directory. It is a YAML\index{YAML} file (\url{https://en.wikipedia.org/wiki/YAML}), and R Markdown users should be familiar with this format since it is also used to write the metadata in the beginning of R Markdown documents (you can learn more about YAML in Section \ref{r-markdown}). You can use a field named \texttt{rmd\_files} to define your own list and order of Rmd files for the book. For example,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rmd\_files}\KeywordTok{:}\AttributeTok{ }\KeywordTok{[}\StringTok{"index.Rmd"}\KeywordTok{,}\AttributeTok{ }\StringTok{"abstract.Rmd"}\KeywordTok{,}\AttributeTok{ }\StringTok{"intro.Rmd"}\KeywordTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+In this case, \textbf{bookdown} will use the list of files you defined in this YAML field (\texttt{index.Rmd} will be added to the list if it exists, and filenames starting with underscores are always ignored). If you want both HTML and LaTeX/PDF output from the book, and use different Rmd files for HTML and LaTeX output, you may specify these files for the two output formats separately, e.g.,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rmd\_files}\KeywordTok{:}
+\AttributeTok{  }\FunctionTok{html}\KeywordTok{:}\AttributeTok{ }\KeywordTok{[}\StringTok{"index.Rmd"}\KeywordTok{,}\AttributeTok{ }\StringTok{"abstract.Rmd"}\KeywordTok{,}\AttributeTok{ }\StringTok{"intro.Rmd"}\KeywordTok{]}
+\AttributeTok{  }\FunctionTok{latex}\KeywordTok{:}\AttributeTok{ }\KeywordTok{[}\StringTok{"abstract.Rmd"}\KeywordTok{,}\AttributeTok{ }\StringTok{"intro.Rmd"}\KeywordTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Although we have been talking about R Markdown files, the chapter files do not actually have to be R Markdown. They can be plain Markdown files (\texttt{.md}), and do not have to contain R code chunks at all. You can certainly use \textbf{bookdown} to compose novels or poems!
+
+At the moment, the major output formats that you may use include \texttt{bookdown::pdf\_book}, \texttt{bookdown::gitbook}, \texttt{bookdown::html\_book}, and \texttt{bookdown::epub\_book}. There is a \texttt{bookdown::render\_book()}\index{bookdown::render\_book()} function similar to \texttt{rmarkdown::render()}, but it was designed to render \emph{multiple} Rmd documents into a book using the output format functions. You may either call this function from command line directly, or click the relevant buttons in the RStudio IDE. Here are some command-line examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{(}\StringTok{\textquotesingle{}foo.Rmd\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bookdown::gitbook\textquotesingle{}}\NormalTok{)}
+\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{(}\StringTok{\textquotesingle{}foo.Rmd\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bookdown::pdf\_book\textquotesingle{}}\NormalTok{)}
+\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{(}\StringTok{\textquotesingle{}foo.Rmd\textquotesingle{}}\NormalTok{, bookdown}\SpecialCharTok{::}\FunctionTok{gitbook}\NormalTok{(}\AttributeTok{lib\_dir =} \StringTok{\textquotesingle{}libs\textquotesingle{}}\NormalTok{))}
+\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{(}\StringTok{\textquotesingle{}foo.Rmd\textquotesingle{}}\NormalTok{, bookdown}\SpecialCharTok{::}\FunctionTok{pdf\_book}\NormalTok{(}\AttributeTok{keep\_tex =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+To use \texttt{render\_book} and the output format functions in the RStudio IDE, you can define a YAML field named \texttt{site} that takes the value \texttt{bookdown::bookdown\_site},\footnote{This function calls \texttt{bookdown::render\_book()}.} and the output format functions can be used in the \texttt{output} field, e.g.,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{{-}{-}{-}}
+\FunctionTok{site}\KeywordTok{:}\AttributeTok{ }\StringTok{"bookdown::bookdown\_site"}
+\FunctionTok{output}\KeywordTok{:}
+\AttributeTok{  bookdown:}\FunctionTok{:gitbook}\KeywordTok{:}
+\AttributeTok{    }\FunctionTok{lib\_dir}\KeywordTok{:}\AttributeTok{ }\StringTok{"book\_assets"}
+\AttributeTok{  bookdown:}\FunctionTok{:pdf\_book}\KeywordTok{:}
+\AttributeTok{    }\FunctionTok{keep\_tex}\KeywordTok{:}\AttributeTok{ }\CharTok{yes}
+\PreprocessorTok{{-}{-}{-}}
+\end{Highlighting}
+\end{Shaded}
+
+Then you can click the \texttt{Build\ Book} button in the \texttt{Build} pane in RStudio to compile the Rmd files into a book, or click the \texttt{Knit} button on the toolbar to preview the current chapter.
+
+More \textbf{bookdown} configuration options in \texttt{\_bookdown.yml} are explained in Section \ref{configuration}. Besides these configurations, you can also specify some Pandoc-related configurations in the YAML metadata of the \emph{first} Rmd file of the book, such as the title, author, and date of the book, etc. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{{-}{-}{-} }
+\FunctionTok{title}\KeywordTok{:}\AttributeTok{ }\StringTok{"Authoring A Book with R Markdown"}
+\FunctionTok{author}\KeywordTok{:}\AttributeTok{ }\StringTok{"Yihui Xie"}
+\FunctionTok{date}\KeywordTok{:}\AttributeTok{ }\StringTok{"\textasciigrave{}r Sys.Date()\textasciigrave{}"}
+\FunctionTok{site}\KeywordTok{:}\AttributeTok{ }\StringTok{"bookdown::bookdown\_site"}
+\FunctionTok{output}\KeywordTok{:}
+\AttributeTok{  bookdown:}\FunctionTok{:gitbook}\KeywordTok{:}\AttributeTok{ default}
+\FunctionTok{documentclass}\KeywordTok{:}\AttributeTok{ book}
+\FunctionTok{bibliography}\KeywordTok{:}\AttributeTok{ }\KeywordTok{[}\StringTok{"book.bib"}\KeywordTok{,}\AttributeTok{ }\StringTok{"packages.bib"}\KeywordTok{]}
+\FunctionTok{biblio{-}style}\KeywordTok{:}\AttributeTok{ apalike}
+\FunctionTok{link{-}citations}\KeywordTok{:}\AttributeTok{ }\CharTok{yes}
+\PreprocessorTok{{-}{-}{-}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{new-session}{%
+\section{Two rendering approaches}\label{new-session}}
+
+Merging all chapters into one Rmd file and knitting it is one way to render the book in \textbf{bookdown}. There is actually another way: you may knit each chapter in a \emph{separate} R session, and \textbf{bookdown} will merge the Markdown output of all chapters to render the book. We call these two approaches ``Merge and Knit'' (M-K) and ``Knit and Merge'' (K-M), respectively. The differences between them may seem subtle, but can be fairly important depending on your use cases.
+
+\begin{itemize}
+\tightlist
+\item
+  The most significant difference is that M-K runs \emph{all} code chunks in all chapters in the same R session, whereas K-M uses separate R sessions for individual chapters. For M-K, the state of the R session from previous chapters is carried over to later chapters (e.g., objects created in previous chapters are available to later chapters, unless you deliberately deleted them); for K-M, all chapters are isolated from each other.\footnote{Of course, no one can stop you from writing out some files in one chapter, and reading them in another chapter. It is hard to isolate these kinds of side-effects.} If you want each chapter to compile from a clean state, use the K-M approach. It can be very tricky and difficult to restore a running R session to a completely clean state if you use the M-K approach. For example, even if you detach/unload packages loaded in a previous chapter, R will not clean up the S3 methods registered by these packages.
+\item
+  Because \textbf{knitr} does not allow duplicate chunk labels in a source document, you need to make sure there are no duplicate labels in your book chapters when you use the M-K approach, otherwise \textbf{knitr} will signal an error when knitting the merged Rmd file. Note that this means there must not be duplicate labels throughout the whole book. The K-M approach only requires no duplicate labels within any single Rmd file.
+\item
+  K-M does not allow Rmd files to be in subdirectories, but M-K does.
+\end{itemize}
+
+The default approach in \textbf{bookdown} is M-K. To switch to K-M, you either use the argument \texttt{new\_session\ =\ TRUE} when calling \texttt{render\_book()}, or set \texttt{new\_session:\ yes} in the configuration file \texttt{\_bookdown.yml}.
+
+You can configure the \texttt{book\_filename} option in \texttt{\_bookdown.yml} for the K-M approach, but it should be a Markdown filename, e.g., \texttt{\_main.md}, although the filename extension does not really matter, and you can even leave out the extension, e.g., just set \texttt{book\_filename:\ \_main}. All other configurations work for both M-K and K-M.
+
+\hypertarget{some-tips}{%
+\section{Some tips}\label{some-tips}}
+
+Typesetting under the paging constraint (e.g., for LaTeX/PDF output) can be an extremely tedious and time-consuming job. I'd recommend you not to look at your PDF output frequently, since most of the time you are very unlikely to be satisfied: text may overflow into the page margin, figures may float too far away, and so on. Do not try to make things look right \emph{immediately}, because you may be disappointed over and over again as you keep on revising the book, and things may be messed up again even if you only made some minor changes (see \url{http://bit.ly/tbrLtx} for a nice illustration).
+
+If you want to preview the book, preview the HTML output. Work on the PDF version after you have finished the content of the book, and are very sure no major revisions will be required.
+
+If certain code chunks in your R Markdown documents are time-consuming to run, you may cache them by adding the chunk option \texttt{cache\ =\ TRUE} in the chunk header, and you are recommended to label such code chunks as well, e.g.,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\{r important{-}computing, cache=TRUE\}}
+\end{Highlighting}
+\end{Shaded}
+
+In Chapter \ref{editing}, we will talk about how to quickly preview a book as you edit . In short, you can use the \texttt{preview\_chapter()} function to render a single chapter instead of the whole book. The function \texttt{serve\_book()} makes it easy to live-preview HTML book pages: whenever you modify an Rmd file, the book can be recompiled and the browser can be automatically refreshed accordingly.
+
+\hypertarget{o-caminho-baixo-para-inferuxeancia-ativa}{%
+\chapter{2 . O Caminho Baixo para Inferência Ativa}\label{o-caminho-baixo-para-inferuxeancia-ativa}}
+
+\hypertarget{introduuxe7uxe3o}{%
+\section{2.1 - Introdução}\label{introduuxe7uxe3o}}
+
+\hypertarget{methods}{%
+\chapter{Methods}\label{methods}}
+
+We describe our methods in this chapter.
+
+\hypertarget{visuxe3o-geral}{%
+\chapter{Visão Geral}\label{visuxe3o-geral}}
+
+O acaso favorece a mente preparada.
+---Louis Pasteur
+
+\hypertarget{introduuxe7uxe3o-1}{%
+\section{Introdução}\label{introduuxe7uxe3o-1}}
+
+\hypertarget{como-os-organismos-vivos-persistem-e-agem-adaptativamente}{%
+\section{Como os Organismos Vivos Persistem e Agem Adaptativamente?}\label{como-os-organismos-vivos-persistem-e-agem-adaptativamente}}
+
+\cleardoublepage
+
+\hypertarget{appendix-apuxeandice}{%
+\appendix}
+
+
+\hypertarget{fundamentos-matemuxe1ticos}{%
+\chapter{Fundamentos Matemáticos}\label{fundamentos-matemuxe1ticos}}
+
+\hypertarget{introduuxe7uxe3o-2}{%
+\section{Introdução}\label{introduuxe7uxe3o-2}}
+
+\hypertarget{uxe1lgebra-linear}{%
+\section{Álgebra Linear}\label{uxe1lgebra-linear}}
+
+\hypertarget{o-buxe1sico}{%
+\subsection{O Básico}\label{o-buxe1sico}}
+
+\hypertarget{derivatives}{%
+\subsection{Derivatives}\label{derivatives}}
+
+\hypertarget{probabilidades}{%
+\subsection{Probabilidades}\label{probabilidades}}
+
+\hypertarget{taylor-series-approximation}{%
+\section{Taylor Series Approximation}\label{taylor-series-approximation}}
+
+\hypertarget{as-equauxe7uxf5es-da-inferuxeancia-ativa}{%
+\chapter{As Equações da Inferência Ativa}\label{as-equauxe7uxf5es-da-inferuxeancia-ativa}}
+
+\hypertarget{introduuxe7uxe3o-3}{%
+\section{Introdução}\label{introduuxe7uxe3o-3}}
+
+\hypertarget{um-exemplo-comentado-do-cuxf3digo-matlab}{%
+\chapter{Um Exemplo comentado do Código Matlab}\label{um-exemplo-comentado-do-cuxf3digo-matlab}}
+
+Summum bonum in ipso iudicio es est habitu optimae mentis
+
+Álgebra Linear
+
+\hypertarget{o-buxe1sico-1}{%
+\section{O Básico}\label{o-buxe1sico-1}}
+
+R can be downloaded and installed from any CRAN (the Comprehensive R Archive Network) mirrors, e.g., \url{https://cran.rstudio.com}. Please note that there will be a few new releases of R every year, and you may want to upgrade R occasionally.
+
+To install the \textbf{bookdown} package, you can type this in R:
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}
