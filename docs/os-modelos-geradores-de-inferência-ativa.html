@@ -131,6 +131,7 @@
 <li class="chapter" data-level="4.5" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#inferência-ativa-em-tempo-contínuo"><i class="fa fa-check"></i><b>4.5</b> Inferência Ativa em Tempo Contínuo</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#um-modelo-generativo-para-codificação-preditiva"><i class="fa fa-check"></i><b>4.5.1</b> Um modelo generativo para codificação preditiva</a></li>
+<li class="chapter" data-level="4.5.2" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#inferência-ativa-como-codificação-preditiva-com-reflexos-motores"><i class="fa fa-check"></i><b>4.5.2</b> Inferência Ativa como Codificação Preditiva com Reflexos Motores</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Apêndice</b></span></li>
@@ -338,13 +339,16 @@ Essas coordenadas generalizadas podem ser resumidas de forma mais sucinta ao rep
 <p><span class="math display">\[\left . \begin{matrix} D\tilde x = \tilde f(\tilde x,\tilde v) + \tilde \omega_x \\ \tilde y = \tilde g(\tilde x,\tilde v) + \tilde \omega_y \end{matrix} \right \} \Longrightarrow \begin{matrix} p(\tilde x |\tilde v) = N(D \cdot \tilde f, \tilde \prod_x) \\ p(\tilde y |\tilde x,\tilde v) = N( \tilde g, \tilde \prod_y) \end{matrix} \qquad (4.18) \]</span>
 Na equação 4.18, <span class="math inline">\(D\)</span> é uma matriz com uns acima da diagonal principal e zeros em outros lugares. Isso efetivamente desloca todos os elementos do vetor para cima e pode ser considerado um operador derivativo. As matrizes de precisão generalizadas podem ser construídas com base na suavidade que assumimos para as flutuações, conforme detalhado no apêndice B. Equipado com uma a priori sobre a causa oculta <span class="math inline">\((v)\)</span>, cuja relevância ficará mais clara a seguir, isso nos permite escrever as energia livre para este modelo generativo:</p>
 <p><span class="math display">\[ \begin{matrix}
-F[\mu,y] &amp; = &amp; -\ln p(\tilde y, \tilde \mu_x , \tilde \mu_v) \\
+F[\mu,y] &amp; = &amp; -\ln p(\tilde y, \tilde \mu_x , \tilde \mu_\nu) \\
   &amp; = &amp; \frac{1}{2}\tilde \epsilon \cdot \tilde \prod \tilde \epsilon \\
-  &amp; = &amp; \frac{1}{2}(\tilde \epsilon_y \cdot \tilde \prod_y \tilde \epsilon_y + \tilde \epsilon_x \cdot \tilde \prod_x \tilde \epsilon_x + \tilde \epsilon_v \cdot \tilde \prod_v \tilde \epsilon_v ) \\
-\tilde \epsilon &amp; = &amp; \epsilon \\
-\prod &amp; = &amp; prod
+  &amp; = &amp; \frac{1}{2}(\tilde \epsilon_y \cdot \tilde \prod_y \tilde \epsilon_y + \tilde \epsilon_x \cdot \tilde \prod_x \tilde \epsilon_x + \tilde \epsilon_v \cdot \tilde \prod_\nu \tilde \epsilon_\nu  \\
+\tilde \epsilon &amp; = &amp; \begin{bmatrix} \tilde \epsilon_y \\ \tilde \epsilon_x \\ \tilde \epsilon_\nu \end{bmatrix} &amp; = \begin{bmatrix} \tilde y - \tilde g(\tilde \mu_x,\tilde \mu_v)\\ D\tilde \mu_x - \tilde f(\tilde \mu_x,\tilde \mu_\nu) \\ \tilde \mu_\nu - \tilde \eta \end{bmatrix} \\
+\tilde \prod &amp; = &amp; \begin{bmatrix} \tilde \prod_y &amp; &amp; \\   &amp; \tilde \prod_y &amp; \\  &amp;   &amp; \tilde \prod_y \end{bmatrix}
 \end{matrix}  \qquad \qquad \qquad (4.19)\]</span></p>
-<p><span class="math display">\[\begin{matrix} a \\ b \\ c \end{matrix}\]</span></p>
+<p>Na equação 4.19, os termos <span class="math inline">\(\mu\)</span> indicam a moda da densidade posterior aproximada para os termos <span class="math inline">\(x\)</span> e <span class="math inline">\(\nu\)</span>. A razão pela qual a energia livre assume uma forma tão simples na primeira linha é que empregamos uma aproximação de Laplace, conforme detalhado no quadro 4.3. Em resumo, isso trata todas as densidades de probabilidade como gaussianas, o que – por meio de uma expansão em série de Taylor – é equivalente a assumir que estamos operando perto da moda da distribuição. A segunda linha da equação expressa a probabilidade logarítmica em termos de erros de predição ponderados de precisão quadrática. Isso omite todos os termos que são constantes em relação ao modo posterior. A terceira linha descompacta isso em termos de log de probabilidade, log de probabilidade de <span class="math inline">\(x\)</span> dado <span class="math inline">\(\nu\)</span> e log antes de <span class="math inline">\(\nu\)</span>.</p>
+</div>
+<div id="inferência-ativa-como-codificação-preditiva-com-reflexos-motores" class="section level3 hasAnchor" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Inferência Ativa como Codificação Preditiva com Reflexos Motores<a href="os-modelos-geradores-de-inferência-ativa.html#inferência-ativa-como-codificação-preditiva-com-reflexos-motores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>

@@ -221,13 +221,14 @@ Na equação 4.18, $D$ é uma matriz com uns acima da diagonal principal e zeros
 
 
 $$ \begin{matrix} 
-F[\mu,y] & = & -\ln p(\tilde y, \tilde \mu_x , \tilde \mu_v) \\ 
+F[\mu,y] & = & -\ln p(\tilde y, \tilde \mu_x , \tilde \mu_\nu) \\ 
   & = & \frac{1}{2}\tilde \epsilon \cdot \tilde \prod \tilde \epsilon \\
-  & = & \frac{1}{2}(\tilde \epsilon_y \cdot \tilde \prod_y \tilde \epsilon_y + \tilde \epsilon_x \cdot \tilde \prod_x \tilde \epsilon_x + \tilde \epsilon_v \cdot \tilde \prod_v \tilde \epsilon_v ) \\
-\tilde \epsilon & = & \epsilon \\
-\prod & = & prod 
+  & = & \frac{1}{2}(\tilde \epsilon_y \cdot \tilde \prod_y \tilde \epsilon_y + \tilde \epsilon_x \cdot \tilde \prod_x \tilde \epsilon_x + \tilde \epsilon_v \cdot \tilde \prod_\nu \tilde \epsilon_\nu  \\
+\tilde \epsilon & = & \begin{bmatrix} \tilde \epsilon_y \\ \tilde \epsilon_x \\ \tilde \epsilon_\nu \end{bmatrix} & = \begin{bmatrix} \tilde y - \tilde g(\tilde \mu_x,\tilde \mu_v)\\ D\tilde \mu_x - \tilde f(\tilde \mu_x,\tilde \mu_\nu) \\ \tilde \mu_\nu - \tilde \eta \end{bmatrix} \\
+\tilde \prod & = & \begin{bmatrix} \tilde \prod_y & & \\   & \tilde \prod_y & \\  &   & \tilde \prod_y \end{bmatrix} 
 \end{matrix}  \qquad \qquad \qquad (4.19)$$
 
 
-$$\begin{matrix} a \\ b \\ c \end{matrix}$$
+Na equação 4.19, os termos $\mu$ indicam a moda da densidade posterior aproximada para os termos $x$ e $\nu$. A razão pela qual a energia livre assume uma forma tão simples na primeira linha é que empregamos uma aproximação de Laplace, conforme detalhado no quadro 4.3. Em resumo, isso trata todas as densidades de probabilidade como gaussianas, o que – por meio de uma expansão em série de Taylor – é equivalente a assumir que estamos operando perto da moda da distribuição. A segunda linha da equação expressa a probabilidade logarítmica em termos de erros de predição ponderados de precisão quadrática. Isso omite todos os termos que são constantes em relação ao modo posterior. A terceira linha descompacta isso em termos de log de probabilidade, log de probabilidade de $x$ dado $\nu$ e log antes de $\nu$.
 
+### Inferência Ativa como Codificação Preditiva com Reflexos Motores
