@@ -1,0 +1,167 @@
+\cleardoublepage 
+
+# (APPENDIX) Apêndice {-} 
+
+# Bases Matemáticas
+
+## Introdução
+
+Este apêndice oferece uma introdução (ou uma atualização) às técnicas matemáticas básicas empregadas ao longo deste livro. Fornecemos uma visão geral introdutória (mas não exaustiva) de quatro tópicos: álgebra linear, aproximação de séries de Taylor, cálculo variacional e dinâmica estocástica. Para cada uma dessas técnicas, nos referimos a onde ela entra em jogo no livro. Nosso objetivo aqui é fornecer uma introdução focada - com ênfase na construção da intuição em oposição a provas formais e rigorosas. A matemática necessária para entender e usar a Inferência Ativa não é complicada, mas sua base multidisciplinar significa que muitas vezes é difícil encontrar recursos que reúnam os pré-requisitos necessários. Esperamos que este apêndice ajude de alguma forma a remediar isso.
+
+## Álgebra Linear
+
+### O básico
+
+Álgebra linear refere-se a uma notação usada para expressar de forma simples e concisa combinações de multiplicações e somatórias. Ele se baseia em matrizes e vetores que compreendem matrizes de números em estruturas com várias linhas e colunas (ou várias linhas e uma única coluna, para um vetor). O elemento de uma matriz $A$ na linha $i$ e na coluna $j$ é referido como $A_{ij}$. O produto $A$ de duas matrizes $B$ e $C$ (ou uma matriz e um vetor) é definido da seguinte forma:
+
+
+$$ A = BC $$
+$$\Longrightarrow \qquad (A.1)$$
+$$ A_{ij} = \sum_k B_{ik} C_{kj} $$
+Para que essa definição seja válida, precisamos que o número de colunas de B corresponda ao número de linhas de C. No entanto, digamos que o número de colunas de B corresponda às colunas de C e queremos expressar a seguinte soma:
+
+$$ A_{ij} = \sum_k B_{ki} C_{kj} \qquad (A.2) $$
+
+Como faríamos isso usando a notação algébrica linear? Precisamos apelar para outra operação que troque os índices subscritos de B (ou seja, reflita a matriz de modo que as colunas se tornem linhas e vice-versa). Esta é a operação de transposição, normalmente expressa usando um T sobrescrito:
+
+$$B_{ik}^T \triangleq B_{ki}$$
+
+$$A=B^TC \triangleq B \cdot C$$
+
+$$ \Longrightarrow \qquad (A.3)$$
+$$A_{ij} = \sum_k B_{ki}C_{kj}$$
+
+A Equação A.3 mostra como podemos usar o operador de transposição para expressar a soma da equação A.2. A segunda linha destaca uma notação alternativa usando um operador de ponto. Essa notação é inspirada no fato de que, quando B e C têm apenas uma coluna cada, a equação A.3 se reduz a um produto vetorial vetorial.
+Outra operação útil é o operador de rastreamento. Isso pega os elementos ao longo da diagonal de uma matriz quadrada e os soma:
+
+$$ tr[A] \triangleq \sum_i A_{ij} \qquad (A.4)$$
+
+Parte da utilidade de um operador de traço é proporcionada pela maneira como podemos permutar elementos no traço de um produto de matriz:
+
+$$ tr[ABC] = \sum_i \sum_j \sum_k A_{ij} B_{jk} C_{ki}$$
+$$ = \sum_k \sum_i \sum_j C_{ki} A_{ij} B_{jk} = tr[CAB] $$
+$$ = \sum_j \sum_k \sum_i B_{jk} C_{ki} A_{ij} = tr[BCA] \qquad (A.5) $$
+O principal uso que encontraremos para essa identidade neste livro é quando aplicada a grandezas escalares. Um escalar pode ser visto como uma matriz com apenas uma linha e uma coluna. Como tal, podemos aplicar um operador de rastreamento a ele, mas isso não fará nada - obtemos o mesmo escalar. Isso significa que, se um produto de matriz der origem a uma quantidade escalar, podemos permutar os termos como acima.
+
+
+Por exemplo, se tivermos uma matriz quadrada $B$ com $N$ colunas e linhas e um vetor $c$ com $N$ linhas, podemos usar a equação A.5 para mostrar o seguinte:
+
+
+$$ a = c \cdot Bc$$
+
+$$ tr[c^T Bc] $$
+$$ tr[Bcc^T] \qquad (A.6)$$
+$$ tr[BC]$$
+$$ C = c \otimes c \triangleq cc^T  $$
+Isso reexpressa uma expressão quadrática (primeira linha) com o traço do produto de duas matrizes (penúltima linha). A linha final define o produto externo(em contraste com o produto escalar interno)
+
+A Equação A.6 torna-se particularmente útil no contexto de distribuições normais multivariadas, como veremos na seção A.2.3. 
+
+Os conceitos finais de álgebra linear a serem observados são o inverso e o determinante de uma matriz. Uma inversa é definida da seguinte forma:
+
+$$ A^{-1}A = AA^{-1} = I \qquad (A.7)$$
+
+A Equação A.7 diz que o produto de uma matriz e sua inversa é a matriz identidade — uma matriz quadrada com uns ao longo de sua principal e zeros em outros lugares. Multiplicar qualquer matriz pela matriz identidade retorna a matriz original, inalterada. É o equivalente algébrico linear da multiplicação escalar por 1 (que pode ser interpretado como uma matriz identidade unidimensional). Isso significa que se multiplicarmos algo por uma matriz e depois pela inversa dessa matriz, acabamos com a quantidade original.
+
+O determinante é uma quantidade útil, mas para a qual é mais difícil desenvolver uma intuição clara. O único ponto em que aparece neste livro é como parte da constante normalizadora de uma distribuição normal multivariada. Como tal, vale a pena saber como é calculado, mas não nos deteremos neste conceito. O determinante é definido recursivamente da seguinte forma:
+
+$$ |A| \triangleq \sum_i(-1)^{i-1}A_{}1i | A_{\setminus(1,i)} |  $$
+
+
+Aqui, a notação ted. Por exemplo:
+$A_{\setminus(1, i)}$ significa a matriz A com linha 1 e coluna i omitidas. Por exemplo:
+
+$$ A = 
+\begin{bmatrix} 
+  A_{11} A_{12} \\ 
+  A_{21} A_{22} 
+  \end{bmatrix}
+  $$
+
+
+$$ A_{\setminus(1,1)} = A_{22}$$
+$$ A_{\setminus(1,2)} = A_{21} \qquad (A.9)$$
+$$ |A| = A_{11} \; |A_{22}| -  A_{12} \;| A_{21}|$$
+$$  A_{11}A_{22} - A_{12}A_{21} $$
+Isso conclui nosso esboço das operações básicas da álgebra linear.
+
+
+
+### Derivadas
+
+A diferenciação de grandezas matriciais e vetoriais segue diretamente da aplicação do cálculo padrão a cada elemento de uma matriz. Por exemplo, se temos uma matriz B cujos elementos são funções de um escalar x, a derivada de B em relação a x é a seguinte:
+
+$$ A(x) = \partial_x B(x)  $$
+$$ A(x)_{ij} = \partial_x B(x)_{ij} \qquad (A.10)$$
+$$ \partial x \triangleq  \frac {\partial} {\partial x} $$
+No entanto, algumas definições e identidades importantes serão úteis para entender os detalhes técnicos deste livro. A primeira é como obter derivadas em relação a quantidades não escalares. Se tivermos uma quantidade vetorial b que é função de outro vetor c, a derivada de b em relação a c é uma matriz:
+
+
+$$ A = \partial_c b(c) \Longrightarrow A{ij} = \partial_{c_j}b(c)_i  \qquad (A.11)$$
+Também faremos uso do operador gradiente, que trata de derivadas em relação a um vetor. Isso é definido da seguinte forma:
+
+$$ \nabla_b = \begin{bmatrix} 
+\partial_{b_1} &  \partial_{b_1} & \partial_{b_1} & \cdots 
+\end{bmatrix}^T  $$
+
+$$ a = \nabla_bx(b) \qquad (A.12)$$
+
+$$ \Longrightarrow $$
+
+$$ a_i = \partial_{b_i}x(b)$$
+A definição do operador gradiente como um vetor de operadores derivativos também fornece uma definição concisa de uma quantidade relacionada - a divergência de uma função vetorial:
+
+
+$$ \nabla_a \cdot b(a) = \sum_i \partial_{a_i}b(a)_i \qquad (A.13)$$
+
+Existem muitas identidades derivadas úteis para grandezas algébricas lineares, mas não tentaremos fornecer uma visão geral abrangente; para os leitores que desejam se aprofundar mais, recomendamos The Matrix Cookbook (Petersen e Pedersen 2012). Aqui, nos limitamos a duas identidades que serão particularmente úteis. O primeiro é o gradiente de uma quantidade quadrática:
+
+
+$$ d(a) = \nabla_a(b(a) \cdot Cb(a))$$
+$$ \Longrightarrow$$
+$$d(a)_i$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# As equações da inferência ativa

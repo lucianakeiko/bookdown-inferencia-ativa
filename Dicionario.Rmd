@@ -26,22 +26,21 @@ evidências empíricas..
 ver mais em: [A teoria de Helmholtz sobre a percepção espacial: psicofísica e
 filosofia transcendental](https://periodicos.ufmg.br/index.php/memorandum/article/download/6857/4411/22713)
 
-**uma variável** aleatória: $x$  [1]  
-todos os eventos possíveis de uma variável aleatória: $x_1$ $x_2$ $x_3$ ... $x_n$  [2]  
-probabilidade de evento $x$ acontecer: $P(x)$   [3]  
-soma de todos os eventos possíveis é um: $\sum_{x}P(x)=1$ [4]  
+**Divergência de Kullback-leibler**(também chamada de entropia relativa) é uma medida não-simétrica da diferença entre duas distribuições de probabilidade. Uma divergência de Kullback-Leibler igual a 0 indica que as funçõe/distribuições P e Q são muito parecidas (iguais, até), enquanto uma divergência de 1 indica que se comportam de maneira diferente.
 
-**duas variáveis** aleatórias: $x$ e $y$   
-probabilidade de evento $x$ acontecer: $P(x)$    
-probabilidade de evento $y$ acontecer, dado que x já aconteceu: $P(y|x)$  
-probabilidade dos dois eventos acotecerem ao mesmo tempo: $P(x,y)$    
-que é o: 
-$$P(x,y) = P(x)P(y|x)$$
-operação de **marginalização**
+**foveate** Angular os olhos de tal forma que as fóveas sejam direcionadas (um objeto em seu campo de visão), sendo a fóvea a porção da retina responsável pela visão central nítida.
 
-probabilidade de um "evento conjunto" acontecer: $P(x,y)$  [igual em 3, pq não seria? ]  
-soma de todos os eventos possível é um: $\sum_{x,y}P(x,y)=1$ [como em 4 - só que a turma abstrai os indices ]
+**ELBO** The evidence lower bound =  limite inferior de evidência
 
-$\sum_{x,y}P(x,y)=1=\sum_{x,y}P(x)P(y|x)=P(x)\sum_{x,y}P(y|x)$
+**Teoria da Informação** estuda a quantificação, armazenamento e comunicação da informação. 
 
+**Entropia** é a medida chave em teoria da informação. A entropia é o grau de casualidade, de indeterminação que algo possui. Ela está ligada à quantidade de informação. Quanto maior a informação, maior a desordem, maior a entropia. Quanto menor a informação, menor a escolha, menor a entropia.[1] Dessa forma, esse processo quantifica a quantidade de incerteza envolvida no valor de uma variável aleatória ou na saída de um processo aleatório.
 
+**Navalha de Ockham** o princípio postula que de múltiplas explicações adequadas e possíveis para o mesmo conjunto de fatos, deve-se optar pela mais simples daquelas. Por “simples” entende-se aquela que contiver o menor número possível de variáveis e hipóteses com relações lógicas entre si, das quais o fato a ser explicado segue logicamente.
+
+**Critério de informação de Akaike** (AIC) é uma métrica que mensura a qualidade de um modelo estatístico visando também a sua simplicidade. Fornece, portanto, uma métrica para comparação e seleção de modelos, em que menores valores de AIC representam uma maior qualidade e simplicidade, segundo este critério.
+
+**G** Energia livre esperada : requer a consideração de observações futuras dependentes da política
+**F** Energia livre variacional : considera apenas observações presentes e passadas
+
+$\triangleq  \text versus \overset{\Delta}{=}$
