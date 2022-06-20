@@ -248,3 +248,6 @@ a = bx + c
 
 ## testes
 migraccao do mundo de keika
+
+
+( comig do Rstudio. Podemos confiar?)
