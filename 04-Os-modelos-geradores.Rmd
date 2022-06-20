@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Os Modelos Geradores de Inferência Ativa
 
 Every­thing should be made as ­simple as pos­si­ble, but not simpler. —­Albert Einstein
@@ -232,3 +237,14 @@ F[\mu,y] & = & -\ln p(\tilde y, \tilde \mu_x , \tilde \mu_\nu) \\
 Na equação 4.19, os termos $\mu$ indicam a moda da densidade posterior aproximada para os termos $x$ e $\nu$. A razão pela qual a energia livre assume uma forma tão simples na primeira linha é que empregamos uma aproximação de Laplace, conforme detalhado no quadro 4.3. Em resumo, isso trata todas as densidades de probabilidade como gaussianas, o que – por meio de uma expansão em série de Taylor – é equivalente a assumir que estamos operando perto da moda da distribuição. A segunda linha da equação expressa a probabilidade logarítmica em termos de erros de predição ponderados de precisão quadrática. Isso omite todos os termos que são constantes em relação ao modo posterior. A terceira linha descompacta isso em termos de log de probabilidade, log de probabilidade de $x$ dado $\nu$ e log antes de $\nu$.
 
 ### Inferência Ativa como Codificação Preditiva com Reflexos Motores
+
+### testes odysseus
+$$
+\begin{equation}
+a = bx + c
+\end{equation}$$
+
+
+
+## testes
+migraccao do mundo de keika
