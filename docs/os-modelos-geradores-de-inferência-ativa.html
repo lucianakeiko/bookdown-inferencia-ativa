@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-06-20" />
+<meta name="date" content="2022-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="o-caminho-para-a-inferência-ativa.html"/>
-<link rel="next" href="dicionário.html"/>
+<link rel="next" href="bases-matemáticas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -132,19 +132,19 @@
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#um-modelo-generativo-para-codificação-preditiva"><i class="fa fa-check"></i><b>4.5.1</b> Um modelo generativo para codificação preditiva</a></li>
 <li class="chapter" data-level="4.5.2" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#inferência-ativa-como-codificação-preditiva-com-reflexos-motores"><i class="fa fa-check"></i><b>4.5.2</b> Inferência Ativa como Codificação Preditiva com Reflexos Motores</a></li>
-<li class="chapter" data-level="4.5.3" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#testes-odysseus"><i class="fa fa-check"></i><b>4.5.3</b> testes odysseus</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#testes"><i class="fa fa-check"></i><b>4.6</b> testes</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
+<li class="appendix"><span><b>Apêndice</b></span></li>
+<li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="4.7" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#introdução-4"><i class="fa fa-check"></i><b>4.7</b> Introdução</a></li>
-<li class="chapter" data-level="4.8" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#álgebra-linear"><i class="fa fa-check"></i><b>4.8</b> Álgebra Linear</a>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-4"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="4.8.1" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#o-básico"><i class="fa fa-check"></i><b>4.8.1</b> O básico</a></li>
-<li class="chapter" data-level="4.8.2" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#derivadas"><i class="fa fa-check"></i><b>4.8.2</b> Derivadas</a></li>
+<li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
+<li class="chapter" data-level="A.2.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#derivadas"><i class="fa fa-check"></i><b>A.2.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="B" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html"><i class="fa fa-check"></i><b>B</b> As equações da inferência ativa</a></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -181,14 +181,14 @@
 <p>Um bom ponto de partida é o teorema de Bayes. Lembre-se do capítulo 2 que esse teorema expressa uma igualdade entre o produto de uma verossimilhança a priori e o produto de uma verossimilhança a posteriori. Isso é reproduzido na equação 4.1:</p>
 <p><span class="math display">\[P(x)P(y|x) = P(x|y)P(y)\]</span>
 <span class="math display">\[ P(y) = \sum_x P(y|x) = \sum_x P(y|x)P(x) \qquad\qquad (4.1)\]</span></p>
-<p>A primeira linha da equação 4.1 é o teorema de Bayes. A segunda linha mostra que a verossimilhança marginal (ou evidência do modelo), <span class="math inline">\(P(y)\)</span>, pode ser calculada diretamente a partir do anterior e da verossimilhança.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Isso mostra que a anterior e a verossimilhança - que juntas compõem o modelo generativo - são suficientes para calcularmos a evidência do modelo e a probabilidade posterior. Apesar disso, nem sempre é fácil fazê-lo. A soma (ou integração, se lidar com variáveis contínuas) na equação 4.1 pode ser computacionalmente ou analiticamente intratável. Uma maneira de resolver isso – o ponto de partida da inferência variacional – é converter esse problema de integração potencialmente difícil em um problema de otimização. Para entender como isso funciona, precisamos recorrer à desigualdade de Jensen, que diz que “o log <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> de uma média é sempre maior ou igual à média de um log”. A Figura 4.1 fornece uma intuição gráfica de por que esse é o caso.</p>
+<p>A primeira linha da equação 4.1 é o teorema de Bayes. A segunda linha mostra que a verossimilhança marginal (ou evidência do modelo), <span class="math inline">\(P(y)\)</span>, pode ser calculada diretamente a partir do anterior e da verossimilhança.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> Isso mostra que a anterior e a verossimilhança - que juntas compõem o modelo generativo - são suficientes para calcularmos a evidência do modelo e a probabilidade posterior. Apesar disso, nem sempre é fácil fazê-lo. A soma (ou integração, se lidar com variáveis contínuas) na equação 4.1 pode ser computacionalmente ou analiticamente intratável. Uma maneira de resolver isso – o ponto de partida da inferência variacional – é converter esse problema de integração potencialmente difícil em um problema de otimização. Para entender como isso funciona, precisamos recorrer à desigualdade de Jensen, que diz que “o log <a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> de uma média é sempre maior ou igual à média de um log”. A Figura 4.1 fornece uma intuição gráfica de por que esse é o caso.</p>
 <div class="figure">
 <img src="images/Figura_4_1.png" alt="" />
 <p class="caption"><strong>Figura 4.1</strong> Função logarítmica fornecendo intuição para a desigualdade de Jensen. Se tivéssemos apenas dois pontos de dados (<span class="math inline">\(x1\)</span> e <span class="math inline">\(x2\)</span>), ou poderíamos pegar sua média (<span class="math inline">\(\mathbb E[x]\)</span>) e encontrar seu log, ou poderíamos pegar o log de cada ponto de dados e então tirar a média desses (<span class="math inline">\(\mathbb {E}[ln x]\)</span>). Este último (<span class="math inline">\(\mathbb{E}[ln x]\)</span>) estará sempre abaixo do primeiro (<span class="math inline">\(ln \mathbb{E}[x]\)</span>), devido à concavidade da função logarítmica, a menos que os pontos de dados sejam os mesmos (onde o logaritmo da média e a média de o log são iguais). Essa desigualdade vale para qualquer número de pontos de dados.</p>
 </div>
-<p>Para tirar proveito dessa propriedade, podemos reescrever a equação 4.1 multiplicando o termo dentro da soma na segunda linha por uma função arbitrária (<span class="math inline">\(Q\)</span>) dividida por ela mesma (isso é equivalente a multiplicar por um, então a igualdade ainda é válida) e tomando o logaritmo de cada lado. Matematicamente, isso não muda nada. No entanto, agora podemos interpretar a expressão como uma expectativa (<span class="math inline">\(\mathbb{E}^3\)</span>) de uma razão entre duas probabilidades e assim explorar a desigualdade de Jensen:</p>
+<p>Para tirar proveito dessa propriedade, podemos reescrever a equação 4.1 multiplicando o termo dentro da soma na segunda linha por uma função arbitrária (<span class="math inline">\(Q\)</span>) dividida por ela mesma (isso é equivalente a multiplicar por um, então a igualdade ainda é válida) e tomando o logaritmo de cada lado. Matematicamente, isso não muda nada. No entanto, agora podemos interpretar a expressão como uma expectativa (<span class="math inline">\(\mathbb{E}\)</span>)<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>: de uma razão entre duas probabilidades e assim explorar a desigualdade de Jensen:</p>
 <p><span class="math display">\[ \ln P(y) = \ln \sum_x P(y,x){Q(x)\over Q(x)}= \ln \mathbb{E_{Q(x)}[{P(y,x)\over Q(x)}]} \ge \mathbb{E}_{Q(x)} [\ln {P(y,x) \over Q(x)}] \triangleq -F[Q,y] \qquad(4.2)\]</span></p>
-<p>A segunda linha desta equação usa o fato de que temos uma expectativa logarítmica e que, pela desigualdade de Jensen, esta deve ser sempre maior ou igual à expectativa logarítmica. Esse movimento às vezes é chamado de amostragem de importância. O lado direito dessa desigualdade é conhecido como energia livre variacional (negativa):<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> quanto menor a energia livre, mais próxima está da evidência do modelo logarítmico negativo. Com isso em mente, podemos reescrever o teorema de Bayes (equação 4.1) na forma logarítmica, tomar sua média sob a distribuição posterior e divulgar a relação entre isso e as quantidades da equação 4.2:</p>
+<p>A segunda linha desta equação usa o fato de que temos uma expectativa logarítmica e que, pela desigualdade de Jensen, esta deve ser sempre maior ou igual à expectativa logarítmica. Esse movimento às vezes é chamado de amostragem de importância. O lado direito dessa desigualdade é conhecido como energia livre variacional (negativa):<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> quanto menor a energia livre, mais próxima está da evidência do modelo logarítmico negativo. Com isso em mente, podemos reescrever o teorema de Bayes (equação 4.1) na forma logarítmica, tomar sua média sob a distribuição posterior e divulgar a relação entre isso e as quantidades da equação 4.2:</p>
 <p><span class="math display">\[ \ln P(x,y) = \ln P(y) + \ln P(x|y) \Longrightarrow  \]</span>
 <span class="math display">\[ \mathbb{E}_{P(x|y)} [\ln P(x,y)] = \ln P(y) + \mathbb{E}_{P(x|y)}[\ln P(x|y)] \qquad\qquad (4.3) \]</span></p>
 <p><span class="math display">\[ \mathbb{E}_{Q(x)} [\ln P(x,y)] = \ln -F[Q,y] + \mathbb{E}_{Q(x)}[\ln Q(x)]\]</span>
@@ -349,45 +349,40 @@ F[\mu,y] &amp; = &amp; -\ln p(\tilde y, \tilde \mu_x , \tilde \mu_\nu) \\
 </div>
 <div id="inferência-ativa-como-codificação-preditiva-com-reflexos-motores" class="section level3 hasAnchor" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> Inferência Ativa como Codificação Preditiva com Reflexos Motores<a href="os-modelos-geradores-de-inferência-ativa.html#inferência-ativa-como-codificação-preditiva-com-reflexos-motores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="testes-odysseus" class="section level3 hasAnchor" number="4.5.3">
-<h3><span class="header-section-number">4.5.3</span> testes odysseus<a href="os-modelos-geradores-de-inferência-ativa.html#testes-odysseus" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[
-\begin{equation}
-a = bx + c
-\end{equation}\]</span></p>
-</div>
-</div>
-<div id="testes" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> testes<a href="os-modelos-geradores-de-inferência-ativa.html#testes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>migraccao do mundo de keika</p>
-<p>( comig do Rstudio. Podemos confiar?)</p>
-
-</div>
-</div>
-
-
-
-<div id="introdução-4" class="section level2 hasAnchor" number="4.7">
-<h2><span class="header-section-number">7</span> Introdução<a href="os-modelos-geradores-de-inferência-ativa.html#introdução-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="álgebra-linear" class="section level2 hasAnchor" number="4.8">
-<h2><span class="header-section-number">8</span> Álgebra Linear<a href="os-modelos-geradores-de-inferência-ativa.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="o-básico" class="section level3 hasAnchor" number="4.8.1">
-<h3><span class="header-section-number">8.1</span> O básico<a href="os-modelos-geradores-de-inferência-ativa.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="derivadas" class="section level3 hasAnchor" number="4.8.2">
-<h3><span class="header-section-number">8.2</span> Derivadas<a href="os-modelos-geradores-de-inferência-ativa.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Como a variância do posterior aproximado é uma função analítica da moda, sob a aproximação de Laplace, podemos otimizar a energia livre em relação a moda. Uma maneira simples de pensar sobre isso é que precisamos apenas encontrar as estimativas <strong>máximas a posteriori</strong> (MAP) <a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> para cada estado. Estes são os meios da distribuição a posteriori que podem ser equipados com sua precisão sem necessidade de mais inferências através da aproximação de Laplace. (ver quadro 4.3).</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quadro 4.3 A aproximação de Laplace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>As aproximações de Laplace baseiam-se num princípio semelhante às coordenadas generalizadas de movimento descritas no quadro 4.2. A ideia é que a energia livre pode ser aproximada por uma expansão quadrática em torno do modo posterior (<span class="math inline">\(\mu\)</span>). Em uma dimensão, é o seguinte: <span class="math display">\[\begin{equation} F[y,q]= E_{q(x)}[\ln q(x) - \ln p(y,x)  \end{equation}\]</span><span class="math display">\[\begin{equation}\begin{aligned}\approx E_{q(x)}\ln  q(\mu)+\begin{matrix}(x-\mu)\underbrace {\partial_x \ln q(x)|_{x=\mu}}\\{=0} \end{matrix}   + \\ \frac{1}{2}(x-\mu)²\partial²_x \ln q(x)|_{x-\mu} ]\end{aligned}\end{equation}\]</span></td>
+</tr>
+</tbody>
+</table>
+<p>\begin{equation} -p(y,)-(x-)<em>xp(y,x)|</em>{x=} ] -(x-)²<em>x^2p(y,x)|</em>{x=} ]</p>
+<p>A suposição de que uma expansão quadrática é suficiente equivale a dizer que podemos tratar as probabilidades como gaussianas (como o logaritmo de uma densidade gaussiana é quadrática). Tornando isso explícito, podemos simplificar o acima para o seguinte:|</p>
 
 </div>
 </div>
 </div>
+
+
+
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Aqui e ao longo do capítulo, o condicionamento ao modelo é deixado implícito; portanto, a evidência do modelo é escrita como <span class="math inline">\(P(y)\)</span> e não <span class="math inline">\(P(y|m)\)</span>.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Tecnicamente, isso é verdade para qualquer função côncava, mas estamos preocupados apenas com logaritmos aqui.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Neste livro, seguimos a convenção do físico em que a energia livre é um limite superior na evidência de log negativo. No entanto, outras disciplinas (incluindo estatística e aprendizado de máquina) usam a energia livre negativa como um limite inferior de evidência (ou ELBO). Estes são completamente equivalentes, mas podem causar alguma confusão na pesquisa interdisciplinar.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<ol start="16">
+<li id="fn16"><p>Aqui e ao longo do capítulo, o condicionamento ao modelo é deixado implícito; portanto, a evidência do modelo é escrita como <span class="math inline">\(P(y)\)</span> e não <span class="math inline">\(P(y|m)\)</span>.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>Tecnicamente, isso é verdade para qualquer função côncava, mas estamos preocupados apenas com logaritmos aqui.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>Uma expectativa é uma soma ponderada ou integral do termo dentro dos colchetes; cada termo é ponderado pela probabilidade indicada pelo índice (ver quadro 2.2).<a href="os-modelos-geradores-de-inferência-ativa.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>Neste livro, seguimos a convenção do físico em que a energia livre é um limite superior na evidência de log negativo. No entanto, outras disciplinas (incluindo estatística e aprendizado de máquina) usam a energia livre negativa como um limite inferior de evidência (ou ELBO). Estes são completamente equivalentes, mas podem causar alguma confusão na pesquisa interdisciplinar.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>As estimativas MAP são os estados mais prováveis considerando as crenças anteriores e os dados disponíveis; contraste isso com abordagens de máxima verossimilhança que não levam
+crenças em conta.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref20" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -396,7 +391,7 @@ a = bx + c
         </div>
       </div>
 <a href="o-caminho-para-a-inferência-ativa.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

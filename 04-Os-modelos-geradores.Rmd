@@ -24,22 +24,23 @@ Um bom ponto de partida é o teorema de Bayes. Lembre-se do capítulo 2 que esse
 $$P(x)P(y|x) = P(x|y)P(y)$$
 $$ P(y) = \sum_x P(y|x) = \sum_x P(y|x)P(x) \qquad\qquad (4.1)$$
 
-A primeira linha da equação 4.1 é o teorema de Bayes. A segunda linha mostra que a verossimilhança marginal (ou evidência do modelo), $P(y)$, pode ser calculada diretamente a partir do anterior e da verossimilhança.[^14] Isso mostra que a anterior e a verossimilhança - que juntas compõem o modelo generativo - são suficientes para calcularmos a evidência do modelo e a probabilidade posterior. Apesar disso, nem sempre é fácil fazê-lo. A soma (ou integração, se lidar com variáveis contínuas) na equação 4.1 pode ser computacionalmente ou analiticamente intratável. Uma maneira de resolver isso – o ponto de partida da inferência variacional – é converter esse problema de integração potencialmente difícil em um problema de otimização. Para entender como isso funciona, precisamos recorrer à desigualdade de Jensen, que diz que “o log [^15] de uma média é sempre maior ou igual à média de um log”. A Figura 4.1 fornece uma intuição gráfica de por que esse é o caso.
+A primeira linha da equação 4.1 é o teorema de Bayes. A segunda linha mostra que a verossimilhança marginal (ou evidência do modelo), $P(y)$, pode ser calculada diretamente a partir do anterior e da verossimilhança.[^4_1] Isso mostra que a anterior e a verossimilhança - que juntas compõem o modelo generativo - são suficientes para calcularmos a evidência do modelo e a probabilidade posterior. Apesar disso, nem sempre é fácil fazê-lo. A soma (ou integração, se lidar com variáveis contínuas) na equação 4.1 pode ser computacionalmente ou analiticamente intratável. Uma maneira de resolver isso – o ponto de partida da inferência variacional – é converter esse problema de integração potencialmente difícil em um problema de otimização. Para entender como isso funciona, precisamos recorrer à desigualdade de Jensen, que diz que “o log [^4_2] de uma média é sempre maior ou igual à média de um log”. A Figura 4.1 fornece uma intuição gráfica de por que esse é o caso.
 
-[^14]:Aqui e ao longo do capítulo, o condicionamento ao modelo é deixado implícito; portanto, a evidência do modelo é escrita como $P(y)$ e não $P(y|m)$.
+[^4_1]:Aqui e ao longo do capítulo, o condicionamento ao modelo é deixado implícito; portanto, a evidência do modelo é escrita como $P(y)$ e não $P(y|m)$.
 
-[^15]:Tecnicamente, isso é verdade para qualquer função côncava, mas estamos preocupados apenas com logaritmos aqui.
+[^4_2]:Tecnicamente, isso é verdade para qualquer função côncava, mas estamos preocupados apenas com logaritmos aqui.
 
 ![**Figura 4.1** Função logarítmica fornecendo intuição para a desigualdade de Jensen. Se tivéssemos apenas dois pontos de dados ($x1$ e $x2$), ou poderíamos pegar sua média ($\mathbb E[x]$) e encontrar seu log, ou poderíamos pegar o log de cada ponto de dados e então tirar a média desses ($\mathbb {E}[ln x]$). Este último ($\mathbb{E}[ln x]$) estará sempre abaixo do primeiro ($ln \mathbb{E}[x]$), devido à concavidade da função logarítmica, a menos que os pontos de dados sejam os mesmos (onde o logaritmo da média e a média de o log são iguais). Essa desigualdade vale para qualquer número de pontos de dados.](images/Figura_4_1.png)
 
-Para tirar proveito dessa propriedade, podemos reescrever a equação 4.1 multiplicando o termo dentro da soma na segunda linha por uma função arbitrária ($Q$) dividida por ela mesma (isso é equivalente a multiplicar por um, então a igualdade ainda é válida) e tomando o logaritmo de cada lado. Matematicamente, isso não muda nada. No entanto, agora podemos interpretar a expressão como uma expectativa ($\mathbb{E}^3$) de uma razão entre duas probabilidades e assim explorar a desigualdade de Jensen:
+Para tirar proveito dessa propriedade, podemos reescrever a equação 4.1 multiplicando o termo dentro da soma na segunda linha por uma função arbitrária ($Q$) dividida por ela mesma (isso é equivalente a multiplicar por um, então a igualdade ainda é válida) e tomando o logaritmo de cada lado. Matematicamente, isso não muda nada. No entanto, agora podemos interpretar a expressão como uma expectativa ($\mathbb{E}$)[^4_3]: de uma razão entre duas probabilidades e assim explorar a desigualdade de Jensen:
 
+[^4_3]:Uma expectativa é uma soma ponderada ou integral do termo dentro dos colchetes; cada termo é ponderado pela probabilidade indicada pelo índice (ver quadro 2.2).
 
 $$ \ln P(y) = \ln \sum_x P(y,x){Q(x)\over Q(x)}= \ln \mathbb{E_{Q(x)}[{P(y,x)\over Q(x)}]} \ge \mathbb{E}_{Q(x)} [\ln {P(y,x) \over Q(x)}] \triangleq -F[Q,y] \qquad(4.2)$$
 
-A segunda linha desta equação usa o fato de que temos uma expectativa logarítmica e que, pela desigualdade de Jensen, esta deve ser sempre maior ou igual à expectativa logarítmica. Esse movimento às vezes é chamado de amostragem de importância. O lado direito dessa desigualdade é conhecido como energia livre variacional (negativa):[^16] quanto menor a energia livre, mais próxima está da evidência do modelo logarítmico negativo. Com isso em mente, podemos reescrever o teorema de Bayes (equação 4.1) na forma logarítmica, tomar sua média sob a distribuição posterior e divulgar a relação entre isso e as quantidades da equação 4.2:
+A segunda linha desta equação usa o fato de que temos uma expectativa logarítmica e que, pela desigualdade de Jensen, esta deve ser sempre maior ou igual à expectativa logarítmica. Esse movimento às vezes é chamado de amostragem de importância. O lado direito dessa desigualdade é conhecido como energia livre variacional (negativa):[^4_4] quanto menor a energia livre, mais próxima está da evidência do modelo logarítmico negativo. Com isso em mente, podemos reescrever o teorema de Bayes (equação 4.1) na forma logarítmica, tomar sua média sob a distribuição posterior e divulgar a relação entre isso e as quantidades da equação 4.2:
 
-[^16]:Neste livro, seguimos a convenção do físico em que a energia livre é um limite superior na evidência de log negativo. No entanto, outras disciplinas (incluindo estatística e aprendizado de máquina) usam a energia livre negativa como um limite inferior de evidência (ou ELBO). Estes são completamente equivalentes, mas podem causar alguma confusão na pesquisa interdisciplinar.
+[^4_4]:Neste livro, seguimos a convenção do físico em que a energia livre é um limite superior na evidência de log negativo. No entanto, outras disciplinas (incluindo estatística e aprendizado de máquina) usam a energia livre negativa como um limite inferior de evidência (ou ELBO). Estes são completamente equivalentes, mas podem causar alguma confusão na pesquisa interdisciplinar.
 
 
 $$ \ln P(x,y) = \ln P(y) + \ln P(x|y) \Longrightarrow  $$
@@ -238,16 +239,19 @@ Na equação 4.19, os termos $\mu$ indicam a moda da densidade posterior aproxim
 
 ### Inferência Ativa como Codificação Preditiva com Reflexos Motores
 
-### testes odysseus
-$$
-\begin{equation}
-a = bx + c
-\end{equation}$$
+Como a variância do posterior aproximado é uma função analítica da moda, sob a aproximação de Laplace, podemos otimizar a energia livre em relação a moda. Uma maneira simples de pensar sobre isso é que precisamos apenas encontrar as estimativas **máximas a posteriori** (MAP) [^4_5] para cada estado. Estes são os meios da distribuição a posteriori que podem ser equipados com sua precisão sem necessidade de mais inferências através da aproximação de Laplace. (ver quadro 4.3).
+
+[^4_5]:As estimativas MAP são os estados mais prováveis considerando as crenças anteriores e os dados disponíveis; contraste isso com abordagens de máxima verossimilhança que não levam
+crenças em conta.
+
+| Quadro 4.3  A aproximação de Laplace |
+| --- | 
+| As aproximações de Laplace baseiam-se num princípio semelhante às coordenadas generalizadas de movimento descritas no quadro 4.2. A ideia é que a energia livre pode ser aproximada por uma expansão quadrática em torno do modo posterior ($\mu$). Em uma dimensão, é o seguinte: \begin{equation} F[y,q]= E_{q(x)}[\ln q(x) - \ln p(y,x)  \end{equation}\begin{equation}\begin{aligned}\approx E_{q(x)}\ln  q(\mu)+\begin{matrix}(x-\mu)\underbrace {\partial_x \ln q(x)|_{x=\mu}}\\{=0} \end{matrix}   + \\ \frac{1}{2}(x-\mu)²\partial²_x \ln q(x)|_{x-\mu} ]\end{aligned}\end{equation}
+
+\begin{equation} -\ln p(y,\mu)-(x-\mu)\partial_x\ln p(y,x)|_{x=\mu} ] -\frac{1}{2}(x-\mu)²\partial_x^2\ln p(y,x)|_{x=\mu} ]
+
+A suposição de que uma expansão quadrática é suficiente equivale a dizer que podemos tratar as probabilidades como gaussianas (como o logaritmo de uma densidade gaussiana é quadrática). Tornando isso explícito, podemos simplificar o acima para o seguinte:|
 
 
 
-## testes
-migraccao do mundo de keika
 
-
-( comig do Rstudio. Podemos confiar?)

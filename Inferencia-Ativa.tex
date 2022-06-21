@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-06-20}
+\date{2022-06-21}
 
 \begin{document}
 \maketitle
@@ -838,7 +838,7 @@ A primeira linha da equação 4.1 é o teorema de Bayes. A segunda linha mostra 
 \caption{\textbf{Figura 4.1} Função logarítmica fornecendo intuição para a desigualdade de Jensen. Se tivéssemos apenas dois pontos de dados (\(x1\) e \(x2\)), ou poderíamos pegar sua média (\(\mathbb E[x]\)) e encontrar seu log, ou poderíamos pegar o log de cada ponto de dados e então tirar a média desses (\(\mathbb {E}[ln x]\)). Este último (\(\mathbb{E}[ln x]\)) estará sempre abaixo do primeiro (\(ln \mathbb{E}[x]\)), devido à concavidade da função logarítmica, a menos que os pontos de dados sejam os mesmos (onde o logaritmo da média e a média de o log são iguais). Essa desigualdade vale para qualquer número de pontos de dados.}
 \end{figure}
 
-Para tirar proveito dessa propriedade, podemos reescrever a equação 4.1 multiplicando o termo dentro da soma na segunda linha por uma função arbitrária (\(Q\)) dividida por ela mesma (isso é equivalente a multiplicar por um, então a igualdade ainda é válida) e tomando o logaritmo de cada lado. Matematicamente, isso não muda nada. No entanto, agora podemos interpretar a expressão como uma expectativa (\(\mathbb{E}^3\)) de uma razão entre duas probabilidades e assim explorar a desigualdade de Jensen:
+Para tirar proveito dessa propriedade, podemos reescrever a equação 4.1 multiplicando o termo dentro da soma na segunda linha por uma função arbitrária (\(Q\)) dividida por ela mesma (isso é equivalente a multiplicar por um, então a igualdade ainda é válida) e tomando o logaritmo de cada lado. Matematicamente, isso não muda nada. No entanto, agora podemos interpretar a expressão como uma expectativa (\(\mathbb{E}\))\footnote{Uma expectativa é uma soma ponderada ou integral do termo dentro dos colchetes; cada termo é ponderado pela probabilidade indicada pelo índice (ver quadro 2.2).}: de uma razão entre duas probabilidades e assim explorar a desigualdade de Jensen:
 
 \[ \ln P(y) = \ln \sum_x P(y,x){Q(x)\over Q(x)}= \ln \mathbb{E_{Q(x)}[{P(y,x)\over Q(x)}]} \ge \mathbb{E}_{Q(x)} [\ln {P(y,x) \over Q(x)}] \triangleq -F[Q,y] \qquad(4.2)\]
 
@@ -1064,15 +1064,24 @@ Na equação 4.19, os termos \(\mu\) indicam a moda da densidade posterior aprox
 \hypertarget{inferuxeancia-ativa-como-codificauxe7uxe3o-preditiva-com-reflexos-motores}{%
 \subsection{Inferência Ativa como Codificação Preditiva com Reflexos Motores}\label{inferuxeancia-ativa-como-codificauxe7uxe3o-preditiva-com-reflexos-motores}}
 
-\hypertarget{testes-odysseus}{%
-\subsection{testes odysseus}\label{testes-odysseus}}
+Como a variância do posterior aproximado é uma função analítica da moda, sob a aproximação de Laplace, podemos otimizar a energia livre em relação a moda. Uma maneira simples de pensar sobre isso é que precisamos apenas encontrar as estimativas \textbf{máximas a posteriori} (MAP) \footnote{As estimativas MAP são os estados mais prováveis considerando as crenças anteriores e os dados disponíveis; contraste isso com abordagens de máxima verossimilhança que não levam
+  crenças em conta.} para cada estado. Estes são os meios da distribuição a posteriori que podem ser equipados com sua precisão sem necessidade de mais inferências através da aproximação de Laplace. (ver quadro 4.3).
 
-\[
-\begin{equation}
-a = bx + c
-\end{equation}\]
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Quadro 4.3 A aproximação de Laplace
+\end{minipage} \\
+\midrule
+\endhead
+As aproximações de Laplace baseiam-se num princípio semelhante às coordenadas generalizadas de movimento descritas no quadro 4.2. A ideia é que a energia livre pode ser aproximada por uma expansão quadrática em torno do modo posterior (\(\mu\)). Em uma dimensão, é o seguinte: \begin{equation} F[y,q]= E_{q(x)}[\ln q(x) - \ln p(y,x)  \end{equation}\begin{equation}\begin{aligned}\approx E_{q(x)}\ln  q(\mu)+\begin{matrix}(x-\mu)\underbrace {\partial_x \ln q(x)|_{x=\mu}}\\{=0} \end{matrix}   + \\ \frac{1}{2}(x-\mu)²\partial²_x \ln q(x)|_{x-\mu} ]\end{aligned}\end{equation} \\
+\bottomrule
+\end{longtable}
 
-Agora vai tete
+\textbackslash begin\{equation\} -\ln p(y,\mu)-(x-\mu)\partial\emph{x\ln p(y,x)\textbar{}}\{x=\mu\} {]} -\frac{1}{2}(x-\mu)²\partial\emph{x\^{}2\ln p(y,x)\textbar{}}\{x=\mu\} {]}
+
+A suposição de que uma expansão quadrática é suficiente equivale a dizer que podemos tratar as probabilidades como gaussianas (como o logaritmo de uma densidade gaussiana é quadrática). Tornando isso explícito, podemos simplificar o acima para o seguinte:\textbar{}
 
 \cleardoublepage
 
@@ -1244,6 +1253,8 @@ filosofia transcendental}
 \textbf{F} Energia livre variacional : considera apenas observações presentes e passadas
 
 \(\triangleq \text versus \overset{\Delta}{=}\)
+
+\[ \begin{align} f(x) =  x_1  \\+ x_2 \\ + x_3 \\ + x_4 + x_5 + x_6\end{align}\]
 
   \bibliography{book.bib,packages.bib}
 

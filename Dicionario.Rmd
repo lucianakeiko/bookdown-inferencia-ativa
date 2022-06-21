@@ -44,3 +44,5 @@ filosofia transcendental](https://periodicos.ufmg.br/index.php/memorandum/articl
 **F** Energia livre variacional : considera apenas observações presentes e passadas
 
 $\triangleq  \text versus \overset{\Delta}{=}$
+
+$$ \begin{align} f(x) =  x_1  \\+ x_2 \\ + x_3 \\ + x_4 + x_5 + x_6\end{align}$$
