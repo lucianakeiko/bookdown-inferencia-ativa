@@ -40,9 +40,7 @@ inferência-ativa-em-um-pomdp
 inferência-ativa-em-tempo-contínuo
 um-modelo-generativo-para-codificação-preditiva
 inferência-ativa-como-codificação-preditiva-com-reflexos-motores
-bases-matemáticas
 introdução-4
 álgebra-linear
 o-básico
 derivadas
-as-equações-da-inferência-ativa

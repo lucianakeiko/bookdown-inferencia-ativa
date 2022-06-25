@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>> 4 Os Modelos Geradores de Inferência Ativa | Inferencia Ativa</title>
   <meta name="description" content="O Princípio da Energia Livre na Mente, Cérebro e Comportamento." />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="> 4 Os Modelos Geradores de Inferência Ativa | Inferencia Ativa" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-06-23" />
+<meta name="date" content="2022-06-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -774,6 +774,9 @@ precisamos apenas encontrar as estimativas <strong>máximas a posteriori</strong
 posteriori que podem ser equipados com sua precisão sem necessidade de
 mais inferências através da aproximação de Laplace. (ver quadro 4.3).</p>
 <table>
+<colgroup>
+<col width="100%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Quadro 4.3 A aproximação de Laplace</th>
@@ -781,20 +784,40 @@ mais inferências através da aproximação de Laplace. (ver quadro 4.3).</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>As aproximações de Laplace baseiam-se num princípio semelhante às coordenadas generalizadas de movimento descritas no quadro 4.2. A ideia é que a energia livre pode ser aproximada por uma expansão quadrática em torno do modo posterior (<span class="math inline">\(\mu\)</span>). Em uma dimensão, é o seguinte:</p>
-<p><span class="math display">\[ \begin{equation} F[y,q]= E_{q(x)}[\ln q(x) - \ln p(y,x) \end{equation}\]</span></p>
-<p><span class="math display">\[ \begin{aligned}  \approx E_{q(x)} [ \ln q(\mu) +
+<td>As aproximações de Laplace baseiam-se num princípio semelhante às coordenadas generalizadas de movimento descritas no quadro 4.2. A ideia é que a energia livre pode ser aproximada por uma expansão quadrática em torno do modo posterior (<span class="math inline">\(\mu\)</span>). Em uma dimensão, é o seguinte: <span class="math display">\[ \begin{equation} F[y,q]= E_{q(x)}[\ln q(x) - \ln p(y,x) \end{equation}\]</span> <span class="math display">\[ \begin{aligned}  \approx E_{q(x)} [ \ln q(\mu) +
 \begin{matrix}
 (x-\mu)\underbrace {\partial_x \ln q(x)|_{x=\mu}}\\{=0}  
 \end{matrix} +
 \frac{1}{2}(x-\mu)²\partial²_x \ln q(x)|_{x-\mu}  \\
 -\ln p(y,\mu)-(x-\mu)\partial_x \ln p(y,x)|_{x=\mu}
 - \frac{1}{2}(x-\mu)^2\partial_x^2\ln p(y,x)|_{x=\mu}]
-\end{aligned}\]</span></p>
+\end{aligned}\]</span> A suposição de que uma expansão quadrática é suficiente equivale a dizer que podemos tratar as probabilidades como gaussianas (como o logaritmo de uma densidade gaussiana é quadrática). Tornando isso explícito, podemos simplificar o acima para o seguinte: <span class="math display">\[q(x)=\mathcal{N}(\mu,\sum{}^{-1} )\]</span> <span class="math display">\[F[y,\mu]= -ln 2\pi\sum-\ln p(y,\mu)-1/2tr\bigg[\sum \partial_x^2 \ln p (y,\mu)\bigg|_{x=\mu} \bigg]\]</span> Sob suposições quadráticas, o único termo que depende da moda é o segundo termo. A omissão dos outros termos leva à expressão na equação 4.19. Podemos encontrar a precisão do posterior aproximado diretamente, uma vez que conhecemos a moda, através da seguinte expansão: <span class="math display">\[ \begin{equation}
+\ln q(x) \approx \ln p(x|y)
+\\ ln p(x,y) - \ln (y)
+\\ \approx \ln p(\mu, y) + (x - \mu) \cdot \underbrace{\partial_x\ln p(x,y)|_{x=\mu}}_{=0}
+\\ + \frac{1}{2} (x-\mu)\cdot \partial_x^2 \ln p(x,y)\bigg|_{x=\mu}(x-\mu)-\ln p(y)
+\\ \Longrightarrow q(x) \varpropto e^{-\frac{1}{2}(x-\mu)\sum{}^{-1}(x-\mu)} , \quad \sum{}^{-1}=-\partial^2_x \ln p(x,y)\bigg|_{x=\mu}
+\end{equation} \]</span> Isso nos diz que a precisão posterior é simplesmente a segunda derivada da probabilidade conjunta avaliada na moda posterior</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[ \begin{equation}
+\dot{\tilde \mu} = D\tilde = \mu-\nabla_{\tilde\mu}F
+\\ = \nabla_\tilde{\mu} \ln p(\tilde y,\tilde\mu)
+\\ = -\nabla_{\tilde\mu}\tilde \epsilon \cdot \tilde \prod \tilde \epsilon
+\end{equation} \qquad\qquad(4.20)
+\]</span></p>
+<p><span class="math display">\[ \begin{equation}
+\begin{bmatrix}
+\dot{\tilde \mu}_x - D\tilde \mu_x  \\ \dot{\tilde \mu}_\nu - D\tilde \mu_\nu
+\end{bmatrix}
+= \begin{bmatrix}
+\nabla_{{\tilde \mu}_x}\tilde g\cdot \tilde \prod_y\tilde\epsilon_y - D\cdot\tilde\prod_x\tilde\epsilon_x + \nabla_{\tilde\mu_x}\tilde f \cdot \tilde \prod_x \tilde \epsilon_x  
+\\  \nabla_{{\tilde \mu}_\nu}\tilde g\cdot \tilde \prod_y\tilde\epsilon_y + \nabla_{\tilde\mu_\nu}\tilde f \cdot \tilde \prod_x \tilde \epsilon_x - \tilde \prod_\nu \tilde \epsilon_\nu
+\end{bmatrix}  
+\end{equation} \]</span></p>
+<p>.Em contraste com as descidas de gradiente que vimos para o esquema de tempo discreto, o lado esquerdo da equação 4.20 é a diferença entre a taxa de variação de <span class="math inline">\(\mu\)</span> e o operador derivativo aplicado a ela. Isso ocorre porque quando a energia livre é minimizada, não faz sentido que a taxa de variação da moda posterior seja zero se a moda posterior associado às taxas de variação for diferente de zero. Em outras palavras, “o movimento da moda deve ser a moda do movimento” no mínimo de energia livre. Isso garante <span class="math inline">\(\mu^{[i]}=\mu^{[i+1]}\)</span> quando a energia livre é minimizada.</p>
+<p>Podemos ir um passo além da equação 4.20 e tratar a causa oculta (<span class="math inline">\(\nu\)</span>) como se fossem dados gerados por um nível hierárquico superior, com dinâmica mais lenta (de modo que <span class="math inline">\(\nu\)</span> parece não mudar no nível inferior). Ao fazer isso, podemos encadear uma hierarquia de equações:</p>
 
 </div>
 </div>
