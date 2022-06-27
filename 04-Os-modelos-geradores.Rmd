@@ -715,4 +715,23 @@ $$ \begin{equation}
 
 Podemos ir um passo além da equação 4.20 e tratar a causa oculta ($\nu$) como se fossem dados gerados por um nível hierárquico superior, com dinâmica mais lenta (de modo que $\nu$ parece não mudar no nível inferior). Ao fazer isso, podemos encadear uma hierarquia de equações:
 
+$$ \begin{bmatrix} 
+\vdots \\ \dot{\tilde\mu_x}^{[i]}- D\tilde\mu_x^{[i]} \\ \dot{\tilde\mu_\nu}^{[i]}- D\tilde\mu_\nu^{[i]} \\ \vdots \end{bmatrix} = \begin{bmatrix} \vdots 
+\\ \nabla_{{\tilde \mu}_x^{(i)}}\tilde g^{(i)}\cdot \tilde \prod_\nu^{(i-1)}\tilde\epsilon_\nu^{(i-1)} - D\cdot\tilde\prod_x^{(i)}\tilde\epsilon_x^{(i)} + \nabla_{\tilde\mu_x}^{(i)}\tilde f^{(i)} \cdot \tilde \prod_x^{(i)} \tilde \epsilon_x^{(i)} 
+\\ \nabla_{{\tilde \mu}_\nu^{(i)}}\tilde g^{(i)}\cdot \tilde \prod_\nu^{(i-1)}\tilde\epsilon_\nu^{(i-1)} + \nabla_{\tilde\mu_x^{(i)}}\tilde f^{(i)} \cdot \tilde \prod_x^{(i)} \tilde \epsilon_x^{(i)}-\tilde\prod_\nu^{(i)}\tilde\epsilon_\nu^{(i)} 
+\\ \vdots \end{bmatrix} \qquad (4.21)$$
 
+$$\begin{bmatrix} \tilde \epsilon_x^{(i)} \\ \tilde \epsilon_\nu^{(i)} \end{bmatrix} = \begin{bmatrix} D\tilde\mu_x^{(i)}-f^{(i)}(\tilde\mu_x^{(i)}, \tilde\mu_\nu^{(i)}) \\ \tilde\mu_\nu^{(i)} - g^{(i+1)}(\tilde\mu_x^{(i+1)}, \tilde\mu_\nu^{(i+1)}) \end{bmatrix} $$
+$$ \tilde\epsilon_\nu^{(0)} \triangleq \tilde\epsilon_y $$
+A Figura 4.6 enfatiza graficamente o papel dos estados ocultos (x) na ligação entre as derivadas temporais dentro de um nível hierárquico e o papel das causas ocultas (v) na ligação entre os níveis hierárquicos. Nesse esquema de codificação preditiva (Rao e Ballard 1999, Friston e Kiebel 2009), níveis mais altos enviam previsões descendentes para níveis mais baixos, que computam erros nessas previsões e os repassam de volta para a hierarquia para atualizar as crenças.
+
+Para completar nossa visão geral da codificação preditiva no contexto da Inferência Ativa, precisamos incorporar a ação. Dado que nosso objetivo é minimizar a energia livre e que as consequências da ação são que alteramos nossos dados sensoriais, temos o seguinte:
+
+
+$$\begin{equation}\dot u = \nabla_uF = \\ -\nabla_u\tilde y(u) \cdot \tilde\prod_y \tilde\epsilon_y\end{equation} \qquad (4.22)$$
+Essa equação diz que minimizamos a energia livre através da ação e que a única parte da energia livre que depende diretamente da ação é o nível mais baixo de erro de previsão. Em outras palavras, a ação simplesmente cumpre as previsões descendentes sobre os dados, minimizando o erro entre as consequências sensoriais da ação previstas e observadas. Uma maneira de pensar sobre isso é como se tivéssemos equipado um esquema de codificação preditivo com arcos reflexos clássicos no nível mais baixo da hierarquia (Adams, Shipp e Friston 2013). Nesta configuração, a Inferência Ativa é apenas codificação preditiva mais arcos reflexos. De uma perspectiva neurobiológica, a ideia é que os aferentes sensoriais entrem no tronco cerebral ou na medula espinhal e façam sinapse nos neurônios motores. Previsões descendentes da entrada sensorial são propagadas do córtex para os neurônios motores, cuja saída depende da diferença entre suas entradas corticais e sensoriais.
+
+
+![**Figura 4.6** Passagem de mensagens de esquemas de codificação preditivos generalizados. Esquerda: Cálculo de erros de previsão a partir de dados sensoriais, mostrando como eles podem ser propagados para cima através de uma hierarquia. Níveis mais altos enviam previsões para os níveis mais baixos que podem ser comparados com dados sensoriais para calcular esses erros. Direita: Uma única camada da hierarquia ilustra como as populações neuronais que representam diferentes ordens de movimento generalizado interagem umas com as outras.](images/Figura_4_6.png)
+
+Do ponto de vista computacional, um arco reflexo é uma das formas mais simples de controlador; esses desvios corretos nos sinais proprioceptivos previstos e observados. Comportamentos motores mais complexos requerem a geração de sequências de previsões e seu cumprimento em ordem usando arcos reflexos. Esse mecanismo diferencia a inferência ativa de outros esquemas de controle motor biológico, como o controle ótimo, que não são baseados em codificação preditiva e utilizam modelos e controladores inversos mais complexos que os arcos reflexos (Friston 2011). Outra característica peculiar da Inferência Ativa é que ela dispensa noções de valor ou custo usadas no controle ótimo (e aprendizado por reforço); estes são totalmente absorvidos pela noção (geralmente mais expressiva) de priores (ver capítulo 10 para uma discussão mais aprofundada).
