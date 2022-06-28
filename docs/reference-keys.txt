@@ -40,7 +40,11 @@ inferência-ativa-em-um-pomdp
 inferência-ativa-em-tempo-contínuo
 um-modelo-generativo-para-codificação-preditiva
 inferência-ativa-como-codificação-preditiva-com-reflexos-motores
+resumo-3
+passagem-de-mensagens-e-neurobiologia
 introdução-4
+microcircuitos-e-mensagens
+introdução-5
 álgebra-linear
 o-básico
 derivadas

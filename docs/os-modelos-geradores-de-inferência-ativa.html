@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-06-27" />
+<meta name="date" content="2022-06-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="o-caminho-para-a-inferência-ativa.html"/>
-<link rel="next" href="dicionário.html"/>
+<link rel="next" href="passagem-de-mensagens-e-neurobiologia.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -133,14 +133,20 @@
 <li class="chapter" data-level="4.5.1" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#um-modelo-generativo-para-codificação-preditiva"><i class="fa fa-check"></i><b>4.5.1</b> Um modelo generativo para codificação preditiva</a></li>
 <li class="chapter" data-level="4.5.2" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#inferência-ativa-como-codificação-preditiva-com-reflexos-motores"><i class="fa fa-check"></i><b>4.5.2</b> Inferência Ativa como Codificação Preditiva com Reflexos Motores</a></li>
 </ul></li>
+<li class="chapter" data-level="4.6" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#resumo-3"><i class="fa fa-check"></i><b>4.6</b> Resumo</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html"><i class="fa fa-check"></i><b>5</b> Passagem de Mensagens e Neurobiologia</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#introdução-4"><i class="fa fa-check"></i><b>5.1</b> Introdução</a></li>
+<li class="chapter" data-level="5.2" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#microcircuitos-e-mensagens"><i class="fa fa-check"></i><b>5.2</b> Microcircuitos e Mensagens</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
 <ul>
-<li class="chapter" data-level="4.6" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#introdução-4"><i class="fa fa-check"></i><b>4.6</b> Introdução</a></li>
-<li class="chapter" data-level="4.7" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#álgebra-linear"><i class="fa fa-check"></i><b>4.7</b> Álgebra Linear</a>
+<li class="chapter" data-level="5.3" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#introdução-5"><i class="fa fa-check"></i><b>5.3</b> Introdução</a></li>
+<li class="chapter" data-level="5.4" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#álgebra-linear"><i class="fa fa-check"></i><b>5.4</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#o-básico"><i class="fa fa-check"></i><b>4.7.1</b> O básico</a></li>
-<li class="chapter" data-level="4.7.2" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#derivadas"><i class="fa fa-check"></i><b>4.7.2</b> Derivadas</a></li>
+<li class="chapter" data-level="5.4.1" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#o-básico"><i class="fa fa-check"></i><b>5.4.1</b> O básico</a></li>
+<li class="chapter" data-level="5.4.2" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#derivadas"><i class="fa fa-check"></i><b>5.4.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
@@ -834,25 +840,12 @@ Essa equação diz que minimizamos a energia livre através da ação e que a ú
 <p class="caption"><strong>Figura 4.6</strong> Passagem de mensagens de esquemas de codificação preditivos generalizados. Esquerda: Cálculo de erros de previsão a partir de dados sensoriais, mostrando como eles podem ser propagados para cima através de uma hierarquia. Níveis mais altos enviam previsões para os níveis mais baixos que podem ser comparados com dados sensoriais para calcular esses erros. Direita: Uma única camada da hierarquia ilustra como as populações neuronais que representam diferentes ordens de movimento generalizado interagem umas com as outras.</p>
 </div>
 <p>Do ponto de vista computacional, um arco reflexo é uma das formas mais simples de controlador; esses desvios corretos nos sinais proprioceptivos previstos e observados. Comportamentos motores mais complexos requerem a geração de sequências de previsões e seu cumprimento em ordem usando arcos reflexos. Esse mecanismo diferencia a inferência ativa de outros esquemas de controle motor biológico, como o controle ótimo, que não são baseados em codificação preditiva e utilizam modelos e controladores inversos mais complexos que os arcos reflexos (Friston 2011). Outra característica peculiar da Inferência Ativa é que ela dispensa noções de valor ou custo usadas no controle ótimo (e aprendizado por reforço); estes são totalmente absorvidos pela noção (geralmente mais expressiva) de priores (ver capítulo 10 para uma discussão mais aprofundada).</p>
+</div>
+</div>
+<div id="resumo-3" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Resumo<a href="os-modelos-geradores-de-inferência-ativa.html#resumo-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Este capítulo delineou as ideias formais básicas que sustentam a Inferência Ativa. A principal mensagem a ser retirada é que a inferência Bayesiana (aproximada) pode ser enquadrada como minimizando uma quantidade conhecida como energia livre variacional. Isso depende de um modelo generativo que expresse nossas crenças sobre como os dados são gerados. Examinamos duas formas de modelo generativo que podem ser empregadas dependendo do problema de inferência em questão: especificamente, se estamos interessados em variáveis categóricas ou contínuas. A solução de minimização de energia livre para ambos podem ser descompactados em termos de troca de mensagens entre populações de neurônios, incluindo os esquemas de codificação preditivos generalizados que seguem de modelos contínuos. Finalmente, notamos que a energia livre pode ser minimizada não apenas mudando as crenças – de modo que elas se tornem consistentes com os dados – mas também agindo no mundo para tornar os dados mais consistentes com as crenças. Nos capítulos subsequentes, apelaremos aos formalismos aqui introduzidos e os aplicaremos a configurações mais concretas, oferecendo uma oportunidade de explorar as extensões dos conceitos amplos aqui estabelecidos.</p>
 
-</div>
-</div>
-</div>
-
-
-
-<div id="introdução-4" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">6</span> Introdução<a href="os-modelos-geradores-de-inferência-ativa.html#introdução-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="álgebra-linear" class="section level2 hasAnchor" number="4.7">
-<h2><span class="header-section-number">7</span> Álgebra Linear<a href="os-modelos-geradores-de-inferência-ativa.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="o-básico" class="section level3 hasAnchor" number="4.7.1">
-<h3><span class="header-section-number">7.1</span> O básico<a href="os-modelos-geradores-de-inferência-ativa.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="derivadas" class="section level3 hasAnchor" number="4.7.2">
-<h3><span class="header-section-number">7.2</span> Derivadas<a href="os-modelos-geradores-de-inferência-ativa.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-
-</div>
 </div>
 </div>
 <div class="footnotes">
@@ -883,7 +876,7 @@ abordagens de máxima verossimilhança que não levam crenças em conta.<a href=
         </div>
       </div>
 <a href="o-caminho-para-a-inferência-ativa.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="passagem-de-mensagens-e-neurobiologia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
