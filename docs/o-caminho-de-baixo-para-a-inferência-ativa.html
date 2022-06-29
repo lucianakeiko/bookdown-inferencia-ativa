@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>> 2 O Caminho de baixo para a Inferência Ativa | Inferencia Ativa</title>
   <meta name="description" content="O Princípio da Energia Livre na Mente, Cérebro e Comportamento." />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="> 2 O Caminho de baixo para a Inferência Ativa | Inferencia Ativa" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-06-23" />
+<meta name="date" content="2022-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,11 +133,19 @@
 <li class="chapter" data-level="4.5.1" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#um-modelo-generativo-para-codificação-preditiva"><i class="fa fa-check"></i><b>4.5.1</b> Um modelo generativo para codificação preditiva</a></li>
 <li class="chapter" data-level="4.5.2" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#inferência-ativa-como-codificação-preditiva-com-reflexos-motores"><i class="fa fa-check"></i><b>4.5.2</b> Inferência Ativa como Codificação Preditiva com Reflexos Motores</a></li>
 </ul></li>
+<li class="chapter" data-level="4.6" data-path="os-modelos-geradores-de-inferência-ativa.html"><a href="os-modelos-geradores-de-inferência-ativa.html#resumo-3"><i class="fa fa-check"></i><b>4.6</b> Resumo</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html"><i class="fa fa-check"></i><b>5</b> Passagem de Mensagens e Neurobiologia</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#introdução-4"><i class="fa fa-check"></i><b>5.1</b> Introdução</a></li>
+<li class="chapter" data-level="5.2" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#microcircuitos-e-mensagens"><i class="fa fa-check"></i><b>5.2</b> Microcircuitos e Mensagens</a></li>
+<li class="chapter" data-level="5.3" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#comandos-do-motor"><i class="fa fa-check"></i><b>5.3</b> Comandos do Motor</a></li>
+<li class="chapter" data-level="5.4" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#estruturas-subcorticais"><i class="fa fa-check"></i><b>5.4</b> Estruturas Subcorticais</a></li>
 </ul></li>
 <li class="appendix"><span><b>Apêndice</b></span></li>
 <li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-4"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-5"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
 <li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
 <li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
@@ -380,9 +388,12 @@ O problema é que não podemos saber qual estado ocupamos apenas a partir de obs
 <div class="footnotes">
 <hr />
 <ol start="3">
-<li id="fn3"><p>Como bits, nats são unidades de informação. A escolha da unidade depende se usamos um logaritmo de base 2 (bits) ou um logaritmo natural (nats).<a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>Suporte é um termo técnico que se refere aos argumentos possíveis para uma distribuição. Por exemplo, o suporte de uma distribuição de probabilidade categórica é uma série de estados alternativos (isto é, espaço de eventos) cuja probabilidade pode ser quantificada. O suporte de uma distribuição normal univariada é toda a reta numérica real.<a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Os detalhes desta tabela não são importantes para entender conceitualmente a Inferência Ativa, mas para leitores interessados, descompactamos brevemente os pontos-chave. A coluna Suporte nos informa o conjunto de variáveis cuja surpresa pode ser quantificada usando cada distribuição. Este é o conjunto de números reais para a distribuição gaussiana. Para a distribuição multinomial, o suporte compreende um grupo de K variáveis, cada uma assumindo um valor inteiro até um máximo N, sob a restrição de que todos os elementos desse grupo somam N. Para a distribuição de Dirichlet, o suporte inclui qualquer grupo de K números reais entre 0 e 1, onde todos os elementos do grupo somam 1. A distribuição gama quantifica a surpresa de números reais não negativos. A coluna Surpresa mostra como a surpresa pode ser calculada. Isso depende de constantes (além da variável aleatória x) que controlam a forma da distribuição subjacente.<a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Essa nomenclatura vem de teorias de aprendizado por reforço (Daw et al. 2005), mas é um pouco enganosa, pois ambos os sistemas dependem de modelos. Sistemas “sem modelo” apenas usam um modelo mais simples que prevê um certo tipo de comportamento em um certo tipo de ambiente.<a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Tecnicamente, isso é verdade para qualquer função côncava, mas
+estamos preocupados apenas com logaritmos aqui.<a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>As estimativas MAP são os estados mais prováveis considerando as
+crenças anteriores e os dados disponíveis; contraste isso com
+abordagens de máxima verossimilhança que não levam crenças em conta.<a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref5" class="footnote-back">↩︎</a></p></li>
 <li id="fn6"><p>Casos especiais incluem distribuições categóricas <span class="math inline">\((K  &gt; 2, N  =  1)\)</span>, binomial <span class="math inline">\((K  = 2, N  &gt;  1)\)</span> e Bernoulli <span class="math inline">\((K = 2, N  =  1)\)</span><a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref6" class="footnote-back">↩︎</a></p></li>
 <li id="fn7"><p>Um caso especial é a distribuição beta <span class="math inline">\((K=2)\)</span><a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref7" class="footnote-back">↩︎</a></p></li>
 <li id="fn8"><p>Curiosamente, as limitações de recursos não são a única barreira para a inferência Bayesiana exata. Na presença de modelos complexos, a inferência exata pode ser analiticamente intratável, de modo que nenhum recurso adicional poderia ajudar a resolver o problema exato.<a href="o-caminho-de-baixo-para-a-inferência-ativa.html#fnref8" class="footnote-back">↩︎</a></p></li>

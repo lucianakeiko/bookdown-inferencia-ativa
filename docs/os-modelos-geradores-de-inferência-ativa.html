@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-06-28" />
+<meta name="date" content="2022-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -139,16 +139,20 @@
 <ul>
 <li class="chapter" data-level="5.1" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#introdução-4"><i class="fa fa-check"></i><b>5.1</b> Introdução</a></li>
 <li class="chapter" data-level="5.2" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#microcircuitos-e-mensagens"><i class="fa fa-check"></i><b>5.2</b> Microcircuitos e Mensagens</a></li>
+<li class="chapter" data-level="5.3" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#comandos-do-motor"><i class="fa fa-check"></i><b>5.3</b> Comandos do Motor</a></li>
+<li class="chapter" data-level="5.4" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#estruturas-subcorticais"><i class="fa fa-check"></i><b>5.4</b> Estruturas Subcorticais</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
+<li class="appendix"><span><b>Apêndice</b></span></li>
+<li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="5.3" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#introdução-5"><i class="fa fa-check"></i><b>5.3</b> Introdução</a></li>
-<li class="chapter" data-level="5.4" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#álgebra-linear"><i class="fa fa-check"></i><b>5.4</b> Álgebra Linear</a>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-5"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#o-básico"><i class="fa fa-check"></i><b>5.4.1</b> O básico</a></li>
-<li class="chapter" data-level="5.4.2" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#derivadas"><i class="fa fa-check"></i><b>5.4.2</b> Derivadas</a></li>
+<li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
+<li class="chapter" data-level="A.2.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#derivadas"><i class="fa fa-check"></i><b>A.2.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="B" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html"><i class="fa fa-check"></i><b>B</b> As equações da inferência ativa</a></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -230,7 +234,7 @@ posteriori. Isso é reproduzido na equação 4.1:</p>
 <p>A primeira linha da equação 4.1 é o teorema de Bayes. A segunda linha
 mostra que a verossimilhança marginal (ou evidência do modelo), <span class="math inline">\(P(y)\)</span>,
 pode ser calculada diretamente a partir do anterior e da
-verossimilhança.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Isso mostra que a anterior e a verossimilhança -
+verossimilhança.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> Isso mostra que a anterior e a verossimilhança -
 que juntas compõem o modelo generativo - são suficientes para
 calcularmos a evidência do modelo e a probabilidade posterior. Apesar
 disso, nem sempre é fácil fazê-lo. A soma (ou integração, se lidar com
@@ -239,7 +243,7 @@ analiticamente intratável. Uma maneira de resolver isso – o ponto de
 partida da inferência variacional – é converter esse problema de
 integração potencialmente difícil em um problema de otimização. Para
 entender como isso funciona, precisamos recorrer à desigualdade de
-Jensen, que diz que “o log <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> de uma média é sempre maior ou igual à
+Jensen, que diz que “o log <a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> de uma média é sempre maior ou igual à
 média de um log”. A Figura 4.1 fornece uma intuição gráfica de por que
 esse é o caso.</p>
 <div class="figure">
@@ -261,14 +265,14 @@ arbitrária (<span class="math inline">\(Q\)</span>) dividida por ela mesma (iss
 multiplicar por um, então a igualdade ainda é válida) e tomando o
 logaritmo de cada lado. Matematicamente, isso não muda nada. No entanto,
 agora podemos interpretar a expressão como uma expectativa
-(<span class="math inline">\(\mathbb{E}\)</span>)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>: de uma razão entre duas probabilidades e assim
+(<span class="math inline">\(\mathbb{E}\)</span>)<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>: de uma razão entre duas probabilidades e assim
 explorar a desigualdade de Jensen:</p>
 <p><span class="math display">\[ \ln P(y) = \ln \sum_x P(y,x){Q(x)\over Q(x)}= \ln \mathbb{E_{Q(x)}[{P(y,x)\over Q(x)}]} \ge \mathbb{E}_{Q(x)} [\ln {P(y,x) \over Q(x)}] \triangleq -F[Q,y] \qquad(4.2)\]</span></p>
 <p>A segunda linha desta equação usa o fato de que temos uma expectativa
 logarítmica e que, pela desigualdade de Jensen, esta deve ser sempre
 maior ou igual à expectativa logarítmica. Esse movimento às vezes é
 chamado de amostragem de importância. O lado direito dessa desigualdade
-é conhecido como energia livre variacional (negativa):<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> quanto menor
+é conhecido como energia livre variacional (negativa):<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> quanto menor
 a energia livre, mais próxima está da evidência do modelo logarítmico
 negativo. Com isso em mente, podemos reescrever o teorema de Bayes
 (equação 4.1) na forma logarítmica, tomar sua média sob a distribuição
@@ -776,7 +780,7 @@ de <span class="math inline">\(x\)</span> dado <span class="math inline">\(\nu\)
 sob a aproximação de Laplace, podemos otimizar a energia livre em
 relação a moda. Uma maneira simples de pensar sobre isso é que
 precisamos apenas encontrar as estimativas <strong>máximas a posteriori</strong>
-(MAP) <a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> para cada estado. Estes são os meios da distribuição a
+(MAP) <a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> para cada estado. Estes são os meios da distribuição a
 posteriori que podem ser equipados com sua precisão sem necessidade de
 mais inferências através da aproximação de Laplace. (ver quadro 4.3).</p>
 <table>
@@ -850,24 +854,22 @@ Essa equação diz que minimizamos a energia livre através da ação e que a ú
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Aqui e ao longo do capítulo, o condicionamento ao modelo é deixado
-implícito; portanto, a evidência do modelo é escrita como <span class="math inline">\(P(y)\)</span> e
-não <span class="math inline">\(P(y|m)\)</span>.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Tecnicamente, isso é verdade para qualquer função côncava, mas
-estamos preocupados apenas com logaritmos aqui.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Uma expectativa é uma soma ponderada ou integral do termo dentro
+<ol start="16">
+<li id="fn16"><p>Essa nomenclatura vem de teorias de aprendizado por reforço (Daw et al. 2005), mas é um pouco enganosa, pois ambos os sistemas dependem de modelos. Sistemas “sem modelo” apenas usam um modelo mais simples que prevê um certo tipo de comportamento em um certo tipo de ambiente.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>Tecnicamente, isso é verdade para qualquer função côncava, mas
+estamos preocupados apenas com logaritmos aqui.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>Uma expectativa é uma soma ponderada ou integral do termo dentro
 dos colchetes; cada termo é ponderado pela probabilidade indicada
-pelo índice (ver quadro 2.2).<a href="os-modelos-geradores-de-inferência-ativa.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>Neste livro, seguimos a convenção do físico em que a energia livre
+pelo índice (ver quadro 2.2).<a href="os-modelos-geradores-de-inferência-ativa.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>Neste livro, seguimos a convenção do físico em que a energia livre
 é um limite superior na evidência de log negativo. No entanto,
 outras disciplinas (incluindo estatística e aprendizado de máquina)
 usam a energia livre negativa como um limite inferior de evidência
 (ou ELBO). Estes são completamente equivalentes, mas podem causar
-alguma confusão na pesquisa interdisciplinar.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>As estimativas MAP são os estados mais prováveis considerando as
+alguma confusão na pesquisa interdisciplinar.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>As estimativas MAP são os estados mais prováveis considerando as
 crenças anteriores e os dados disponíveis; contraste isso com
-abordagens de máxima verossimilhança que não levam crenças em conta.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref5" class="footnote-back">↩︎</a></p></li>
+abordagens de máxima verossimilhança que não levam crenças em conta.<a href="os-modelos-geradores-de-inferência-ativa.html#fnref20" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
