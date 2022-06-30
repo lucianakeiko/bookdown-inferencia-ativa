@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-06-29" />
+<meta name="date" content="2022-06-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="os-modelos-geradores-de-inferência-ativa.html"/>
-<link rel="next" href="bases-matemáticas.html"/>
+<link rel="next" href="dicionário.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -141,18 +141,17 @@
 <li class="chapter" data-level="5.2" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#microcircuitos-e-mensagens"><i class="fa fa-check"></i><b>5.2</b> Microcircuitos e Mensagens</a></li>
 <li class="chapter" data-level="5.3" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#comandos-do-motor"><i class="fa fa-check"></i><b>5.3</b> Comandos do Motor</a></li>
 <li class="chapter" data-level="5.4" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#estruturas-subcorticais"><i class="fa fa-check"></i><b>5.4</b> Estruturas Subcorticais</a></li>
+<li class="chapter" data-level="5.5" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#neuromodulação-e-aprendizagem"><i class="fa fa-check"></i><b>5.5</b> Neuromodulação e Aprendizagem</a></li>
 </ul></li>
-<li class="appendix"><span><b>Apêndice</b></span></li>
-<li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
+<li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-5"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
-<li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
+<li class="chapter" data-level="5.6" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#introdução-5"><i class="fa fa-check"></i><b>5.6</b> Introdução</a></li>
+<li class="chapter" data-level="5.7" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#álgebra-linear"><i class="fa fa-check"></i><b>5.7</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
-<li class="chapter" data-level="A.2.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#derivadas"><i class="fa fa-check"></i><b>A.2.2</b> Derivadas</a></li>
+<li class="chapter" data-level="5.7.1" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#o-básico"><i class="fa fa-check"></i><b>5.7.1</b> O básico</a></li>
+<li class="chapter" data-level="5.7.2" data-path="passagem-de-mensagens-e-neurobiologia.html"><a href="passagem-de-mensagens-e-neurobiologia.html#derivadas"><i class="fa fa-check"></i><b>5.7.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html"><i class="fa fa-check"></i><b>B</b> As equações da inferência ativa</a></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -176,8 +175,7 @@
             <section class="normal" id="section-">
 <div id="passagem-de-mensagens-e-neurobiologia" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">> 5</span> Passagem de Mensagens e Neurobiologia<a href="passagem-de-mensagens-e-neurobiologia.html#passagem-de-mensagens-e-neurobiologia" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Basicamente, existem dois tipos de animais: animais e animais que não têm cérebro; são chamados de plantas. Eles não precisam de um sistema nervoso porque não se movem ativamente, não arrancam suas raízes e correm em um incêndio florestal! Qualquer coisa que se mova ativamente requer um sistema nervoso; caso contrário, teria uma morte rápida.
-—Rodolfo Llinas</p>
+<p>Basicamente, existem dois tipos de animais: animais e animais que não têm cérebro; são chamados de plantas. Eles não precisam de um sistema nervoso porque não se movem ativamente, não arrancam suas raízes e correm em um incêndio florestal! Qualquer coisa que se mova ativamente requer um sistema nervoso; caso contrário, teria uma morte rápida. —Rodolfo Llinas</p>
 <div id="introdução-4" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Introdução<a href="passagem-de-mensagens-e-neurobiologia.html#introdução-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>No capítulo 4, vimos a forma que a inferência variacional assume para dois tipos de modelo generativo. Neste capítulo, nos concentramos nas teorias de processo que surgem dessas dinâmicas inferenciais: teorias que explicam como o cérebro pode implementar a inferência variacional. Central para esta implementação de atualização de crença Bayesiana é a noção de passagem de mensagem Bayesiana, que engloba propagação de crença e passagem de mensagem variacional, entre outros esquemas. A ideia subjacente a esses esquemas é que nem tudo depende diretamente de todo o resto. Em vez disso, cada variável em um modelo generativo depende de relativamente poucas outras variáveis. Da mesma forma, o cérebro exibe uma estrutura de conectividade esparsa, em que a atividade de qualquer neurônio depende apenas daqueles neurônios com os quais compartilha sinapses. Este capítulo se concentra na maneira como podemos mapear a transmissão esparsa de mensagens associada à inferência variacional à estrutura de conectividade esparsa da computação biológica.</p>
@@ -193,8 +191,7 @@
 <img src="images/Figura_5_1.png" alt="" />
 <p class="caption">Figura 5.1 Microcircuitos corticais canônicos que ilustram a relação entre a passagem de mensagens inferenciais e a arquitetura do córtex cerebral. Esquerda: Esquema simplificado baseado em uma síntese de Miller 2003; Haeusler e Maass 2007; Expedição 2007, 2016; e Bastos et ai. 2012 (consulte estes artigos para um resumo das observações neuroanatômicas das quais esta síntese é derivada). As pontas de seta redondas indicam inibição; pontas de seta normais indicam conexões excitatórias. As populações neurais dividem-se grosseiramente em piramidal superficial (SP), piramidal profundo (DP), estrelado espinhoso (SS) e interneurônios inibitórios (II). Meio: passagem de mensagens que subscreve a codificação preditiva hierárquica. Direita: A passagem de mensagens necessária para resolver um processo de decisão de Markov parcialmente observável (POMDP).</p>
 </div>
-<p>A assimetria na passagem de mensagens é importante, pois oferece previsões empíricas sobre a diferença entre atividade ascendente e descendente. Uma dessas previsões é que podemos esperar que essas mensagens sejam comunicadas pela atividade neural em diferentes frequências temporais. A razão para isso é que as operações necessárias para calcular um erro de previsão a partir de uma expectativa são não lineares (Friston 2019b). Esta não linearidade é devido ao cálculo de previsões usando funções não lineares ( g) que tendem a aumentar a frequência de um sinal (por exemplo, uma duplicação da frequência
-na quadratura de uma onda senoidal). Uma previsão decorrente disso é que mensagens ascendentes – originadas de unidades de erro – podem ser mensuráveis ​​em bandas de frequência mais altas do que mensagens descendentes – originadas de unidades de expectativa (veja a figura 5.2). Isso é consistente com assimetrias espectrais medidas, em que conexões ascendentes são tipicamente associadas a frequências gama e conexões descendentes com bandas alfa ou beta (Arnal e Giraud 2012; Bastos, Litvak et ai. 2015).</p>
+<p>A assimetria na passagem de mensagens é importante, pois oferece previsões empíricas sobre a diferença entre atividade ascendente e descendente. Uma dessas previsões é que podemos esperar que essas mensagens sejam comunicadas pela atividade neural em diferentes frequências temporais. A razão para isso é que as operações necessárias para calcular um erro de previsão a partir de uma expectativa são não lineares (Friston 2019b). Esta não linearidade é devido ao cálculo de previsões usando funções não lineares ( g) que tendem a aumentar a frequência de um sinal (por exemplo, uma duplicação da frequência na quadratura de uma onda senoidal). Uma previsão decorrente disso é que mensagens ascendentes – originadas de unidades de erro – podem ser mensuráveis ​​em bandas de frequência mais altas do que mensagens descendentes – originadas de unidades de expectativa (veja a figura 5.2). Isso é consistente com assimetrias espectrais medidas, em que conexões ascendentes são tipicamente associadas a frequências gama e conexões descendentes com bandas alfa ou beta (Arnal e Giraud 2012; Bastos, Litvak et ai. 2015).</p>
 <div class="figure">
 <img src="images/Figura_5_2.png" alt="" />
 <p class="caption">Figura 5.2 Versão simplificada do esquema de codificação preditivo mostrado no meio da figura 5.1, descompactado para mostrar a mensagem passando entre três regiões corticais. A ênfase está na assimetria na passagem de mensagens, com linhas pontilhadas mostrando mensagens ascendentes (erros de previsão) e linhas sólidas mostrando mensagens descendentes (previsões). A Figura 5.1 é uma versão mais detalhada deste esquema, incluindo os neurônios intermediários nas conexões polissinápticas mostradas aqui. Nesta figura, granular grosseiramente a especificidade laminar e dividir o córtex em Superficial e Profundo em relação à camada IV recupera um esquema de codificação preditivo que será familiar a muitos leitores.</p>
@@ -217,17 +214,95 @@ na quadratura de uma onda senoidal). Uma previsão decorrente disso é que mensa
 <p>Além de suas projeções para a medula espinhal, a camada cortical V tem como alvo várias outras estruturas. Entre eles está o corpo estriado (Shipp 2007, Wall et al. 2013)—uma estrutura profunda dentro do cérebro que compreende o núcleo caudado e o putâmen. O corpo estriado é o núcleo de entrada de uma complexa rede de estruturas conhecidas como gânglios da base. Neurônios espinhosos médios são as unidades funcionais do corpo estriado, recebendo informações do córtex e projetando-se para outros núcleos dos gânglios da base. Estes se dividem em dois tipos - aqueles que expressam receptores de dopamina D1 e aqueles que expressam receptores D2 - onde a dopamina aumenta a atividade do primeiro e a atenua para o último. As primeiras células são a origem da via direta através dos gânglios da base, conectadas por uma única sinapse inibitória aos núcleos de saída (o globo pálido interno e a substância negra pars reticulata). As células D2 dão origem à via indireta, um curso um pouco mais complexo com duas sinapses inibitórias e uma excitatória. O corpo estriado inibe o globo pálido externo, que por sua vez inibe o núcleo subtalâmico (STN). O STN projeta-se para as saídas dos gânglios da base, o que significa que os núcleos de saída são inibidos pela via direta e desinibidos pela via indireta. Como esses núcleos são eles próprios inibitórios, o resultado final da ativação dos neurônios estriatais que expressam D1 é a desinibição do comportamento, que seria suprimido pelos neurônios que expressam D2 (Freeze et al. 2013).</p>
 <p>Dado que associamos as previsões proprioceptivas com as projeções para a medula espinhal, quais mensagens devemos associar às projeções da camada V para o corpo estriado? A inspeção da figura 5.1 oferece uma solução possível. Os resultados previstos (o) e as diferenças entre os resultados preferidos e previstos (ς ) são mostrados nesta camada, combinando-se para calcular a energia livre esperada (G) de uma política. O cálculo do último deles no corpo estriado é consistente com a noção de que os gânglios da base estão envolvidos no planejamento - isto é, na avaliação de cursos alternativos de ação. A Figura 5.4 mostra um possível mapeamento da passagem de mensagens para avaliação de políticas na anatomia dos gânglios da base.</p>
 <p>O principal a ser extraído da Figura 5.4 é que, conforme descrito no capítulo 4, as probabilidades posteriores sobre as políticas (π) — mostradas aqui no globo pálido interno — são calculadas com base em sua energia livre esperada. Esse padrão segue o caminho direto da camada V do córtex através do corpo estriado até os núcleos de saída dos gânglios da base. No entanto, existem algumas sutilezas adicionais. No esquema hierárquico mostrado à esquerda na figura 4.4, vemos que as expectativas sobre os estados nos níveis mais altos podem influenciar as crenças sobre as políticas nos níveis mais baixos. A Figura 5.4 mostra isso à esquerda, onde as observações esperadas em estados de alto nível são usadas para formar a priori empírica (E) que influencia a seleção de políticas independentemente da energia livre esperada.</p>
-<p>Voltaremos a isso no capítulo 7, mas a ideia principal é que temos crenças sobre como agimos em contextos particulares. Essas expectativas anteriores tendem a influenciar a avaliação de políticas quando nos encontramos novamente no mesmo contexto – bem como a formação de hábitos. Nesse sentido, as influências de E e G podem ser vistas como impulsos habituais e direcionados a objetivos, respectivamente. Na aprendizagem por reforço (Lee et al. 2014), estes são às vezes chamados de sistemas <a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> “sem modelo” e “baseado em modelo”. que a dopamina modula o equilíbrio dos dois. Lembre-se de que a dopamina tende a promover o caminho direto e a execução de políticas específicas (Moss e Bolam 2008) – presumivelmente aquelas associadas à menor energia livre esperada. Em contraste, pode-se esperar que a baixa dopamina favoreça os antecedentes sensíveis ao contexto na via indireta, cujo papel é suprimir políticas implausíveis em um determinado contexto. De certa forma, a dopamina estriatal pode ser pensada como modulando o equilíbrio entre inferir o que fazer e o que não fazer (Parr 2020).</p>
+<p>Voltaremos a isso no capítulo 7, mas a ideia principal é que temos crenças sobre como agimos em contextos particulares. Essas expectativas anteriores tendem a influenciar a avaliação de políticas quando nos encontramos novamente no mesmo contexto – bem como a formação de hábitos. Nesse sentido, as influências de E e G podem ser vistas como impulsos habituais e direcionados a objetivos, respectivamente. Na aprendizagem por reforço (Lee et al. 2014), estes são às vezes chamados de sistemas <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> “sem modelo” e “baseado em modelo”. que a dopamina modula o equilíbrio dos dois. Lembre-se de que a dopamina tende a promover o caminho direto e a execução de políticas específicas (Moss e Bolam 2008) – presumivelmente aquelas associadas à menor energia livre esperada. Em contraste, pode-se esperar que a baixa dopamina favoreça os antecedentes sensíveis ao contexto na via indireta, cujo papel é suprimir políticas implausíveis em um determinado contexto. De certa forma, a dopamina estriatal pode ser pensada como modulando o equilíbrio entre inferir o que fazer e o que não fazer (Parr 2020).</p>
+<p>O acima é consistente com perturbações do sistema dopaminérgico; sua depleção na doença de Parkinson grave causa acinesia – uma falha na implementação de políticas específicas – enquanto os agonistas de dopamina exógenos promovem comportamentos impulsivos (Frank 2005; Galea et al. 2012; Friston, Schwartenbeck et al. 2014). Além disso, é consistente com os modelos conceituais da função dos gânglios da base. Por exemplo, Nambu (2004) sugere que a via direta medeia uma inibição rápida e focalizada do globo pálido interno, seguida de uma excitação ampla e lenta, que causa excitação e inibição dos alvos dos gânglios da base, respectivamente. Isso é pensado para garantir um padrão “centro-surround” que facilita programas motores com alta especificidade, o que é consistente com os processos rápidos que computam a ação facilitadora de energia livre esperada e a contextualização mais ampla da via mais lenta comunicando a priori empírica.</p>
+<p>A observação final a fazer sobre a Figura 5.4 é que existem dois níveis de uma hierarquia cortical (sobrescrito) contribuindo para o mesmo circuito dos gânglios da base. Isso sugere regiões temporalmente mais lentas no direcionamento de neurônios da via indireta, mas influências rápidas e lentas sobre a via direta. À medida que ascendemos nas hierarquias corticais, os neurônios tendem a representar uma dinâmica mais lenta. Por exemplo, podemos esperar que as regiões corticais frontais representem escalas de tempo mais longas do que as regiões parietais. Isso é consistente com a distribuição anatômica das entradas corticais para as vias dos gânglios da base (Wall et al. 2013). Essa granulação grosseira temporal na via indireta é complementada pela grosseria espacial, com os neurônios espinhosos médios da via direta exibindo mandris dendríticos maiores (Gertler et al. 2008), permitindo um ajuste mais fino. Portanto, a anatomia da figura 5.4 é endossada por evidências de patologia clínica (por exemplo, parkinsonismo) e morfologia celular.</p>
+<p>Além dos gânglios da base, muitas outras estruturas subcorticais importantes contribuem para a transmissão de mensagens neuronais. Na próxima seção, discutiremos aqueles de onde se originam os sistemas neuromodulatórios; vamos concluir esta seção tocando brevemente no tálamo. Não seremos capazes de fazer plena justiça a esta estrutura altamente complexa; no entanto, podemos esboçar alguns princípios básicos. O tálamo é frequentemente dividido em núcleos primários e secundários. A Figura 5.1 mostra que os núcleos talâmicos primários podem desempenhar o mesmo papel que as regiões corticais inferiores, no sentido de que eles têm como alvo a camada IV do córtex e recebem informações das células piramidais profundas da camada VI (Thomson 2010, Olsen et al. 2012). Um exemplo é o núcleo geniculado lateral no sistema visual, muitas vezes considerado como um relay (retransmissão) entre o olho e o córtex visual. Como os neurônios que representam erros de previsão, este recebe tanto informações sensoriais do olho quanto projeções para trás do córtex, que podem ser interpretadas como previsões. Os núcleos talâmicos de segunda ordem incluem o núcleo mediodorsal e o pulvinar, que interagem com os córtices frontal e posterior, respectivamente. Estes podem ter um papel na previsão de estatísticas de segunda ordem (ou seja, precisão e variância) de entradas sensoriais ou de ordem superior e têm sido associados a tarefas de discriminação figura-fundo (Kanai et al. 2015). De forma simplista, isso sugere que a divisão do tálamo em núcleos primários e secundários pode ser uma manifestação da divisão em estatísticas de primeira e segunda ordem.</p>
+</div>
+<div id="neuromodulação-e-aprendizagem" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Neuromodulação e Aprendizagem<a href="passagem-de-mensagens-e-neurobiologia.html#neuromodulação-e-aprendizagem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A neuroanatomia estrutural é importante, mas só nos dá parte do quadro do processamento neural porque a presença de uma conexão não nos diz muito sobre o modo como ela é usada. Como exemplo, considere o papel da substância negra mostrado na figura 5.4. O efeito modulatório que isso tem na conectividade estriatal subscreve saídas muito diferentes dos gânglios da base, dependendo da quantidade de dopamina liberada. A modulação rápida da eficácia sináptica desta forma pode ser contrastada com as mudanças mais lentas, porém mais persistentes, que ocorrem com o aprendizado. Nesta seção, nos concentramos nessas duas maneiras pelas quais a eficácia sináptica pode mudar.</p>
+<p>A precisão é um conceito importante na compreensão da neuromodulação (Feldman e Friston 2010). Tocamos nisso no capítulo 4 e em nossa discussão sobre atenuação sensorial acima, onde vimos que ela atua como um peso multiplicativo nos erros de previsão. Mais amplamente, a precisão é uma medida de confiança em uma distribuição de probabilidade. A relação entre os dois é simples. Se tivermos crenças muito precisas sobre como os dados são gerados a partir de estados ocultos, nossas crenças sobre estados ocultos podem ser atualizadas observando os dados mais do que se não tivermos confiança nessas crenças. Quando as atualizações de crenças se manifestam como mudanças no disparo neuronal, uma distribuição de probabilidade mais precisa se manifesta como uma resposta neural aumentada a um determinado estímulo sensorial. Isso é essencial para as funções cognitivas da atenção (Parr e Friston 2019a) à integração multissensorial (Limanowski e Friston 2019).</p>
+<p>Essa perspectiva sobre o controle do ganho sináptico nos diz algo simples, mas importante. Se a precisão é um atributo de alguma distribuição em um modelo generativo, então deve haver diferentes precisões associadas a diferentes distribuições. Isso é intuitivamente sensato, pois podemos estar mais ou menos confiantes na confiabilidade de nossas sensações, em como as coisas evoluirão dinamicamente e até em como podemos agir (Parr e Friston 2017b). Vimos o último deles no contexto da sinalização dopaminérgica nos gânglios da base. Quanto maior a precisão associada, mais confiantes estamos de que nossas políticas minimizarão a energia gratuita esperada.</p>
+<p>Se um dos papéis do sistema dopaminérgico – originado na substância negra pars compacta e na área tegmental ventral do mesencéfalo – é sinalizar confiança no que fazer, então outros sistemas neuromoduladores desempenham papéis semelhantes? A Tabela 5.1 resume as evidências que associam precisões a sistemas neuromodulatórios – com os símbolos às vezes usados para essas precisões. Especificamente, o sistema colinérgico que surge do núcleo basal de Meynert parece sinalizar a precisão de algumas distribuições de verossimilhança. O sistema noradrenérgico, do locus coeruleus, parece desempenhar um papel na sinalização da precisão das transições ao longo do tempo. O sistema serotoninérgico parece menos claro, mas pode estar relacionado à precisão das preferências anteriores.</p>
+<p>Por que é útil poder associar essas precisões a sistemas neuromoduladores? A resposta é tripla: nos permite explicar a biologia observada, formar hipóteses e desenvolver métodos não invasivos para medir a precisão. Destacaremos um exemplo de cada um deles. Primeiro, em relação às explicações da biologia observada, as medições empíricas dos sinais de dopamina se parecem com “erros de previsão de recompensa” (Schultz 1997) – com a dopamina dos animais aumentando ao receber suco de fruta inesperado ou ao ver uma sugestão sinalizando suco de fruta iminente. A Inferência Ativa oferece uma explicação alternativa para esses achados (Schwartenbeck, FitzGerald, Mathys, Dolan e Friston 2015). Alcançar uma recompensa (ou atender às nossas preferências) ou encontrar uma pista indicativa de uma recompensa futura aumenta nossa confiança de que estamos seguindo uma política que minimiza a energia livre esperada. Esse aumento na confiança se manifesta como um pico de dopamina.</p>
+<p>Em segundo lugar, em relação à formação de hipóteses, um exemplo diz respeito à diminuição da sinalização colinérgica associada à demência de corpos de Lewy (Parr, Benrimoh et al. 2018) – uma condição que leva a alucinações visuais complexas. Uma explicação plausível para isso é que o acúmulo de patologia nos córtices visuais superiores leva a uma incompatibilidade entre as previsões dessas áreas e a atividade nos córtices visuais primários. Tal incompatibilidade diminui a confiança nas distribuições de probabilidade associadas e causa perda de sinalização colinérgica. A consequência dessa perda de precisão é uma falha em atualizar crenças com base em dados sensoriais, significando que a percepção perde as restrições oferecidas pela sensação. Isso poderia explicar o desenvolvimento de percepções alucinatórias nessa condição. Terceiro, em relação à medição não invasiva de parâmetros de precisão, um exemplo é a identificação de fenótipos computacionais. Há uma série de manifestações periféricas da atividade neuroquímica central, incluindo a relação entre a taxa de piscar espontâneo e a dopamina (Karson 1983) e entre o tamanho pupilar e a noradrenalina (Koss 1986). Trabalhos recentes explorando o último (Vincent et al. 2019) demonstraram uma relação entre a precisão da transição que se espera que seja inferida por um observador bayesiano ideal e a dinâmica da constrição e dilatação pupilar. A implicação é que poderíamos sondar o modelo generativo implícito de alguém (ou seja, crenças prévias empíricas) por meio de medições periféricas desse tipo.</p>
+<table>
+<caption><strong>Tabela 5.1</strong> Papéis putativos dos neurotransmissores na Inferência Ativa</caption>
+<colgroup>
+<col width="7%" />
+<col width="20%" />
+<col width="71%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Neurotransmissor</th>
+<th>Precisão</th>
+<th>Evidência</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Acetilcolina</td>
+<td>Probabilidade (ζ)</td>
+<td><ul>
+<li><p>Presença de receptores pré-sinápticos em aferentes talamocorticais (Sahin et al. 1992, Lavine et al. 1997)</p></li>
+<li><p>Modulação do ganho de respostas visualmente evocadas (Gil et al. 1997, Disney et al. 2007)</p></li>
+<li><p>Mudanças na conectividade efetiva com manipulações farmacológicas (Moran et al. 2013)</p></li>
+<li><p>Modelagem de respostas comportamentais sob manipulação farmacológica (Vossel et al. 2014, Marshall et al. 2016)</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Noradrenalina</td>
+<td>Transições (ω)</td>
+<td><p>• A manutenção da atividade pré-frontal persistente (período de atraso) (exigindo probabilidades de transição precisas) depende da noradrenalina (Arnsten e Li 2005, Zhang et al. 2013)</p>
+<p>• ​ Respostas pupilares a sequências surpreendentes (ou seja, imprecisas) (Nassar et al. 2012, Lavín et al. 2013, Liao et al. 2016, Krishna murthy et al. 2017, Vincent et al. 2019)</p>
+<p>• ​ Modelagem de respostas comportamentais sob manipulação farmacológica (Marshall et al. 2016)</p></td>
+</tr>
+<tr class="odd">
+<td>Dopamina</td>
+<td>Políticas (γ )</td>
+<td><p>• ​ Expressado pós-sinapticamente em neurônios espinhosos médios estriados (Freund et al. 1984, Yager et al. 2015)</p>
+<p>• ​ A fMRI computacional revela a atividade do mesencéfalo com mudanças na precisão (Schwartenbeck, FitzGerald, Mathys, Dolan e Friston 2015)</p>
+<p>•  ​Modelagem de respostas comportamentais sob manipulação farmacológica (Marshall et al. 2016)</p></td>
+</tr>
+<tr class="even">
+<td>Serotonina</td>
+<td>Preferências ou probabilidade interoceptiva (χ ) |</td>
+<td><p>• ​ Receptores expressos nas células piramidais da camada V (Aghajanian e Marek 1999, Lambe et al. 2000, Elliott et al. 2018) no córtex pré-frontal medial</p>
+<p>• ​ Regiões corticais pré-frontais mediais fortemente implicadas no processamento interoceptivo e regulação autonômica (Marek et al. 2013, Mukherjee et al. 2016)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Embora mudanças rápidas na precisão sejam importantes, essa é uma maneira grosseira de otimizar a conectividade efetiva; leva a um aumento ou diminuição no ganho de um sinal, mas nada mais sutil. Se quisermos mudar a maneira como o sinal é interpretado, precisamos confiar no aprendizado. Voltaremos a isso em detalhes no capítulo 7. No entanto, a ideia básica é que temos crenças não apenas sobre os estados do mundo, mas também sobre os parâmetros fixos (ou de variação lenta) que determinam as dependências entre as variáveis ​​(Friston, FitzGerald et al. al. 2016). O substrato dessas crenças é a eficácia das conexões sinápticas entre as populações neurais que representam variáveis ​​que variam no tempo (como estados ocultos ou resultados). Quando observamos um resultado que acreditamos ter sido gerado por um determinado estado, podemos atualizar as crenças sobre o parâmetro que conecta os dois, refletindo um aumento na probabilidade de co-ocorrerem no futuro. Em outras palavras, obtemos um fortalecimento das sinapses entre as duas populações de neurônios. O resultado é o famoso decreto de Hebb (parafraseado): “Células que disparam juntas, ligam juntas”.</p>
+<p><br />
+Uma característica importante da Figura 5.1 é que, tanto na codificação preditiva quanto nos esquemas de passagem de mensagens marginais, as conexões que entram e saem de uma coluna cortical se relacionam com distribuições de verossimilhança. Em contraste, as probabilidades de transição e a dinâmica contínua dependem das conexões dentro de um microcircuito. Isso sugere que a dinâmica de aprendizagem deve levar a mudanças na conectividade intrínseca, enquanto os modelos de observação de aprendizagem devem modificar a conectividade extrínseca. Usando técnicas como modelagem causal dinâmica – que permitem a avaliação de medidas de conectividade efetivas a partir de dados de neuroimagem – é possível testar essas hipóteses (Tsvetanov et al. 2016, Zhou et al. 2018). Isso destaca o papel das teorias de processo desse tipo: elas nos permitem ir além da teorização abstrata para formar hipóteses testáveis específicas.</p>
+<p><br />
+</p>
 
 </div>
 </div>
 
 
 
+<div id="introdução-5" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">6</span> Introdução<a href="passagem-de-mensagens-e-neurobiologia.html#introdução-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="álgebra-linear" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">7</span> Álgebra Linear<a href="passagem-de-mensagens-e-neurobiologia.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="o-básico" class="section level3 hasAnchor" number="5.7.1">
+<h3><span class="header-section-number">7.1</span> O básico<a href="passagem-de-mensagens-e-neurobiologia.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="derivadas" class="section level3 hasAnchor" number="5.7.2">
+<h3><span class="header-section-number">7.2</span> Derivadas<a href="passagem-de-mensagens-e-neurobiologia.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+
+</div>
+</div>
+</div>
 <div class="footnotes">
 <hr />
-<ol start="21">
-<li id="fn21"><p>Essa nomenclatura vem de teorias de aprendizado por reforço (Daw et al. 2005), mas é um pouco enganosa, pois ambos os sistemas dependem de modelos. Sistemas “sem modelo” apenas usam um modelo mais simples que prevê um certo tipo de comportamento em um certo tipo de ambiente.<a href="passagem-de-mensagens-e-neurobiologia.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<ol start="1">
+<li id="fn1"><p>Essa nomenclatura vem de teorias de aprendizado por reforço (Daw et al. 2005), mas é um pouco enganosa, pois ambos os sistemas dependem de modelos. Sistemas “sem modelo” apenas usam um modelo mais simples que prevê um certo tipo de comportamento em um certo tipo de ambiente.<a href="passagem-de-mensagens-e-neurobiologia.html#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -236,7 +311,7 @@ na quadratura de uma onda senoidal). Uma previsão decorrente disso é que mensa
         </div>
       </div>
 <a href="os-modelos-geradores-de-inferência-ativa.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
