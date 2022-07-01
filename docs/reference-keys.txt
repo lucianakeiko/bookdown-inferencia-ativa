@@ -47,7 +47,12 @@ microcircuitos-e-mensagens
 comandos-do-motor
 estruturas-subcorticais
 neuromodulação-e-aprendizagem
+hierarquias-contínuas-e-discretas
+resumo-4
+uma-receita-para-projetar-modelos-de-inferência-ativos
 introdução-5
+projetando-um-modelo-de-inferência-ativo-uma-receita-em-quatro-etapas
+introdução-6
 álgebra-linear
 o-básico
 derivadas

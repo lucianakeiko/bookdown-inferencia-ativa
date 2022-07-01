@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Inferencia Ativa</title>
+  <title>> 6 Uma receita para projetar modelos de inferência ativos | Inferencia Ativa</title>
   <meta name="description" content="O Princípio da Energia Livre na Mente, Cérebro e Comportamento." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Inferencia Ativa" />
+  <meta property="og:title" content="> 6 Uma receita para projetar modelos de inferência ativos | Inferencia Ativa" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/Figura_1_1.png" />
   <meta property="og:description" content="O Princípio da Energia Livre na Mente, Cérebro e Comportamento." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Inferencia Ativa" />
+  <meta name="twitter:title" content="> 6 Uma receita para projetar modelos de inferência ativos | Inferencia Ativa" />
   
   <meta name="twitter:description" content="O Princípio da Energia Livre na Mente, Cérebro e Comportamento." />
   <meta name="twitter:image" content="/images/Figura_1_1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="passagem-de-mensagens-e-neurobiologia.html"/>
+<link rel="next" href="dicionário.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -180,19 +180,50 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="uma-receita-para-projetar-modelos-de-inferência-ativos" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">> 6</span> Uma receita para projetar modelos de inferência ativos<a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html#uma-receita-para-projetar-modelos-de-inferência-ativos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Dê-me seis horas para derrubar uma árvore e passarei as primeiras quatro afiando o machado.
+—Abraham Lincoln</p>
+<div id="introdução-5" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Introdução<a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html#introdução-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Este capítulo fornece uma receita de quatro etapas para construir um modelo de Inferência Ativa, discutindo as escolhas de projeto mais importantes que se deve fazer para realizar um modelo e fornecendo algumas diretrizes para essas escolhas. Ele serve como uma introdução à segunda parte do livro, que ilustrará vários modelos computacionais específicos usando a Inferência Ativa e suas aplicações em vários domínios cognitivos.</p>
+<p>omo a Inferência Ativa é uma abordagem normativa, ela tenta explicar o máximo possível sobre o comportamento, os processos cognitivos e neurais a partir dos primeiros princípios. Consistentemente, a filosofia de design da Inferência Ativa é de cima para baixo. Ao contrário de muitas outras abordagens da neurociência computacional, o desafio não é emular um cérebro, peça por peça, mas encontrar o modelo generativo que descreve o problema que o cérebro está tentando resolver. Uma vez que o problema é formalizado apropriadamente em termos de um modelo generativo, a solução para o problema surge sob a Inferência Ativa – com as respectivas previsões sobre cérebros e mentes. Em outras palavras, o modelo generativo fornece uma descrição completa de um sistema de interesse. O comportamento resultante, a inferência e a dinâmica neural podem ser derivados de um modelo minimizando a energia livre.</p>
+<p>A abordagem de modelagem generativa é usada em várias disciplinas para a realização de modelos cognitivos, modelagem estatística, análise de dados experimentais e aprendizado de máquina (Hinton 2007b; Lee e Wagenmakers 2014; Pezzulo, Rigoli e Friston 2015; Allen et al. 2019; Foster 2019). Aqui, estamos principalmente interessados ​​em projetar modelos generativos que engendram processos cognitivos de interesse. Vimos essa metodologia de projeto nos capítulos anteriores. Por exemplo, usando um modelo generativo para codificação preditiva, a percepção foi lançada como uma inferência sobre a causa mais provável das sensações; usando um modelo generativo que evolui em tempo discreto, o planejamento foi lançado como uma inferência sobre o curso de ação mais provável. Dependendo do problema de interesse (por exemplo, planejamento durante a navegação espacial ou planejamento de sacadas durante a busca visual), pode-se adaptar a forma desses modelos generativos para equipá-los com diferentes estruturas (por exemplo, rasas ou hierárquicas) e variáveis ​​(por exemplo, crenças sobre localizações espaciais alocêntricas ou egocêntricas). É importante ressaltar que a Inferência Ativa pode assumir muitas formas diferentes sob diferentes suposições sobre a forma do modelo generativo que está sendo otimizado. Por exemplo, suposições sobre modelos que evoluem em tempo discreto ou contínuo influenciam a forma de transmissão de mensagens (veja o capítulo 4). Isso implica que a escolha de um modelo generativo corresponde a previsões específicas sobre comportamento e neurobiologia.</p>
+<p>Essa flexibilidade é útil, pois nos permite usar a mesma linguagem para descrever processos em vários domínios. No entanto, também pode ser confuso do ponto de vista prático, pois há uma série de escolhas que devem ser feitas para encontrar o nível apropriado de descrição para o sistema de interesse. Na segunda parte deste livro, tentaremos resolver essa confusão por meio de uma série de exemplos ilustrativos de Inferência Ativa in silico. Este capítulo apresenta uma receita geral para o projeto de modelos de Inferência Ativa, destacando algumas das principais escolhas de projeto, distinções e dicotomias que aparecerão na análise numérica de modelos computacionais descritos nos capítulos subsequentes.</p>
+</div>
+<div id="projetando-um-modelo-de-inferência-ativo-uma-receita-em-quatro-etapas" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Projetando um modelo de inferência ativo: uma receita em quatro etapas<a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html#projetando-um-modelo-de-inferência-ativo-uma-receita-em-quatro-etapas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Projetar um modelo de Inferência Ativa requer quatro etapas fundamentais, cada uma resolvendo uma questão de projeto específica:</p>
+<ol style="list-style-type: decimal">
+<li>Qual sistema estamos modelando? A primeira escolha a fazer é sempre o sistema de interesse. Isso pode não ser tão simples quanto parece; baseia-se na identificação dos limites (ou seja, envoltório de Markov) desse sistema. O que conta como agente de Inferência Ativa (modelo generativo), o que conta como ambiente externo (processo generativo) e qual é a interface (dados sensoriais e ações) entre eles?</li>
+</ol>
+
+</div>
+</div>
+
+
+
+<div id="introdução-6" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">3</span> Introdução<a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html#introdução-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="álgebra-linear" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">4</span> Álgebra Linear<a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="o-básico" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">4.1</span> O básico<a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="derivadas" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">4.2</span> Derivadas<a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="passagem-de-mensagens-e-neurobiologia.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
