@@ -1642,11 +1642,89 @@ Claro, exceto nos casos mais simples, não é obrigatório que o modelo generati
 
 Existem algumas implicações filosóficas de projetar modelos generativos que são semelhantes ou diferentes do processo generativo (Hohwy 2013; Clark 2015; Pezzulo, Donnarumma et al. 2017; Nave et al. 2020, Tschantz et al. 2020). Como discutido acima, o teorema do bom regulador (Conant e Ashby 1970) diz que uma criatura adaptativa eficaz deve ter ou ser um bom modelo do sistema que regula. No entanto, isso pode ser alcançado de várias maneiras. Primeiro, como discutido até agora, o modelo generativo da criatura pode imitar (pelo menos em grande medida) o processo generativo. Os modelos desenvolvidos dessa forma podem ser chamados de modelos explícitos ou ambientais, dada a semelhança entre seus estados internos e os estados externos do ambiente. Em segundo lugar, o modelo generativo da criatura pode ser muito mais parcimonioso do que (e até significativamente diferente) do processo generativo, na medida em que administra corretamente os aspectos do ambiente que são úteis para agir de forma adaptativa nele e atingir os objetivos da criatura. Os modelos desenvolvidos dessa maneira podem ser chamados de sensório-motores ou orientados para a ação, pois codificam principalmente contingências de observação de ação (ou sensório-motoras) e seu papel principal é apoiar ações direcionadas a objetivos, em vez de fornecer uma descrição precisa do ambiente.
 
+A diferença entre modelos explícitos e orientados para a ação pode ser apreciada se considerarmos diferentes maneiras de modelar (por exemplo) um roedor tentando escapar de um labirinto no qual alguns corredores são becos sem saída. Um modelo generativo explícito pode se assemelhar a um mapa cognitivo do labirinto e fornecer uma caracterização detalhada de entidades externas, como locais específicos, corredores e becos sem saída. Este modelo pode permitir que o roedor escape do labirinto usando a navegação baseada em mapas. Um modelo orientado para a ação pode codificar contingências entre os movimentos do bigode e as sensações de toque. Este último modelo permitiria a seleção de estratégias contextualmente apropriadas, como avançar (se nenhuma sensação de toque for experimentada ou esperada) ou mudar de direção (no caso oposto) - eventualmente permitindo que o roedor escape do labirinto sem representar explicitamente os locais , corredores ou becos sem saída. Esses dois tipos de modelo levam a diferentes interpretações filosóficas da Inferência Ativa, considerando os modelos generativos como formas de reconstruir o ambiente externo (explícito) ou proporcionar controle preciso da ação (orientado à ação).
 
+Finalmente, como discutido no campo da computação morfológica (Pfeifer e Bongard 2006), alguns aspectos do controle de uma criatura ou robô podem ser terceirizados para o corpo e, portanto, não precisam ser codificados em seu modelo generativo. Um exemplo é o caminhante dinâmico passivo: um objeto físico semelhante a um corpo humano, composto por duas “pernas” e dois “braços”, que é capaz de caminhar em um declive sem sensores, motores ou controladores (Collins et al. 2016). . Este exemplo implica que pelo menos alguns aspectos da locomoção (ou outras habilidades) podem ser alcançados com a mecânica corporal que é cuidadosamente ajustada para explorar contingências ambientais (por exemplo, um peso corporal ou tamanho apropriado para andar sem escorregar); portanto, essas contingências não precisam ser codificadas no modelo generativo da criatura. Isso sugere uma maneira alternativa de projetar agentes de Inferência Ativa (e seus corpos) que são – e não têm – bons modelos de seu ambiente. No entanto, todas as maneiras de projetar modelos de Inferência Ativa não são mutuamente alternativas, mas podem ser combinadas adequadamente, dependendo do problema de interesse.
 
+## Simulando, Visualizando, Analisando e Ajustando Dados Usando Inferência Ativa
 
+Na maioria das aplicações práticas, uma vez que o modelo generativo e o processo generativo tenham sido definidos, basta usar o procedimento padrão de Inferência Ativa - a descida dos estados ativo e interno no funcional de energia livre associado ao modelo - para obter resultados numéricos . Indiscutivelmente, os objetivos dos modeladores são simular, visualizar, analisar e ajustar dados (por exemplo, realizar análise de dados baseada em modelo). Rotinas padrão para Active Inference que fornecem suporte para todas essas funções estão disponíveis gratuitamente (https://www​.fil​.ion​.ucl​.ac​.uk​/spm​/); um exemplo anotado de como usar esses
+rotinas é fornecida no apêndice C.
+
+Embora na maioria dos casos os procedimentos de Inferência Ativa funcionem de prateleira, em algumas aplicações práticas pode-se considerar ajustes específicos ou mudanças. Por exemplo, especificar a profundidade temporal do planejamento define quantos estados futuros são considerados durante os cálculos de energia livre esperados. A configuração de uma profundidade temporal limitada, juntamente com outras aproximações para busca exaustiva, como amostragem (Fountas et al. 2020), pode ser útil em aplicações práticas de Inferência Ativa em grandes espaços de estados.
+
+Outro exemplo de adaptação do funcionamento padrão da Inferência Ativa é a remoção seletiva de partes da equação de energia livre esperada. Esta ablação pode ser útil para comparar a Inferência Ativa padrão (que usa energia livre esperada) com versões reduzidas, nas quais algumas partes da energia livre esperada são suprimidas para torná-las formalmente análogas a (por exemplo) controle KL ou sistemas de maximização de utilidade (Friston , Rigoli et al. 2015). Além disso, pode-se também ampliar os modelos de Inferência Ativa com mecanismos adicionais, como aprendizado habitual (Friston, FitzGerald et al. 2016) ou modulação da taxa de aprendizado (Sales et al. 2019), com a ressalva de que manter o caráter normativo da Inferência Ativa requerem lançar esses mecanismos adicionais em termos de minimização de energia livre.
+
+Finalmente, outros ajustes ou mudanças na Inferência Ativa podem ser úteis para caracterizar distúrbios de inferência e condições psicopatológicas - por exemplo, para explorar as consequências comportamentais e neuronais de dotar o modelo generativo de uma criatura com antecedentes excessivamente fortes (ou fracos) por meio de (ou baixos) níveis de neuromoduladores. Forneceremos alguns exemplos de modelos de Inferência Ativa que são relevantes para a psicopatologia no capítulo 9.
+
+## Resumo 
+
+Neste capítulo, descrevemos as escolhas de projeto mais importantes que devem ser feitas na configuração de um modelo de Inferência Ativa. Fornecemos uma receita em quatro etapas e algumas diretrizes para enfrentar os desafios usuais que os designers de modelos enfrentam. Claro, não é necessário seguir a receita de forma rígida. Algumas etapas podem ser invertidas (por exemplo, projetar o processo generativo antes do modelo generativo) ou combinadas. Mas, em geral, essas etapas são todas necessárias. Isso configura o restante deste livro, que coloca essas ideias em prática por meio de uma série de exemplos ilustrativos projetados para mostrar os princípios teóricos apresentados na primeira metade do livro. Em tudo o que segue, as únicas diferenças entre os exemplos estão nas escolhas de design que destacamos aqui. A Parte 2 ilustra sistemas com limites diferentes, com dinâmicas discretas ou contínuas em diferentes escalas de tempo, para os quais a escolha de crenças anteriores é fundamental para reproduzir o comportamento em muitos domínios diferentes, mas todos implementando a mesma Inferência Ativa.
 
 <!--chapter:end:06-Uma-receita-para-projetar-modelos.Rmd-->
+
+#  Inferência ativa em tempo discreto
+
+O que eu não posso criar, eu não entendo. — Richard Feynman
+
+## Introdução 
+
+Até agora, discutimos os princípios da Inferência Ativa em um nível relativamente abstrato. Este capítulo trata de exemplos específicos — e como eles podem ser especificados em um cenário prático. Focamos em modelos de variáveis categóricas em tempo discreto. Por meio de uma série de exemplos, construídos em complexidade, ilustramos modelos de processamento perceptual, tomada de decisão, busca de informações, aprendizado e inferência hierárquica. Esses exemplos são escolhidos para destacar as propriedades emergentes da forma mais simples possível – incluindo fisiologia e comportamento mensuráveis – dos esquemas de Inferência Ativa.
+
+
+## Processamento Perceptivo
+
+Começamos considerando o processamento perceptual e a inversão do tipo de modelos de tempo discreto introduzidos no capítulo 4. Mais adiante neste capítulo, construímos um processo de decisão Markov parcialmente observável completo (POMDP). No entanto, começamos com um caso especial de um POMDP no qual podemos ignorar escolhas e comportamento: um modelo oculto de Markov (HMM), que pode ser usado para inferência perceptual de uma classificação sequencial e categórica (veja a figura 7.1). Para motivar isso, vamos recorrer a um exemplo simples. Imagine ouvir uma apresentação de uma pequena peça de música. A sequência de notas que são escritas na partitura pode ser pensada como estados ocultos (não observados), enquanto a sequência de notas que realmente ouvimos são os resultados (observáveis). Se o intérprete é um músico profissional, a correspondência entre os estados ocultos e os resultados pode ser muito próxima. No entanto, se for um amador, pode haver um grau adicional de estocasticidade no mapeamento (de probabilidade) da nota que deve ser tocada para a que é ouvida. Nesse cenário, ainda pode ser possível inferir qual nota deveria ter sido ouvida, dadas as crenças prévias sobre a probabilidade de cada nota ser precedida ou sucedida por outra.
+
+![**Figura 7.1** Este modelo oculto de Markov usa a mesma notação introduzida no capítulo 4 para expressar uma sequência de estados que evoluem ao longo do tempo. A cada vez, eles dão origem a um resultado observável (o). O estado em um momento depende apenas do estado no momento anterior (com essa dependência expressa em B). O primeiro estado na sequência tem probabilidade anterior D. A geração de resultados dos estados depende da distribuição de verossimilhança (A). Esta especificação de um HMM é genérica, com modelos generativos específicos dependendo de escolhas específicas para A, B e D.](images/Figura_7_1.png)
+
+O exemplo de escuta do músico amador pode ser formalizado da seguinte forma. Primeiro, decidimos com que confiabilidade nosso músico realmente toca a nota (resultado) que ela pretende (estado oculto). Podemos expressar isso através da matriz A, cujos elementos indicam a probabilidade de um resultado (linhas) dado um estado (colunas). Em nosso exemplo de brinquedo, definimos isso da seguinte forma:
+
+$$ A = \frac{1}{10}\begin{bmatrix} 
+7 & 1 & 1 & 1  \\ 
+1 & 7 & 1 & 1  \\
+1 & 1 & 7 & 1  \\ 
+1 & 1 & 1 & 7  \\ 
+\end{bmatrix} \qquad\qquad\qquad (7.1) $$
+
+Isso diz que 70% das vezes, nosso músico atinge a nota pretendida. Em seguida, especificamos as probabilidades de transição na matriz B, que explicam a probabilidade do próximo estado (linhas) dado o estado atual (colunas)
+
+$$ B = \frac{1}{100}\begin{bmatrix} 
+1 & 1 & 1 & 97  \\ 
+97 & 1 & 1 & 1  \\
+1 & 97 & 7 & 1  \\ 
+1 & 1 & 97 & 1  \\ 
+\end{bmatrix} \qquad\qquad\qquad (7.2) $$
+
+Isso diz que há uma probabilidade de 97% de a primeira nota ser seguida pela segunda, a segunda pela terceira e assim por diante. Se sabemos que a sequência sempre começa com a primeira nota, definimos a probabilidade anterior:
+
+
+$$ D = \begin{bmatrix} 
+1  \\ 
+0 \\ 
+0 \\ 
+0 \\ 
+\end{bmatrix} \qquad\qquad\qquad (7.3) $$
+
+Juntas, as equações 7.1–7.3 especificam completamente o modelo generativo HMM mostrado na figura 7.1. Em outras palavras, eles fornecem uma descrição de nossas crenças sobre como a música que ouvimos é gerada por nosso músico amador. Usando a equação 4.12 e substituindo em nosso modelo generativo, podemos simular a dinâmica da atualização da crença Bayesiana induzida por uma sequência de resultados. Isso é mostrado na figura 7.2. Observe o aumento na confiança mostrado no gráfico superior esquerdo à medida que mais dados são acumulados ao longo do tempo, exceto para o terceiro passo de tempo, onde ocorreu um resultado inesperado. Esse resultado pode ser explicado de duas maneiras. Primeiro, pode ser que a nota pretendida realmente fosse uma nota incomum sob nossas crenças anteriores na equação 7.2. Isso é menos provável pela raridade de tais transições sob a matriz B deste modelo. A explicação alternativa, mais plausível, é que o músico tocou a nota errada por engano. Conforme mostrado na terceira coluna do gráfico superior direito, esta é a explicação que nosso ouvinte simulado estabelece. No entanto, uma probabilidade diferente de zero é atribuída à possibilidade de que, afinal, fosse a nota certa. A capacidade de relatar esse tipo de incerteza é uma característica fundamental da perspectiva Bayesiana proporcionada pela Inferência Ativa.
+
+O modelo mostrado aqui pode ser mais sofisticado de várias maneiras, mas talvez o mais simples dependa da fatoração do espaço de estados (Mirza et al. 2016). Um exemplo pode ser o tom e a dinâmica da nota (com uma distinção semelhante nos resultados). Em uma tarefa de inferência visual, a fatoração pode ser em quê e onde, o que tem muito valor na neurobiologia (Ungerleider e Haxby 1994). Nas seções subsequentes, apelaremos a esse tipo de fatoração para separar os estados que podem ser influenciados pela criatura em questão daqueles que não podem. Para ler mais sobre esse tipo de modelo (sem ações em jogo) e os tipos de esquema de transmissão de mensagens neuronais que podem ser usados para invertê-lo minimizando a energia livre, veja Parr, Markovic et al. (2019).
+
+![Figura 7.2 Esses gráficos de inferência perceptiva simulados ilustram o processo de atualização de crenças em um exemplo de tentativa baseado no modelo generativo descrito no texto principal. Superior esquerdo: Crenças (probabilidades posteriores) sobre cada nota na sequência em cada passo de tempo. Superior direito: Como os valores numéricos dessas crenças são difíceis de rastrear as crenças no final da sequência, tendo ouvido cada nota (ou seja, crenças retrospectivas) são mostradas. Cada coluna mostra crenças (retrospectivas) sobre os estados ocultos em um determinado intervalo de tempo. Cada linha representa uma hipótese alternativa para esse estado oculto. Quanto mais escuro o sombreamento, mais provável é que a nota tenha sido (com o preto indicando uma probabilidade de um e o branco uma probabilidade de zero). Inferior esquerdo: gradientes de energia livre (negativos) (ou seja, erros de previsão) ao longo do tempo. A taxa de mudança das crenças no gráfico superior esquerdo é determinada pelo valor desses erros em cada passo de tempo. Inferior direito: Sequência de notas musicais apresentadas ao nosso agente sintético (ou seja, as observações que ele recebe durante os passos de tempo 1 a 5). Observe que enquanto no terceiro passo de tempo (o3) o ouvinte ouviu a segunda nota (terceira coluna do gráfico inferior direito), ele infere a terceira nota com maior probabilidade (terceira coluna do gráfico superior direito).](images/Figura_7_2.png)
+
+## Tomada de decisão e planejamento como inferência
+
+O HMM usado acima ilustra uma forma muito simples de inferência categórica baseada em uma sequência de resultados. No entanto, o tipo de criatura (séssil) que isso descreve é bastante desinteressante. Criaturas autônomas são claramente mais do que recipientes passivos de dados sensoriais. Em vez disso, eles mudam ativamente seu ambiente e se envolvem em uma troca bidirecional com seu sensório. Isso fala da importância de converter um HMM em um POMDP, pelo qual devemos inferir não apenas como nosso ambiente está mudando, mas também como nosso curso de ação escolhido o altera e qual curso de ação escolher.
+
+A Figura 7.3 mostra um modelo generativo do POMDP. Isso é o mesmo que foi apresentado no capítulo 4, onde os detalhes da inferência nesse tipo de modelo são descompactados. Observe a semelhança dessa estrutura com o HMM na figura 7.1 e a adição de uma variável extra (π ), na qual estão condicionadas as probabilidades de transição (B). Isso significa que podemos considerar hipóteses alternativas sobre a dinâmica dos estados. Essas hipóteses podem ser interpretadas como planos entre os quais uma criatura pode selecionar. Essa perspectiva equipara avaliação de políticas com comparação de modelos e diz que uma política é simplesmente uma explicação
+variável para uma sequência observada de sensações (autogeradas).
+
+![Figura 7.3 POMDP da figura 4.3, descompactando as distribuições de probabilidade em termos de fatores de estado ocultos e modalidades de resultado. (A Figura 7.1 é um caso especial dessa estrutura.) Três pontos a serem observados: Primeiro, a fatoração dos estados ocultos agora significa que a distribuição codificada por A tem (potencialmente) muitos fatores de estado em seu conjunto de condicionamento e não pode mais ser codificada por uma matriz. Em vez disso, isso se torna um objeto tensor, no qual cada índice corresponde a um fator de estado. Em segundo lugar, a separação dos resultados em diferentes modalidades significa que haverá um tensor A separado para cada modalidade. Terceiro, enquanto C e E aparecem no painel à direita, eles não aparecem no gráfico de fatores à esquerda porque só entram no modelo generativo por meio de crenças anteriores sobre políticas. Para uma perspectiva alternativa sobre isso, ver Parr e Friston (2018d) e van de Laar e de Vries (2019).](images/Figura_7_3.png)
+
+
+
+
+<!--chapter:end:7-Inferencia-ativa-em-tempo-discreto.Rmd-->
 
 \cleardoublepage 
 
