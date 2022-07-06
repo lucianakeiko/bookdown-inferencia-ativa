@@ -96,3 +96,27 @@ $$ \begin{equation}
 D^1 = [1,0,0,0,0]^T \qquad\qquad\qquad\\ 
 D^2 =\frac{1}{2}[1,1]^T
 \end{equation} \qquad\qquad\qquad (7.7) $$
+
+A ordem dos elementos nestes vetores coincide com a das matrizes B. O vetor D1 indica uma crença confiante em começar no centro do labirinto. O vetor D2 indica que os dois contextos (figura 7.4 ou 7.5) são considerados igualmente prováveis no início.
+
+A Figura 7.7 mostra o que acontece quando invertemos o modelo generativo das figuras 7.4–7.6. A linha superior ilustra o que veríamos se observássemos o comportamento do rato. Começa no centro e depois vai para a dica informativa. Isso se deve ao alto valor epistêmico associado a esse local (ou seja, as observações feitas nesse local têm o potencial de resolver a incerteza sobre o contexto). Ao ver a pista que indica um contexto à esquerda (contexto 1), o rato escolhe o braço esquerdo do labirinto e encontra o estímulo recompensador. Este movimento é impulsionado pelo alto valor pragmático atribuído a este local. Os gráficos inferiores ilustram a atualização de crenças que ocorre durante este teste simples. Como na figura 7.2, isso é mostrado na forma que poderíamos esperar observar em um rato idealizado se estivéssemos medindo a atividade neuronal (ou seja, taxas de disparo e potenciais de campo locais [LFPs]). Observe a rápida mudança nas crenças no segundo passo de tempo, quando o rato atinge o local da dica informativa e a LFP associada (linha tracejada).
+
+![**Figura 7.7** Comportamento epistêmico e pragmático simulado de um rato forrageando em um labirinto em T. O rato começa no local central, mas depois escolhe amostrar a sugestão informativa no braço inferior do labirinto. Esta localização está associada ao maior valor epistêmico, pois observar a deixa neste local revela o contexto (recompensa direita ou esquerda) em que o rato se encontra. LFP (ε ). Sem mais incertezas para resolver, o rato seleciona a opção pragmaticamente valiosa e vai para o braço esquerdo do labirinto. Os dois gráficos à direita mostram as crenças mantidas pelo rato no final da tentativa sobre todos os tempos anteriores (ou seja, são crenças retrospectivas e não as crenças do rato no momento da decisão). Ele acredita (corretamente) que começou no local central, foi para o braço do taco e depois foi para o braço esquerdo. Para o fator de estado oculto do contexto, o rato acredita que o contexto foi o contexto da esquerda por toda parte.](images/Figura_7_7.png)
+
+## Busca de informações
+
+A simulação na seção 7.2 ilustra um exemplo simples de um trade-off prospecção-aproveitamento, que é resolvido pela busca de informações até que a incerteza seja resolvida, então explorando o que foi inferido para atender às preferências anteriores. Nesta seção, descompactamos o conceito de valor epistêmico com mais detalhes. Como vimos na equação 7.4, isso compreende dois termos:
+
+$$ 
+\begin{equation}
+\begin{matrix} \underbrace{\mathcal I(\pi)} \\ valor\;epistêmico\end{matrix} 
+= \begin{matrix} \underbrace{H(Q(\tilde o|\pi))} \\ entropia\;preditiva\;posterior \end{matrix}
+- \begin{matrix} \underbrace{E_{Q(\tilde s|\pi)}[H[P(\tilde o| \tilde s)]]} \\ ambiguidade\;esperada\end{matrix} \\
+= \begin{matrix} \underbrace{D_{KL}[P(\tilde o | \tilde s)Q(\tilde o | \tilde \pi) || Q(\tilde o | \tilde \pi) Q(\tilde s | \tilde \pi)]} \\ informação\;mútua \end{matrix} \qquad\qquad\qquad (7.8) \\
+= \begin{matrix} \underbrace{E_{Q(\tilde o | \tilde \pi)}[D_{KL}][Q(\tilde s |\pi, \tilde o) || Q(\tilde s | \pi)]} ; Q(\tilde s|\pi, \tilde o) \triangleq \frac{P(\tilde o| \tilde s)Q(\tilde s | \pi)}{Q(\tilde o | \pi)} \\ ganho\;de\;informação,\;saliência,\;surpresa\;Bayesiana \end{matrix}  \\
+
+\end{equation}
+$$
+
+
+
