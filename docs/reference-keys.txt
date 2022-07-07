@@ -72,3 +72,4 @@ introdução-7
 o-básico
 derivadas
 busca-de-informações
+aprendizado-e-novidade

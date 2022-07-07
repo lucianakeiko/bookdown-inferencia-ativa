@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-06" />
+<meta name="date" content="2022-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,14 +171,15 @@
 <li class="chapter" data-level="7.2" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#processamento-perceptivo"><i class="fa fa-check"></i><b>7.2</b> Processamento Perceptivo</a></li>
 <li class="chapter" data-level="7.3" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#tomada-de-decisão-e-planejamento-como-inferência"><i class="fa fa-check"></i><b>7.3</b> Tomada de decisão e planejamento como inferência</a></li>
 <li class="chapter" data-level="7.4" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#busca-de-informações"><i class="fa fa-check"></i><b>7.4</b> Busca de informações</a></li>
+<li class="chapter" data-level="7.5" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#aprendizado-e-novidade"><i class="fa fa-check"></i><b>7.5</b> Aprendizado e Novidade</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
 <ul>
-<li class="chapter" data-level="7.5" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#introdução-7"><i class="fa fa-check"></i><b>7.5</b> Introdução</a></li>
-<li class="chapter" data-level="7.6" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#álgebra-linear"><i class="fa fa-check"></i><b>7.6</b> Álgebra Linear</a>
+<li class="chapter" data-level="7.6" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#introdução-7"><i class="fa fa-check"></i><b>7.6</b> Introdução</a></li>
+<li class="chapter" data-level="7.7" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#álgebra-linear"><i class="fa fa-check"></i><b>7.7</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="7.6.1" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#o-básico"><i class="fa fa-check"></i><b>7.6.1</b> O básico</a></li>
-<li class="chapter" data-level="7.6.2" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#derivadas"><i class="fa fa-check"></i><b>7.6.2</b> Derivadas</a></li>
+<li class="chapter" data-level="7.7.1" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#o-básico"><i class="fa fa-check"></i><b>7.7.1</b> O básico</a></li>
+<li class="chapter" data-level="7.7.2" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#derivadas"><i class="fa fa-check"></i><b>7.7.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
@@ -307,23 +308,49 @@ D^2 =\frac{1}{2}[1,1]^T
 = \begin{matrix} \underbrace{E_{Q(\tilde o | \tilde \pi)}[D_{KL}][Q(\tilde s |\pi, \tilde o) || Q(\tilde s | \pi)]} ; Q(\tilde s|\pi, \tilde o) \triangleq \frac{P(\tilde o| \tilde s)Q(\tilde s | \pi)}{Q(\tilde o | \pi)} \\ ganho\;de\;informação,\;saliência,\;surpresa\;Bayesiana \end{matrix}  \\
 
 \end{equation}\]</span>
-$$</p>
+$$
+Estas são a entropia preditiva posterior e a ambiguidade esperada, respectivamente. Abaixo destes, destacamos a correspondência entre estes e outros rearranjos. Para descompactá-los de forma intuitiva, vamos enquadrar isso em termos de um paradigma visual, onde sacadas alternativas (π ) levam a diferentes transições entre locais de fixação (s). Além dos locais de fixação, os estados ocultos incluem a identidade de um estímulo em cada local. Uma combinação de estímulo e fixação gera consequências visuais e proprioceptivas (o). Com isso em mente, podemos interpretar a entropia preditiva posterior como a dispersão (ou incerteza) associada ao “o que eu veria se realizasse esse movimento ocular”. Do ponto de vista de um cientista, isso quantifica o quão incertos podemos estar sobre os dados que obteríamos ao realizar um determinado experimento. Sob essa perspectiva, faz sentido selecionarmos as sacadas (ou experimentos) que estão associadas à maior entropia preditiva posterior, pois oferecem o maior potencial de resolução de incertezas. Não ganharíamos nada realizando um experimento se já soubéssemos quais seriam os resultados com um alto grau de confiança.</p>
+<p>No entanto, a entropia preditiva apenas nos diz a quantidade total de incerteza. Não nos diz quanta incerteza é realmente solucionável. Sempre estaremos incertos sobre o próximo número em uma sequência de números gerados aleatoriamente, mas nunca resolveremos nossa incerteza sobre o processo que os gerou fixando neles. É aí que entra a ambiguidade esperada. Isso quantifica o grau em que as observações e os estados são independentes um do outro. Se os estados sempre gerarem a mesma observação, essa quantidade será zero. Será máximo se, como no gerador de números aleatórios, não houver associação entre estados e resultados. No domínio visual, isso implica que a melhor sacada será aquela em direção a um estímulo bem iluminado, onde há pouca ambiguidade sobre “o que eu veria se olhasse para esse estímulo”. Tomados em conjunto, isso diz que as melhores sacadas (ou seja, experimentos perceptivos) são aquelas para as quais há a maior incerteza para resolver (entropia preditiva posterior), mas somente se essa incerteza puder ser resolvida (ambiguidade negativa). Curiosamente, isso tem exatamente a mesma forma que as expressões desenvolvidas em estatística para pontuar o projeto experimental em termos de ganho de informação (Lindley 1956).</p>
+<p>A Figura 7.9 ilustra o que acontece em um paradigma sacádico (Parr e Friston 2017b) quando simulamos manipulações para a ambiguidade e entropia preditiva posterior. Isso mostra quatro estímulos (quadrados), cada um dos quais pode mudar de cor a cada momento. Sobreposto a estes está um traço de rastreamento ocular simulado, como se estivéssemos medindo para onde um participante experimental estava olhando. Crucialmente, especificamos crenças anteriores sobre resultados como uniformes (ou seja, valor pragmático a ser ausente), impedindo quaisquer escolhas baseadas em preferências. Isso significa que cada sacada é selecionada para maximizar o valor epistêmico. Quando o modelo generativo trata todos os quatro estímulos como equivalentes (imagem da esquerda), todos são amostrados com aproximadamente a mesma frequência. No entanto, podemos modular a incerteza associada a cada estímulo (ver caixa 7.1). Se definirmos um estímulo para ter uma ambiguidade maior (aumentando o valor dos elementos fora da diagonal da matriz A correspondente), esse quadrado será ignorado (imagem do meio). Este é um exemplo do famoso efeito “streetlight” (Demirdjian et al. 2005), que leva o nome da metáfora de pessoas que perderam suas chaves tarde da noite. O primeiro lugar que eles podem procurar é sob a luz da rua - não porque as chaves provavelmente estejam lá, mas porque é o melhor lugar para encontrar informações de alta qualidade, inequívocas e que resolvem incertezas. A simulação mostra como a praça ambígua (por exemplo, mal iluminada) é ignorada, reproduzindo um efeito “streetlight” in silico.</p>
+<p>Em contraste, a imagem da direita na Figura 7.8 mostra o que acontece quando tornamos as transições menos previsíveis para o quadrado inferior esquerdo. Acumulamos incerteza sobre esta localização muito rapidamente, garantindo uma alta entropia preditiva posterior sem alteração da ambiguidade. Como podemos ver, isso leva a uma fixação mais frequente nesse local, pois sempre há novas incertezas a serem resolvidas aqui. Intuitivamente, se eu sei que algo tem uma dinâmica muito previsível, não preciso olhar para ele com muita frequência para ter certeza de seu estado. Por outro lado, se algo pode ter mudado no tempo em que estive olhando para outra coisa, vale a pena olhar para trás para verificar. Essas simulações são projetadas para oferecer uma intuição para as duas partes do valor epistêmico, para ver como a minimização da energia livre esperada garante que selecionemos ativamente nossos dados sensoriais para descobrir o mundo.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quadro 7.1 Incerteza e precisão</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>O exemplo da Figura 7.7 apela ao conceito de precisão – uma ideia importante neste livro. A precisão é o inverso da variância e pontua nossa confiança em uma determinada distribuição de probabilidade. Isso está intimamente relacionado à entropia negativa (negentropia) de uma distribuição:<span class="math display">\[ -H[P(s)]=\mathbb E_{P(x)}[\ln P(s)]\]</span>Uma maneira simples de parametrizar uma distribuição de forma que ela possa ser mais ou menos precisa é usar uma forma de Gibbs com um parâmetro de temperatura inverso (<span class="math inline">\(omega\)</span>) tem a seguinte forma: <span class="math display">\[ P(s |\omega )=Cat(\sigma(\omega\ln D))\]</span>Observe que a precisão multiplica o log anterior, para que possa ser interpretado como um dispositivo de controle de ganho (amplificador em vez de adicionar sinais neurais). Os gráficos na figura 7.8 mostram como a distribuição de probabilidade (cada coluna representando a probabilidade de um estado alternativo) muda para um dado D quando variamos ω. Observe o aumento da confiança com o aumento da precisão.<img src="images/Figura_7_8.png" alt="Figura 7.8" />Este tipo de parametrização pode ser aplicado a qualquer uma das distribuições utilizadas em um POMDP. Além disso, podemos definir a priori sobre a precisão e inferir isso da mesma forma que inferimos outras variáveis latentes (ou seja, através da minimização da energia livre). Supondo que o prior tenha uma distribuição Gamma (excluindo valores negativos da precisão), obtemos as seguintes atualizações (consulte o apêndice B para obter detalhes):<span class="math display">\[P(\omega)=\ \Gamma(1,\beta_\omega)\]</span><span class="math display">\[Q(\omega)=\Gamma(1,\beta_\omega)\]</span><span class="math display">\[\Longrightarrow\dot\beta_\omega=(D^{\beta_\omega^{-1}}-s)\cdot\ln D+\beta_w-{\beta_w}\]</span>Há um crescente reconhecimento de que o substrato biológico desses parâmetros de precisão podem ser os sistemas neuromoduladores que determinam o ganho das respostas neurais. O Capítulo 5 discute as evidências que relacionam esses parâmetros a neuroquímicos específicos.</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img src="images/Figura_7_9.png" alt="" />
+<p class="caption">Figura 7.9 Paradigma de busca visual epistêmica simulada (Parr e Friston 2017b) com o traço sintético de rastreamento ocular sobreposto aos quatro locais de estímulo. Cada estímulo (quadrado sombreado) está associado a uma matriz de transição que pode ser mais ou menos previsível e uma matriz de probabilidade que pode ser mais ou menos ambígua. Esquerda: Quando as transições e probabilidades são igualmente previsíveis para todas as quatro localizações, todas as localizações são amostradas com aproximadamente a mesma frequência. Meio: O visualizador mostra aversão ao quadrado superior esquerdo quando é especificado com um mapeamento de probabilidade menos preciso (mais ambíguo). Direita: O quadrado inferior esquerdo é epistemicamente atraente quando as probabilidades de transição são especificadas como mais incertas.</p>
+</div>
+</div>
+<div id="aprendizado-e-novidade" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Aprendizado e Novidade<a href="inferência-ativa-em-tempo-discreto-1.html#aprendizado-e-novidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
 
 
 
-<div id="introdução-7" class="section level2 hasAnchor" number="7.5">
-<h2><span class="header-section-number">5</span> Introdução<a href="inferência-ativa-em-tempo-discreto-1.html#introdução-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introdução-7" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">6</span> Introdução<a href="inferência-ativa-em-tempo-discreto-1.html#introdução-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="álgebra-linear" class="section level2 hasAnchor" number="7.6">
-<h2><span class="header-section-number">6</span> Álgebra Linear<a href="inferência-ativa-em-tempo-discreto-1.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="o-básico" class="section level3 hasAnchor" number="7.6.1">
-<h3><span class="header-section-number">6.1</span> O básico<a href="inferência-ativa-em-tempo-discreto-1.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="álgebra-linear" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7</span> Álgebra Linear<a href="inferência-ativa-em-tempo-discreto-1.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="o-básico" class="section level3 hasAnchor" number="7.7.1">
+<h3><span class="header-section-number">7.1</span> O básico<a href="inferência-ativa-em-tempo-discreto-1.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="derivadas" class="section level3 hasAnchor" number="7.6.2">
-<h3><span class="header-section-number">6.2</span> Derivadas<a href="inferência-ativa-em-tempo-discreto-1.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="derivadas" class="section level3 hasAnchor" number="7.7.2">
+<h3><span class="header-section-number">7.2</span> Derivadas<a href="inferência-ativa-em-tempo-discreto-1.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
