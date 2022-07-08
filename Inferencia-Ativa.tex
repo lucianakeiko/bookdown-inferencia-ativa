@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-05}
+\date{2022-07-08}
 
 \begin{document}
 \maketitle
@@ -2066,6 +2066,84 @@ A ordem dos elementos nesses vetores corresponde à ordem das linhas nas matrize
 D^1 = [1,0,0,0,0]^T \qquad\qquad\qquad\\ 
 D^2 =\frac{1}{2}[1,1]^T
 \end{equation} \qquad\qquad\qquad (7.7) \]
+
+A ordem dos elementos nestes vetores coincide com a das matrizes B. O vetor D1 indica uma crença confiante em começar no centro do labirinto. O vetor D2 indica que os dois contextos (figura 7.4 ou 7.5) são considerados igualmente prováveis no início.
+
+A Figura 7.7 mostra o que acontece quando invertemos o modelo generativo das figuras 7.4--7.6. A linha superior ilustra o que veríamos se observássemos o comportamento do rato. Começa no centro e depois vai para a dica informativa. Isso se deve ao alto valor epistêmico associado a esse local (ou seja, as observações feitas nesse local têm o potencial de resolver a incerteza sobre o contexto). Ao ver a pista que indica um contexto à esquerda (contexto 1), o rato escolhe o braço esquerdo do labirinto e encontra o estímulo recompensador. Este movimento é impulsionado pelo alto valor pragmático atribuído a este local. Os gráficos inferiores ilustram a atualização de crenças que ocorre durante este teste simples. Como na figura 7.2, isso é mostrado na forma que poderíamos esperar observar em um rato idealizado se estivéssemos medindo a atividade neuronal (ou seja, taxas de disparo e potenciais de campo locais {[}LFPs{]}). Observe a rápida mudança nas crenças no segundo passo de tempo, quando o rato atinge o local da dica informativa e a LFP associada (linha tracejada).
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_7_7.png}
+\caption{\textbf{Figura 7.7} Comportamento epistêmico e pragmático simulado de um rato forrageando em um labirinto em T. O rato começa no local central, mas depois escolhe amostrar a sugestão informativa no braço inferior do labirinto. Esta localização está associada ao maior valor epistêmico, pois observar a deixa neste local revela o contexto (recompensa direita ou esquerda) em que o rato se encontra. LFP (ε ). Sem mais incertezas para resolver, o rato seleciona a opção pragmaticamente valiosa e vai para o braço esquerdo do labirinto. Os dois gráficos à direita mostram as crenças mantidas pelo rato no final da tentativa sobre todos os tempos anteriores (ou seja, são crenças retrospectivas e não as crenças do rato no momento da decisão). Ele acredita (corretamente) que começou no local central, foi para o braço do taco e depois foi para o braço esquerdo. Para o fator de estado oculto do contexto, o rato acredita que o contexto foi o contexto da esquerda por toda parte.}
+\end{figure}
+
+\hypertarget{busca-de-informauxe7uxf5es}{%
+\section{Busca de informações}\label{busca-de-informauxe7uxf5es}}
+
+A simulação na seção 7.2 ilustra um exemplo simples de um trade-off prospecção-aproveitamento, que é resolvido pela busca de informações até que a incerteza seja resolvida, então explorando o que foi inferido para atender às preferências anteriores. Nesta seção, descompactamos o conceito de valor epistêmico com mais detalhes. Como vimos na equação 7.4, isso compreende dois termos:
+
+\$\$
+\begin{equation}
+\begin{matrix} \underbrace{\mathcal I(\pi)} \\ valor\;epistêmico\end{matrix} 
+= \begin{matrix} \underbrace{H(Q(\tilde o|\pi))} \\ entropia\;preditiva\;posterior \end{matrix}
+- \begin{matrix} \underbrace{E_{Q(\tilde s|\pi)}[H[P(\tilde o| \tilde s)]]} \\ ambiguidade\;esperada\end{matrix} \\
+= \begin{matrix} \underbrace{D_{KL}[P(\tilde o | \tilde s)Q(\tilde o | \tilde \pi) || Q(\tilde o | \tilde \pi) Q(\tilde s | \tilde \pi)]} \\ informação\;mútua \end{matrix} \qquad\qquad\qquad (7.8) \\
+= \begin{matrix} \underbrace{E_{Q(\tilde o | \tilde \pi)}[D_{KL}][Q(\tilde s |\pi, \tilde o) || Q(\tilde s | \pi)]} ; Q(\tilde s|\pi, \tilde o) \triangleq \frac{P(\tilde o| \tilde s)Q(\tilde s | \pi)}{Q(\tilde o | \pi)} \\ ganho\;de\;informação,\;saliência,\;surpresa\;Bayesiana \end{matrix}  \\
+
+\end{equation}
+\$\$
+Estas são a entropia preditiva posterior e a ambiguidade esperada, respectivamente. Abaixo destes, destacamos a correspondência entre estes e outros rearranjos. Para descompactá-los de forma intuitiva, vamos enquadrar isso em termos de um paradigma visual, onde sacadas alternativas (π ) levam a diferentes transições entre locais de fixação (s). Além dos locais de fixação, os estados ocultos incluem a identidade de um estímulo em cada local. Uma combinação de estímulo e fixação gera consequências visuais e proprioceptivas (o). Com isso em mente, podemos interpretar a entropia preditiva posterior como a dispersão (ou incerteza) associada ao ``o que eu veria se realizasse esse movimento ocular''. Do ponto de vista de um cientista, isso quantifica o quão incertos podemos estar sobre os dados que obteríamos ao realizar um determinado experimento. Sob essa perspectiva, faz sentido selecionarmos as sacadas (ou experimentos) que estão associadas à maior entropia preditiva posterior, pois oferecem o maior potencial de resolução de incertezas. Não ganharíamos nada realizando um experimento se já soubéssemos quais seriam os resultados com um alto grau de confiança.
+
+No entanto, a entropia preditiva apenas nos diz a quantidade total de incerteza. Não nos diz quanta incerteza é realmente solucionável. Sempre estaremos incertos sobre o próximo número em uma sequência de números gerados aleatoriamente, mas nunca resolveremos nossa incerteza sobre o processo que os gerou fixando neles. É aí que entra a ambiguidade esperada. Isso quantifica o grau em que as observações e os estados são independentes um do outro. Se os estados sempre gerarem a mesma observação, essa quantidade será zero. Será máximo se, como no gerador de números aleatórios, não houver associação entre estados e resultados. No domínio visual, isso implica que a melhor sacada será aquela em direção a um estímulo bem iluminado, onde há pouca ambiguidade sobre ``o que eu veria se olhasse para esse estímulo''. Tomados em conjunto, isso diz que as melhores sacadas (ou seja, experimentos perceptivos) são aquelas para as quais há a maior incerteza para resolver (entropia preditiva posterior), mas somente se essa incerteza puder ser resolvida (ambiguidade negativa). Curiosamente, isso tem exatamente a mesma forma que as expressões desenvolvidas em estatística para pontuar o projeto experimental em termos de ganho de informação (Lindley 1956).
+
+A Figura 7.9 ilustra o que acontece em um paradigma sacádico (Parr e Friston 2017b) quando simulamos manipulações para a ambiguidade e entropia preditiva posterior. Isso mostra quatro estímulos (quadrados), cada um dos quais pode mudar de cor a cada momento. Sobreposto a estes está um traço de rastreamento ocular simulado, como se estivéssemos medindo para onde um participante experimental estava olhando. Crucialmente, especificamos crenças anteriores sobre resultados como uniformes (ou seja, valor pragmático a ser ausente), impedindo quaisquer escolhas baseadas em preferências. Isso significa que cada sacada é selecionada para maximizar o valor epistêmico. Quando o modelo generativo trata todos os quatro estímulos como equivalentes (imagem da esquerda), todos são amostrados com aproximadamente a mesma frequência. No entanto, podemos modular a incerteza associada a cada estímulo (ver caixa 7.1). Se definirmos um estímulo para ter uma ambiguidade maior (aumentando o valor dos elementos fora da diagonal da matriz A correspondente), esse quadrado será ignorado (imagem do meio). Este é um exemplo do famoso efeito ``streetlight'' (Demirdjian et al.~2005), que leva o nome da metáfora de pessoas que perderam suas chaves tarde da noite. O primeiro lugar que eles podem procurar é sob a luz da rua - não porque as chaves provavelmente estejam lá, mas porque é o melhor lugar para encontrar informações de alta qualidade, inequívocas e que resolvem incertezas. A simulação mostra como a praça ambígua (por exemplo, mal iluminada) é ignorada, reproduzindo um efeito ``streetlight'' in silico.
+
+Em contraste, a imagem da direita na Figura 7.8 mostra o que acontece quando tornamos as transições menos previsíveis para o quadrado inferior esquerdo. Acumulamos incerteza sobre esta localização muito rapidamente, garantindo uma alta entropia preditiva posterior sem alteração da ambiguidade. Como podemos ver, isso leva a uma fixação mais frequente nesse local, pois sempre há novas incertezas a serem resolvidas aqui. Intuitivamente, se eu sei que algo tem uma dinâmica muito previsível, não preciso olhar para ele com muita frequência para ter certeza de seu estado. Por outro lado, se algo pode ter mudado no tempo em que estive olhando para outra coisa, vale a pena olhar para trás para verificar. Essas simulações são projetadas para oferecer uma intuição para as duas partes do valor epistêmico, para ver como a minimização da energia livre esperada garante que selecionemos ativamente nossos dados sensoriais para descobrir o mundo.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Quadro 7.1 Incerteza e precisão
+\end{minipage} \\
+\midrule
+\endhead
+O exemplo da Figura 7.7 apela ao conceito de precisão -- uma ideia importante neste livro. A precisão é o inverso da variância e pontua nossa confiança em uma determinada distribuição de probabilidade. Isso está intimamente relacionado à entropia negativa (negentropia) de uma distribuição:\( -H[P(s)]=\mathbb E_{P(x)}[\ln P(s)]\)Uma maneira simples de parametrizar uma distribuição de forma que ela possa ser mais ou menos precisa é usar uma forma de Gibbs com um parâmetro de temperatura inverso (\(omega\)) tem a seguinte forma: \( P(s |\omega )=Cat(\sigma(\omega\ln D))\)Observe que a precisão multiplica o log anterior, para que possa ser interpretado como um dispositivo de controle de ganho (amplificador em vez de adicionar sinais neurais). Os gráficos na figura 7.8 mostram como a distribuição de probabilidade (cada coluna representando a probabilidade de um estado alternativo) muda para um dado D quando variamos ω. Observe o aumento da confiança com o aumento da precisão.\includegraphics{images/Figura_7_8.png}Este tipo de parametrização pode ser aplicado a qualquer uma das distribuições utilizadas em um POMDP. Além disso, podemos definir a priori sobre a precisão e inferir isso da mesma forma que inferimos outras variáveis latentes (ou seja, através da minimização da energia livre). Supondo que o prior tenha uma distribuição Gamma (excluindo valores negativos da precisão), obtemos as seguintes atualizações (consulte o apêndice B para obter detalhes):\(P(\omega)=\ \Gamma(1,\beta_\omega)\)\(Q(\omega)=\Gamma(1,\beta_\omega)\)\(\Longrightarrow\dot\beta_\omega=(D^{\beta_\omega^{-1}}-s)\cdot\ln D+\beta_w-{\beta_w}\)Há um crescente reconhecimento de que o substrato biológico desses parâmetros de precisão podem ser os sistemas neuromoduladores que determinam o ganho das respostas neurais. O Capítulo 5 discute as evidências que relacionam esses parâmetros a neuroquímicos específicos. \\
+\bottomrule
+\end{longtable}
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_7_9.png}
+\caption{Figura 7.9 Paradigma de busca visual epistêmica simulada (Parr e Friston 2017b) com o traço sintético de rastreamento ocular sobreposto aos quatro locais de estímulo. Cada estímulo (quadrado sombreado) está associado a uma matriz de transição que pode ser mais ou menos previsível e uma matriz de probabilidade que pode ser mais ou menos ambígua. Esquerda: Quando as transições e probabilidades são igualmente previsíveis para todas as quatro localizações, todas as localizações são amostradas com aproximadamente a mesma frequência. Meio: O visualizador mostra aversão ao quadrado superior esquerdo quando é especificado com um mapeamento de probabilidade menos preciso (mais ambíguo). Direita: O quadrado inferior esquerdo é epistemicamente atraente quando as probabilidades de transição são especificadas como mais incertas.}
+\end{figure}
+
+\hypertarget{aprendizado-e-novidade}{%
+\section{Aprendizado e Novidade}\label{aprendizado-e-novidade}}
+
+As seções 7.2--7.4 estabelecem tudo o que é necessário para a maioria das aplicações práticas da Inferência Ativa. No entanto, assumimos que o modelo generativo já é conhecido e não muda como efeito da aprendizagem. Em algumas aplicações práticas, podemos querer considerar como uma ou mais partes do modelo generativo (por exemplo, a matriz A ou B) são aprendidas durante um experimento ou, mais amplamente, como otimizamos a estrutura do próprio modelo generativo , dados alguns dados (Friston, FitzGerald et al.~2016). Ao fazer isso, a Inferência Ativa se estende ao aprendizado ativo, e a saliência (equação 7.5) que descreve o ganho de informação sobre os estados é complementada pela novidade, que trata da resolução da incerteza sobre (por exemplo) os elementos da matriz A mostrada na equação 7.1, a matriz B mostrada na equação 7.2, ou quaisquer outros parâmetros do modelo generativo. Essas crenças agora podem variar com o tempo, em vez de serem fixas, como se supunha até agora (Schwartenbeck et al.~2019). Para chegar a isso, primeiro temos que estender o modelo generativo como na Figura 7.10 para incluir crenças sobre esses parâmetros do modelo.
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_7_10.png}
+\caption{\textbf{Figura 7.10} Esse modelo generativo para aprendizado usa a mesma estrutura POMDP da figura 7.3, mas as prioridades para cada um dos estados ocultos agora dependem de variáveis \hspace{0pt}\hspace{0pt}(em círculos), que agora vêm equipadas com crenças anteriores. Estas têm a forma de distribuições de Dirichlet, que são conjugadas (ver quadro 7.2) às distribuições categóricas consideradas até agora. O modelo mostra como a probabilidade de resultados dados estados agora também depende de uma variável A (que é a mesma para todos os pontos de tempo), as probabilidades de transição agora estão condicionadas a uma variável B, as preferências dependem de C, os estados iniciais dependem em D, e a política de forma fixa a priori depende de E. Ao tornar explícitas as crenças prévias sobre os parâmetros do modelo generativo, essa figura enfatiza que tanto a inferência quanto o aprendizado são processos de minimização de energia livre, mas são distintos. Em suma, a inferência descreve a otimização de crenças sobre o estado do mundo como ele é (s), incluindo crenças sobre a maneira como estamos agindo (π ). Em contraste, a aprendizagem descreve a otimização de crenças sobre as relações entre essas variáveis \hspace{0pt}\hspace{0pt}(A,  B,  C,  D ou E ). As últimas variam muito mais lentamente que as primeiras e só podem ser aprendidas quando os estados foram inferidos. Voltaremos a essa separação de escalas de tempo abaixo quando considerarmos os modelos generativos hierárquicos.}
+\end{figure}
+
+Conceitualmente, incluir crenças sobre parâmetros no modelo generativo permite tratar a aprendizagem como outra forma de inferência Bayesiana -- ou seja, como a passagem de crenças anteriores para posteriores sobre parâmetros do modelo. Isso destaca a semelhança fundamental entre percepção e aprendizado: da mesma forma que a percepção pode ser descrita como a inversão de um modelo generativo para inferir estados ocultos a partir de observações, o aprendizado pode ser descrito como a inversão de um modelo generativo para incluir crenças sobre parâmetros ( embora normalmente esta inversão possa operar em uma escala de tempo mais lenta).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Quadro 7.2 Antecedentes do Conjugado
+\end{minipage} \\
+\midrule
+\endhead
+Ao configurar um modelo generativo da forma da figura 7.10, é importante selecionar cuidadosamente a distribuição apropriada para crenças anteriores. Normalmente, esta será a distribuição anterior conjugada associada à probabilidade. Uma crença prévia conjugada significa que, quando usada para realizar inferência Bayesiana, a crença posterior será do mesmo tipo de distribuição. Por exemplo, usando a regra de Bayes:\(P(D|s)\propto P(D) P(s|D)\) Se \(P(s|D)\) é uma distribuição categórica, quando escolhemos uma distribuição de Dirichlet (conjugada para categórica ) para \(P(D)\), podemos garantir que \(P(D|s)\) também é uma distribuição de Dirichlet. Colocando formalmente:\(\begin{matrix}P(D)=Dir(d) \\ P(s|D)=Cat(D)\end{matrix}\bigg \}\Rightarrow P(D|s) = Dir(d)\) \\
+\bottomrule
+\end{longtable}
+
+A maneira mais simples de escolher o tipo certo de a priori é procurar a priori conjugada para qualquer forma que a distribuição de verossimilhança assuma. Para as distribuições categóricas usadas aqui, uma distribuição de Dirichlet é a escolha apropriada para crenças sobre parâmetros (ver caixa 7.2). Tendo incluído essas crenças anteriores adicionais, podemos agora otimizar as crenças posteriores sobre a estrutura do modelo generativo. Isso significa incorporá-los à energia livre (como fizemos para os estados no capítulo 4) e encontrar os mínimos de energia livre.
 
 \cleardoublepage
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-07" />
+<meta name="date" content="2022-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="uma-receita-para-projetar-modelos-de-inferência-ativos.html"/>
-<link rel="next" href="dicionário.html"/>
+<link rel="next" href="bases-matemáticas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -173,15 +173,17 @@
 <li class="chapter" data-level="7.4" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#busca-de-informações"><i class="fa fa-check"></i><b>7.4</b> Busca de informações</a></li>
 <li class="chapter" data-level="7.5" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#aprendizado-e-novidade"><i class="fa fa-check"></i><b>7.5</b> Aprendizado e Novidade</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
+<li class="appendix"><span><b>Apêndice</b></span></li>
+<li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="7.6" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#introdução-7"><i class="fa fa-check"></i><b>7.6</b> Introdução</a></li>
-<li class="chapter" data-level="7.7" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#álgebra-linear"><i class="fa fa-check"></i><b>7.7</b> Álgebra Linear</a>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-7"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="7.7.1" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#o-básico"><i class="fa fa-check"></i><b>7.7.1</b> O básico</a></li>
-<li class="chapter" data-level="7.7.2" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#derivadas"><i class="fa fa-check"></i><b>7.7.2</b> Derivadas</a></li>
+<li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
+<li class="chapter" data-level="A.2.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#derivadas"><i class="fa fa-check"></i><b>A.2.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="B" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html"><i class="fa fa-check"></i><b>B</b> As equações da inferência ativa</a></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -335,33 +337,41 @@ Estas são a entropia preditiva posterior e a ambiguidade esperada, respectivame
 </div>
 <div id="aprendizado-e-novidade" class="section level2 hasAnchor" number="7.5">
 <h2><span class="header-section-number">7.5</span> Aprendizado e Novidade<a href="inferência-ativa-em-tempo-discreto-1.html#aprendizado-e-novidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As seções 7.2–7.4 estabelecem tudo o que é necessário para a maioria das aplicações práticas da Inferência Ativa. No entanto, assumimos que o modelo generativo já é conhecido e não muda como efeito da aprendizagem. Em algumas aplicações práticas, podemos querer considerar como uma ou mais partes do modelo generativo (por exemplo, a matriz A ou B) são aprendidas durante um experimento ou, mais amplamente, como otimizamos a estrutura do próprio modelo generativo , dados alguns dados (Friston, FitzGerald et al. 2016). Ao fazer isso, a Inferência Ativa se estende ao aprendizado ativo, e a saliência (equação 7.5) que descreve o ganho de informação sobre os estados é complementada pela novidade, que trata da resolução da incerteza sobre (por exemplo) os elementos da matriz A mostrada na equação 7.1, a matriz B mostrada na equação 7.2, ou quaisquer outros parâmetros do modelo generativo. Essas crenças agora podem variar com o tempo, em vez de serem fixas, como se supunha até agora (Schwartenbeck et al. 2019). Para chegar a isso, primeiro temos que estender o modelo generativo como na Figura 7.10 para incluir crenças sobre esses parâmetros do modelo.</p>
+<div class="figure">
+<img src="images/Figura_7_10.png" alt="" />
+<p class="caption"><strong>Figura 7.10</strong> Esse modelo generativo para aprendizado usa a mesma estrutura POMDP da figura 7.3, mas as prioridades para cada um dos estados ocultos agora dependem de variáveis ​​(em círculos), que agora vêm equipadas com crenças anteriores. Estas têm a forma de distribuições de Dirichlet, que são conjugadas (ver quadro 7.2) às distribuições categóricas consideradas até agora. O modelo mostra como a probabilidade de resultados dados estados agora também depende de uma variável A (que é a mesma para todos os pontos de tempo), as probabilidades de transição agora estão condicionadas a uma variável B, as preferências dependem de C, os estados iniciais dependem em D, e a política de forma fixa a priori depende de E. Ao tornar explícitas as crenças prévias sobre os parâmetros do modelo generativo, essa figura enfatiza que tanto a inferência quanto o aprendizado são processos de minimização de energia livre, mas são distintos. Em suma, a inferência descreve a otimização de crenças sobre o estado do mundo como ele é (s), incluindo crenças sobre a maneira como estamos agindo (π ). Em contraste, a aprendizagem descreve a otimização de crenças sobre as relações entre essas variáveis ​​(A,  B,  C,  D ou E ). As últimas variam muito mais lentamente que as primeiras e só podem ser aprendidas quando os estados foram inferidos. Voltaremos a essa separação de escalas de tempo abaixo quando considerarmos os modelos generativos hierárquicos.</p>
+</div>
+<p>Conceitualmente, incluir crenças sobre parâmetros no modelo generativo permite tratar a aprendizagem como outra forma de inferência Bayesiana – ou seja, como a passagem de crenças anteriores para posteriores sobre parâmetros do modelo. Isso destaca a semelhança fundamental entre percepção e aprendizado: da mesma forma que a percepção pode ser descrita como a inversão de um modelo generativo para inferir estados ocultos a partir de observações, o aprendizado pode ser descrito como a inversão de um modelo generativo para incluir crenças sobre parâmetros ( embora normalmente esta inversão possa operar em uma escala de tempo mais lenta).</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quadro 7.2 Antecedentes do Conjugado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ao configurar um modelo generativo da forma da figura 7.10, é importante selecionar cuidadosamente a distribuição apropriada para crenças anteriores. Normalmente, esta será a distribuição anterior conjugada associada à probabilidade. Uma crença prévia conjugada significa que, quando usada para realizar inferência Bayesiana, a crença posterior será do mesmo tipo de distribuição. Por exemplo, usando a regra de Bayes:<span class="math inline">\(P(D|s)\propto P(D) P(s|D)\)</span> Se <span class="math inline">\(P(s|D)\)</span> é uma distribuição categórica, quando escolhemos uma distribuição de Dirichlet (conjugada para categórica ) para <span class="math inline">\(P(D)\)</span>, podemos garantir que <span class="math inline">\(P(D|s)\)</span> também é uma distribuição de Dirichlet. Colocando formalmente:<span class="math inline">\(\begin{matrix}P(D)=Dir(d) \\ P(s|D)=Cat(D)\end{matrix}\bigg \}\Rightarrow P(D|s) = Dir(d)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>A maneira mais simples de escolher o tipo certo de a priori é procurar a priori conjugada para qualquer forma que a distribuição de verossimilhança assuma. Para as distribuições categóricas usadas aqui, uma distribuição de Dirichlet é a escolha apropriada para crenças sobre parâmetros (ver caixa 7.2). Tendo incluído essas crenças anteriores adicionais, podemos agora otimizar as crenças posteriores sobre a estrutura do modelo generativo. Isso significa incorporá-los à energia livre (como fizemos para os estados no capítulo 4) e encontrar os mínimos de energia livre.</p>
 
 </div>
 </div>
 
 
 
-<div id="introdução-7" class="section level2 hasAnchor" number="7.6">
-<h2><span class="header-section-number">6</span> Introdução<a href="inferência-ativa-em-tempo-discreto-1.html#introdução-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="álgebra-linear" class="section level2 hasAnchor" number="7.7">
-<h2><span class="header-section-number">7</span> Álgebra Linear<a href="inferência-ativa-em-tempo-discreto-1.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="o-básico" class="section level3 hasAnchor" number="7.7.1">
-<h3><span class="header-section-number">7.1</span> O básico<a href="inferência-ativa-em-tempo-discreto-1.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="derivadas" class="section level3 hasAnchor" number="7.7.2">
-<h3><span class="header-section-number">7.2</span> Derivadas<a href="inferência-ativa-em-tempo-discreto-1.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-
-</div>
-</div>
-</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
