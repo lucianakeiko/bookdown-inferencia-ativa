@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-08}
+\date{2022-07-09}
 
 \begin{document}
 \maketitle
@@ -2108,7 +2108,7 @@ Quadro 7.1 Incerteza e precisão
 \end{minipage} \\
 \midrule
 \endhead
-O exemplo da Figura 7.7 apela ao conceito de precisão -- uma ideia importante neste livro. A precisão é o inverso da variância e pontua nossa confiança em uma determinada distribuição de probabilidade. Isso está intimamente relacionado à entropia negativa (negentropia) de uma distribuição:\( -H[P(s)]=\mathbb E_{P(x)}[\ln P(s)]\)Uma maneira simples de parametrizar uma distribuição de forma que ela possa ser mais ou menos precisa é usar uma forma de Gibbs com um parâmetro de temperatura inverso (\(omega\)) tem a seguinte forma: \( P(s |\omega )=Cat(\sigma(\omega\ln D))\)Observe que a precisão multiplica o log anterior, para que possa ser interpretado como um dispositivo de controle de ganho (amplificador em vez de adicionar sinais neurais). Os gráficos na figura 7.8 mostram como a distribuição de probabilidade (cada coluna representando a probabilidade de um estado alternativo) muda para um dado D quando variamos ω. Observe o aumento da confiança com o aumento da precisão.\includegraphics{images/Figura_7_8.png}Este tipo de parametrização pode ser aplicado a qualquer uma das distribuições utilizadas em um POMDP. Além disso, podemos definir a priori sobre a precisão e inferir isso da mesma forma que inferimos outras variáveis latentes (ou seja, através da minimização da energia livre). Supondo que o prior tenha uma distribuição Gamma (excluindo valores negativos da precisão), obtemos as seguintes atualizações (consulte o apêndice B para obter detalhes):\(P(\omega)=\ \Gamma(1,\beta_\omega)\)\(Q(\omega)=\Gamma(1,\beta_\omega)\)\(\Longrightarrow\dot\beta_\omega=(D^{\beta_\omega^{-1}}-s)\cdot\ln D+\beta_w-{\beta_w}\)Há um crescente reconhecimento de que o substrato biológico desses parâmetros de precisão podem ser os sistemas neuromoduladores que determinam o ganho das respostas neurais. O Capítulo 5 discute as evidências que relacionam esses parâmetros a neuroquímicos específicos. \\
+O exemplo da Figura 7.7 apela ao conceito de precisão -- uma ideia importante neste livro. A precisão é o inverso da variância e pontua nossa confiança em uma determinada distribuição de probabilidade. Isso está intimamente relacionado à entropia negativa (negentropia) de uma distribuição:\( -H[P(s)]=\mathbb E_{P(x)}[\ln P(s)]\)Uma maneira simples de parametrizar uma distribuição de forma que ela possa ser mais ou menos precisa é usar uma forma de Gibbs com um parâmetro de temperatura inverso (\(omega\)) tem a seguinte forma: \( P(s |\omega )=Cat(\sigma(\omega\ln D))\)Observe que a precisão multiplica o log anterior, para que possa ser interpretado como um dispositivo de controle de ganho (amplificador em vez de adicionar sinais neurais). Os gráficos na figura 7.8 mostram como a distribuição de probabilidade (cada coluna representando a probabilidade de um estado alternativo) muda para um dado D quando variamos ω. Observe o aumento da confiança com o aumento da precisão.\includegraphics{images/Figura_7_8.png}Este tipo de parametrização pode ser aplicado a qualquer uma das distribuições utilizadas em um POMDP. Além disso, podemos definir a priori sobre a precisão e inferir isso da mesma forma que inferimos outras variáveis latentes (ou seja, através da minimização da energia livre). Supondo que o prior tenha uma distribuição Gamma (excluindo valores negativos da precisão), obtemos as seguintes atualizações (consulte o apêndice B para obter detalhes):\(P(\omega)=\ \Gamma(1,\pmb{\beta}_\omega)\)\(Q(\omega)=\Gamma(1,\beta_\omega)\)\(\Longrightarrow\pmb{\dot\beta_\omega}=(\pmb{D}^{\beta_\omega^{-1}}-s)\cdot\ln \pmb{D}+\beta_w-{\pmb{\beta}_w}\)Há um crescente reconhecimento de que o substrato biológico desses parâmetros de precisão podem ser os sistemas neuromoduladores que determinam o ganho das respostas neurais. O Capítulo 5 discute as evidências que relacionam esses parâmetros a neuroquímicos específicos. \\
 \bottomrule
 \end{longtable}
 
@@ -2144,6 +2144,39 @@ Ao configurar um modelo generativo da forma da figura 7.10, é importante seleci
 \end{longtable}
 
 A maneira mais simples de escolher o tipo certo de a priori é procurar a priori conjugada para qualquer forma que a distribuição de verossimilhança assuma. Para as distribuições categóricas usadas aqui, uma distribuição de Dirichlet é a escolha apropriada para crenças sobre parâmetros (ver caixa 7.2). Tendo incluído essas crenças anteriores adicionais, podemos agora otimizar as crenças posteriores sobre a estrutura do modelo generativo. Isso significa incorporá-los à energia livre (como fizemos para os estados no capítulo 4) e encontrar os mínimos de energia livre.
+
+\[\begin{equation} 
+\theta = (A, B, C,D,E) \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad\\ 
+F=\mathbb E_{Q(\pi,\theta)}[F(\pi,\theta)]+D_{KL}[Q(\theta)||P(\theta)]+D_{KL}[Q(\pi)||P(\pi)] 
+\end{equation} \qquad (7.9)\]
+As distribuições de Dirichlet são parametrizadas por contagens (ou pseudocontagens) que indexam o número de vezes que uma determinada variável categórica foi vista (ou, no caso das anteriores, como se tivesse sido vista esse número de vezes). Para a derivação das regras de atualização para esses parâmetros, consulte o apêndice B. Por enquanto, resumimos a regra de atualização e as principais propriedades de uma distribuição de Dirichlet, focando nos parâmetros a e a de concentração associados ao anterior e posterior sobre A.
+
+\[ \begin{equation} \qquad
+\pmb{a} = a + \sum_{\tau}\pmb{s}_\tau \otimes\theta_\tau \\
+\mathbb E_Q[A_{ij}]=\pmb{A}_{ij} \approx \frac{\pmb{a}_{ij}}{\pmb{a}_{0,j}} \qquad\\
+\mathbb E_Q[\ln A_{ij}]= \ln \pmb{A}_{ij}=\psi(\pmb{a}_{ij})-psi(\pmb{a}_{oj})  \qquad (7.10) \\
+\pmb{a}_{oj} \triangleq \sum_k \pmb{a}_{kj}
+\end{equation}
+\]
+
+A primeira linha aqui expressa a atualização dos parâmetros de concentração anteriores para posteriores seguindo uma série de observações, com crenças sobre os estados que os causaram. A cruz no círculo indica um produto tensorial de Kronecker (ou produto externo no caso de dois vetores), aqui dando origem a uma matriz em que cada elemento é o produto de um par de elementos em \(o_\tau\) e \(\pmb{s}_\tau\) . Esta regra de atualização pode ser interpretada simplesmente como uma forma de plasticidade dependente da atividade. Quando um resultado é observado em combinação com uma crença posterior de que um determinado estado o causou, o elemento da matriz que representa a relação entre os dois é incrementado.
+
+A segunda linha da equação destaca a interpretação dos parâmetros de concentração de Dirichlet em termos de contagens. Para um determinado estado (coluna), cada elemento de a é o número de vezes que o resultado correspondente foi visto. Dividindo pela soma dos elementos na coluna (número total de observações ou pseudo-observações) dá a probabilidade de cada resultado dado aquele estado. Para entender por que esse (pseudo) método de contagem faz sentido intuitivo, considere o exemplo do músico amador do início deste capítulo. Se contarmos quantas vezes o músico toca a primeira nota quando pretende fazê-lo (primeira linha e coluna), quantas vezes ele toca a segunda nota quando pretende fazê-lo (segunda linha e coluna), e assim por diante, e dividi-los pelo número total de vezes que ela pretende cada nota, um acabará por convergir para os valores numéricos corretos da matriz A mostrada na equação 7.1 - ou seja, que o músico atinge todas as notas pretendidas 70\% das vezes. O método de contagem tem outra consequência importante à qual retornaremos: o número de contagens ou pseudocontagens que precedem uma observação nos diz a probabilidade de atualizarmos nossas crenças ao fazer a observação. Imagine jogar uma moeda cinco vezes e obter cinco caras seguidas. Isso pode nos levar a atualizar nossas crenças para favorecer a hipótese de que esta é uma moeda injusta. No entanto, se isso tivesse sido precedido por 100 lançamentos com 50 caras e 50 coroas, as cinco caras finais fariam pouco para influenciar nossas crenças sobre se esta é uma moeda justa. A terceira linha da equação 7.10 mostra uma identidade útil associada às distribuições de Dirichlet: o logaritmo esperado da variável aleatória é dado pela diferença em duas funções digamma (derivada de uma função gama).
+
+A abordagem inferencial ao aprendizado destaca uma diferença importante entre a Inferência Ativa e a maioria das outras abordagens de neurociência computacional e aprendizado de máquina, que incorporam várias regras de aprendizado (por exemplo, regras Hebbianas ou retropropagação de erros) que são consideradas biologicamente realista ou computacionalmente eficiente. Na Inferência Ativa, as regras de atualização que governam o aprendizado são derivadas de considerações estatísticas, mas acabam sendo notavelmente semelhantes às regras biologicamente motivadas para plasticidade dependente de atividade (veja as considerações acima na primeira linha da equação 7.10). Isso exemplifica um dos apelos das abordagens normativas, que partem dos primeiros princípios para explicar o que sabemos sobre cérebros e comportamento -- e coisas que não sabíamos.
+
+Outra diferença entre a Inferência Ativa e a maioria das abordagens de aprendizado de máquina é que o aprendizado é naturalmente descrito como um processo ativo, no qual as criaturas selecionam de forma autônoma os dados mais apropriados para melhorar seus modelos generativos. Isso fica evidente se considerarmos que ao incluir crenças sobre parâmetros no modelo, a energia livre esperada adquire um termo adicional:
+
+\[
+\begin{equation}
+G(\pi)= \begin{matrix}\underbrace{D_{KL}[Q(\tilde o|\pi)||P(\tilde o|C)]} \\ Risco \end{matrix}+ 
+\begin{matrix}\underbrace{\mathbb E_{Q(\tilde s|\pi)}[H[P(\tilde o|\tilde s)]] } \\ Ambiguidade \end{matrix} \\
+\begin{matrix}\underbrace{+ \mathbb E[] } \\ Ganho\;de\;informação\;de\;parâmetro \end{matrix} \\
+\begin{matrix}\underbrace{= - \mathbb E[] } \\ Saliência \end{matrix} \\
+\begin{matrix}\underbrace{- \mathbb E[] } \\ novidade \end{matrix} -
+\begin{matrix}\underbrace{\mathbb E[] } \\ Valor\;pragmático \end{matrix} 
+\end{equation}
+\]
 
 \cleardoublepage
 
