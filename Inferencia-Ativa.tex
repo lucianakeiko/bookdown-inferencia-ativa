@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-09}
+\date{2022-07-10}
 
 \begin{document}
 \maketitle
@@ -2171,12 +2171,30 @@ Outra diferença entre a Inferência Ativa e a maioria das abordagens de aprendi
 \begin{equation}
 G(\pi)= \begin{matrix}\underbrace{D_{KL}[Q(\tilde o|\pi)||P(\tilde o|C)]} \\ Risco \end{matrix}+ 
 \begin{matrix}\underbrace{\mathbb E_{Q(\tilde s|\pi)}[H[P(\tilde o|\tilde s)]] } \\ Ambiguidade \end{matrix} \\
-\begin{matrix}\underbrace{+ \mathbb E[] } \\ Ganho\;de\;informação\;de\;parâmetro \end{matrix} \\
-\begin{matrix}\underbrace{= - \mathbb E[] } \\ Saliência \end{matrix} \\
-\begin{matrix}\underbrace{- \mathbb E[] } \\ novidade \end{matrix} -
-\begin{matrix}\underbrace{\mathbb E[] } \\ Valor\;pragmático \end{matrix} 
+\begin{matrix}\underbrace{+ \mathbb E_{\tilde Q(\tilde o,\tilde s, \tilde \theta | \pi )}[\ln Q(\theta) - \ln P(\theta)|\tilde o, \tilde s) ] } \\ Parâmetro \;de\; Ganho\;de\;informação \end{matrix} \\
+\begin{matrix}\underbrace{= - \mathbb E_{Q(\tilde o, \tilde s| \pi)}[D_{KL}[Q(\tilde s|\pi,\tilde o)||Q(\tilde s| \pi )]] } \\ Saliência \end{matrix} \\
+\begin{matrix}\underbrace{- \mathbb E_{Q(\tilde o,\tilde  s|\pi)}[D_{KL}[Q(\theta|\tilde o,\tilde s)|| Q(\theta )]] } \\ novidade \end{matrix} -
+\begin{matrix}\underbrace{\mathbb E_{Q(\tilde o |\pi)}[\ln P(\tilde o|C)] } \\ Valor\;pragmático \end{matrix} 
 \end{equation}
 \]
+Os termos de saliência e valor pragmático já existiam na equação 7.4, mas o termo novidade é novo. A igualdade final aqui mostra um arranjo que destaca a relação entre saliência e novidade. Em suma, a saliência é inferir o que a novidade é para a aprendizagem. Ambos são expressões da mudança nas crenças antecipadas uma vez que um experimento perceptual (ou seja, uma ação em uma política) é realizado. Tal como acontece com os experimentos científicos, quanto maior a mudança nas crenças após a coleta de dados, melhor o experimento. Voltando à analogia de jogar uma moeda e acumular contagens, isso nos diz algo útil. Se tivermos duas moedas e pudermos jogar qualquer uma delas, podemos provocar a maior mudança nas crenças jogando a moeda que havíamos lançado apenas cinco vezes antes, em vez da moeda com 100 jogadas anteriores. Há uma maior novidade associada ao lançamento da moeda anterior (menos familiar). Da mesma forma, se tivermos crenças anteriores confiantes como se tivéssemos observado algo muitas vezes, as políticas que questionam essas variáveis \hspace{0pt}\hspace{0pt}estão associadas a menos novidade do que aquelas sobre as quais temos crenças menos confiantes.
+
+Para ilustrar como isso funciona na prática, imagine que temos uma criatura muito míope de pé sobre um piso de ladrilhos. Esta criatura só pode ver a cor do ladrilho em que está e só pode mover um ladrilho de cada vez. Para qualquer paisagem adequadamente grande com muitos ladrilhos, é computacionalmente muito caro representar a cor de cada ladrilho como um estado oculto diferente. No entanto, uma forma mais simples de modelo está disponível. Se associarmos estados ocultos apenas com localização e cores apenas com resultados, podemos representar com eficiência crenças sobre ``o que eu veria se fosse até lá'' na matriz A que gera ladrilhos coloridos a partir de locais. Ao acumular parâmetros de Dirichlet (equação 7.10), nossa criatura pode otimizar essas crenças com base em observações. Podemos interpretar isso como uma forma de memória sináptica em oposição à manutenção da atividade persistente em neurônios que representam crenças sobre a cor de um determinado azulejo. Dado esse tipo de modelo generativo, em que toda a incerteza está nos parâmetros da distribuição de verossimilhança, é interessante ver o que acontece na ausência de quaisquer preferências (ou seja, quando o termo novidade da equação 7.11 domina a seleção de políticas). A Figura 7.11 mostra uma simulação de um ambiente simples composto por 64 ladrilhos pretos ou brancos. À medida que cada ladrilho é visitado, as crenças sobre a probabilidade de observar preto ou branco naquele local são atualizadas através do acúmulo de parâmetros de Dirichlet. Como grandes parâmetros de Dirichlet impedem grandes atualizações de crenças, o impulso para a resolução de novidade dada pela minimização de energia livre esperada leva nossa criatura simulada a evitar quaisquer locais visitados anteriormente.
+
+Os mesmos princípios podem ser aplicados a uma série de outros paradigmas (por exemplo, se reinterpretarmos o caminho percorrido por nossa criatura como um caminho de varredura sacádica, isso pode ser aplicado à amostragem visual ativa). No domínio da visão ativa, isso foi usado para simular os tipos de comportamento de busca visual induzidos por tarefas de cancelamento de alvo (Parr e Friston 2017a). Posteriormente, foram demonstradas evidências da plasticidade de curto prazo necessária para acumular parâmetros de Dirichlet nesse cenário (Parr, Mirza et al.~2019).
+
+Assim como podemos estender ideias sobre inferência para aprendizado, é possível ir (pelo menos) um passo adiante e pensar em aprendizado de estrutura: o processo de não apenas otimizar os parâmetros no modelo, mas selecionar entre diferentes modelos com mais ou menos parâmetros em jogo. O Quadro 7.3 apresenta uma maneira de fazer isso que envolve comparações post hoc eficientes de modelos hipotéticos alternativos. Isso tem sido usado como uma metáfora para o sono (Friston, Lin et al.~2017) e atividade espontânea em repouso (Pezzulo, Zorzi e Corbetta 2020), onde não são coletados novos dados, mas a estrutura do modelo ainda pode ser refinada e simplificada .
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_7_11.png}
+\caption{\textbf{Figura 7.11} A aprendizagem ativa é demonstrada por uma criatura sintética explorando um mundo simples de azulejos pretos e brancos (Bruineberg et al.~2018, Kaplan e Friston 2018). Esquerda: Caminho percorrido pela criatura, mostrando quais peças são brancas e quais são pretas (os pontos correspondem aos locais visitados). Direita: Uma matriz da criatura e as crenças (em termos de contagens de Dirichlet normalizadas) que a criatura tem sobre o que veria indo para locais diferentes. As células na matriz A são brancas (ou pretas) se a criatura acredita fortemente que a peça correspondente é branca (ou preta); eles são cinzas se a criatura não tiver certeza sobre a cor. Crucialmente, essas crenças influenciam o caminho que ele toma por meio do termo novidade da energia livre esperada. Aqueles locais sobre os quais ele tem crenças confiantes oferecem relativamente poucas oportunidades para a resolução de incertezas, então ele não os revisita. Em outras palavras, o fenômeno da ``inibição do retorno'' (Posner et al.~1985) surge naturalmente da minimização da energia livre esperada.}
+\end{figure}
+
+\hypertarget{inferuxeancia-hieruxe1rquica-ou-profunda}{%
+\section{Inferência Hierárquica ou Profunda}\label{inferuxeancia-hieruxe1rquica-ou-profunda}}
+
+Na seção anterior, vimos um método para extensão hierárquica do modelo generativo original baseado na definição de priors sobre os parâmetros do modelo generativo. A Figura 7.12 mostra uma segunda forma de hierarquia que se refere ao aninhamento de escalas temporais. Este modelo generativo para inferência hierárquica ou profunda pode ser concebido como uma extensão hierárquica do modelo raso mostrado na figura 7.3: inclui uma série de modelos POMDP no nível inferior que são os mesmos da Figura 7.3 (um exemplo é delineado com a caixa tracejada), contextualizada por um POMDP de nível superior.
 
 \cleardoublepage
 
