@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-10" />
+<meta name="date" content="2022-07-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="uma-receita-para-projetar-modelos-de-inferência-ativos.html"/>
-<link rel="next" href="dicionário.html"/>
+<link rel="next" href="bases-matemáticas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -174,15 +174,17 @@
 <li class="chapter" data-level="7.5" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#aprendizado-e-novidade"><i class="fa fa-check"></i><b>7.5</b> Aprendizado e Novidade</a></li>
 <li class="chapter" data-level="7.6" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#inferência-hierárquica-ou-profunda"><i class="fa fa-check"></i><b>7.6</b> Inferência Hierárquica ou Profunda</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
+<li class="appendix"><span><b>Apêndice</b></span></li>
+<li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="7.7" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#introdução-7"><i class="fa fa-check"></i><b>7.7</b> Introdução</a></li>
-<li class="chapter" data-level="7.8" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#álgebra-linear"><i class="fa fa-check"></i><b>7.8</b> Álgebra Linear</a>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-7"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="7.8.1" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#o-básico"><i class="fa fa-check"></i><b>7.8.1</b> O básico</a></li>
-<li class="chapter" data-level="7.8.2" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#derivadas"><i class="fa fa-check"></i><b>7.8.2</b> Derivadas</a></li>
+<li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
+<li class="chapter" data-level="A.2.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#derivadas"><i class="fa fa-check"></i><b>A.2.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="B" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html"><i class="fa fa-check"></i><b>B</b> As equações da inferência ativa</a></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -396,33 +398,40 @@ Os termos de saliência e valor pragmático já existiam na equação 7.4, mas o
 <div id="inferência-hierárquica-ou-profunda" class="section level2 hasAnchor" number="7.6">
 <h2><span class="header-section-number">7.6</span> Inferência Hierárquica ou Profunda<a href="inferência-ativa-em-tempo-discreto-1.html#inferência-hierárquica-ou-profunda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Na seção anterior, vimos um método para extensão hierárquica do modelo generativo original baseado na definição de priors sobre os parâmetros do modelo generativo. A Figura 7.12 mostra uma segunda forma de hierarquia que se refere ao aninhamento de escalas temporais. Este modelo generativo para inferência hierárquica ou profunda pode ser concebido como uma extensão hierárquica do modelo raso mostrado na figura 7.3: inclui uma série de modelos POMDP no nível inferior que são os mesmos da Figura 7.3 (um exemplo é delineado com a caixa tracejada), contextualizada por um POMDP de nível superior.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Quadro 7.3</strong> Aprendizado de estrutura e redução de modelo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A discussão na seção 7.4 trata de uma forma importante, mas limitada, de aprendizado (paramétrico). O próximo nível de sofisticação – aprender sobre a estrutura do mundo – vai além da otimização dos parâmetros do modelo e pergunta se devemos expandir ou podar a estrutura do modelo. Isso pode ser colocado como uma questão de comparação de modelos (Friston, Lin et al. 2017). Em outras palavras, minha energia livre aumentaria ou diminuiria se eu (por exemplo) eliminasse elementos de uma matriz de probabilidade? Ao comparar modelos com e sem esses elementos, podemos responder a essa pergunta. No entanto, pode ser muito caro ter que inverter explicitamente vários modelos. Felizmente, um método eficiente para fazer isso - conhecido como redução do modelo bayesiano (Friston, Litvak et al. 2016; Friston, Parr e Zeidman 2018) - está disponível e requer apenas a inversão de um único modelo completo. Em um cenário geral, a comparação entre um modelo completo e um com anteriores alternativos (indicado por ~) pode ser alcançada através das seguintes fórmulas:<span class="math display">\[\begin{equation} \Delta F = F[P(\theta)]-F[P(\theta)]=\ln \mathbb E_{Q(\theta)}\Big [\frac{P(\theta)}{\tilde P(\theta)}\Big] \\ \tilde Q(\theta) \propto exp(\ln Q(\theta)+\ln \tilde P(\theta)) - \ln P(\theta)) +\Delta F) \end{equation}\]</span>Para os priors de Dirichlet usados na seção 7.5, isso assume a forma (onde B é a função beta multivariada):<span class="math display">\[\begin{equation} \Delta F = \ln B(\tilde d)- \ln B(d) + \ln B(\pmb d)-\ln B(\tilde {\pmb d}) \\ \pmb {\tilde d}=\pmb d+\tilde d-d \end{equation}\]</span>Essa forma de redução do modelo pode ser importante para entender a otimização do modelo offline, do tipo que pode ocorrer durante o sono. Revisitaremos brevemente a redução do modelo bayesiano no capítulo 8, ao considerar a otimização de modelos hierárquicos com componentes discretos e contínuos.</td>
+</tr>
+</tbody>
+</table>
+<p>É importante ressaltar que esse modelo generativo inclui variáveis que evoluem em diferentes escalas de tempo: mais lento para níveis mais altos e mais rápido para níveis mais baixos (Friston 2008; Friston, Rosch et al. 2017; Pezzulo, Rigoli e Friston 2018). Isso fica evidente se considerarmos que os modelos POMDP no nível 1 evoluem ao longo de três etapas de tempo, mas cada uma dessas curtas trajetórias de estados e resultados depende de um único estado no nível superior (nível 2) que persiste ao longo de toda a trajetória no nível nível mais baixo. Em outras palavras, para cada passo de tempo da perspectiva do nível superior, existem vários (aqui, três) passos de tempo para o nível inferior.</p>
+<p>Para obter alguma intuição para essa separação de escalas de tempo – que subscreve uma profunda inferência temporal – vale a pena pensar em um exemplo simples de hierarquia na vida cotidiana: a leitura. Fazemos inferências sobre palavras que se combinam para formar frases. As frases se combinam para formar parágrafos, páginas, livros, bibliotecas e assim por diante. Se imaginarmos que cada estado no nível inferior da figura 7.12 é uma palavra, cada estado no nível superior pode ser pensado como uma sentença. Crucialmente, a duração da frase transcende a de qualquer palavra na sequência.</p>
+<div class="figure">
+<img src="images/Figura_7_12.png" alt="" />
+<p class="caption"><strong>Figura 7.12</strong> Podemos estender o modelo generativo (superficial) apresentado na Figura 7.3 para que ele permita inferência hierárquica ou profunda, que evolui em várias escalas de tempo. O modelo generativo completo inclui um contexto de mudança lenta (no nível 2) que gera uma série de trajetórias curtas no nível 1 inferior e mais rápido. A forma do POMDP é a mesma no nível superior e no nível inferior (um dos POMDPs é delineado com a caixa tracejada). A única diferença é que ele se estende no tempo (horizontal) e que os resultados que gera não são observados diretamente. Em vez disso, eles formam priores empíricos para o nível inferior, o que gera resultados observáveis.</p>
+</div>
 
 </div>
 </div>
 
 
 
-<div id="introdução-7" class="section level2 hasAnchor" number="7.7">
-<h2><span class="header-section-number">7</span> Introdução<a href="inferência-ativa-em-tempo-discreto-1.html#introdução-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="álgebra-linear" class="section level2 hasAnchor" number="7.8">
-<h2><span class="header-section-number">8</span> Álgebra Linear<a href="inferência-ativa-em-tempo-discreto-1.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="o-básico" class="section level3 hasAnchor" number="7.8.1">
-<h3><span class="header-section-number">8.1</span> O básico<a href="inferência-ativa-em-tempo-discreto-1.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="derivadas" class="section level3 hasAnchor" number="7.8.2">
-<h3><span class="header-section-number">8.2</span> Derivadas<a href="inferência-ativa-em-tempo-discreto-1.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-
-</div>
-</div>
-</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
