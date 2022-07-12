@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-11}
+\date{2022-07-12}
 
 \begin{document}
 \maketitle
@@ -2218,6 +2218,45 @@ Para obter alguma intuição para essa separação de escalas de tempo -- que su
 \caption{\textbf{Figura 7.12} Podemos estender o modelo generativo (superficial) apresentado na Figura 7.3 para que ele permita inferência hierárquica ou profunda, que evolui em várias escalas de tempo. O modelo generativo completo inclui um contexto de mudança lenta (no nível 2) que gera uma série de trajetórias curtas no nível 1 inferior e mais rápido. A forma do POMDP é a mesma no nível superior e no nível inferior (um dos POMDPs é delineado com a caixa tracejada). A única diferença é que ele se estende no tempo (horizontal) e que os resultados que gera não são observados diretamente. Em vez disso, eles formam priores empíricos para o nível inferior, o que gera resultados observáveis.}
 \end{figure}
 
+O exemplo de leitura é ilustrado com mais detalhes na figura 7.13, que é baseada no exemplo de Friston, Rosch et al.~(2017), ao qual nos referimos para mais detalhes. O modelo está estruturado como na figura 7.12 e representa frases (no nível superior) e palavras (no nível inferior) extraídas de uma linguagem muito simples. Esta linguagem compreende três palavras possíveis ( fugir, alimentar, esperar) que podem ser organizadas em seis possíveis frases de quatro palavras. Se a frase for ``fuja, espere, alimente, espere'', o nível mais alto prevê a palavra fugir para o primeiro dos POMDPs de nível inferior, aguarde o segundo e assim por diante. No nível inferior, começamos com uma prévia empírica (D) baseada no nível superior, que nos diz quais palavras são mais plausíveis. Por exemplo, se começamos com uma distribuição uniforme sobre as sentenças mostradas no painel superior da figura 7.13, vemos que a primeira palavra é esperar em dois terços das sentenças e fugir no outro terço. Isso significa que na primeira etapa de tempo do primeiro POMDP de baixo nível, nosso vetor D deve atribuir essas probabilidades a essas palavras.
+
+As palavras no nível inferior geram observações, entradas visuais com base em qual parte da palavra está atualmente . Assim como no exemplo da figura 7.9, o POMDP permite a seleção de diferentes alvos foveais para acumular evidências a favor ou contra cada palavra hipotética. Isso apela para os mesmos processos de minimização de energia livre esperados descritos acima; portanto, não detalharemos as específicas feitas aqui, mas notamos que a cada passo de tempo no nível inferior, há um aumento na confiança sobre a palavra em jogo. Na sequência mostrada na figura 7.13, vemos que a evidência é acumulada para a palavra fugir no nível inferior ao longo dos primeiros passos de tempo (na escala rápida, τ (1)). Essa inferência é propagada de volta ao nível superior, onde fornece evidências para a primeira e a quarta sentenças (cada uma das quais começa com essa palavra). Ao longo das etapas de tempo subsequentes, a evidência acumulada no nível inferior é consistente com ambas as sentenças. No quarto passo (na escala lenta, τ (2)), prevemos esperar na primeira sentença e fugir na segunda. Ao inferir espera na escala de tempo rápida, a primeira sentença é inferida na escala lenta. Na etapa final, a simulação seleciona a frase correta e é recompensada com o feedback correto. A atualização de crença resultante é vista no gráfico LFP na parte inferior da figura 7.12.
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_7_13.png}
+\caption{Figura 7.13 A atualização de crenças ocorre em várias escalas de tempo invertendo um modelo de inferência hierárquica simulado. Isso se baseia em um modelo generativo com uma separação de escalas de tempo (mostrada como uma escala de tempo lenta---τ    (2)---e uma escala de tempo rápida---τ (1)). A atualização de crenças no nível superior (s(2) ), representando sentenças, é mais lenta do que no nível inferior (s(1)), representando palavras. Painel inferior: LFPs, ou seja, a taxa de mudança das expectativas de log - que é proporcional aos erros de previsão (ε ) mostrados nas figuras anteriores.}
+\end{figure}
+
+Modelos temporais profundos desse tipo foram usados para simular leitura (Friston, Rosch et al.~2017), tarefas de memória de trabalho de período de atraso (Parr e Friston 2017c) e cálculo de priors empíricos para inferência visual (Parr, Benrimoh et al.~2018). Além disso, eles foram alavancados em explicações teóricas de motivação e controle (Pezzulo, Rigoli e Friston 2018). Em princípio, esses modelos podem ser estendidos a um número arbitrário de níveis, representando um mundo profundamente estruturado com dinâmicas que se desenrolam em muitas escalas temporais diferentes.
+
+Podemos traçar um paralelo interessante entre os modelos hierárquicos do tipo das figuras 7.12 e 7.13 e os modelos de aprendizagem do tipo da figura 7.10. Modelos de aprendizagem podem ser considerados modelos generativos hierárquicos, que destacam uma separação de escalas de tempo entre dinâmicas inferenciais mais rápidas (atualizações de crenças sobre estados) e dinâmicas de aprendizagem mais lentas (atualizações de crenças sobre parâmetros). Os modelos mostrados nas figuras 7.10 e 7.12 também podem ser combinados a níveis arbitrários de complexidade, onde as próprias relações entre variáveis em diferentes níveis podem ser aprendidas. Isso permite projetar modelos generativos cada vez mais sofisticados que abordam questões cognitivas e neurobiológicas em nível de sistema.
+
+\hypertarget{resumo-6}{%
+\section{Resumo}\label{resumo-6}}
+
+Neste capítulo, vimos algumas das maneiras pelas quais os modelos generativos de tempo discreto podem ser construídos para abordar uma série de problemas cognitivos e neurobiológicos, como inferência perceptual, tomada de decisão e planejamento, exploração e exploração de equilíbrio, aprendizado paramétrico e de estrutura , e busca de novidades. Isso está longe de ser um resumo exaustivo das aplicações de modelos discretos em Inferência Ativa, mas serve para ilustrar os princípios-chave desse tipo de modelagem. Os modelos descritos acima podem ser combinados hierarquicamente, com priorização adicionada sobre parâmetros e com priorização sensível ao contexto para políticas ou preferências. É importante ressaltar que a inferência usando modelos generativos simples e mais complexos sempre pode proceder através da minimização da energia livre, o que ilustra a generalidade da abordagem. O fato de que diferentes aspectos da Inferência Ativa se tornam aparentes sob modelos generativos distintos (por exemplo, busca de novidades com prioris sobre os parâmetros do modelo) abre a possibilidade de explorar um conjunto aberto de problemas cognitivos e biológicos projetando os modelos generativos apropriados.
+
+\hypertarget{inferuxeancia-ativa-em-tempo-contuxednuo-1}{%
+\chapter{Inferência ativa em tempo contínuo}\label{inferuxeancia-ativa-em-tempo-contuxednuo-1}}
+
+Tudo flui, nada fica parado. ---Heráclito, 501 aC
+
+\hypertarget{introduuxe7uxe3o-7}{%
+\section{Introdução}\label{introduuxe7uxe3o-7}}
+
+Este capítulo complementa o capítulo 7, continuando nossa discussão sobre como construir um modelo generativo. Nosso foco aqui é em modelos de espaço de estados contínuos, que são bem adequados para modelar as flutuações físicas que atingem os receptores sensoriais e para o movimento contínuo dos efetores (por exemplo, músculos) que usamos para mudar o mundo ao nosso redor. Existem muitas aplicações desses modelos. Neste capítulo, definimos os princípios por trás de seu uso. Destacamos os tipos de modelos usados no controle motor e os sistemas dinâmicos que desempenham um papel em tais modelos, e tocamos no conceito de sincronia generalizada. Finalmente, discutimos a reconciliação de modelos generativos discretos e contínuos.
+
+\hypertarget{controles-de-movimento}{%
+\section{Controles de movimento}\label{controles-de-movimento}}
+
+Como vimos no capítulo 4, o modelo generativo que subscreve a inferência ativa em tempo contínuo pode ser escrito como um par de equações estocásticas que determinam como os estados \((x)\) geram dados \((y)\) e como os estados evoluem ao longo do tempo dependendo de alguma variável estática \((\nu)\):
+
+\[\begin{equation} 
+y=g(x)+\omega_y \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
+\dot x = f(x,u) + \omega_x \qquad\qquad\qquad\qquad (8.1)
+\end{equation}\]
+
 \cleardoublepage
 
 \hypertarget{appendix-apuxeandice}{%
@@ -2227,8 +2266,8 @@ Para obter alguma intuição para essa separação de escalas de tempo -- que su
 \hypertarget{bases-matemuxe1ticas}{%
 \chapter{Bases Matemáticas}\label{bases-matemuxe1ticas}}
 
-\hypertarget{introduuxe7uxe3o-7}{%
-\section{Introdução}\label{introduuxe7uxe3o-7}}
+\hypertarget{introduuxe7uxe3o-8}{%
+\section{Introdução}\label{introduuxe7uxe3o-8}}
 
 Este apêndice oferece uma introdução (ou uma atualização) às técnicas matemáticas básicas empregadas ao longo deste livro. Fornecemos uma visão geral introdutória (mas não exaustiva) de quatro tópicos: álgebra linear, aproximação de séries de Taylor, cálculo variacional e dinâmica estocástica. Para cada uma dessas técnicas, nos referimos a onde ela entra em jogo no livro. Nosso objetivo aqui é fornecer uma introdução focada - com ênfase na construção da intuição em oposição a provas formais e rigorosas. A matemática necessária para entender e usar a Inferência Ativa não é complicada, mas sua base multidisciplinar significa que muitas vezes é difícil encontrar recursos que reúnam os pré-requisitos necessários. Esperamos que este apêndice ajude de alguma forma a remediar isso.
 

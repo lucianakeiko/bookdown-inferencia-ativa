@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-11" />
+<meta name="date" content="2022-07-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="uma-receita-para-projetar-modelos-de-inferência-ativos.html"/>
-<link rel="next" href="bases-matemáticas.html"/>
+<link rel="next" href="inferência-ativa-em-tempo-contínuo-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -173,11 +173,17 @@
 <li class="chapter" data-level="7.4" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#busca-de-informações"><i class="fa fa-check"></i><b>7.4</b> Busca de informações</a></li>
 <li class="chapter" data-level="7.5" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#aprendizado-e-novidade"><i class="fa fa-check"></i><b>7.5</b> Aprendizado e Novidade</a></li>
 <li class="chapter" data-level="7.6" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#inferência-hierárquica-ou-profunda"><i class="fa fa-check"></i><b>7.6</b> Inferência Hierárquica ou Profunda</a></li>
+<li class="chapter" data-level="7.7" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#resumo-6"><i class="fa fa-check"></i><b>7.7</b> Resumo</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html"><i class="fa fa-check"></i><b>8</b> Inferência ativa em tempo contínuo</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#introdução-7"><i class="fa fa-check"></i><b>8.1</b> Introdução</a></li>
+<li class="chapter" data-level="8.2" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#controles-de-movimento"><i class="fa fa-check"></i><b>8.2</b> Controles de movimento</a></li>
 </ul></li>
 <li class="appendix"><span><b>Apêndice</b></span></li>
 <li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-7"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-8"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
 <li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
 <li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
@@ -419,19 +425,28 @@ Os termos de saliência e valor pragmático já existiam na equação 7.4, mas o
 <img src="images/Figura_7_12.png" alt="" />
 <p class="caption"><strong>Figura 7.12</strong> Podemos estender o modelo generativo (superficial) apresentado na Figura 7.3 para que ele permita inferência hierárquica ou profunda, que evolui em várias escalas de tempo. O modelo generativo completo inclui um contexto de mudança lenta (no nível 2) que gera uma série de trajetórias curtas no nível 1 inferior e mais rápido. A forma do POMDP é a mesma no nível superior e no nível inferior (um dos POMDPs é delineado com a caixa tracejada). A única diferença é que ele se estende no tempo (horizontal) e que os resultados que gera não são observados diretamente. Em vez disso, eles formam priores empíricos para o nível inferior, o que gera resultados observáveis.</p>
 </div>
+<p>O exemplo de leitura é ilustrado com mais detalhes na figura 7.13, que é baseada no exemplo de Friston, Rosch et al. (2017), ao qual nos referimos para mais detalhes. O modelo está estruturado como na figura 7.12 e representa frases (no nível superior) e palavras (no nível inferior) extraídas de uma linguagem muito simples. Esta linguagem compreende três palavras possíveis ( fugir, alimentar, esperar) que podem ser organizadas em seis possíveis frases de quatro palavras. Se a frase for “fuja, espere, alimente, espere”, o nível mais alto prevê a palavra fugir para o primeiro dos POMDPs de nível inferior, aguarde o segundo e assim por diante. No nível inferior, começamos com uma prévia empírica (D) baseada no nível superior, que nos diz quais palavras são mais plausíveis. Por exemplo, se começamos com uma distribuição uniforme sobre as sentenças mostradas no painel superior da figura 7.13, vemos que a primeira palavra é esperar em dois terços das sentenças e fugir no outro terço. Isso significa que na primeira etapa de tempo do primeiro POMDP de baixo nível, nosso vetor D deve atribuir essas probabilidades a essas palavras.</p>
+<p>As palavras no nível inferior geram observações, entradas visuais com base em qual parte da palavra está atualmente <foveated> . Assim como no exemplo da figura 7.9, o POMDP permite a seleção de diferentes alvos foveais para acumular evidências a favor ou contra cada palavra hipotética. Isso apela para os mesmos processos de minimização de energia livre esperados descritos acima; portanto, não detalharemos as <foveal> específicas feitas aqui, mas notamos que a cada passo de tempo no nível inferior, há um aumento na confiança sobre a palavra em jogo. Na sequência mostrada na figura 7.13, vemos que a evidência é acumulada para a palavra fugir no nível inferior ao longo dos primeiros passos de tempo (na escala rápida, τ (1)). Essa inferência é propagada de volta ao nível superior, onde fornece evidências para a primeira e a quarta sentenças (cada uma das quais começa com essa palavra). Ao longo das etapas de tempo subsequentes, a evidência acumulada no nível inferior é consistente com ambas as sentenças. No quarto passo (na escala lenta, τ (2)), prevemos esperar na primeira sentença e fugir na segunda. Ao inferir espera na escala de tempo rápida, a primeira sentença é inferida na escala lenta. Na etapa final, a simulação seleciona a frase correta e é recompensada com o feedback correto. A atualização de crença resultante é vista no gráfico LFP na parte inferior da figura 7.12.</p>
+<div class="figure">
+<img src="images/Figura_7_13.png" alt="" />
+<p class="caption">Figura 7.13 A atualização de crenças ocorre em várias escalas de tempo invertendo um modelo de inferência hierárquica simulado. Isso se baseia em um modelo generativo com uma separação de escalas de tempo (mostrada como uma escala de tempo lenta—τ    (2)—e uma escala de tempo rápida—τ (1)). A atualização de crenças no nível superior (s(2) ), representando sentenças, é mais lenta do que no nível inferior (s(1)), representando palavras. Painel inferior: LFPs, ou seja, a taxa de mudança das expectativas de log - que é proporcional aos erros de previsão (ε ) mostrados nas figuras anteriores.</p>
+</div>
+<p>Modelos temporais profundos desse tipo foram usados para simular leitura (Friston, Rosch et al. 2017), tarefas de memória de trabalho de período de atraso (Parr e Friston 2017c) e cálculo de priors empíricos para inferência visual (Parr, Benrimoh et al. 2018). Além disso, eles foram alavancados em explicações teóricas de motivação e controle (Pezzulo, Rigoli e Friston 2018). Em princípio, esses modelos podem ser estendidos a um número arbitrário de níveis, representando um mundo profundamente estruturado com dinâmicas que se desenrolam em muitas escalas temporais diferentes.</p>
+<p>Podemos traçar um paralelo interessante entre os modelos hierárquicos do tipo das figuras 7.12 e 7.13 e os modelos de aprendizagem do tipo da figura 7.10. Modelos de aprendizagem podem ser considerados modelos generativos hierárquicos, que destacam uma separação de escalas de tempo entre dinâmicas inferenciais mais rápidas (atualizações de crenças sobre estados) e dinâmicas de aprendizagem mais lentas (atualizações de crenças sobre parâmetros). Os modelos mostrados nas figuras 7.10 e 7.12 também podem ser combinados a níveis arbitrários de complexidade, onde as próprias relações entre variáveis em diferentes níveis podem ser aprendidas. Isso permite projetar modelos generativos cada vez mais sofisticados que abordam questões cognitivas e neurobiológicas em nível de sistema.</p>
+</div>
+<div id="resumo-6" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Resumo<a href="inferência-ativa-em-tempo-discreto-1.html#resumo-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Neste capítulo, vimos algumas das maneiras pelas quais os modelos generativos de tempo discreto podem ser construídos para abordar uma série de problemas cognitivos e neurobiológicos, como inferência perceptual, tomada de decisão e planejamento, exploração e exploração de equilíbrio, aprendizado paramétrico e de estrutura , e busca de novidades. Isso está longe de ser um resumo exaustivo das aplicações de modelos discretos em Inferência Ativa, mas serve para ilustrar os princípios-chave desse tipo de modelagem. Os modelos descritos acima podem ser combinados hierarquicamente, com priorização adicionada sobre parâmetros e com priorização sensível ao contexto para políticas ou preferências. É importante ressaltar que a inferência usando modelos generativos simples e mais complexos sempre pode proceder através da minimização da energia livre, o que ilustra a generalidade da abordagem. O fato de que diferentes aspectos da Inferência Ativa se tornam aparentes sob modelos generativos distintos (por exemplo, busca de novidades com prioris sobre os parâmetros do modelo) abre a possibilidade de explorar um conjunto aberto de problemas cognitivos e biológicos projetando os modelos generativos apropriados.</p>
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
 <a href="uma-receita-para-projetar-modelos-de-inferência-ativos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="inferência-ativa-em-tempo-contínuo-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

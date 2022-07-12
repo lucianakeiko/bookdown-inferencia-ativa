@@ -23,14 +23,14 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-11" />
+<meta name="date" content="2022-07-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="inferência-ativa-em-tempo-discreto-1.html"/>
+<link rel="prev" href="inferência-ativa-em-tempo-contínuo-1.html"/>
 <link rel="next" href="as-equações-da-inferência-ativa.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -173,11 +173,17 @@
 <li class="chapter" data-level="7.4" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#busca-de-informações"><i class="fa fa-check"></i><b>7.4</b> Busca de informações</a></li>
 <li class="chapter" data-level="7.5" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#aprendizado-e-novidade"><i class="fa fa-check"></i><b>7.5</b> Aprendizado e Novidade</a></li>
 <li class="chapter" data-level="7.6" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#inferência-hierárquica-ou-profunda"><i class="fa fa-check"></i><b>7.6</b> Inferência Hierárquica ou Profunda</a></li>
+<li class="chapter" data-level="7.7" data-path="inferência-ativa-em-tempo-discreto-1.html"><a href="inferência-ativa-em-tempo-discreto-1.html#resumo-6"><i class="fa fa-check"></i><b>7.7</b> Resumo</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html"><i class="fa fa-check"></i><b>8</b> Inferência ativa em tempo contínuo</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#introdução-7"><i class="fa fa-check"></i><b>8.1</b> Introdução</a></li>
+<li class="chapter" data-level="8.2" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#controles-de-movimento"><i class="fa fa-check"></i><b>8.2</b> Controles de movimento</a></li>
 </ul></li>
 <li class="appendix"><span><b>Apêndice</b></span></li>
 <li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-7"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-8"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
 <li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
 <li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
@@ -206,15 +212,15 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bases-matemáticas" class="section level1 hasAnchor" number="8">
+<div id="bases-matemáticas" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">A</span> Bases Matemáticas<a href="bases-matemáticas.html#bases-matemáticas" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introdução-7" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">A.1</span> Introdução<a href="bases-matemáticas.html#introdução-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introdução-8" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">A.1</span> Introdução<a href="bases-matemáticas.html#introdução-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Este apêndice oferece uma introdução (ou uma atualização) às técnicas matemáticas básicas empregadas ao longo deste livro. Fornecemos uma visão geral introdutória (mas não exaustiva) de quatro tópicos: álgebra linear, aproximação de séries de Taylor, cálculo variacional e dinâmica estocástica. Para cada uma dessas técnicas, nos referimos a onde ela entra em jogo no livro. Nosso objetivo aqui é fornecer uma introdução focada - com ênfase na construção da intuição em oposição a provas formais e rigorosas. A matemática necessária para entender e usar a Inferência Ativa não é complicada, mas sua base multidisciplinar significa que muitas vezes é difícil encontrar recursos que reúnam os pré-requisitos necessários. Esperamos que este apêndice ajude de alguma forma a remediar isso.</p>
 </div>
-<div id="álgebra-linear" class="section level2 hasAnchor" number="8.2">
+<div id="álgebra-linear" class="section level2 hasAnchor" number="9.2">
 <h2><span class="header-section-number">A.2</span> Álgebra Linear<a href="bases-matemáticas.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="o-básico" class="section level3 hasAnchor" number="8.2.1">
+<div id="o-básico" class="section level3 hasAnchor" number="9.2.1">
 <h3><span class="header-section-number">A.2.1</span> O básico<a href="bases-matemáticas.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Álgebra linear refere-se a uma notação usada para expressar de forma simples e concisa combinações de multiplicações e somatórias. Ele se baseia em matrizes e vetores que compreendem matrizes de números em estruturas com várias linhas e colunas (ou várias linhas e uma única coluna, para um vetor). O elemento de uma matriz <span class="math inline">\(A\)</span> na linha <span class="math inline">\(i\)</span> e na coluna <span class="math inline">\(j\)</span> é referido como <span class="math inline">\(A_{ij}\)</span>. O produto <span class="math inline">\(A\)</span> de duas matrizes <span class="math inline">\(B\)</span> e <span class="math inline">\(C\)</span> (ou uma matriz e um vetor) é definido da seguinte forma:</p>
 <p><span class="math display">\[ A = BC \]</span>
@@ -262,7 +268,7 @@ Isso reexpressa uma expressão quadrática (primeira linha) com o traço do prod
 <span class="math display">\[  A_{11}A_{22} - A_{12}A_{21} \]</span>
 Isso conclui nosso esboço das operações básicas da álgebra linear.</p>
 </div>
-<div id="derivadas" class="section level3 hasAnchor" number="8.2.2">
+<div id="derivadas" class="section level3 hasAnchor" number="9.2.2">
 <h3><span class="header-section-number">A.2.2</span> Derivadas<a href="bases-matemáticas.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A diferenciação de grandezas matriciais e vetoriais segue diretamente da aplicação do cálculo padrão a cada elemento de uma matriz. Por exemplo, se temos uma matriz B cujos elementos são funções de um escalar x, a derivada de B em relação a x é a seguinte:</p>
 <p><span class="math display">\[ A(x) = \partial_x B(x)  \]</span>
@@ -291,7 +297,7 @@ A definição do operador gradiente como um vetor de operadores derivativos tamb
           </div>
         </div>
       </div>
-<a href="inferência-ativa-em-tempo-discreto-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="inferência-ativa-em-tempo-contínuo-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="as-equações-da-inferência-ativa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
