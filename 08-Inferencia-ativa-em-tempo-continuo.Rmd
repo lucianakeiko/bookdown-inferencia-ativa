@@ -12,5 +12,43 @@ Como vimos no capítulo 4, o modelo generativo que subscreve a inferência ativa
 
 $$\begin{equation} 
 y=g(x)+\omega_y \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
-\dot x = f(x,u) + \omega_x \qquad\qquad\qquad\qquad (8.1)
+\dot x = f(x,\nu) + \omega_x \qquad\qquad\qquad\qquad (8.1)
 \end{equation}$$
+
+Essas equações e a precisão associada às flutuações $(\omega)$ determinam o modelo utilizado para fazer inferências sobre as causas das sensações.
+Observe que a ação está ausente da equação 8.1. Isso ocorre porque (como descrito no capítulo 6), a ação é parte do processo generativo, não do modelo generativo. O modelo generativo lida apenas com aquelas variáveis que são diretamente influenciadas por estados externos a um envoltório de Markov. Se fôssemos escrever a dinâmica do mundo real (ou seja, o processo generativo), teríamos que incluir a ação $(u)$: 
+
+$$\begin{equation} 
+y=\pmb g(x)+\omega_y \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
+\dot x =\pmb f(x,u) + \omega_x \qquad\qquad\qquad\qquad (8.2)
+\end{equation}$$
+
+Observe que as funções $g$ e $f$ (e as precisões de $\omega $) usadas para definir o modelo gerativo (equação 8.1) não são necessariamente as mesmas usadas para definir o processo gerativo (equação 8.2). Como vimos nos capítulos 2 a 4, as ações alteram os dados sensoriais de modo que a energia livre é minimizada. Isso significa que não precisamos escrever explicitamente a dinâmica da ação no modelo generativo – elas emergem das escolhas feitas para os termos da equação 8.1. Para obter alguma intuição para isso, começamos com um tipo muito simples de modelo generativo:
+
+
+$$\begin{equation} 
+g(x) = x \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
+f(x,\nu) = \nu - x \qquad\qquad\qquad\qquad (8.3)
+\end{equation}$$
+
+A Equação 8.3 diz que o estado oculto representa o valor esperado para os dados e que tem uma dinâmica consistente com um atrator simples (ou seja, ponto). Por atrator, queremos dizer que quando x é menor que v, a taxa de variação esperada de x é positiva e vice-versa. Isso significa que x sempre fluirá em direção a v (ou seja, v é um ponto de atração ou fixo). Para gerar dados, definimos um simples processo gerador:
+
+$$\begin{equation} 
+\pmb g(x) = x \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
+\pmb f(x,u) = u \qquad\qquad\qquad\qquad (8.4)
+\end{equation}$$
+
+Ao minimizar a energia livre, isso significa que a ação mudará para cumprir as previsões da equação 8.3. Se $\mu$ for o valor esperado de $x$, isso significa que a ação que minimiza a diferença entre os dados previstos $(g(\mu))$ e os dados observados $(y)$ é igualar $u$ a $\nu − \mu$. Esta é uma expressão da “hipótese do ponto de equilíbrio” (Feldman e Levin 2009), que trata o controle motor como encenado por arcos reflexos que simplesmente atraem os membros em direção a pontos de equilíbrio definidos por sinais motores descendentes. Na Inferência Ativa, esses sinais são previsões – especificamente, previsões proprioceptivas sobre, por exemplo, a posição esperada de membros ou olhos (Adams, Shipp e riston 2013). Portanto, o controle do movimento resulta do cumprimento de previsões (proprioceptivas) pela ação, conforme ilustrado esquematicamente na figura 8.1. Observe que este esquema não requer a especificação de “modelos inversos” (ou seja, mapeamentos de consequências desejadas para os comandos motores para alcançá-los) que são amplamente utilizados em outras formulações de controle motor (Wolpert e Kawato 1998).
+
+A expressão na equação 8.3 é o tipo mais simples de sistema atrator que podemos empregar em um modelo generativo. No entanto, é muito simples em muitos cenários, onde se aplicam dinâmicas newtonianas mais realistas. Um modelo mais sofisticado reconhece que as forças – geradas pelos músculos – alteram a velocidade (ou seja, induzem uma aceleração), não a posição. A Equação 8.5 estabelece isso explicitamente com $x_1$ como a posição e $x_2$ como a velocidade:
+
+$$\begin{equation} 
+f(x, \nu) = \begin{bmatrix}  x_2\\ \frac{\kappa}{m}(\nu-x_1) \end{bmatrix} \qquad\qquad\qquad\qquad (8.5)
+\end{equation}$$
+
+Esta expressão é equivalente à dinâmica de uma mola obedecendo à lei de Hooke. A taxa de mudança da posição (primeiro elemento) é simplesmente a velocidade. A taxa de variação da velocidade (segundo elemento) é proporcional à distância entre a posição atual e o ponto $\nu$, com a constante de proporcionalidade: uma razão entre a massa do objeto $(m)$ e uma constante (mola) $(\kappa)$ ). Multiplicando ambos os lados pela massa, temos a força[^81] gerada por uma mola $(κ (\nu − x_1))$ presa aos pontos $\nu$ e $x_1$ igual à massa multiplicada pela taxa de variação da velocidade. Esta é apenas a segunda lei de Newton. Em outras palavras, podemos escrever um modelo generativo que prevê a dinâmica que se desenrolaria se houvesse uma mola puxando um membro para um local desejado. Ao prever os dados (proprioceptivos) decorrentes dessa mecânica newtoniana, podemos decretar o movimento que cumpre essas previsões.
+
+[^81]: Muitas vezes é necessário adicionar termos de amortecimento para levar em conta o atrito e/ou viscosidade para evitar soluções oscilatórias.
+
+
+
