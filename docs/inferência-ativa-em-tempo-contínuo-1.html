@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-13" />
+<meta name="date" content="2022-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="inferência-ativa-em-tempo-discreto-1.html"/>
-<link rel="next" href="dicionário.html"/>
+<link rel="next" href="bases-matemáticas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -179,16 +179,19 @@
 <ul>
 <li class="chapter" data-level="8.1" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#introdução-7"><i class="fa fa-check"></i><b>8.1</b> Introdução</a></li>
 <li class="chapter" data-level="8.2" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#controles-de-movimento"><i class="fa fa-check"></i><b>8.2</b> Controles de movimento</a></li>
+<li class="chapter" data-level="8.3" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#sistemas-dinâmicos"><i class="fa fa-check"></i><b>8.3</b> Sistemas Dinâmicos</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
+<li class="appendix"><span><b>Apêndice</b></span></li>
+<li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="8.3" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#introdução-8"><i class="fa fa-check"></i><b>8.3</b> Introdução</a></li>
-<li class="chapter" data-level="8.4" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#álgebra-linear"><i class="fa fa-check"></i><b>8.4</b> Álgebra Linear</a>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-8"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="8.4.1" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#o-básico"><i class="fa fa-check"></i><b>8.4.1</b> O básico</a></li>
-<li class="chapter" data-level="8.4.2" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#derivadas"><i class="fa fa-check"></i><b>8.4.2</b> Derivadas</a></li>
+<li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
+<li class="chapter" data-level="A.2.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#derivadas"><i class="fa fa-check"></i><b>A.2.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="B" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html"><i class="fa fa-check"></i><b>B</b> As equações da inferência ativa</a></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -245,31 +248,47 @@ f(x,\nu) = \nu - x \qquad\qquad\qquad\qquad (8.3)
 <p><span class="math display">\[\begin{equation}
 f(x, \nu) = \begin{bmatrix}  x_2\\ \frac{\kappa}{m}(\nu-x_1) \end{bmatrix} \qquad\qquad\qquad\qquad (8.5)
 \end{equation}\]</span></p>
-<p>Esta expressão é equivalente à dinâmica de uma mola obedecendo à lei de Hooke. A taxa de mudança da posição (primeiro elemento) é simplesmente a velocidade. A taxa de variação da velocidade (segundo elemento) é proporcional à distância entre a posição atual e o ponto <span class="math inline">\(\nu\)</span>, com a constante de proporcionalidade: uma razão entre a massa do objeto <span class="math inline">\((m)\)</span> e uma constante (mola) <span class="math inline">\((\kappa)\)</span> ). Multiplicando ambos os lados pela massa, temos a força<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> gerada por uma mola <span class="math inline">\((κ (\nu − x_1))\)</span> presa aos pontos <span class="math inline">\(\nu\)</span> e <span class="math inline">\(x_1\)</span> igual à massa multiplicada pela taxa de variação da velocidade. Esta é apenas a segunda lei de Newton. Em outras palavras, podemos escrever um modelo generativo que prevê a dinâmica que se desenrolaria se houvesse uma mola puxando um membro para um local desejado. Ao prever os dados (proprioceptivos) decorrentes dessa mecânica newtoniana, podemos decretar o movimento que cumpre essas previsões.</p>
+<p>Esta expressão é equivalente à dinâmica de uma mola obedecendo à lei de Hooke. A taxa de mudança da posição (primeiro elemento) é simplesmente a velocidade. A taxa de variação da velocidade (segundo elemento) é proporcional à distância entre a posição atual e o ponto <span class="math inline">\(\nu\)</span>, com a constante de proporcionalidade: uma razão entre a massa do objeto <span class="math inline">\((m)\)</span> e uma constante (mola) <span class="math inline">\((\kappa)\)</span> ). Multiplicando ambos os lados pela massa, temos a força<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> gerada por uma mola <span class="math inline">\((κ (\nu − x_1))\)</span> presa aos pontos <span class="math inline">\(\nu\)</span> e <span class="math inline">\(x_1\)</span> igual à massa multiplicada pela taxa de variação da velocidade. Esta é apenas a segunda lei de Newton. Em outras palavras, podemos escrever um modelo generativo que prevê a dinâmica que se desenrolaria se houvesse uma mola puxando um membro para um local desejado. Ao prever os dados (proprioceptivos) decorrentes dessa mecânica newtoniana, podemos decretar o movimento que cumpre essas previsões.</p>
+</div>
+<div id="sistemas-dinâmicos" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Sistemas Dinâmicos<a href="inferência-ativa-em-tempo-contínuo-1.html#sistemas-dinâmicos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Conforme descrito na seção 8.2, as formulações de tempo contínuo da Inferência Ativa são bem adequadas à caracterização de movimentos. Mais geralmente, eles são apropriados na especificação de modelos generativos de sistemas dinâmicos não lineares em que a discretização de tempo e espaço é ineficiente. A forma mais simples de sistema dinâmico é o atrator da equação 8.3, mas um comportamento muito mais rico pode ser desenvolvido a partir de sistemas mais complexos. No espaço limitado deste livro, não podemos fazer justiça ao grande corpo de trabalho desenvolvendo modelos com sistemas dinâmicos mais complexos (mas veja a tabela 8.1 para alguns dos principais avanços). Em vez disso, nos concentramos em alguns dos princípios necessários para entender esses sistemas. Nesta seção, apresentamos brevemente dois sistemas dinâmicos usados ​​na formulação de modelos generativos desse tipo: a dinâmica de Lotka-Volterra e os sistemas de Lorenz. Os primeiros podem ser utilizados na caracterização de sistemas com aspecto sequencial à sua dinâmica, enquanto os segundos representam sistemas caóticos.</p>
+<div class="figure">
+<img src="images/Figura_8_1.png" alt="" />
+<p class="caption"><strong>Figura 8.1</strong> Reflexos espinhais, ilustrando a distinção entre um processo generativo (lá fora no mundo) e um modelo generativo no cenário de geração de ação. O modelo assume que a posição <span class="math inline">\((x)\)</span> de um membro (ou mão ou outra parte do corpo) é traçada em direção a algum ponto <span class="math inline">\((\nu)\)</span>. A seta tracejada no gráfico superior mostra essa crença. Crenças sobre <span class="math inline">\(x(\mu_x)\)</span> podem ser substituídas no lugar de <span class="math inline">\(x\)</span> e usadas para atualizar crenças sobre sua taxa de mudança. O <span class="math inline">\(\mu_x\)</span> resultante é então usado para prever dados sensoriais <span class="math inline">\((y)\)</span> por meio da função <span class="math inline">\(g\)</span> no modelo generativo. Os dados sensoriais são realmente gerados pelo processo generativo por meio da função <span class="math inline">\(g\)</span>, que recebe o valor “real” de <span class="math inline">\(x\)</span> como argumento. O erro <span class="math inline">\((\epsilon_y)\)</span> então conduz mudanças na ação <span class="math inline">\((u)\)</span> de modo que o erro seja resolvido. Essa resolução acontece através do modelo generativo, pois a ação determina a taxa de variação de <span class="math inline">\(x\)</span> via <span class="math inline">\(\pmb f\)</span>. Isso faz com que <span class="math inline">\(x\)</span> se mova para o local no espaço que gera dados <span class="math inline">\(y\)</span> consistentes com a previsão <span class="math inline">\((g(\mu_x))\)</span>, definindo <span class="math inline">\(\epsilon_y\)</span> e, portanto, a taxa de mudança de <span class="math inline">\(a\)</span> para zero.</p>
+</div>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Quadro 8.1</strong> Precisão, atenção e atenuação sensorial</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Abordamos a importância da precisão no capítulo 7, mas vale a pena recapitular seu papel em sistemas de tempo contínuo. De muitas maneiras, esse conceito é abordado de forma mais natural nesse cenário, pois a variável <span class="math inline">\(\Pi\)</span> aparece como uma consequência direta da aproximação de Laplace. Isso atua diretamente como um ganho multiplicativo na dinâmica inferencial (ver figura 8.1), com diferentes precisões ponderando influências alternativas sobre a atualização de crenças.<span class="math display">\[ \]</span> A interpretação da precisão como ganho sináptico a conecta a vários aspectos importantes da neurobiologia. De um ponto de vista empírico, uma precisão mais alta implica uma atualização de crença mais vigorosa do tipo que pode ser medido em pesquisas eletrofisiológicas como uma resposta evocada de grande amplitude com um pico precoce ou em gravações de célula única como um efeito multiplicativo nas taxas de disparo neuronal em resposta a um estímulo colocado no campo receptivo dessa célula. Esses achados são frequentemente associados ao processamento atencional, onde um canal sensorial (ou subconjunto de canais) é favorecido em relação aos outros. Do ponto de vista da inferência ativa, precisão e atenção são sinônimos. O primeiro tem sido usado para reproduzir uma série de fenômenos atencionais in silico, incluindo o paradigma de Posner (Feldman e Friston 2010). Especificamente, usar uma sugestão para prever a precisão da entrada sensorial de um dos dois locais reproduz a descoberta empírica de que as respostas aos estímulos no local indicado são mais rápidas do que aquelas que aparecem no local alternativo.<span class="math display">\[ \]</span> Um segundo aspecto importante do controle de precisão é seu papel na geração de movimento. Para entender isso, vale pensar no que acontece na ausência desse controle. Imagine, primeiro, que os dados sensoriais sejam previstos com alta precisão. As mensagens desses dados, portanto, têm alto ganho sináptico e levam a inferências verídicas sobre a posição de alguma parte do corpo. O problema com isso é a equivalência entre comandos motores e previsões sob Inferência Ativa. Uma crença precisa de que “não estou me movendo” não pode ser usada para prever as consequências sensoriais do movimento, vitais para o início desse movimento. Com entrada sensorial de alta precisão, a crença de que “estou me movendo” é imediatamente corrigida diante de evidências em contrário; portanto, nenhum movimento é executado. Isso nos diz algo importante: para gerar movimento, devemos ser capazes de ignorar as consequências sensoriais desse movimento para formar a crença (inicialmente falsa) de que “estou me movendo”. Uma vez estabelecida essa crença, as consequências proprioceptivas (e outras sensoriais) desse movimento podem ser previstas e encenadas por meio dos mecanismos descritos na figura 8.1. Esse processo de ignorar evidências em contrário é conhecido como “atenuação sensorial” e representa a diminuição da precisão necessária para que um movimento ocorra (Brown, Adams et al. 2013; Pezzulo 2013; Set 2013; Pezzulo, Rigoli e Friston 2015; Seth e Friston 2016; Allen et ai. 2019).<span class="math display">\[ \]</span> Claramente, é útil entre os movimentos restaurar essa precisão, tirar as inferências apropriadas da entrada sensorial. Isso implica um processo cíclico de atenuação e movimento (por exemplo, a supressão cíclica da entrada visual durante as sacadas, depois uma supressão das sacadas). Predizer o movimento na suspensão da atenção tem estreitas relações com uma teoria ideomotora que se originou no século XIX para explicar os movimentos induzidos sob hipnose.</td>
+</tr>
+</tbody>
+</table>
+<p>A dinâmica de Lotka-Volterra é herdada das caracterizações da dinâmica predador-presa em ecologia. Embora desde então tenham encontrado aplicação em várias disciplinas, os sistemas predador-presa continuam sendo um exemplo útil para fornecer alguma intuição sobre seu funcionamento. Quando a população de predadores é pequena, a presa pode aumentar seu número para se tornar uma população relativamente grande. Isso fornece comida adicional para os predadores, cujo tamanho da população cresce. O aumento da predação causa uma diminuição no número de espécies de presas e, portanto, uma diminuição no número de predadores. A partir daqui, o ciclo continua. Isso fornece um padrão oscilatório em que o tamanho da população de presas atinge o pico, depois os predadores, depois as presas novamente e assim por diante. Ao generalizar isso para mais de duas populações (por exemplo, populações carnívoras, herbívoras e vegetais), podemos gerar uma sequência de picos. A Figura 8.2 ilustra a dinâmica generalizada de Lotka-Volterra com três populações, que obedecem a dinâmicas da seguinte forma:</p>
+<p><span class="math display">\[ f(x,\nu)= x \circ (\nu + \pmb Ax) \qquad \qquad \qquad \qquad (8.6) \]</span></p>
+<p>Aqui, <span class="math inline">\(x\)</span> é um vetor como antes. O símbolo <span class="math inline">\(\circ\)</span> significa um produto elementar. As taxas intrínsecas de natalidade e mortalidade são dadas pelo vetor <span class="math inline">\(\nu\)</span>, e <span class="math inline">\(A\)</span> é uma matriz cujos elementos são positivos se as espécies indexadas pela coluna predam aquelas indexadas pela linha e negativas se a relação for invertida.</p>
+<div class="figure">
+<img src="images/Figura_8_2.png" alt="" />
+<p class="caption">Figura 8.2 Dinâmica sequencial generalizada que emerge dos sistemas Lotka-Volterra fornece um importante ponto de conexão com a dinâmica sequencial discreta assumida no capítulo 7. Essa dinâmica pode ser aplicada a uma variedade de sistemas, mas são enquadradas aqui em termos de relações predador-presa para facilitar de interpretação. Acima: A população muda ao longo do tempo. O tamanho da população é expresso em termos de unidades arbitrárias (a.u.). Os picos são rotulados com base em qual espécie tem a maior população naquele ponto. O padrão repetido de p, h, c pode ser visto como uma sequência de três passos de tempo discretos (não necessariamente uniformemente espaçados). Abaixo: Trajetórias enfatizando o padrão (aproximadamente) periódico que cada uma segue.</p>
+</div>
 
 </div>
 </div>
 
 
 
-<div id="introdução-8" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">3</span> Introdução<a href="inferência-ativa-em-tempo-contínuo-1.html#introdução-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="álgebra-linear" class="section level2 hasAnchor" number="8.4">
-<h2><span class="header-section-number">4</span> Álgebra Linear<a href="inferência-ativa-em-tempo-contínuo-1.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="o-básico" class="section level3 hasAnchor" number="8.4.1">
-<h3><span class="header-section-number">4.1</span> O básico<a href="inferência-ativa-em-tempo-contínuo-1.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="derivadas" class="section level3 hasAnchor" number="8.4.2">
-<h3><span class="header-section-number">4.2</span> Derivadas<a href="inferência-ativa-em-tempo-contínuo-1.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-
-</div>
-</div>
-</div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Muitas vezes é necessário adicionar termos de amortecimento para levar em conta o atrito e/ou viscosidade para evitar soluções oscilatórias.<a href="inferência-ativa-em-tempo-contínuo-1.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<ol start="24">
+<li id="fn24"><p>Muitas vezes é necessário adicionar termos de amortecimento para levar em conta o atrito e/ou viscosidade para evitar soluções oscilatórias.<a href="inferência-ativa-em-tempo-contínuo-1.html#fnref24" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -278,7 +297,7 @@ f(x, \nu) = \begin{bmatrix}  x_2\\ \frac{\kappa}{m}(\nu-x_1) \end{bmatrix} \qqua
         </div>
       </div>
 <a href="inferência-ativa-em-tempo-discreto-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-12}
+\date{2022-07-14}
 
 \begin{document}
 \maketitle
@@ -2254,8 +2254,75 @@ Como vimos no capítulo 4, o modelo generativo que subscreve a inferência ativa
 
 \[\begin{equation} 
 y=g(x)+\omega_y \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
-\dot x = f(x,u) + \omega_x \qquad\qquad\qquad\qquad (8.1)
+\dot x = f(x,\nu) + \omega_x \qquad\qquad\qquad\qquad (8.1)
 \end{equation}\]
+
+Essas equações e a precisão associada às flutuações \((\omega)\) determinam o modelo utilizado para fazer inferências sobre as causas das sensações.
+Observe que a ação está ausente da equação 8.1. Isso ocorre porque (como descrito no capítulo 6), a ação é parte do processo generativo, não do modelo generativo. O modelo generativo lida apenas com aquelas variáveis que são diretamente influenciadas por estados externos a um envoltório de Markov. Se fôssemos escrever a dinâmica do mundo real (ou seja, o processo generativo), teríamos que incluir a ação \((u)\):
+
+\[\begin{equation} 
+y=\pmb g(x)+\omega_y \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
+\dot x =\pmb f(x,u) + \omega_x \qquad\qquad\qquad\qquad (8.2)
+\end{equation}\]
+
+Observe que as funções \(g\) e \(f\) (e as precisões de \$\omega \$) usadas para definir o modelo gerativo (equação 8.1) não são necessariamente as mesmas usadas para definir o processo gerativo (equação 8.2). Como vimos nos capítulos 2 a 4, as ações alteram os dados sensoriais de modo que a energia livre é minimizada. Isso significa que não precisamos escrever explicitamente a dinâmica da ação no modelo generativo -- elas emergem das escolhas feitas para os termos da equação 8.1. Para obter alguma intuição para isso, começamos com um tipo muito simples de modelo generativo:
+
+\[\begin{equation} 
+g(x) = x \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
+f(x,\nu) = \nu - x \qquad\qquad\qquad\qquad (8.3)
+\end{equation}\]
+
+A Equação 8.3 diz que o estado oculto representa o valor esperado para os dados e que tem uma dinâmica consistente com um atrator simples (ou seja, ponto). Por atrator, queremos dizer que quando x é menor que v, a taxa de variação esperada de x é positiva e vice-versa. Isso significa que x sempre fluirá em direção a v (ou seja, v é um ponto de atração ou fixo). Para gerar dados, definimos um simples processo gerador:
+
+\[\begin{equation} 
+\pmb g(x) = x \qquad\qquad\qquad\qquad\quad\quad\quad  \\ 
+\pmb f(x,u) = u \qquad\qquad\qquad\qquad (8.4)
+\end{equation}\]
+
+Ao minimizar a energia livre, isso significa que a ação mudará para cumprir as previsões da equação 8.3. Se \(\mu\) for o valor esperado de \(x\), isso significa que a ação que minimiza a diferença entre os dados previstos \((g(\mu))\) e os dados observados \((y)\) é igualar \(u\) a \(\nu − \mu\). Esta é uma expressão da ``hipótese do ponto de equilíbrio'' (Feldman e Levin 2009), que trata o controle motor como encenado por arcos reflexos que simplesmente atraem os membros em direção a pontos de equilíbrio definidos por sinais motores descendentes. Na Inferência Ativa, esses sinais são previsões -- especificamente, previsões proprioceptivas sobre, por exemplo, a posição esperada de membros ou olhos (Adams, Shipp e riston 2013). Portanto, o controle do movimento resulta do cumprimento de previsões (proprioceptivas) pela ação, conforme ilustrado esquematicamente na figura 8.1. Observe que este esquema não requer a especificação de ``modelos inversos'' (ou seja, mapeamentos de consequências desejadas para os comandos motores para alcançá-los) que são amplamente utilizados em outras formulações de controle motor (Wolpert e Kawato 1998).
+
+A expressão na equação 8.3 é o tipo mais simples de sistema atrator que podemos empregar em um modelo generativo. No entanto, é muito simples em muitos cenários, onde se aplicam dinâmicas newtonianas mais realistas. Um modelo mais sofisticado reconhece que as forças -- geradas pelos músculos -- alteram a velocidade (ou seja, induzem uma aceleração), não a posição. A Equação 8.5 estabelece isso explicitamente com \(x_1\) como a posição e \(x_2\) como a velocidade:
+
+\[\begin{equation} 
+f(x, \nu) = \begin{bmatrix}  x_2\\ \frac{\kappa}{m}(\nu-x_1) \end{bmatrix} \qquad\qquad\qquad\qquad (8.5)
+\end{equation}\]
+
+Esta expressão é equivalente à dinâmica de uma mola obedecendo à lei de Hooke. A taxa de mudança da posição (primeiro elemento) é simplesmente a velocidade. A taxa de variação da velocidade (segundo elemento) é proporcional à distância entre a posição atual e o ponto \(\nu\), com a constante de proporcionalidade: uma razão entre a massa do objeto \((m)\) e uma constante (mola) \((\kappa)\) ). Multiplicando ambos os lados pela massa, temos a força\footnote{Muitas vezes é necessário adicionar termos de amortecimento para levar em conta o atrito e/ou viscosidade para evitar soluções oscilatórias.} gerada por uma mola \((κ (\nu − x_1))\) presa aos pontos \(\nu\) e \(x_1\) igual à massa multiplicada pela taxa de variação da velocidade. Esta é apenas a segunda lei de Newton. Em outras palavras, podemos escrever um modelo generativo que prevê a dinâmica que se desenrolaria se houvesse uma mola puxando um membro para um local desejado. Ao prever os dados (proprioceptivos) decorrentes dessa mecânica newtoniana, podemos decretar o movimento que cumpre essas previsões.
+
+\hypertarget{sistemas-dinuxe2micos}{%
+\section{Sistemas Dinâmicos}\label{sistemas-dinuxe2micos}}
+
+Conforme descrito na seção 8.2, as formulações de tempo contínuo da Inferência Ativa são bem adequadas à caracterização de movimentos. Mais geralmente, eles são apropriados na especificação de modelos generativos de sistemas dinâmicos não lineares em que a discretização de tempo e espaço é ineficiente. A forma mais simples de sistema dinâmico é o atrator da equação 8.3, mas um comportamento muito mais rico pode ser desenvolvido a partir de sistemas mais complexos. No espaço limitado deste livro, não podemos fazer justiça ao grande corpo de trabalho desenvolvendo modelos com sistemas dinâmicos mais complexos (mas veja a tabela 8.1 para alguns dos principais avanços). Em vez disso, nos concentramos em alguns dos princípios necessários para entender esses sistemas. Nesta seção, apresentamos brevemente dois sistemas dinâmicos usados \hspace{0pt}\hspace{0pt}na formulação de modelos generativos desse tipo: a dinâmica de Lotka-Volterra e os sistemas de Lorenz. Os primeiros podem ser utilizados na caracterização de sistemas com aspecto sequencial à sua dinâmica, enquanto os segundos representam sistemas caóticos.
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_8_1.png}
+\caption{\textbf{Figura 8.1} Reflexos espinhais, ilustrando a distinção entre um processo generativo (lá fora no mundo) e um modelo generativo no cenário de geração de ação. O modelo assume que a posição \((x)\) de um membro (ou mão ou outra parte do corpo) é traçada em direção a algum ponto \((\nu)\). A seta tracejada no gráfico superior mostra essa crença. Crenças sobre \(x(\mu_x)\) podem ser substituídas no lugar de \(x\) e usadas para atualizar crenças sobre sua taxa de mudança. O \(\mu_x\) resultante é então usado para prever dados sensoriais \((y)\) por meio da função \(g\) no modelo generativo. Os dados sensoriais são realmente gerados pelo processo generativo por meio da função \(g\), que recebe o valor ``real'' de \(x\) como argumento. O erro \((\epsilon_y)\) então conduz mudanças na ação \((u)\) de modo que o erro seja resolvido. Essa resolução acontece através do modelo generativo, pois a ação determina a taxa de variação de \(x\) via \(\pmb f\). Isso faz com que \(x\) se mova para o local no espaço que gera dados \(y\) consistentes com a previsão \((g(\mu_x))\), definindo \(\epsilon_y\) e, portanto, a taxa de mudança de \(a\) para zero.}
+\end{figure}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Quadro 8.1} Precisão, atenção e atenuação sensorial
+\end{minipage} \\
+\midrule
+\endhead
+Abordamos a importância da precisão no capítulo 7, mas vale a pena recapitular seu papel em sistemas de tempo contínuo. De muitas maneiras, esse conceito é abordado de forma mais natural nesse cenário, pois a variável \(\Pi\) aparece como uma consequência direta da aproximação de Laplace. Isso atua diretamente como um ganho multiplicativo na dinâmica inferencial (ver figura 8.1), com diferentes precisões ponderando influências alternativas sobre a atualização de crenças.\( \) A interpretação da precisão como ganho sináptico a conecta a vários aspectos importantes da neurobiologia. De um ponto de vista empírico, uma precisão mais alta implica uma atualização de crença mais vigorosa do tipo que pode ser medido em pesquisas eletrofisiológicas como uma resposta evocada de grande amplitude com um pico precoce ou em gravações de célula única como um efeito multiplicativo nas taxas de disparo neuronal em resposta a um estímulo colocado no campo receptivo dessa célula. Esses achados são frequentemente associados ao processamento atencional, onde um canal sensorial (ou subconjunto de canais) é favorecido em relação aos outros. Do ponto de vista da inferência ativa, precisão e atenção são sinônimos. O primeiro tem sido usado para reproduzir uma série de fenômenos atencionais in silico, incluindo o paradigma de Posner (Feldman e Friston 2010). Especificamente, usar uma sugestão para prever a precisão da entrada sensorial de um dos dois locais reproduz a descoberta empírica de que as respostas aos estímulos no local indicado são mais rápidas do que aquelas que aparecem no local alternativo.\( \) Um segundo aspecto importante do controle de precisão é seu papel na geração de movimento. Para entender isso, vale pensar no que acontece na ausência desse controle. Imagine, primeiro, que os dados sensoriais sejam previstos com alta precisão. As mensagens desses dados, portanto, têm alto ganho sináptico e levam a inferências verídicas sobre a posição de alguma parte do corpo. O problema com isso é a equivalência entre comandos motores e previsões sob Inferência Ativa. Uma crença precisa de que ``não estou me movendo'' não pode ser usada para prever as consequências sensoriais do movimento, vitais para o início desse movimento. Com entrada sensorial de alta precisão, a crença de que ``estou me movendo'' é imediatamente corrigida diante de evidências em contrário; portanto, nenhum movimento é executado. Isso nos diz algo importante: para gerar movimento, devemos ser capazes de ignorar as consequências sensoriais desse movimento para formar a crença (inicialmente falsa) de que ``estou me movendo''. Uma vez estabelecida essa crença, as consequências proprioceptivas (e outras sensoriais) desse movimento podem ser previstas e encenadas por meio dos mecanismos descritos na figura 8.1. Esse processo de ignorar evidências em contrário é conhecido como ``atenuação sensorial'' e representa a diminuição da precisão necessária para que um movimento ocorra (Brown, Adams et al.~2013; Pezzulo 2013; Set 2013; Pezzulo, Rigoli e Friston 2015; Seth e Friston 2016; Allen et ai. 2019).\( \) Claramente, é útil entre os movimentos restaurar essa precisão, tirar as inferências apropriadas da entrada sensorial. Isso implica um processo cíclico de atenuação e movimento (por exemplo, a supressão cíclica da entrada visual durante as sacadas, depois uma supressão das sacadas). Predizer o movimento na suspensão da atenção tem estreitas relações com uma teoria ideomotora que se originou no século XIX para explicar os movimentos induzidos sob hipnose. \\
+\bottomrule
+\end{longtable}
+
+A dinâmica de Lotka-Volterra é herdada das caracterizações da dinâmica predador-presa em ecologia. Embora desde então tenham encontrado aplicação em várias disciplinas, os sistemas predador-presa continuam sendo um exemplo útil para fornecer alguma intuição sobre seu funcionamento. Quando a população de predadores é pequena, a presa pode aumentar seu número para se tornar uma população relativamente grande. Isso fornece comida adicional para os predadores, cujo tamanho da população cresce. O aumento da predação causa uma diminuição no número de espécies de presas e, portanto, uma diminuição no número de predadores. A partir daqui, o ciclo continua. Isso fornece um padrão oscilatório em que o tamanho da população de presas atinge o pico, depois os predadores, depois as presas novamente e assim por diante. Ao generalizar isso para mais de duas populações (por exemplo, populações carnívoras, herbívoras e vegetais), podemos gerar uma sequência de picos. A Figura 8.2 ilustra a dinâmica generalizada de Lotka-Volterra com três populações, que obedecem a dinâmicas da seguinte forma:
+
+\[ f(x,\nu)= x \circ (\nu + \pmb Ax) \qquad \qquad \qquad \qquad (8.6) \]
+
+Aqui, \(x\) é um vetor como antes. O símbolo \(\circ\) significa um produto elementar. As taxas intrínsecas de natalidade e mortalidade são dadas pelo vetor \(\nu\), e \(A\) é uma matriz cujos elementos são positivos se as espécies indexadas pela coluna predam aquelas indexadas pela linha e negativas se a relação for invertida.
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_8_2.png}
+\caption{Figura 8.2 Dinâmica sequencial generalizada que emerge dos sistemas Lotka-Volterra fornece um importante ponto de conexão com a dinâmica sequencial discreta assumida no capítulo 7. Essa dinâmica pode ser aplicada a uma variedade de sistemas, mas são enquadradas aqui em termos de relações predador-presa para facilitar de interpretação. Acima: A população muda ao longo do tempo. O tamanho da população é expresso em termos de unidades arbitrárias (a.u.). Os picos são rotulados com base em qual espécie tem a maior população naquele ponto. O padrão repetido de p, h, c pode ser visto como uma sequência de três passos de tempo discretos (não necessariamente uniformemente espaçados). Abaixo: Trajetórias enfatizando o padrão (aproximadamente) periódico que cada uma segue.}
+\end{figure}
 
 \cleardoublepage
 
