@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-14}
+\date{2022-07-15}
 
 \begin{document}
 \maketitle
@@ -2323,6 +2323,28 @@ Aqui, \(x\) é um vetor como antes. O símbolo \(\circ\) significa um produto el
 \includegraphics{images/Figura_8_2.png}
 \caption{Figura 8.2 Dinâmica sequencial generalizada que emerge dos sistemas Lotka-Volterra fornece um importante ponto de conexão com a dinâmica sequencial discreta assumida no capítulo 7. Essa dinâmica pode ser aplicada a uma variedade de sistemas, mas são enquadradas aqui em termos de relações predador-presa para facilitar de interpretação. Acima: A população muda ao longo do tempo. O tamanho da população é expresso em termos de unidades arbitrárias (a.u.). Os picos são rotulados com base em qual espécie tem a maior população naquele ponto. O padrão repetido de p, h, c pode ser visto como uma sequência de três passos de tempo discretos (não necessariamente uniformemente espaçados). Abaixo: Trajetórias enfatizando o padrão (aproximadamente) periódico que cada uma segue.}
 \end{figure}
+
+A Figura 8.2 deixa claro que ter um modelo generativo que incorpore a dinâmica Lotka-Volterra permite o sequenciamento temporal (Huerta e Rabino vich 2004) -- dependendo do pico mais alto atual. Cada linha pode ser pensada como representando um estado oculto, no lugar de uma espécie. A Figura 8.3 destaca dois exemplos importantes em que essas dinâmicas foram exploradas para gerar comportamento Um é um modelo hierárquico que usa a dinâmica sequencial oferecida por um sistema Lotka-Volterra para cronometrar a resposta de um piscar de olhos em relação a um estímulo condicionado (Friston e Herreros 2016). O paradigma é baseado naqueles usados na investigação da função cerebelar. Um estímulo incondicionado (um sopro de ar direcionado para o olho de um animal) provoca uma resposta (piscando).
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_8_3.png}
+\caption{Figura 8.3 Duas aplicações da dinâmica sequencial generalizada de Lotka-Volterra na Inferência Ativa. Esquerda: Condicionamento de piscar de olhos usado para investigar empiricamente a função cerebelar (Friston e Herreros 2016). Começando no nível mais alto da coluna, os estados esperados mostram o mesmo tipo de padrão sequencial da figura 8.2. Isso passa para o próximo nível para prever causas ocultas sequenciais; os vários picos aqui predizem estados no próximo nível abaixo, onde o primeiro pico é o estímulo condicionado (CS) e o segundo é o estímulo incondicionado (US). Finalmente, os EUA previstos induzem à ação -- um piscar de olhos. Direita: Picos sequenciais usando um ponto de atração como na equação 8.5, mas selecionando o atrator específico com base em qual população de um sistema Lotka-Volterra é atualmente mais alta; isso leva a uma visita sequencial de cada ponto, dando origem a uma forma de escrita à mão (Friston, Mattout e Kilner 2011).}
+\end{figure}
+
+Um estímulo condicionado (um tom auditivo) pode ser reproduzido antes do estímulo incondicionado em várias ocasiões. Aprendendo (veja o quadro 8.2) o número de picos na dinâmica de Lotka-Volterra que separa o estímulo condicionado do estímulo incondicionado, o animal aprende a antecipar o sopro de ar e cronometrar o piscar apropriado. Esta é uma forma de aprendizado temporal, uma vez que o número de picos fornece uma estimativa implícita da duração do intervalo temporal entre os estímulos condicionados e incondicionados. No segundo exemplo da figura 8.3, cada pico sequencial está associado a um ponto de atração alternativo que direciona os movimentos para uma série de pontos de atração dispostos para sugerir escrita à mão (Friston, Mattout e Kilner 2011). Como os dois exemplos ilustram, os sistemas Lotka-Volterra generalizados fornecem modelos úteis de dinâmica sequencial usando um sistema dinâmico contínuo.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Quadro 8.2 Aprendizagem em modelos contínuos
+\end{minipage} \\
+\midrule
+\endhead
+Conforme discutido no capítulo 7, o aprendizado é o processo de otimizar crenças sobre os parâmetros \((\theta)\) de um modelo generativo. No domínio de tempo contínuo, isso significa acumular evidências ao longo do tempo. Isso funciona como se tratássemos dados em uma série de intervalos de tempo infinitesimalmente pequenos como obedecendo a i.i.d. (independentes e identicamente distribuídos) e formular um modelo generativo que gera observações a partir de parâmetros (invariantes no tempo):\(\begin{equation} \ln p(\tilde y, \theta) = \ln p(\theta) + \int \ln p(y(t)| \theta)dt \\ \approx \ln p(\theta) - \int F[y(t)|\theta]dt \end{equation}\)Isso pode ser usado para formular um funcional \((S)\) que desempenha o papel de uma energia livre para parâmetros usando a integral no tempo da energia livre condicionada aos parâmetros. Usando uma aproximação de Laplace, obtemos o seguinte, em que α atua para acumular gradientes de energia livre (ou seja, gradientes de evidência):\( \begin{equation}S(\theta)=\mathbb E_{q(\theta)}[\ln q(\theta)+ \int F[y(t)|\theta]dt - \ln p(\theta)] \\ \approx \int F[y(t)|\mu_\theta]dt - \ln p(\mu_\theta)\qquad\qquad  \\ \dot \mu_\theta = \partial_{\mu_\theta} S(\mu_\theta) \qquad\qquad\qquad\qquad\qquad\qquad \\ = \partial_{\mu_\theta} \ln p(\mu_\theta) - \int \partial_{\mu_\theta} F[y(t)|\mu_\theta]dt \\ = \partial \ln p(\mu_{\theta})-\alpha \qquad\qquad\qquad\qquad \\ \dot \alpha = \partial_{\mu_\theta}F[y(t)| \mu_\theta]   \end{equation}\) \\
+\bottomrule
+\end{longtable}
 
 \cleardoublepage
 
