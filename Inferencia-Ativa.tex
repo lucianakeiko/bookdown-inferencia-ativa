@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-15}
+\date{2022-07-16}
 
 \begin{document}
 \maketitle
@@ -2345,6 +2345,32 @@ Quadro 8.2 Aprendizagem em modelos contínuos
 Conforme discutido no capítulo 7, o aprendizado é o processo de otimizar crenças sobre os parâmetros \((\theta)\) de um modelo generativo. No domínio de tempo contínuo, isso significa acumular evidências ao longo do tempo. Isso funciona como se tratássemos dados em uma série de intervalos de tempo infinitesimalmente pequenos como obedecendo a i.i.d. (independentes e identicamente distribuídos) e formular um modelo generativo que gera observações a partir de parâmetros (invariantes no tempo):\(\begin{equation} \ln p(\tilde y, \theta) = \ln p(\theta) + \int \ln p(y(t)| \theta)dt \\ \approx \ln p(\theta) - \int F[y(t)|\theta]dt \end{equation}\)Isso pode ser usado para formular um funcional \((S)\) que desempenha o papel de uma energia livre para parâmetros usando a integral no tempo da energia livre condicionada aos parâmetros. Usando uma aproximação de Laplace, obtemos o seguinte, em que α atua para acumular gradientes de energia livre (ou seja, gradientes de evidência):\( \begin{equation}S(\theta)=\mathbb E_{q(\theta)}[\ln q(\theta)+ \int F[y(t)|\theta]dt - \ln p(\theta)] \\ \approx \int F[y(t)|\mu_\theta]dt - \ln p(\mu_\theta)\qquad\qquad  \\ \dot \mu_\theta = \partial_{\mu_\theta} S(\mu_\theta) \qquad\qquad\qquad\qquad\qquad\qquad \\ = \partial_{\mu_\theta} \ln p(\mu_\theta) - \int \partial_{\mu_\theta} F[y(t)|\mu_\theta]dt \\ = \partial \ln p(\mu_{\theta})-\alpha \qquad\qquad\qquad\qquad \\ \dot \alpha = \partial_{\mu_\theta}F[y(t)| \mu_\theta]   \end{equation}\) \\
 \bottomrule
 \end{longtable}
+
+A formulação POMDP do capítulo 7 substituiu amplamente o uso de sistemas Lotka-Volterra generalizados em aplicações de Inferência Ativa. No entanto, é útil ter esse tipo de dinâmica em mente como um sistema contínuo plausível que pode subscrever a dinâmica sequencial discreta do capítulo 7. Além disso, os sistemas Lotka-Volterra tornam explícita a distinção entre representações de sequências envolvidas no planejamento temporalmente profundo e representações de taxas de mudança em coordenadas generalizadas de movimento (ver capítulo 4). Cada um tem seu lugar, mas lida com diferentes tipos de problemas.
+O segundo tipo de sistema dinâmico que encontrou ampla aplicação na pesquisa de inferência ativa é o sistema de Lorenz:
+
+\[\dot x = \begin{bmatrix}  \sigma (x_2 - x_1) \\ x_1(\rho - x_3) - x_2 \\ x_1x_2 - \beta x_3  \end{bmatrix} \qquad\qquad\qquad\qquad (8.7)\]
+
+Os parâmetros são conhecidos como o número de Prandtl \((\sigma)\), o número de Rayleigh \((\rho)\) e uma constante \((\beta)\) que se relaciona com a física do sistema. Dependendo dos valores que eles assumem, o sistema pode se comportar de maneiras muito diferentes. Os atratores de Lorenz foram inicialmente formulados para explicar a dinâmica da convecção atmosférica. Seu comportamento itinerante (errante) estimulou seu uso em modelos generativos para simular problemas de inferência desafiadores. Um exemplo importante disso está na simulação do canto dos pássaros, que descompactamos na próxima seção. Esses sistemas também têm sido usados para simular sistemas físicos simples e investigar as condições sob as quais seu comportamento começa a parecer senciente. A Figura 8.4 mostra como o sistema Lorenz se comporta em configurações de parâmetros de exemplo.
+
+\hypertarget{sincronia-generalizada}{%
+\section{Sincronia Generalizada}\label{sincronia-generalizada}}
+
+Como mencionado acima, um exemplo-chave de aplicação de modelos de espaço de estados contínuos está em uma série de estudos baseados em pássaros sintéticos (Friston e Frith 2015b). Um aspecto importante desses estudos analisa a comunicação e os problemas de inferência multiagentes. A ideia aqui se baseia na capacidade de uma criatura de sincronizar seus estados internos com algo lá fora no mundo (ou seja, inferência). Quando o que está lá fora é outra criatura com um modelo semelhante, essa sincronização significa que os estados internos de uma criatura devem se assemelhar aos estados internos da outra: um tipo primitivo de teoria da mente.
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_8_4.png}
+\caption{Figura 8.4 Comportamento de um atrator do sistema Lorenz (usando o mesmo formato da figura 8.2), mostrando como esse sistema tridimensional evolui. Caracteristicamente, parece caótico e imprevisível, passando algum tempo orbitando uma parte do espaço antes de mudar para outra órbita. Esta itinerância e aparente autonomia tornam este interessante sistema bem adequado para inclusão em modelos de fenômenos biológicos.}
+\end{figure}
+
+A Figura 8.5 mostra o tipo de modelo generativo usado para simular pássaros canoros. Neste modelo hierárquico, os estados de alto nível (nível 2) evoluem de acordo com um sistema de Lorenz lento. Uma dimensão deste sistema é então usada para parametrizar o número Rayleigh de um sistema Lorenz mais rápido no nível inferior (nível 1). As variáveis de nível inferior são mapeadas para dados sensoriais (sonográficos). Analogamente à figura 8.1, o processo generativo inclui adicionalmente ação; aqui, em vez de mover um membro, as ações influenciam a laringe, de modo que os dados ultrassonográficos podem ser influenciados pela ave. Como antes, a ação é gerada para resolver o erro de previsão. Isso significa que, se um pássaro ouve o canto que está prevendo, não há necessidade de gerá-lo. No entanto, se ele prevê uma música que não é ouvida, ele deve começar a cantar para resolver qualquer erro.
+
+\begin{figure}
+\centering
+\includegraphics{images/Figura_8_5.png}
+\caption{Figura 8.5 Sincronização e comunicação. Esquerda: Modelo generativo subscrevendo as simulações de canto de pássaros descritas no texto principal. Este é um modelo hierárquico, com atratores de Lorenz em cada nível. Direita: Sincronização multipla de expectativas no segundo nível para dois pássaros antes e depois de terem aprendido um sobre o outro. Depois de aprender os parâmetros dos modelos generativos um do outro, a trajetória conjunta dos dois pássaros é confinada a um subespaço (quase) unidimensional, indicando sincronização.}
+\end{figure}
 
 \cleardoublepage
 
