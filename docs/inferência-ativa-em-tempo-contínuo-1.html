@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-17" />
+<meta name="date" content="2022-07-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="inferência-ativa-em-tempo-discreto-1.html"/>
-<link rel="next" href="dicionário.html"/>
+<link rel="next" href="bases-matemáticas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -183,15 +183,17 @@
 <li class="chapter" data-level="8.4" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#sincronia-generalizada"><i class="fa fa-check"></i><b>8.4</b> Sincronia Generalizada</a></li>
 <li class="chapter" data-level="8.5" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#modelos-híbridos-discretos-e-contínuos"><i class="fa fa-check"></i><b>8.5</b> Modelos Híbridos (Discretos e Contínuos)</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-apêndice"><i class="fa fa-check"></i>(APPENDIX) Apêndice</a>
+<li class="appendix"><span><b>Apêndice</b></span></li>
+<li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="8.6" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#introdução-8"><i class="fa fa-check"></i><b>8.6</b> Introdução</a></li>
-<li class="chapter" data-level="8.7" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#álgebra-linear"><i class="fa fa-check"></i><b>8.7</b> Álgebra Linear</a>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-8"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
-<li class="chapter" data-level="8.7.1" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#o-básico"><i class="fa fa-check"></i><b>8.7.1</b> O básico</a></li>
-<li class="chapter" data-level="8.7.2" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#derivadas"><i class="fa fa-check"></i><b>8.7.2</b> Derivadas</a></li>
+<li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
+<li class="chapter" data-level="A.2.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#derivadas"><i class="fa fa-check"></i><b>A.2.2</b> Derivadas</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="B" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html"><i class="fa fa-check"></i><b>B</b> As equações da inferência ativa</a></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -248,7 +250,7 @@ f(x,\nu) = \nu - x \qquad\qquad\qquad\qquad (8.3)
 <p><span class="math display">\[\begin{equation}
 f(x, \nu) = \begin{bmatrix}  x_2\\ \frac{\kappa}{m}(\nu-x_1) \end{bmatrix} \qquad\qquad\qquad\qquad (8.5)
 \end{equation}\]</span></p>
-<p>Esta expressão é equivalente à dinâmica de uma mola obedecendo à lei de Hooke. A taxa de mudança da posição (primeiro elemento) é simplesmente a velocidade. A taxa de variação da velocidade (segundo elemento) é proporcional à distância entre a posição atual e o ponto <span class="math inline">\(\nu\)</span>, com a constante de proporcionalidade: uma razão entre a massa do objeto <span class="math inline">\((m)\)</span> e uma constante (mola) <span class="math inline">\((\kappa)\)</span> ). Multiplicando ambos os lados pela massa, temos a força<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> gerada por uma mola <span class="math inline">\((κ (\nu − x_1))\)</span> presa aos pontos <span class="math inline">\(\nu\)</span> e <span class="math inline">\(x_1\)</span> igual à massa multiplicada pela taxa de variação da velocidade. Esta é apenas a segunda lei de Newton. Em outras palavras, podemos escrever um modelo generativo que prevê a dinâmica que se desenrolaria se houvesse uma mola puxando um membro para um local desejado. Ao prever os dados (proprioceptivos) decorrentes dessa mecânica newtoniana, podemos decretar o movimento que cumpre essas previsões.</p>
+<p>Esta expressão é equivalente à dinâmica de uma mola obedecendo à lei de Hooke. A taxa de mudança da posição (primeiro elemento) é simplesmente a velocidade. A taxa de variação da velocidade (segundo elemento) é proporcional à distância entre a posição atual e o ponto <span class="math inline">\(\nu\)</span>, com a constante de proporcionalidade: uma razão entre a massa do objeto <span class="math inline">\((m)\)</span> e uma constante (mola) <span class="math inline">\((\kappa)\)</span> ). Multiplicando ambos os lados pela massa, temos a força<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> gerada por uma mola <span class="math inline">\((κ (\nu − x_1))\)</span> presa aos pontos <span class="math inline">\(\nu\)</span> e <span class="math inline">\(x_1\)</span> igual à massa multiplicada pela taxa de variação da velocidade. Esta é apenas a segunda lei de Newton. Em outras palavras, podemos escrever um modelo generativo que prevê a dinâmica que se desenrolaria se houvesse uma mola puxando um membro para um local desejado. Ao prever os dados (proprioceptivos) decorrentes dessa mecânica newtoniana, podemos decretar o movimento que cumpre essas previsões.</p>
 </div>
 <div id="sistemas-dinâmicos" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Sistemas Dinâmicos<a href="inferência-ativa-em-tempo-contínuo-1.html#sistemas-dinâmicos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -332,32 +334,23 @@ O segundo tipo de sistema dinâmico que encontrou ampla aplicação na pesquisa 
 <p>A Figura 8.7 ilustra o funcionamento de um modelo generativo misto que resolve esse problema. No painel superior, o nível superior do modelo toma decisões categóricas: ele calcula as crenças posteriores sobre quatro locais de destino discretos em quatro períodos de tempo. Nos gráficos do meio e do fundo, o nível inferior do modelo computa trajetórias comportamentais contínuas (movimentos oculares) resultantes de inferências discretas no nível superior.</p>
 <p>Transformar decisões sobre locais de alvos discretos em movimentos oculares contínuos requer que cada local de alvo discreto <span class="math inline">\((o)\)</span> seja associado a uma distribuição sobre causas ocultas contínuas <span class="math inline">\((\nu)\)</span>, que identifica as coordenadas do alvo. As coordenadas anteriores sobre o alvo podem ser calculadas tomando a média do modelo Bayesiano sobre esses locais, ponderada pelas inferências no nível POMDP:</p>
 <p><span class="math display">\[P(\tilde \nu| o_\tau)= \mathcal N(\tilde \eta_{o_{\tau}}, \tilde \Pi_\nu) \]</span>
-<span class="math display">\[P(\tilde \nu) \approx \mathcal N( \pmb {\tilde \eta}, \tilde \Pi_\nu) \]</span></p>
-<p><span class="math display">\[ \pmb {\tilde \eta} = \mathbb E_{Q(o_\tau)}[\tilde \eta]= \pmb o_\tau \cdot \tilde \eta  \]</span></p>
+<span class="math display">\[P(\tilde \nu) \approx \mathcal N( \pmb {\tilde \eta}, \tilde \Pi_\nu)  \qquad (8.8)\]</span></p>
+<p><span class="math display">\[ \pmb {\tilde \eta} = \mathbb E_{Q(o_\tau)}[\tilde \eta]= \pmb o_\tau \cdot \tilde \eta  \]</span>
+Para inferir qual alvo discreto explica melhor os dados contínuos, precisamos ser capazes de calcular a evidência associada a cada alvo hipotético – que é uma função dos dados contínuos observados. Isso exemplifica o fato de que modelos mistos requerem interações recíprocas entre níveis hierárquicos superiores e inferiores. Como vemos na figura 8.7, isso facilita a formação de crenças sobre onde realizar as sacadas e a execução dessas sacadas nos momentos apropriados. No primeiro passo de tempo discreto (até 250 ms na escala contínua), o macaco é capaz de inferir com alguma confiança que seus olhos estão centrados na cruz de fixação durante o primeiro passo de tempo, que manterá essa fixação no segundo passo de tempo (até 500 ms), e que o curso de ação mais provável após isso resultará em “foveting” o local superior. Isso pode ser visto nas taxas de disparo discretas (gráfico superior). Isso se traduz no comportamento contínuo que, quando implementado, aumenta a confiança nas crenças sobre os estados discretos (observe o aumento na probabilidade de uma sacada ascendente no terceiro passo de tempo, uma vez que os dados contínuos se tornam disponíveis entre 500 e 750 ms). Este exemplo simples, baseado em pesquisa cognitiva experimental, ilustra os princípios básicos de tradução entre planos de ação discretos e sua implementação contínua.</p>
+<div class="figure">
+<img src="images/Figura_8_7.png" alt="" />
+<p class="caption">Figura 8.7 Transformando decisões em movimento usando modelos mistos ou híbridos (Parr e Friston 2019b). Este exemplo simples usa o paradigma do período de atraso oculomotor descrito no texto principal. Acima: Taxas de disparos neuronais representando crenças posteriores sobre a localização do alvo. O alvo pode estar em quatro locais diferentes e há quatro etapas de tempo neste experimento sintético, portanto, existem 16 populações neurais representando cada uma dessas combinações. As linhas correspondentes ao estado de coisas final inferido são anotadas explicitamente. Observe a atualização da crença na primeira etapa (de 0 a 250 ms), quando o alvo aparece inicialmente, e na terceira etapa (de 500 a 750 ms), quando o agente se observa realizando um movimento sacádico para aquele local. Médio: Comportamento (ou seja, um movimento sacádico do local central para o local de destino). Durante o primeiro trimestre do experimento, o destino fica visível no local superior. Em seguida, há um período de atraso, durante o qual a fixação é mantida. Em seguida, um movimento sacádico é realizado no local correto. Finalmente, há um período durante o qual a fixação é mantida no local alvo. Inferior: Trajetórias comportamentais contínuas que resultam das inferências discretas do gráfico superior.</p>
+</div>
 
 </div>
 </div>
 
 
 
-<div id="introdução-8" class="section level2 hasAnchor" number="8.6">
-<h2><span class="header-section-number">6</span> Introdução<a href="inferência-ativa-em-tempo-contínuo-1.html#introdução-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="álgebra-linear" class="section level2 hasAnchor" number="8.7">
-<h2><span class="header-section-number">7</span> Álgebra Linear<a href="inferência-ativa-em-tempo-contínuo-1.html#álgebra-linear" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="o-básico" class="section level3 hasAnchor" number="8.7.1">
-<h3><span class="header-section-number">7.1</span> O básico<a href="inferência-ativa-em-tempo-contínuo-1.html#o-básico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="derivadas" class="section level3 hasAnchor" number="8.7.2">
-<h3><span class="header-section-number">7.2</span> Derivadas<a href="inferência-ativa-em-tempo-contínuo-1.html#derivadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-
-</div>
-</div>
-</div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Muitas vezes é necessário adicionar termos de amortecimento para levar em conta o atrito e/ou viscosidade para evitar soluções oscilatórias.<a href="inferência-ativa-em-tempo-contínuo-1.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<ol start="24">
+<li id="fn24"><p>Muitas vezes é necessário adicionar termos de amortecimento para levar em conta o atrito e/ou viscosidade para evitar soluções oscilatórias.<a href="inferência-ativa-em-tempo-contínuo-1.html#fnref24" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -366,7 +359,7 @@ O segundo tipo de sistema dinâmico que encontrou ampla aplicação na pesquisa 
         </div>
       </div>
 <a href="inferência-ativa-em-tempo-discreto-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
