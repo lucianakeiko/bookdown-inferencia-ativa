@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-18" />
+<meta name="date" content="2022-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="inferência-ativa-em-tempo-discreto-1.html"/>
-<link rel="next" href="bases-matemáticas.html"/>
+<link rel="next" href="análise-de-dados-baseada-em-modelo.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -182,7 +182,9 @@
 <li class="chapter" data-level="8.3" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#sistemas-dinâmicos"><i class="fa fa-check"></i><b>8.3</b> Sistemas Dinâmicos</a></li>
 <li class="chapter" data-level="8.4" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#sincronia-generalizada"><i class="fa fa-check"></i><b>8.4</b> Sincronia Generalizada</a></li>
 <li class="chapter" data-level="8.5" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#modelos-híbridos-discretos-e-contínuos"><i class="fa fa-check"></i><b>8.5</b> Modelos Híbridos (Discretos e Contínuos)</a></li>
+<li class="chapter" data-level="8.6" data-path="inferência-ativa-em-tempo-contínuo-1.html"><a href="inferência-ativa-em-tempo-contínuo-1.html#resumo-7"><i class="fa fa-check"></i><b>8.6</b> Resumo</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html"><i class="fa fa-check"></i><b>9</b> Análise de dados baseada em modelo</a></li>
 <li class="appendix"><span><b>Apêndice</b></span></li>
 <li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
@@ -341,12 +343,100 @@ Para inferir qual alvo discreto explica melhor os dados contínuos, precisamos s
 <img src="images/Figura_8_7.png" alt="" />
 <p class="caption">Figura 8.7 Transformando decisões em movimento usando modelos mistos ou híbridos (Parr e Friston 2019b). Este exemplo simples usa o paradigma do período de atraso oculomotor descrito no texto principal. Acima: Taxas de disparos neuronais representando crenças posteriores sobre a localização do alvo. O alvo pode estar em quatro locais diferentes e há quatro etapas de tempo neste experimento sintético, portanto, existem 16 populações neurais representando cada uma dessas combinações. As linhas correspondentes ao estado de coisas final inferido são anotadas explicitamente. Observe a atualização da crença na primeira etapa (de 0 a 250 ms), quando o alvo aparece inicialmente, e na terceira etapa (de 500 a 750 ms), quando o agente se observa realizando um movimento sacádico para aquele local. Médio: Comportamento (ou seja, um movimento sacádico do local central para o local de destino). Durante o primeiro trimestre do experimento, o destino fica visível no local superior. Em seguida, há um período de atraso, durante o qual a fixação é mantida. Em seguida, um movimento sacádico é realizado no local correto. Finalmente, há um período durante o qual a fixação é mantida no local alvo. Inferior: Trajetórias comportamentais contínuas que resultam das inferências discretas do gráfico superior.</p>
 </div>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quadro 8.3 Modelos de mistura e agrupamento</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A questão de combinar modelos generativos categóricos e contínuos fora da Inferência Ativa foi principalmente enquadrada pelas lentes do agrupamento. Aqui, o objetivo é atribuir cada ponto de dados (contínuo) a um cluster (discreto). Uma variedade de algoritmos foi empregada para resolver este problema, mas a maioria deles implicitamente se baseia em um modelo generativo semelhante ao usado aqui. Esta é uma mistura de gaussianos (também conhecido como modelo de mistura gaussiana):<span class="math display">\[P(\tilde y, \tilde s, \pmb D, \eta, \Pi)=P(\pmb D)P(\eta)P(\Pi)\prod_iP(s_i|\pmb D)P(y_i|s_i,\eta,\Pi)\]</span> <span class="math display">\[P(\pmb D) = Dir(d)\]</span> <span class="math display">\[P(S_i| \pmb D)= Cat(\pmb D)\]</span> <span class="math display">\[P(y_i|s_i,\eta,\Pi)=\mathcal N(\eta_{s_i}, \Pi_{s_i}) \]</span>O problema nas abordagens de agrupamento é inferir a média e a precisão (η e Π, respectivamente) de cada agrupamento e a probabilidade posterior de que cada ponto de dados <span class="math inline">\((y_i)\)</span> pertença a um determinado agrupamento <span class="math inline">\(P(s_i|y_i)\)</span>. Para nossos propósitos (conforme descrito na seção 8.5), assumimos prioritários precisos (função delta) para η e Π e calculamos <span class="math inline">\(Q(s_i)≈P(s_i | y_i)\)</span> via redução do modelo Bayesiano (ver Quadro 7.3).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="resumo-7" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Resumo<a href="inferência-ativa-em-tempo-contínuo-1.html#resumo-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Neste capítulo, apresentamos uma visão geral das aplicações de modelos generativos de tempo contínuo sob Inferência Ativa. Este é um tópico enorme, e muito foi deixado de fora (veja a tabela 8.1 para leitura adicional). No entanto, os amplos conceitos descritos aqui fornecem uma base a partir da qual esses modelos podem ser mais explorados. Especificamente, consideramos a geração de movimento em termos de cumprimento de previsões. Isso simplifica muito o tratamento de problemas de controle motor, pois não precisamos de nenhuma maquinaria adicional ou modelos inversos - apenas arcos reflexos da coluna vertebral ou do tronco cerebral. Destacamos o papel da precisão e da atenuação sensorial no controle motor desse tipo. Dado que uma vantagem chave dos esquemas contínuos é articular modelos generativos em termos de sistemas dinâmicos, descrevemos dois tipos onipresentes de sistemas dinâmicos que encontraram ampla aplicação na pesquisa de Inferência Ativa. Os sistemas generalizados Lotka-Volterra agem para fornecer sequenciamento temporal em um contexto contínuo, enquanto os atratores Lorenz podem ser usados ​​para gerar simulações ricas, incluindo o canto dos pássaros sintéticos. Em seguida, consideramos o conceito de sincronia generalizada. A sincronização dos estados internos de um sistema com os estados externos forma a base dos tratamentos inferenciais da função cerebral e é crucial nas explicações dos sistemas sociais – onde os estados externos compreendem em grande parte coespecíficos (ou seja, criaturas como eu). Finalmente, estabelecemos a unificação dos modelos discretos e contínuos dos capítulos 7 e 8, reunindo a dinâmica esperada de minimização de energia livre (exploração e exploratória) das formulações de POMDP, a execução dos comportamentos que estes exigem por meio de processos contínuos e a recíproca passagem de mensagens que medeia essa interação. Em suma, isso nos leva de decisões a movimentos – e de volta.</p>
+<p><strong>Tabela 8.1</strong> Principais avanços em modelos de tempo contínuo</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Aplicação</th>
+<th align="center">Origens</th>
+<th align="center">Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Synthetic birdsong</td>
+<td align="center">Friston and Frith 2015a Friston and Frith 2015b Isomura, Parr, and Friston 2019</td>
+<td align="center">Esta série de artigos trata da comunicação e da interação entre agentes sintéticos, um par (ou grupo) simulado de pássaros cantando um para o outro. Os estudos descompactam fenômenos desde a sincronia generalizada até a inferência perceptiva até a atenuação sensorial.</td>
+</tr>
+<tr class="even">
+<td align="center">Atrasos oculomotores</td>
+<td align="center">Perrinet, Adams, and Friston 2014</td>
+<td align="center">Aproveitando-se de crenças sobre o passado próximo e futuro implícitas em modelos formulados em coordenadas generalizadas de movimento, é possível dar conta dos atrasos sensório-motores por meio de projeções a curto caminho no futuro ou no passado.</td>
+</tr>
+<tr class="odd">
+<td align="center">Reflexos condicionados</td>
+<td align="center">Friston and Herreros 2016</td>
+<td align="center">Usando um modelo baseado no sistema Lotka-Volterra, a relação temporal entre um estímulo condicionado e um incondicionado é aprendida e usada para gerar um piscar antecipado.</td>
+</tr>
+<tr class="even">
+<td align="center">Movimentos oculares de perseguição suave</td>
+<td align="center">Adams, Perrinet, and Friston 2012</td>
+<td align="center">Este trabalho analisa o papel dos movimentos oculares de perseguição suave, seguindo um alvo visual. Tem como objetivo reproduzir diferenças entre indivíduos neurotípicos e esquizofrênicos em resposta à perseguição com e sem oclusão visual.</td>
+</tr>
+<tr class="odd">
+<td align="center">Psicose</td>
+<td align="center">Adams, Stephan et al. 2013</td>
+<td align="center">Com base nos modelos de pássaros canoros e de perseguição suave, esta pesquisa analisa como inferências falsas e psicóticas podem surgir de crenças anteriores abaixo do ideal.</td>
+</tr>
+<tr class="even">
+<td align="center">Ilusões</td>
+<td align="center">Brown e Friston 2012 Brown, Adams et al. 2013</td>
+<td align="center">As ilusões oferecem uma ferramenta útil para revelar as crenças anteriores às quais nossos cérebros apelam na presença de informações sensoriais incertas ou ambíguas. Esses artigos pegam vários exemplos de ilusões comuns e demonstram a otimalidade de inferências ilusórias sob certas crenças anteriores.</td>
+</tr>
+<tr class="odd">
+<td align="center">Movimentos sacádicos</td>
+<td align="center">Friston, Adams et al. 2012 Donnarumma et al. 2017 Parr and Friston 2018a</td>
+<td align="center">Assim como as simulações de perseguição suave, esses artigos consideram o controle do movimento dos olhos. No entanto, aqui os olhos não seguem simplesmente um alvo, mas devem se mover para um dos vários locais de alvo possíveis. Eles lidam com os modelos generativos que precisamos para poder fazer isso e (uma vez que os modelos tenham sido especificados) as arquiteturas e fisiologia emergentes.</td>
+</tr>
+<tr class="even">
+<td align="center">Observação de ação</td>
+<td align="center">Friston, Mattout, and Kilner 2011</td>
+<td align="center">Este trabalho considera o papel do sistema de neurônios-espelho e formaliza a ideia de que modelos generativos de nossas próprias ações também podem ser usados para modelar e replicar o comportamento observado em outros.</td>
+</tr>
+<tr class="odd">
+<td align="center">Atenção</td>
+<td align="center">Feldman and Friston 2010 Kanai et al. 2015</td>
+<td align="center">Por meio da precisão da previsão, selecionamos implicitamente os dados que acreditamos serem mais informativos. Este trabalho destaca como implementações dessa ideia reproduzem achados psicofísicos clássicos no paradigma de Posner e tarefas de discriminação figura-fundo.</td>
+</tr>
+<tr class="even">
+<td align="center">Modelos híbridos</td>
+<td align="center">Friston, Parr, and de Vries 2017 Parr and Friston 2018c Parr and Friston 2019b</td>
+<td align="center">Esses modelos fazem uso de modelos POMDP discretos em combinação com esquemas de codificação preditivos. A maioria dos exemplos atuais dessa modelagem são enquadrados em termos de comportamento de busca visual ou controle oculomotor. Isso requer selecionar onde procurar e, em seguida, implementar o processo de procurar lá.</td>
+</tr>
+<tr class="odd">
+<td align="center">Auto-organização</td>
+<td align="center">Friston 2013 Friston, Levin et al. 2015 Palacios et al. 2020</td>
+<td align="center">Essa linha de pesquisa se baseia na ideia de que grupos de células podem se organizar em uma estrutura pré-definida quando cada célula possui o mesmo modelo generativo implícito dessa estrutura. Especificamente, eles devem saber que tipo de entrada sensorial eles preveriam se fossem um tipo específico de célula.</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
 <ol start="24">
@@ -359,7 +449,7 @@ Para inferir qual alvo discreto explica melhor os dados contínuos, precisamos s
         </div>
       </div>
 <a href="inferência-ativa-em-tempo-discreto-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análise-de-dados-baseada-em-modelo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
