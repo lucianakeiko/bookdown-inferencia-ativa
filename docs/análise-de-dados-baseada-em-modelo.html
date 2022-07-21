@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-20" />
+<meta name="date" content="2022-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -189,6 +189,8 @@
 <li class="chapter" data-level="9.1" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#introdução-8"><i class="fa fa-check"></i><b>9.1</b> Introdução</a></li>
 <li class="chapter" data-level="9.2" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#métodos-meta-bayesianos"><i class="fa fa-check"></i><b>9.2</b> Métodos Meta-Bayesianos</a></li>
 <li class="chapter" data-level="9.3" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#laplace-variacional"><i class="fa fa-check"></i><b>9.3</b> Laplace Variacional</a></li>
+<li class="chapter" data-level="9.4" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#bayes-empíricos-paramétricos-peb"><i class="fa fa-check"></i><b>9.4</b> Bayes Empíricos Paramétricos (PEB)</a></li>
+<li class="chapter" data-level="9.5" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#instruções-para-análise-baseada-em-modelo"><i class="fa fa-check"></i><b>9.5</b> Instruções para Análise Baseada em Modelo</a></li>
 </ul></li>
 <li class="appendix"><span><b>Apêndice</b></span></li>
 <li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
@@ -257,12 +259,40 @@
 <span class="math display">\[ \pmb {\tilde u} = \pmb \pi \cdot U\]</span></p>
 <p><span class="math display">\[ \pmb \pi =arg \;min\; F \]</span></p>
 <p>Descompactando isso, o primeiro termo fornece a probabilidade logarítmica de uma sequência observada de ações <span class="math inline">\((\tilde u)\)</span> em função dos parâmetros <span class="math inline">\((\theta)\)</span>, do modelo <span class="math inline">\((m)\)</span> e de uma sequência de estímulos <span class="math inline">\((\tilde o)\)</span> apresentada durante um experimento real. A probabilidade dessas ações é encontrada usando os parâmetros para definir as crenças anteriores em um modelo POMDP do tipo descrito no capítulo 7. Podemos então resolver o POMDP conforme descrito nos capítulos 4 e 7, forçando a simulação a realizar a ação observada sequência e apresentando-a com os mesmos estímulos experimentais. Como descrevemos nos capítulos anteriores, isso envolve calcular as crenças <span class="math inline">\((\pi)\)</span> que um sujeito sintético mantém sobre a política ou curso de ação que ele escolhe seguir. Isso minimiza a energia livre <span class="math inline">\((F)\)</span> associada ao seu modelo generativo do mundo. Podemos então pegar essas crenças e calcular a probabilidade média de seguir uma sequência de ação. Isso exige que distribuamos a probabilidade de cada política pelas ações implícitas nessa política (indexadas por uma matriz <span class="math inline">\(U\)</span> ). Finalmente, um parâmetro de temperatura softmax <span class="math inline">\((θ_\alpha)\)</span> é aplicado para levar em conta a aleatoriedade (tremor) no comportamento não contabilizado pelo modelo. Se esse parâmetro softmax for um, estamos efetivamente assumindo que o sujeito amostra suas ações a partir de crenças posteriores sobre suas ações; às vezes, isso é chamado de comportamento de correspondência. Alternativamente, se o parâmetro softmax for muito grande, a ação emitida é a ação com maior posterior subjetiva, ou seja, o sujeito sempre escolhe a opção mais provável. Este parâmetro softmax pode ser estimado.</p>
+<p>O resultado é a probabilidade das ações sob o modelo, dada uma sequência de estímulos e parâmetros – isto é, uma probabilidade de dados comportamentais dado um modelo. Equipando os parâmetros objetivos com priors gaussianas<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> $ (N (, ^{(1)}) $, podemos usar a suposição de Laplace para expressar a (energia livre) aproximação à evidência do modelo:</p>
+<p><span class="math display">\[\begin{equation}
+\ln P(\tilde u| m, \tilde o) \approx \mathcal L(\mu)- \frac{1}{2} \Big(\epsilon \cdot \Pi^{(1)}\epsilon + \ln \Big| \nabla_{\mu\mu} \mathcal L (\mu)-\Pi^{(1)} \Big| \Big) \\
+e = \eta - \mu  \qquad \qquad (9.3)\\
+\mu = arg \; max \Big\{ \mathcal L(\mu)- \frac{1}{2} \Big(\epsilon \cdot \Pi^{(1)}\epsilon + \ln \Big| \nabla_{\mu\mu} \mathcal L (\mu)-\Pi^{(1)} \Big| \Big)  \Big\}
+\end{equation}\]</span></p>
+<p>A Equação 9.3 é a mesma que foi descompactada na Quadro 4.3 (generalizada para um espaço de parâmetros multidimensional), mas aqui substituímos uma forma explícita para a covariância posterior e assumimos uma distribuição a priori normalmente. No capítulo 4 e nas aplicações do capítulo 8, ignoramos os termos da equação 9.3 que não dependiam da moda. No entanto, é importante incluí-los aqui quando consideramos problemas de comparação de modelos.</p>
+<p>Para encontrar o valor de μ que maximiza a última linha da equação 9.3, realizamos uma subida de gradiente. Sob suposições quadráticas, isso se reduz ao seguinte:</p>
+<p><span class="math display">\[ \mu = \nabla_\mu \mathcal L(\mu) + \Pi^{(1)}\epsilon \qquad\qquad\qquad (9.4) \]</span></p>
+<p>Embora uma forma explícita para o gradiente da probabilidade logarítmica usada aqui possa não estar disponível, métodos de diferenças finitas <a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a> podem ser usados para calcular uma aproximação numérica razoável. Eles também podem ser usados para encontrar a precisão posterior, que é a segunda derivada (ou Hessiana) da probabilidade logarítmica negativa mais a precisão anterior. A Equação 9.4 é a forma mais simples de atualização, mas geralmente são usados métodos mais sofisticados baseados na curvatura local.</p>
+</div>
+<div id="bayes-empíricos-paramétricos-peb" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Bayes Empíricos Paramétricos (PEB)<a href="análise-de-dados-baseada-em-modelo.html#bayes-empíricos-paramétricos-peb" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>O procedimento variacional de Laplace na seção anterior nos permite fazer inferências e quantificar a evidência de um modelo de comportamento de escolha. Isso nos permite fenotipar computacionalmente um indivíduo e comparar hipóteses alternativas sobre esse indivíduo. No entanto, as questões interessantes geralmente estão em nível de grupo. Por exemplo, podemos estar interessados em como um parâmetro – como a precisão de preferências anteriores – varia com a idade. Para responder a essa pergunta, podemos usar a abordagem da seção 9.3 para ajustar modelos ao comportamento de participantes individuais com uma faixa de idades. Formulamos então um modelo linear geral que gera o parâmetro de interesse, levando em consideração a idade:</p>
+<p><span class="math display">\[ P(\theta| \beta, X) = \mathcal N(X\beta, \Pi^{(2)}) \qquad\qquad\qquad (9.5) \]</span>
+Aqui, <span class="math inline">\(X\)</span> é uma matriz cujas colunas são variáveis explicativas alternativas e cujas linhas indicam cada participante. A primeira coluna de <span class="math inline">\(X\)</span> normalmente compreende uma matriz de uns (para indicar o efeito do parâmetro médio sobre os sujeitos). A segunda coluna, em nosso exemplo, pode ser a idade de cada participante. O vetor <span class="math inline">\(\beta\)</span> indica o tamanho do efeito de cada uma das variáveis explicativas em <span class="math inline">\(X\)</span>. O primeiro elemento de <span class="math inline">\(\beta\)</span> é então o valor médio da precisão (ou qualquer outro parâmetro), enquanto o segundo é o efeito da idade na precisão. Esse valor é a inclinação da linha em um gráfico de idade (eixo <span class="math inline">\(x\)</span>) em relação à precisão prevista (eixo <span class="math inline">\(y\)</span>). Pode haver um número arbitrário de colunas de <span class="math inline">\(X\)</span>, com um número arbitrário de elementos em <span class="math inline">\(\beta\)</span>.</p>
+<p>Uma vez ajustado o modelo expresso na equação 9.5, suplementado com a priori para os valores de <span class="math inline">\(\beta\)</span>, podemos fazer perguntas sobre o papel das variáveis explicativas. Por exemplo, podemos perguntar se a idade tem efeito sobre a precisão das preferências anteriores comparando a evidência de um modelo no qual o segundo elemento de <span class="math inline">\(\beta\)</span> pode desviar-se de zero com a evidência de um modelo com uma crença precisa de que é zero. Praticamente falando, isso pode ser feito sem múltiplas inversões de modelo por meio do uso da redução do modelo Bayesiano (Friston, Parr e Zeidman 2018).</p>
+</div>
+<div id="instruções-para-análise-baseada-em-modelo" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Instruções para Análise Baseada em Modelo<a href="análise-de-dados-baseada-em-modelo.html#instruções-para-análise-baseada-em-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Na prática, seguimos os passos descritos abaixo para analisar o comportamento de escolha empírica usando inferência ativa (Schwartenbeck e Friston 2016). Estas se referem às rotinas relevantes disponíveis no pacote SPM12 Matlab.</p>
 
 </div>
 </div>
 
 
 
+<div class="footnotes">
+<hr />
+<ol start="25">
+<li id="fn25"><p>Praticamente, muitas vezes é útil definir parâmetros como parâmetros de escala de log: o parâmetro atua como um fator de escala não negativo e não pode ser caracterizado por uma distribuição normal, que aloca números negativos em uma densidade de probabilidade finita. Assumir que o log do parâmetro de escala é normalmente distribuído garante positividade quando exponenciado para obter o próprio parâmetro de escala. O mesmo objetivo pode ser alcançado modelando a raiz quadrada de um parâmetro como sendo normalmente distribuído.<a href="análise-de-dados-baseada-em-modelo.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn26"><p>Por exemplo, <span class="math inline">\(∂x f(x) ≈ 2Δx f(x + Δx) − f(x − Δx)).\)</span><a href="análise-de-dados-baseada-em-modelo.html#fnref26" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
