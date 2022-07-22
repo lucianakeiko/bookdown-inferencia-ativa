@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-21}
+\date{2022-07-22}
 
 \begin{document}
 \maketitle
@@ -2539,6 +2539,28 @@ Uma vez ajustado o modelo expresso na equação 9.5, suplementado com a priori p
 
 Na prática, seguimos os passos descritos abaixo para analisar o comportamento de escolha empírica usando inferência ativa (Schwartenbeck e Friston 2016). Estas se referem às rotinas relevantes disponíveis no pacote SPM12 Matlab.
 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Colete dados comportamentais}, incluindo as escolhas feitas e a entrada sensorial disponível para a pessoa que faz essa escolha. Além disso, colete dados de interesse para análise de segundo nível entre sujeitos (por exemplo, se o sujeito é um paciente ou um sujeito de controle, informações demográficas relevantes e assim por diante).
+\item
+  \textbf{Formule um modelo POMDP} como no capítulo 7. Esta deve ser uma função que recebe parâmetros como entradas e saídas de um POMDP totalmente especificado (mas ainda não resolvido).
+\item
+  \textbf{Especifique uma função de verossimilhança} (ou seja, equação 9.2). Isso nos diz como o modelo deve ser usado para calcular uma probabilidade. Isso normalmente chama um solucionador POMDP (como a rotina spm\_MDP\_VB\_X.m) para simular o comportamento e quantificar a probabilidade de ações observadas.
+\item
+  \textbf{Especifique crenças prévias} sobre os parâmetros em termos de expectativas e precisões. Muitas vezes, eles serão centrados em zero, com precisões refletindo intervalos plausíveis.
+\item
+  \textbf{Resolva a probabilidade posterior e a evidência do modelo}. Isso usa um esquema de inferência padrão, como o procedimento variacional de Laplace descrito acima (equação 9.4). A rotina spm\_nlsi\_Newton.m fará isso automaticamente.
+\item
+  \textbf{Realizar análise em nível de grupo}. Isso normalmente faz uso do PEB, que trata os parâmetros estimados para cada indivíduo como se fossem gerados por um modelo de segundo nível. Isso nos permite testar hipóteses sobre as causas desses parâmetros. Praticamente, isso pode ser feito usando a rotina spm\_dcm\_peb.m. As análises alternativas incluem testes estatísticos padrão de associação entre os parâmetros inferidos para cada sujeito e outras medidas específicas do sujeito. Por exemplo, uma análise de variáveis canônicas pode ser usada para avaliar a relação entre as pontuações do questionário e os parâmetros inferidos.
+\end{enumerate}
+
+O resumo dessas instruções da Figura 9.2 é baseado no comportamento do rato na tarefa do labirinto em T descrita no capítulo 7. Primeiro, colocamos um rato em um labirinto em T com um estímulo recompensador no braço esquerdo ou direito e uma dica informativa no braço central. Em seguida, registramos a sequência de ações realizadas pelo rato. Este procedimento pode ser repetido em vários ensaios para registrar o comportamento aprendido e pode ser repetido para vários ratos diferentes sob diferentes intervenções (por exemplo, farmacológicas ou optogenéticas).
+
+Uma vez que esses dados comportamentais tenham sido obtidos, precisamos de uma função de verossimilhança que nos permita quantificar a probabilidade do comportamento (para um determinado rato em uma determinada condição) sob configurações de parâmetros específicos. Podemos fazer isso formulando o modelo POMDP que consideramos no capítulo 7. Isso deve ser parametrizado em termos dos parâmetros cuja probabilidade procuramos encontrar. Por exemplo, se quisermos avaliar a precisão associada às preferências, podemos incluir um parâmetro de escala logarítmica que torne a distribuição de preferências mais ou menos intensa.
+
+Tendo estabelecido o modelo generativo (da perspectiva do rato), podemos resolver automaticamente o POMDP usando as equações de atualização de crença no capítulo 4. Isso nos permite calcular a probabilidade dos dados (ou seja, a sequência de braços visitados) condicionados no modelo com o parâmetro de escala (preferências) em um valor específico. A combinação dessa probabilidade com nossa anterior completa a especificação de um modelo generativo para o comportamento (da perspectiva do cientista). Isso pode ser resolvido usando Laplace variacional para encontrar uma distribuição de probabilidade posterior sobre o parâmetro de escala para cada rato
+
 \cleardoublepage
 
 \hypertarget{appendix-apuxeandice}{%
@@ -2707,6 +2729,8 @@ filosofia transcendental}
 
 \textbf{G} Energia livre esperada : requer a consideração de observações futuras dependentes da política
 \textbf{F} Energia livre variacional : considera apenas observações presentes e passadas
+
+\textbf{PEB} abordagem empírica paramétrica de Bayes( A parametric empirical Bayes )
 
 \(\triangleq \text versus \overset{\Delta}{=}\)
 
