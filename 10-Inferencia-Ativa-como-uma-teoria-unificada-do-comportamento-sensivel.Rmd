@@ -1,0 +1,7 @@
+# Inferência ativa como uma teoria unificada do comportamento sensível
+
+Em geral,  nós estamos menos cientes do que nossas mentes fazem de melhor—Marvin Minsky
+
+## Introdução
+
+Neste capítulo, encerramos os principais pontos teóricos da Inferência Ativa (da primeira parte do livro) e suas implementações práticas (da segunda parte). Em seguida, conectamos os pontos: nos abstraímos dos modelos específicos de Inferência Ativa discutidos nos capítulos anteriores para focar nos aspectos integrativos da estrutura. Um benefício da Inferência Ativa é que ela fornece uma solução completa para os problemas adaptativos que os organismos sencientes precisam resolver. Portanto, oferece uma perspectiva unificada sobre problemas como percepção, seleção de ações, atenção e regulação de emoções, que geralmente são tratados isoladamente em psicologia e neurociência – e abordados usando abordagens computacionais distintas em inteligência artificial. Discutiremos a perspectiva de Inferência Ativa em cada um desses problemas (e mais) no contexto de teorias estabelecidas, como cibernética, teoria da ação ideomotora, aprendizado por reforço e controle ótimo. Finalmente, discutimos brevemente como o escopo da Inferência Ativa pode ser estendido para cobrir outros tópicos biológicos, sociais e tecnológicos que não são discutidos em profundidade neste livro.

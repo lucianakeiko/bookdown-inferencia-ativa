@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-07-23" />
+<meta name="date" content="2022-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="inferência-ativa-em-tempo-contínuo-1.html"/>
-<link rel="next" href="bases-matemáticas.html"/>
+<link rel="next" href="inferência-ativa-como-uma-teoria-unificada-do-comportamento-sensível.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -192,11 +192,16 @@
 <li class="chapter" data-level="9.4" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#bayes-empíricos-paramétricos-peb"><i class="fa fa-check"></i><b>9.4</b> Bayes Empíricos Paramétricos (PEB)</a></li>
 <li class="chapter" data-level="9.5" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#instruções-para-análise-baseada-em-modelo"><i class="fa fa-check"></i><b>9.5</b> Instruções para Análise Baseada em Modelo</a></li>
 <li class="chapter" data-level="9.6" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#modelos-de-falsa-inferência"><i class="fa fa-check"></i><b>9.6</b> Modelos de falsa inferência</a></li>
+<li class="chapter" data-level="9.7" data-path="análise-de-dados-baseada-em-modelo.html"><a href="análise-de-dados-baseada-em-modelo.html#resumo-8"><i class="fa fa-check"></i><b>9.7</b> Resumo</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="inferência-ativa-como-uma-teoria-unificada-do-comportamento-sensível.html"><a href="inferência-ativa-como-uma-teoria-unificada-do-comportamento-sensível.html"><i class="fa fa-check"></i><b>10</b> Inferência ativa como uma teoria unificada do comportamento sensível</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="inferência-ativa-como-uma-teoria-unificada-do-comportamento-sensível.html"><a href="inferência-ativa-como-uma-teoria-unificada-do-comportamento-sensível.html#introdução-9"><i class="fa fa-check"></i><b>10.1</b> Introdução</a></li>
 </ul></li>
 <li class="appendix"><span><b>Apêndice</b></span></li>
 <li class="chapter" data-level="A" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html"><i class="fa fa-check"></i><b>A</b> Bases Matemáticas</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-9"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
+<li class="chapter" data-level="A.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#introdução-10"><i class="fa fa-check"></i><b>A.1</b> Introdução</a></li>
 <li class="chapter" data-level="A.2" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#álgebra-linear"><i class="fa fa-check"></i><b>A.2</b> Álgebra Linear</a>
 <ul>
 <li class="chapter" data-level="A.2.1" data-path="bases-matemáticas.html"><a href="bases-matemáticas.html#o-básico"><i class="fa fa-check"></i><b>A.2.1</b> O básico</a></li>
@@ -344,14 +349,49 @@ Aqui, <span class="math inline">\(X\)</span> é uma matriz cujas colunas são va
 <td>Adams, Stephan et ai. 2013 Benrimoh et al. 2018 Parr, Benrimoh et al. 2018 Corlett et al. 2019</td>
 <td>Essas simulações se baseiam em desequilíbrios entre precisões anteriores e de probabilidade. Superinterpretação de dados sensoriais espúrios devido a uma falha na atenuação da precisão da verossimilhança, ou uma falha na correção de crenças anteriores devido à atenuação excessiva, cada uma oferece mecanismos para falsa inferência perceptiva.</td>
 </tr>
+<tr class="even">
+<td>Interpessoal e distúrbios de personalidade</td>
+<td>Moutoussis et ai. 2014 Prosser et al. 2018</td>
+<td>A inferência interpessoal depende de ter modelos sobre outras pessoas e como elas podem reagir às nossas decisões. Isso levou ao desenvolvimento de modelos de jogos de confiança, que dependem de interações entre duas (ou mais) partes, e jogos de caridade. Estes últimos têm sido usados para reproduzir o auto-engrandecimento e a falta de remorso associados à psicopatia. Esses traços são simulados modulando o grau em que as crenças sobre a autoestima dependem de decisões de ser caridoso versus egoísta e sensibilidade à aprovação dos outros.</td>
+</tr>
+<tr class="odd">
+<td>Síndromes oculomotoras</td>
+<td>Adams, Perrinet, and Friston 2012 Parr and Friston 2018a</td>
+<td>Nestes artigos, modelos generativos de tempo contínuo são empregados para prever a evolução dinâmica de sistemas newtonianos. Ao tornar vários aspectos do modelo generativo condicionalmente independentes de outros, podem ser induzidas síndromes oculomotoras, como oftalmoplegias internucleares.</td>
+</tr>
+<tr class="even">
+<td>Farmacoterapia</td>
+<td>Parr e Friston 2019b</td>
+<td>Dadas as associações que propusemos entre parâmetros de precisão e neuroquímicos no capítulo 5, deve ser possível simular as consequências da manipulação farmacológica desses sistemas. Este trabalho ilustra as consequências de várias intervenções farmacológicas sintéticas no desempenho de uma tarefa oculomotora do período de atraso, fornecendo uma prova de princípio de que esses métodos podem ser usados para simular não apenas a patologia, mas também a influência da terapêutica.</td>
+</tr>
+<tr class="odd">
+<td>Síndromes pré-frontais</td>
+<td>Parr, Rikhye et al. 2019</td>
+<td>Essas simulações estabelecem uma diferença entre as síndromes pré-frontais medial e lateral, atenuando a precisão das transições para prejudicar o desempenho de uma tarefa guiada pela memória (lateral) versus a precisão de uma probabilidade interoceptiva que determina a motivação para se envolver na tarefa (medial).</td>
+</tr>
+<tr class="even">
+<td>Negligência visual</td>
+<td>Parr and Friston 2017a</td>
+<td>A desatenção ao lado esquerdo do espaço pode ser induzida por várias lesões prévias alternativas. Entre estes, um aumento nos parâmetros de Dirichlet para este lado do espaço reduz a novidade associada às sacadas à esquerda, aumentando a amostragem visual da direita. Alternativamente, definir preferências consistentes com resultados proprioceptivos ou visuais do lado direito ou aumentar o envolvimento habitual em sacadas do lado direito reproduz um comportamento qualitativamente semelhante.</td>
+</tr>
+<tr class="odd">
+<td>Distúrbios de inferência interoceptiva</td>
+<td>Barrett et al. 2016 Allen et al. 2019 Maisto, Barca et al. 2019 Pezzulo, Maisto et al. 2019 Barca and Pezzulo 2020 Tschantz et al. 2021</td>
+<td>Simulações de inferência interoceptiva (ou inferência ativa no domínio interoceptivo) sugerem que desequilíbrios entre precisões anteriores e de probabilidade sobre (por exemplo) sinais cardíacos ou gástricos podem causar falsas crenças sobre o estado interno do corpo, percepções errôneas de sintomas corporais e alucinações psicossomáticas . Além disso, eles podem ter efeitos em cascata na regulação autonômica e na seleção de ações, causando vários tipos de comportamento desadaptativo, como hipervigilância, uso excessivo de medicamentos e restrições alimentares excessivas.</td>
+</tr>
 </tbody>
 </table>
+<p>Prioridades aberrantes podem ser sobre estados ou precisões, ou podem ser a priori estruturais sobre a forma do modelo generativo. Uma maneira útil de pensar sobre as causas do comportamento patológico é pensar sobre a crença anterior usada para políticas e sobre como cada parte disso pode ser interrompida para dar origem a uma seleção anormal de políticas. As políticas anteriores dependem da energia livre esperada, que por sua vez depende das crenças posteriores, do potencial de ganho de informação e das preferências anteriores (C). Prioridades sobre as apólices também podem ser equipadas com um termo de forma fixa (E ), representando vieses habituais.</p>
+<p>Tomando cada um destes por sua vez: Crenças posteriores dependem de anteriores e probabilidades. Para formar uma crença posterior aberrante, uma ou ambas devem ser rompidas. Normalmente, essa ruptura assume a forma de sub ou superestimação do equilíbrio de precisões. A probabilidade excessivamente alta, em comparação com a precisão anterior, leva a uma interpretação exagerada da entrada sensorial (potencialmente barulhenta). Isso leva ao overfitting no sentido de que conclusões injustificadas podem ser tiradas de dados espúrios. Se o equilíbrio é interrompido na direção oposta, favorecendo a confiança no anterior, as percepções geradas internamente tornam-se resistentes a entradas sensoriais conflitantes. Ambos os mecanismos têm sido associados ao desenvolvimento de alucinações, e os dois podem coexistir quando são empregados modelos hierárquicos. Dada a associação de várias precisões com substâncias químicas neuromoduladoras (ver capítulo 5), parece sensato que condições como a demência por corpos de Lewy, na qual a sinalização colinérgica é prejudicada, e a esquizofrenia, com anormalidades do sistema dopaminérgico, apresentem fenômenos alucinatórios – isto é, falsa inferência perceptual.</p>
+<p>Em seguida, consideramos o papel do ganho de informação. Aqui, a precisão da probabilidade e a precisão das crenças anteriores nos dizem o grau em que a incerteza pode ser resolvida e a quantidade de incerteza que há para resolver, respectivamente. A precisão das crenças anteriores se aplica tanto aos parâmetros do modelo generativo (ou seja, influencia a novidade) quanto aos estados (ou seja, influencia a saliência). Interpretar os parâmetros de probabilidades condicionais como eficácias sinápticas ou as precisões como ganhos sinápticos sugere que as síndromes de desconexão sináptica podem ser consideradas como ruptura de um ou ambos. Sinapses ausentes não podem ser moduladas, então isso é como ter crenças anteriores extremamente confiantes sobre uma probabilidade condicional, pois novos dados não podem atualizar a eficácia associada. Isso tem implicações importantes para o potencial ganho de informação de diferentes políticas, como tem sido explorado na modelagem de síndromes de negligência sensorial.</p>
+<p>Finalmente, as preferências e as políticas anteriores fornecem uma clara influência sobre o comportamento. Estes podem sustentar o desenvolvimento de hábitos viciantes ou a apatia associada a várias síndromes psiquiátricas e neurológicas (Hezemans, Wolpe e Rowe 2020). Em resumo, crenças anteriores defeituosas em vários lugares nos modelos generativos descritos acima fornecem uma explicação funcional ou teleológica para o comportamento patológico.</p>
+</div>
+<div id="resumo-8" class="section level2 hasAnchor" number="9.7">
+<h2><span class="header-section-number">9.7</span> Resumo<a href="análise-de-dados-baseada-em-modelo.html#resumo-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Neste capítulo, delineamos uma abordagem que utiliza os modelos teóricos descritos nos capítulos anteriores para colocar questões aos dados empíricos. Isso nos permite usar a Inferência Ativa como uma ferramenta não invasiva para investigar os processos computacionais que os indivíduos usam para tomar decisões. Nós nos concentramos em alguns exemplos simples. No entanto, modelos baseados em Inferência Ativa foram desenvolvidos para tarefas mais realistas e complicadas (Cullen et al. 2018) projetadas para evocar um comportamento mais rico para fenotipagem computacional. Além de estabelecer um processo de seis etapas para análise baseada em modelos, destacamos dois exemplos do uso desses métodos. Isso traz variações importantes em como isso pode ocorrer, incluindo os tipos de comportamento medidos (trajetórias suaves ou escolhas discretas), a escolha do modelo (contínuo ou discreto) e as diferentes questões científicas que estão sendo feitas. A última delas é a mais importante, pois determina as escolhas anteriores. Vimos o uso de fenotipagem computacional em combinação com neuroimagem (Adams, Bauer et al. 2016) para fazer perguntas sobre a relação entre ganho sináptico e precisão. Além disso, vimos como a inversão de modelo pode ser usada para avaliar as contribuições de impulsos comportamentais alternativos e preditores de desempenho (Mirza et al. 2018). Em última análise, as seis etapas na Figura 9.1 fornecem um método genérico para projetar experimentos para interrogar de forma não invasiva os modelos generativos implícitos que as pessoas (ou outros animais) usam para direcionar o comportamento. Isso oferece uma oportunidade para responder a perguntas sobre a função do sistema nervoso na saúde e na doença.</p>
 
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
 <ol start="25">
@@ -365,7 +405,7 @@ Aqui, <span class="math inline">\(X\)</span> é uma matriz cujas colunas são va
         </div>
       </div>
 <a href="inferência-ativa-em-tempo-contínuo-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bases-matemáticas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="inferência-ativa-como-uma-teoria-unificada-do-comportamento-sensível.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
