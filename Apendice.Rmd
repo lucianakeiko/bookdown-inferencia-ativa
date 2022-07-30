@@ -1,6 +1,6 @@
 \cleardoublepage 
 
-# (APPENDIX) Apêndice {-} 
+# (APPENDIX) Apêndice{-} 
 
 # Bases Matemáticas
 
@@ -127,41 +127,54 @@ $$d(a)_i$$
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # As equações da inferência ativa
+
+## Introdução
+
+Neste apêndice, fornecemos um resumo matemático da Inferência Ativa. Isso complementa as equações nos capítulos principais com detalhes sobre de onde elas vêm e visa preencher algumas das etapas intermediárias omitidas. Isso baseia-se diretamente no fundo matemático do apêndice A e lida com inferência em processos de decisão Markov parcialmente observados (POMDP) e arquiteturas de codificação preditivas, e aborda questões de aprendizagem de estrutura e redução de modelo aludidas no texto principal. Nosso objetivo é que isso seja relativamente autocontido, com foco particular em tópicos que frequentemente causam confusão. Os leitores devem ter certeza de que não é necessário entender tudo neste apêndice para poder aplicar utilmente a Inferência Ativa; isso é mais para quem quer maior
+detalhe técnico.
+
+## Processos de decisão de Markov
+
+### Inferência do Estado
+
+Ao resolver um problema de POMDP, nosso objetivo é selecionar o curso de ação ou política apropriado. Sob Inferência Ativa, isso é enquadrado como um problema de inferência, no qual devemos encontrar uma distribuição de probabilidade posterior sobre políticas alternativas. Para calcular uma probabilidade posterior, precisamos de duas coisas: a probabilidade anterior de políticas (abordadas na seção B.2.2) e a probabilidade de observações de uma política. Esta seção se concentra neste último.
+
+A probabilidade de observações dada uma política não é simples de calcular. Isso ocorre porque um problema POMDP é estruturado de forma que as políticas (π) influenciem as trajetórias (indicadas por ~) dos estados (s) que influenciam os resultados (o) sem uma influência direta das políticas nos resultados. O problema então envolve uma soma sobre trajetórias de estados para marginalizá-los e encontrar
+uma probabilidade marginal de observações dadas políticas:
+
+$$P(\tilde o | \pi ) = \sum_\tilde S P(\tilde o | \tilde s)P(\tilde s | \tilde \pi ) \qquad\qquad\qquad (B.1) $$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

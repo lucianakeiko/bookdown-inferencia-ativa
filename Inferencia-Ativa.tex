@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-07-29}
+\date{2022-07-30}
 
 \begin{document}
 \maketitle
@@ -2909,6 +2909,41 @@ Como este exemplo simples ilustra, aprender modelos generativos ricos -- da estr
 \hypertarget{inferuxeancia-ativa-e-outros-campos-direuxe7uxf5es-abertas}{%
 \section{Inferência ativa e outros campos: direções abertas}\label{inferuxeancia-ativa-e-outros-campos-direuxe7uxf5es-abertas}}
 
+Tem que começar em algum lugar, tem que começar em algum momento, que lugar melhor do que aqui? Que melhor hora do que agora?
+---Rage Against the Machine, ``Guerrilla Radio''
+
+Neste livro, nos concentramos principalmente em modelos de Inferência Ativa que abordam problemas biológicos de sobrevivência e adaptação. No entanto, a Inferência Ativa pode ser aplicada em muitos outros domínios. Nesta última seção, discutimos brevemente dois desses domínios: dinâmica social e cultural e aprendizado de máquina e robótica. Abordar o primeiro requer pensar sobre as maneiras pelas quais vários agentes de Inferência Ativa interagem e os efeitos emergentes de tal interação. Abordar o último requer entender como a Inferência Ativa pode ser dotada de mecanismos de aprendizado (e inferência) mais eficazes para escalar problemas mais complexos - mas de uma maneira compatível com os pressupostos básicos da teoria. Ambos são interessantes direções abertas para a pesquisa.
+
+\hypertarget{dinuxe2micas-sociais-e-culturais}{%
+\subsection{Dinâmicas Sociais e Culturais}\label{dinuxe2micas-sociais-e-culturais}}
+
+Muitos aspectos interessantes de nossa cognição (humana) relacionam-se a dinâmicas sociais e culturais em vez de percepções, decisões e ações individualistas (Veissière et al.~2020). Por definição, a dinâmica social requer múltiplas criaturas de Inferência Ativa que se envolvem em interações físicas (por exemplo, ações conjuntas, como praticar esportes coletivos) ou interações mais abstratas (por exemplo, eleições ou redes sociais). Demonstrações simples de inferência interativa entre organismos idênticos já produziram fenômenos emergentes interessantes, como a auto-organização de formas de vida simples que resistem à dispersão, a possibilidade de se engajar em processos morfogenéticos para adquirir e restaurar uma forma corporal e previsão e coordenação mútuas. tomada de turnos (Friston 2013; Friston e Frith 2015a; Friston, Levin et al.~2015). Outras simulações abordaram as maneiras pelas quais as criaturas podem estender sua cognição a artefatos materiais e moldar seus nichos cognitivos (Bruineberg et al.~2018). Essas simulações capturam apenas uma fração da complexidade de nossa dinâmica social e cultural, mas ilustram o potencial da Inferência Ativa para expandir de uma ciência de indivíduos para uma ciência de sociedades -- e como a cognição se estende além de nossos crânios (Nave et al.~2020 ).
+
+\hypertarget{aprendizado-de-muxe1quina-e-robuxf3tica}{%
+\subsection{Aprendizado de máquina e robótica}\label{aprendizado-de-muxe1quina-e-robuxf3tica}}
+
+Os métodos de modelagem generativa e inferência variacional discutidos neste livro são amplamente utilizados em aprendizado de máquina e robótica. Nesses campos, a ênfase geralmente está em como aprender modelos generativos (conexionistas) --- em oposição a como usá-los para a Inferência Ativa, o foco deste livro. Isso é interessante, pois as abordagens de aprendizado de máquina são potencialmente úteis para aumentar a complexidade dos modelos generativos e dos problemas considerados neste livro - com a ressalva de que podem recorrer a teorias de processo muito diferentes da Inferência Ativa.
+
+Embora seja impossível revisar aqui a vasta literatura sobre modelagem generativa em aprendizado de máquina, mencionamos brevemente alguns dos modelos mais populares, a partir dos quais muitas variantes foram desenvolvidas. Dois primeiros modelos generativos conexionistas, a máquina de Helmholtz e a máquina de Boltzmann (Ackley et al.~1985, Dayan et al.~1995), forneceram exemplos paradigmáticos de como aprender as representações internas de uma rede neural de forma não supervisionada. A máquina de Helmholtz está especialmente relacionada à abordagem variacional da Inferência Ativa, pois usa redes generativas e de reconhecimento separadas para inferir uma distribuição sobre variáveis \hspace{0pt}\hspace{0pt}ocultas e amostrar delas para obter dados fictícios. O sucesso prático inicial desses métodos foi limitado. Mas depois, a possibilidade de empilhar várias máquinas Boltzmann (restritas) permitiu o aprendizado de várias camadas de representações internas e foi um dos primeiros sucessos das redes neurais profundas não supervisionadas (Hinton 2007).
+
+Dois exemplos recentes de modelos generativos conexionistas, autoencoders variacionais ou VAEs (Kingma e Welling 2014) e redes adversariais generativas ou GANs (Goodfellow et al.~2014), são amplamente utilizados em aplicações de aprendizado de máquina, como reconhecimento ou geração de imagens e vídeos. Os VAEs exemplificam uma aplicação elegante de métodos variacionais ao aprendizado em redes generativas. Seu objetivo de aprendizado, o limite inferior de evidência (ELBO), é matematicamente equivalente à energia livre variacional. Esse objetivo permite o aprendizado de uma descrição precisa dos dados (ou seja, maximiza a precisão), mas também favorece representações internas que não diferem muito de suas anteriores (ou seja, minimizam a complexidade). Este último objetivo atua como um chamado regularizador, o que ajuda a generalizar e evitar o overfitting.
+
+As GANs seguem uma abordagem diferente: combinam duas redes, uma rede generativa e uma rede discriminativa, que competem continuamente durante o aprendizado. A rede discriminativa aprende a distinguir quais dados de exemplo produzidos pela rede generativa são reais ou fictícios. A rede generativa tenta gerar dados fictícios que enganam (ou seja, são classificados erroneamente por) a rede discriminativa. A corrida entre essas duas redes força a rede generativa a melhorar suas capacidades generativas e produzir dados fictícios de alta fidelidade -- uma capacidade que tem sido amplamente explorada para gerar, por exemplo, imagens realistas.
+
+Os modelos generativos acima (e outros) podem ser usados para tarefas de controle. Por exemplo, Ha e Eck (2017) usaram um VAE (sequência a sequência) para aprender a prever traços de lápis. Por amostragem da representação interna do VAE, o modelo pode construir novos desenhos baseados em traços. Abordagens de modelagem generativa também têm sido usadas para controlar os movimentos do robô. Algumas dessas abordagens usam Inferência Ativa (Pio-Lopez et al.~2016, Sancaktar et al.~2020, Ciria et al.~2021) ou ideias intimamente relacionadas, mas em um cenário conexionista (Ahmadi e Tani 2019, Tani e White 2020).
+
+Um dos principais desafios neste domínio é que os movimentos do robô são de alta dimensão e requerem (aprendizagem) modelos generativos sofisticados. Um aspecto interessante da Inferência Ativa e abordagens relacionadas é que a coisa mais importante a ser aprendida é um mapeamento direto entre ações e feedback sensorial (por exemplo, visual e proprioceptivo) na próxima etapa de tempo. Esse mapeamento direto pode ser aprendido de várias maneiras: por exploração autônoma, por demonstração ou mesmo por interação direta com um humano -- por exemplo, um professor (o experimentador) que guia as mãos do robô ao longo de uma trajetória até o objetivo, portanto, andaime para a aquisição de ações efetivas direcionadas a objetivos (Yamashita e Tani 2008). A possibilidade de aprender modelos generativos de várias maneiras expande muito o escopo das habilidades do robô que podem ser eventualmente alcançadas. Por sua vez, a possibilidade de desenvolver robôs (neuro-) mais avançados usando Inferência Ativa pode ser importante não apenas por razões tecnológicas, mas também teóricas. De fato, alguns aspectos-chave da Inferência Ativa, como as interações adaptativas agente-ambiente, a integração de funções cognitivas e a importância da incorporação, são naturalmente abordados em configurações robóticas.
+
+\hypertarget{resumo-9}{%
+\section{Resumo}\label{resumo-9}}
+
+O lar está atrás, o mundo à frente, e há muitos caminhos para trilhar através das sombras até a beira da noite, até que as estrelas estejam todas acesas.
+---J. R. R. Tolkien, O Senhor dos Anéis
+
+Começamos este livro perguntando se é possível entender o cérebro e o comportamento a partir dos primeiros princípios. Em seguida, introduzimos a Inferência Ativa como uma teoria candidata para enfrentar esse desafio. Esperamos que o leitor tenha se convencido de que a resposta à nossa pergunta original é sim. Neste capítulo, consideramos a perspectiva unificada que a Inferência Ativa oferece sobre o comportamento senciente e quais implicações essa teoria tem para construções psicológicas familiares, como percepção, seleção de ação e emoção. Isso nos deu a oportunidade de revisitar os conceitos introduzidos ao longo do livro e nos lembrar das fascinantes questões ainda abertas para pesquisas futuras. Esperamos que este livro forneça um complemento útil para trabalhos relacionados sobre Inferência Ativa, incluindo, por um lado, a filosofia (Hohwy 2013, Clark 2015) e, por outro lado, a física (Friston 2019a).
+
+Estamos agora no final de nossa jornada. Nosso objetivo foi oferecer uma introdução aos interessados \hspace{0pt}\hspace{0pt}em usar esses métodos - tanto em nível conceitual quanto formal. No entanto, é importante enfatizar que a Inferência Ativa não é algo que pode ser aprendido puramente na teoria. Incentivamos qualquer pessoa que tenha gostado deste livro a pensar em realizá-lo na prática. Ritos de passagem importantes na neurobiologia teórica são tentar escrever um modelo generativo, experimentar a frustração quando as simulações se comportam mal e aprender com as violações de suas crenças anteriores quando algo inesperado acontece. Independentemente de você optar ou não por seguir essa prática em um nível computacional, esperamos que você reflita sobre isso ao se envolver na Inferência Ativa no dia-a-dia. Isso pode se manifestar na compulsão de direcionar seus olhos para resolver a incerteza sobre algo em sua visão periférica. Pode ser na escolha de comer em um restaurante favorito para atender às preferências (gustativas) anteriores. Pode ser na redução do calor quando o chuveiro está muito quente para garantir que a temperatura esteja de acordo com o seu modelo de como o mundo deveria ser. Em última análise, estamos confiantes de que você continuará a buscar a Inferência Ativa de alguma forma.
+
 \cleardoublepage
 
 \hypertarget{appendix-apuxeandice}{%
@@ -3031,6 +3066,25 @@ Existem muitas identidades derivadas úteis para grandezas algébricas lineares,
 
 \hypertarget{as-equauxe7uxf5es-da-inferuxeancia-ativa}{%
 \chapter{As equações da inferência ativa}\label{as-equauxe7uxf5es-da-inferuxeancia-ativa}}
+
+\hypertarget{introduuxe7uxe3o-11}{%
+\section{Introdução}\label{introduuxe7uxe3o-11}}
+
+Neste apêndice, fornecemos um resumo matemático da Inferência Ativa. Isso complementa as equações nos capítulos principais com detalhes sobre de onde elas vêm e visa preencher algumas das etapas intermediárias omitidas. Isso baseia-se diretamente no fundo matemático do apêndice A e lida com inferência em processos de decisão Markov parcialmente observados (POMDP) e arquiteturas de codificação preditivas, e aborda questões de aprendizagem de estrutura e redução de modelo aludidas no texto principal. Nosso objetivo é que isso seja relativamente autocontido, com foco particular em tópicos que frequentemente causam confusão. Os leitores devem ter certeza de que não é necessário entender tudo neste apêndice para poder aplicar utilmente a Inferência Ativa; isso é mais para quem quer maior
+detalhe técnico.
+
+\hypertarget{processos-de-decisuxe3o-de-markov}{%
+\section{Processos de decisão de Markov}\label{processos-de-decisuxe3o-de-markov}}
+
+\hypertarget{inferuxeancia-do-estado}{%
+\subsection{Inferência do Estado}\label{inferuxeancia-do-estado}}
+
+Ao resolver um problema de POMDP, nosso objetivo é selecionar o curso de ação ou política apropriado. Sob Inferência Ativa, isso é enquadrado como um problema de inferência, no qual devemos encontrar uma distribuição de probabilidade posterior sobre políticas alternativas. Para calcular uma probabilidade posterior, precisamos de duas coisas: a probabilidade anterior de políticas (abordadas na seção B.2.2) e a probabilidade de observações de uma política. Esta seção se concentra neste último.
+
+A probabilidade de observações dada uma política não é simples de calcular. Isso ocorre porque um problema POMDP é estruturado de forma que as políticas (π) influenciem as trajetórias (indicadas por \textasciitilde) dos estados (s) que influenciam os resultados (o) sem uma influência direta das políticas nos resultados. O problema então envolve uma soma sobre trajetórias de estados para marginalizá-los e encontrar
+uma probabilidade marginal de observações dadas políticas:
+
+\[P(\tilde o | \pi ) = \sum_\tilde S P(\tilde o | \tilde s)P(\tilde s | \tilde \pi ) \qquad\qquad\qquad (B.1) \]
 
 \cleardoublepage
 
