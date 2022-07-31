@@ -144,9 +144,19 @@ A probabilidade de observações dada uma política não é simples de calcular.
 uma probabilidade marginal de observações dadas políticas:
 
 $$P(\tilde o | \pi ) = \sum_\tilde S P(\tilde o | \tilde s)P(\tilde s | \tilde \pi ) \qquad\qquad\qquad (B.1) $$
+Para qualquer espaço de estado não trivial, essa soma pode ser muito desafiadora para calcular, de uma perspectiva computacional. No entanto, como veremos no capítulo 2, podemos aproximar probabilidades marginais desse tipo usando um funcional de energia livre. Os capítulos 2-4 descrevem a energia livre como funcional de duas coisas: crenças posteriores aproximadas (
+Q ) e um modelo generativo (P). Isso nos permite expressar a energia livre para uma determinada política da seguinte forma:
 
+$$ F(\pi)=\mathbb E_{Q(\tilde S|\pi)}[\ln Q(\tilde S|\pi)-\ln P(\tilde O, \tilde S|\pi)]\ge ln P(\tilde o|\pi)  \qquad (B.2)$$
+$$Q(\tilde S|\pi) = \begin{matrix}arg\; min\;\\Q \end{matrix} F(\pi) \Rightarrow F(\pi) \approx - \ln P(\tilde O|\pi)  $$
 
+A Equação B.2 nos diz algo simples, mas importante. Para poder inferir o que fazer, precisamos aproximar uma probabilidade marginal de uma política. Para encontrar uma boa aproximação dessa probabilidade marginal, precisamos otimizar nossas crenças sobre os estados sob essa política. Em suma, a inferência perceptual é obrigatória para que o planejamento prossiga. Então, como vamos resolver esse problema na prática? A resposta é apelar para os métodos descritos na seção A.4.2. Ao escolher formas explícitas para as distribuições de probabilidade na equação B.1, podemos encontrar uma expressão simples para a energia livre:
 
+$$Q(\tilde s|\pi) = \prod_\tau Q(S_\tau|\pi):Q(S_\tau|\pi)=Cat(\mathbf s_{\pi\tau})$$
+$$P(\tilde o | \tilde S) = \prod_\tau P(o_\tau|s_\tau):P(o_\tau|s_\tau)=Cat(A) \qquad (B.3)$$
+$$P(\tilde S|\pi) = P(S_1)\prod_\tau P(s_{\tau+1}|s_\tau,\pi):P(s_{\tau+1}|s_\tau,\pi)=Cat(\mathbf B_{\pi\tau}) \\P(S_1) = Cat(\mathbf D)$$
+
+Resumidamente, a primeira linha da equação B.3 define crenças sobre estados em termos de uma aproximação de campo médio (ver equação A.41), fatorada ao longo do tempo. Cada ponto no tempo está associado a uma crença sobre o que seria o estado ao perseguir uma política, dado pelo vetor sπτ, cujos elementos são as probabilidades de cada estado alternativo. A trajetória de observações na segunda linha depende de uma trajetória de estados ocultos, com a matriz (ou tensor, se os estados forem ainda fatorados) A indicando a distribuição sobre as observações para cada estado. Da mesma forma, a trajetória anterior dos estados sob um modelo compreende as probabilidades de transição sob aquela política (Bπτ) e as probabilidades iniciais dos estados (D). Substituindo-os na expressão de energia livre na Equação B.2, chegamos à seguinte expressão para a energia livre sob uma política:
 
 
 
