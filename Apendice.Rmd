@@ -158,20 +158,39 @@ $$P(\tilde S|\pi) = P(S_1)\prod_\tau P(s_{\tau+1}|s_\tau,\pi):P(s_{\tau+1}|s_\ta
 
 Resumidamente, a primeira linha da equação B.3 define crenças sobre estados em termos de uma aproximação de campo médio (ver equação A.41), fatorada ao longo do tempo. Cada ponto no tempo está associado a uma crença sobre o que seria o estado ao perseguir uma política, dado pelo vetor sπτ, cujos elementos são as probabilidades de cada estado alternativo. A trajetória de observações na segunda linha depende de uma trajetória de estados ocultos, com a matriz (ou tensor, se os estados forem ainda fatorados) A indicando a distribuição sobre as observações para cada estado. Da mesma forma, a trajetória anterior dos estados sob um modelo compreende as probabilidades de transição sob aquela política (Bπτ) e as probabilidades iniciais dos estados (D). Substituindo-os na expressão de energia livre na Equação B.2, chegamos à seguinte expressão para a energia livre sob uma política:
 
-$$\mathbf F_\pi = \mathbf s_{\pi1}(\ln \mathbf s_{\pi1} - \ln \mathbf A\cdot o_1-\ln \mathbf D)+ \sum S_{\pi\tau} \cdot (\ln \mathbf s_{\pi\tau} - \ln \mathbf A \cdot o_{\tau} - \ln \mathbf B_{\pi\tau}\mathbf s_{\pi\tau-1} )\qquad\qquad\qquad(B.4)  $$
+$$\bf F_\pi = \mathbf s_{\pi1}(\ln \mathbf s_{\pi1} - \ln \mathbf A\cdot o_1-\ln \mathbf D)+ \sum S_{\pi\tau} \cdot (\ln \mathbf s_{\pi\tau} - \ln \mathbf A \cdot o_{\tau} - \ln \mathbf B_{\pi\tau}\mathbf s_{\pi\tau-1} )\qquad\qquad\qquad(B.4)  $$
 Observe que o produto escalar de um vetor de probabilidade com outra quantidade é equivalente à operação de expectativa. Consulte a seção A.2.1 se isso não estiver claro. A Equação B.4 trata os resultados como se fossem vetores de probabilidade, mas com um no elemento correspondente ao resultado observado e zeros em outro lugar (às vezes chamado de codificação one-hot ou vetor 1-in-k). O desafio agora é minimizar a energia livre em relação às nossas crenças sobre estados (sπτ) para garantir que a energia livre se torne uma boa aproximação de uma probabilidade marginal. Poderíamos fazer isso como na seção A.4.2 e minimizar em relação a cada fator de nossas crenças, um de cada vez, iterando até convergir. No entanto, como estamos interessados em esquemas biologicamente mais plausíveis, podemos construir um sistema dinâmico que converge na mesma solução. Essa abordagem é conhecida como gradiente descendente, pois seguimos os gradientes de energia livre para baixo até chegarmos ao mínimo.
 
-Para atualizar crenças sobre estados, tomamos o gradiente disso em relação às crenças atuais sobre estados. Em seguida, definimos uma variável auxiliar (v) que desempenha o papel de logaritmo e a configuramos para realizar um gradiente descendente na energia livre. Este log posterior é então passado por uma função softmax1 (σ ) para convertê-lo em uma distribuição de probabilidade normalizada. Esse processo garante que as crenças sobre os estados mudem de tal forma que diminuam a energia livre.
+Para atualizar crenças sobre estados, tomamos o gradiente disso em relação às crenças atuais sobre estados. Em seguida, definimos uma variável auxiliar (v) que desempenha o papel de logaritmo e a configuramos para realizar um gradiente descendente na energia livre. Este log posterior é então passado por uma função softmax[^1101] (σ ) para convertê-lo em uma distribuição de probabilidade normalizada. Esse processo garante que as crenças sobre os estados mudem de tal forma que diminuam a energia livre.
 
 
+[^1101]: Uma função exponencial normalizada
+
+$$ S_{\pi\tau} = \sigma(\mathbf V_{\pi\tau}) \mathbf V_{\pi\tau} \\
+ \dot V_{\pi\tau} = - \nabla_{S_{_\pi\tau}}\mathbf F_\pi \qquad\qquad\qquad  (B.5) \\ 
+ \nabla_{S{\pi\tau}}\mathbf F_\pi = \ln S_{\pi\tau} - ln A \cdot o_\tau - \ln \mathbf B_{\pi\tau}\mathbf s_{\pi\tau-1}- \ln \mathbf B_{\pi\tau+1}\mathbf \cdot s_{\pi\tau+1}$$
+
+A Equação B.5 tem a mesma solução para o esquema variacional de passagem de mensagens descrito na equação A.42. Ele permite a computação eficiente de crenças posteriores usando apenas informações derivadas localmente (neste caso, de dados sensoriais, crenças sobre o passado imediato e crenças sobre o futuro imediato). No entanto, vale a pena notar que a aproximação de campo médio usada aqui (fatoração ao longo do tempo) muitas vezes leva a posteriores superconfiantes. Na prática, isso pode ser combatido usando um esquema modificado chamado passagem de mensagens marginal (Friston, FitzGerald et al. 2017; Parr, Markovic et al. 2019):
 
 
+$$ \bf \dot V_{\pi\tau} = \pmb\epsilon_{\pi\tau} \\ 
+\pmb \epsilon_{\pi\tau} = \ln \pmb A \cdot o_\tau + \frac{1}{2}(\ln (B_{\pi\tau+1}\pmb s_{\pi\tau-1} )) + \ln (B^\dagger_{\pi\tau+1}\pmb s_{\pi\tau+1} )) - \ln \pmb s_{\pi\tau} \qquad (B.6)\\ 
+B^\dagger_{\pi\tau} \propto B^T_{\pi\tau} 
+$$
+
+Isso leva a inferências mais conservadoras, com maior incerteza atribuída a crenças posteriores. Outras alternativas foram exploradas, incluindo a aproximação de Bethe (Schwöbel et al. 2018). No entanto, no momento da redação deste artigo, a implementação mais amplamente utilizada do Active Inference emprega a passagem de mensagens marginal.
+
+### Planejamento como Inferência
+
+A seção acima trata da inferência sobre estados condicionados a alguma política para minimizar uma energia livre condicionada à política. Essa energia livre desempenha o papel de uma probabilidade marginal logarítmica negativa (evidência do modelo), em que cada política é tratada como um modelo. Equipando isso com crenças anteriores e posteriores sobre a política mais provável, podemos expressar a energia livre como um funcional de crenças sobre políticas.
 
 
-
-
-
-
+$$F = \mathbb E_{Q(\pi)}[lnQ(\pi)-\ln P(\pi,\tilde o)] \\ 
+\approx \mathbb E_{Q(\pi)}[lnQ(\pi) +F(\pi) -\ln P(\pi)]  \qquad (B.7)\\
+P(\pi) = Cat(\pmb \pi_0) \\
+Q(\pi) = Cat(\pmb \pi) \\
+\pi_0 = \sigma(\ln \pmb E - \pmb G)
+$$
 
 
 
