@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-02" />
+<meta name="date" content="2022-08-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -251,6 +251,8 @@
 <ul>
 <li class="chapter" data-level="B.2.1" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#inferência-do-estado"><i class="fa fa-check"></i><b>B.2.1</b> Inferência do Estado</a></li>
 <li class="chapter" data-level="B.2.2" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#planejamento-como-inferência-1"><i class="fa fa-check"></i><b>B.2.2</b> Planejamento como Inferência</a></li>
+<li class="chapter" data-level="B.2.3" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#aprendendo"><i class="fa fa-check"></i><b>B.2.3</b> Aprendendo</a></li>
+<li class="chapter" data-level="B.2.4" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#precisão"><i class="fa fa-check"></i><b>B.2.4</b> Precisão</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
@@ -300,7 +302,7 @@ Q ) e um modelo generativo (P). Isso nos permite expressar a energia livre par
 <p>Resumidamente, a primeira linha da equação B.3 define crenças sobre estados em termos de uma aproximação de campo médio (ver equação A.41), fatorada ao longo do tempo. Cada ponto no tempo está associado a uma crença sobre o que seria o estado ao perseguir uma política, dado pelo vetor sπτ, cujos elementos são as probabilidades de cada estado alternativo. A trajetória de observações na segunda linha depende de uma trajetória de estados ocultos, com a matriz (ou tensor, se os estados forem ainda fatorados) A indicando a distribuição sobre as observações para cada estado. Da mesma forma, a trajetória anterior dos estados sob um modelo compreende as probabilidades de transição sob aquela política (Bπτ) e as probabilidades iniciais dos estados (D). Substituindo-os na expressão de energia livre na Equação B.2, chegamos à seguinte expressão para a energia livre sob uma política:</p>
 <p><span class="math display">\[\bf F_\pi = \mathbf s_{\pi1}(\ln \mathbf s_{\pi1} - \ln \mathbf A\cdot o_1-\ln \mathbf D)+ \sum S_{\pi\tau} \cdot (\ln \mathbf s_{\pi\tau} - \ln \mathbf A \cdot o_{\tau} - \ln \mathbf B_{\pi\tau}\mathbf s_{\pi\tau-1} )\qquad\qquad\qquad(B.4)  \]</span>
 Observe que o produto escalar de um vetor de probabilidade com outra quantidade é equivalente à operação de expectativa. Consulte a seção A.2.1 se isso não estiver claro. A Equação B.4 trata os resultados como se fossem vetores de probabilidade, mas com um no elemento correspondente ao resultado observado e zeros em outro lugar (às vezes chamado de codificação one-hot ou vetor 1-in-k). O desafio agora é minimizar a energia livre em relação às nossas crenças sobre estados (sπτ) para garantir que a energia livre se torne uma boa aproximação de uma probabilidade marginal. Poderíamos fazer isso como na seção A.4.2 e minimizar em relação a cada fator de nossas crenças, um de cada vez, iterando até convergir. No entanto, como estamos interessados em esquemas biologicamente mais plausíveis, podemos construir um sistema dinâmico que converge na mesma solução. Essa abordagem é conhecida como gradiente descendente, pois seguimos os gradientes de energia livre para baixo até chegarmos ao mínimo.</p>
-<p>Para atualizar crenças sobre estados, tomamos o gradiente disso em relação às crenças atuais sobre estados. Em seguida, definimos uma variável auxiliar (v) que desempenha o papel de logaritmo e a configuramos para realizar um gradiente descendente na energia livre. Este log posterior é então passado por uma função softmax<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> (σ ) para convertê-lo em uma distribuição de probabilidade normalizada. Esse processo garante que as crenças sobre os estados mudem de tal forma que diminuam a energia livre.</p>
+<p>Para atualizar crenças sobre estados, tomamos o gradiente disso em relação às crenças atuais sobre estados. Em seguida, definimos uma variável auxiliar (v) que desempenha o papel de logaritmo e a configuramos para realizar um gradiente descendente na energia livre. Este log posterior é então passado por uma função softmax<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a> (σ ) para convertê-lo em uma distribuição de probabilidade normalizada. Esse processo garante que as crenças sobre os estados mudem de tal forma que diminuam a energia livre.</p>
 <p><span class="math display">\[ S_{\pi\tau} = \sigma(\mathbf V_{\pi\tau}) \mathbf V_{\pi\tau} \\
 \dot V_{\pi\tau} = - \nabla_{S_{_\pi\tau}}\mathbf F_\pi \qquad\qquad\qquad  (B.5) \\
 \nabla_{S{\pi\tau}}\mathbf F_\pi = \ln S_{\pi\tau} - ln A \cdot o_\tau - \ln \mathbf B_{\pi\tau}\mathbf s_{\pi\tau-1}- \ln \mathbf B_{\pi\tau+1}\mathbf \cdot s_{\pi\tau+1}\]</span></p>
@@ -320,14 +322,48 @@ P(\pi) = Cat(\pmb \pi_0) \\
 Q(\pi) = Cat(\pmb \pi) \\
 \pi_0 = \sigma(\ln \pmb E - \pmb G)
 \]</span></p>
+<p>A igualdade aproximada na segunda linha vem da equação B.2. Aqui, E é um vetor de crenças fixas sobre políticas (isso pode ser pensado como um termo de viés, ou hábito), enquanto G é a energia livre esperada para cada política. Como antes, agora podemos escrever a energia livre em termos de estatísticas suficientes:</p>
+<p><span class="math display">\[F = \pmb \pi \cdot (\ln \pmb\pi - \ln \pmb E + \pmb F + \pmb G )\]</span></p>
+<p>Aqui, <span class="math inline">\(F\)</span> é um vetor cujos elementos são <span class="math inline">\(F_π\)</span> conforme definido na equação B.4. Tomando os gradientes, encontramos a atualização ideal para crenças sobre políticas (ou seja, planejamento):</p>
+<p><span class="math display">\[ \nabla_\pi F = 0 \Longleftrightarrow \\ \pi=\sigma(\ln \pmb E-\pmb F - \pmb G )\]</span></p>
+</div>
+<div id="aprendendo" class="section level3 hasAnchor" number="12.2.3">
+<h3><span class="header-section-number">B.2.3</span> Aprendendo<a href="as-equações-da-inferência-ativa.html#aprendendo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Para possibilitar o aprendizado, precisamos incorporar crenças prévias sobre os parâmetros das distribuições de probabilidade que compõem o modelo generativo. Como estes são expressos como distribuições categóricas, a escolha apropriada (conjugada) de prior é uma distribuição de Dirichlet. Tomando a priori sobre os estados iniciais como exemplo, os termos da energia livre que dependem da priori esperada (log) incluem o seguinte:</p>
+<p><span class="math display">\[F = ... + D_{KL}[Q(D) ||P(D)]- \mathbb E_{Q(S_1)Q(D)}[\ln P(S_1 | D)] \\
+= ... +(\pmb d - d ) \cdot \mathbb E_{Q(D)}[ln D]- \pmb s_1 \cdot \mathbb E_Q(D) [ln D]\\
+E_{Q(D)}[\ln \pmb D] = \psi(\pmb d) - \psi(\pmb d_0) \qquad\qquad\qquad (B.10)\\
+d_o = \sum_i\pmb d_i\\
+Q(D) \triangleq Dir(\pmb d)\\
+P(D) \triangleq Dir (d)
+\]</span></p>
+<p>A equação B.10 destaca na terceira igualdade uma identidade útil. A expectativa do logaritmo de uma variável distribuída de Dirichlet é a diferença entre duas funções digamma <span class="math inline">\((ψ)\)</span> —onde a função digamma é a derivada de uma função gama. Podemos usar a equação <strong>B.10</strong> para encontrar o mínimo de energia livre:</p>
+<p><span class="math display">\[\nabla_{\mathbb E{[\ln \pmb D]}}F = \pmb d - d -s_1 = 0 \Longleftrightarrow \pmb d = d +s_1 \qquad (B.11) \]</span></p>
+<p>Isso fornece um esquema simples que pode ser usado para atualizar os parâmetros Dirichlet anteriores para seus valores posteriores. Regras de atualização muito semelhantes se aplicam às outras distribuições de probabilidade que compõem o modelo generativo:</p>
+<p><span class="math display">\[
+\pmb a = a + \sum_\tau o_\tau \otimes \pmb s_\tau \\
+\pmb b_{\pi\tau} = b_{\pi\tau} + \sum_\tau s_{\pi\tau} \otimes s_{\pi\tau-1} \\
+\pmb c = c + \sum_\tau o_\tau \\
+\pmb d = d + s_1 \\
+\pmb e = e + \pi
+\]</span></p>
+<p>Estes simplesmente dizem que quando a coisa prevista pelo termo relevante na distribuição de probabilidade acontece (que pode ser uma combinação de duas coisas para probabilidades condicionais), nós simplesmente aumentamos esse elemento da matriz de probabilidade para sinalizar que é mais provável volte a acontecer no futuro.</p>
+</div>
+<div id="precisão" class="section level3 hasAnchor" number="12.2.4">
+<h3><span class="header-section-number">B.2.4</span> Precisão<a href="as-equações-da-inferência-ativa.html#precisão" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Em algumas configurações, pode ser conveniente parametrizar o modelo generativo de uma maneira ligeiramente diferente. Uma opção aqui é usar uma medida de Gibbs, onde as distribuições de probabilidade são equipadas com um parâmetro de temperatura inverso que desempenha o papel de uma precisão. Mais comumente, isso é feito para a precisão <span class="math inline">\((γ)\)</span> sobre as políticas:</p>
+<p><span class="math display">\[P(\pi | \gamma) = Cat(\pmb \pi_0) \\
+\pmb \pi_o = \sigma(-\gamma \pmb G) \qquad (B.13)
+\]</span></p>
+<p>Por simplicidade, omitimos o vetor E para esta seção. No que segue, também consideraremos uma precisão para a verossimilhança (ζ     ) e para transições (ω ). A distribuição a priori sobre os parâmetros de precisão é considerada uma distribuição gama:</p>
 
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Uma função exponencial normalizada<a href="as-equações-da-inferência-ativa.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<ol start="30">
+<li id="fn30"><p>Uma função exponencial normalizada<a href="as-equações-da-inferência-ativa.html#fnref30" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -193,19 +193,55 @@ Q(\pi) = Cat(\pmb \pi) \\
 $$
 
 
+A igualdade aproximada na segunda linha vem da equação B.2. Aqui, E é um vetor de crenças fixas sobre políticas (isso pode ser pensado como um termo de viés, ou hábito), enquanto G é a energia livre esperada para cada política. Como antes, agora podemos escrever a energia livre em termos de estatísticas suficientes:
+
+$$F = \pmb \pi \cdot (\ln \pmb\pi - \ln \pmb E + \pmb F + \pmb G )$$
+
+Aqui, $F$ é um vetor cujos elementos são $F_π$ conforme definido na equação B.4. Tomando os gradientes, encontramos a atualização ideal para crenças sobre políticas (ou seja, planejamento):
+
+$$ \nabla_\pi F = 0 \Longleftrightarrow \\ \pi=\sigma(\ln \pmb E-\pmb F - \pmb G )$$
 
 
 
+### Aprendendo
 
 
+Para possibilitar o aprendizado, precisamos incorporar crenças prévias sobre os parâmetros das distribuições de probabilidade que compõem o modelo generativo. Como estes são expressos como distribuições categóricas, a escolha apropriada (conjugada) de prior é uma distribuição de Dirichlet. Tomando a priori sobre os estados iniciais como exemplo, os termos da energia livre que dependem da priori esperada (log) incluem o seguinte:
+
+$$F = ... + D_{KL}[Q(D) ||P(D)]- \mathbb E_{Q(S_1)Q(D)}[\ln P(S_1 | D)] \\
+= ... +(\pmb d - d ) \cdot \mathbb E_{Q(D)}[ln D]- \pmb s_1 \cdot \mathbb E_Q(D) [ln D]\\
+E_{Q(D)}[\ln \pmb D] = \psi(\pmb d) - \psi(\pmb d_0) \qquad\qquad\qquad (B.10)\\
+d_o = \sum_i\pmb d_i\\
+Q(D) \triangleq Dir(\pmb d)\\
+P(D) \triangleq Dir (d) 
+$$
+
+A equação B.10 destaca na terceira igualdade uma identidade útil. A expectativa do logaritmo de uma variável distribuída de Dirichlet é a diferença entre duas funções digamma $(ψ)$ —onde a função digamma é a derivada de uma função gama. Podemos usar a equação **B.10** para encontrar o mínimo de energia livre:
+
+$$\nabla_{\mathbb E{[\ln \pmb D]}}F = \pmb d - d -s_1 = 0 \Longleftrightarrow \pmb d = d +s_1 \qquad (B.11) $$
+
+Isso fornece um esquema simples que pode ser usado para atualizar os parâmetros Dirichlet anteriores para seus valores posteriores. Regras de atualização muito semelhantes se aplicam às outras distribuições de probabilidade que compõem o modelo generativo:
 
 
+$$
+\pmb a = a + \sum_\tau o_\tau \otimes \pmb s_\tau \\
+\pmb b_{\pi\tau} = b_{\pi\tau} + \sum_\tau s_{\pi\tau} \otimes s_{\pi\tau-1} \\
+\pmb c = c + \sum_\tau o_\tau \\
+\pmb d = d + s_1 \\
+\pmb e = e + \pi
+$$
+
+Estes simplesmente dizem que quando a coisa prevista pelo termo relevante na distribuição de probabilidade acontece (que pode ser uma combinação de duas coisas para probabilidades condicionais), nós simplesmente aumentamos esse elemento da matriz de probabilidade para sinalizar que é mais provável volte a acontecer no futuro. 
 
 
+### Precisão
 
+Em algumas configurações, pode ser conveniente parametrizar o modelo generativo de uma maneira ligeiramente diferente. Uma opção aqui é usar uma medida de Gibbs, onde as distribuições de probabilidade são equipadas com um parâmetro de temperatura inverso que desempenha o papel de uma precisão. Mais comumente, isso é feito para a precisão $(γ)$ sobre as políticas:
 
+$$P(\pi | \gamma) = Cat(\pmb \pi_0) \\ 
+\pmb \pi_o = \sigma(-\gamma \pmb G) \qquad (B.13)
+$$
 
-
-
+Por simplicidade, omitimos o vetor E para esta seção. No que segue, também consideraremos uma precisão para a verossimilhança (ζ     ) e para transições (ω ). A distribuição a priori sobre os parâmetros de precisão é considerada uma distribuição gama:
 
 
