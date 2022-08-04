@@ -2534,6 +2534,9 @@ Estamos agora no final de nossa jornada. Nosso objetivo foi oferecer uma introdu
 
 \cleardoublepage 
 
+\renewcommand{\[}{\begin{equation}}
+\renewcommand{\]}{\end{equation}}
+
 # (APPENDIX) Apêndice{-} 
 
 # Bases Matemáticas
@@ -2776,7 +2779,111 @@ $$P(\pi | \gamma) = Cat(\pmb \pi_0) \\
 \pmb \pi_o = \sigma(-\gamma \pmb G) \qquad (B.13)
 $$
 
-Por simplicidade, omitimos o vetor E para esta seção. No que segue, também consideraremos uma precisão para a verossimilhança (ζ     ) e para transições (ω ). A distribuição a priori sobre os parâmetros de precisão é considerada uma distribuição gama:
+Por simplicidade, omitimos o vetor E para esta seção. No que segue, também consideraremos uma precisão para a verossimilhança (ζ) e para transições (ω). A distribuição a priori sobre os parâmetros de precisão é considerada uma distribuição gama:
+
+$$
+P(\zeta) \propto \beta_\zeta \;exp(\beta_\zeta \zeta) \\ 
+P(\omega) \propto \beta_\omega \;exp(\beta_\omega \omega)  \qquad (B.14)\\
+P(\gamma) \propto \beta_\gamma \;exp(\beta_\gamma \gamma) \\
+$$
+
+
+As distribuições posteriores aproximadas têm a mesma forma (distribuição gama), e usaremos um hiperparâmetro beta em negrito para distinguir entre as estatísticas suficientes da posterior e da anterior acima. Uma propriedade útil da distribuição gama, quando parametrizada desta forma, é a seguinte:
+
+$$
+\begin{equation}
+\zeta = \mathbb E_{Q(\zeta)}[\zeta] = \pmb \beta^{-1}_{\zeta} \qquad\qquad  \\
+\omega = \mathbb E_{Q(\omega)}[\omega] = \pmb \beta^{-1}_{\omega}  \qquad (B.15)\\ 
+\gamma = \mathbb E_{Q(\gamma)}[\gamma] = \pmb \beta^{-1}_{\gamma} \qquad\qquad 
+\end{equation}
+$$
+
+Tendo definido essas distribuições, podemos escrever a energia livre variacional:
+$$
+\begin{equation}
+F = \mathbb E_Q[F(\pi, \zeta, \omega) + D_{KL}[Q(\pi) || P(\pi | \gamma)]] \qquad (B.16) \\ 
++ D_{KL}[Q(\gamma) || P(\gamma)] + D_{KL}[Q(\omega)||P(\omega)]+D_{KL}[Q(\zeta) || P(\zeta)] 
+\end{equation}
+$$
+
+Isso pode ser expresso em termos de suas estatísticas suficientes (omitindo constantes):
+
+
+
+$$\begin{equation}
+
+F = \pmb \pi \cdot (F+ \ln \pmb \pi + \gamma \cdot \pmb G + \ln \pmb Z(\pmb \gamma)) + \ln \pmb \beta_\gamma + \ln \pmb \beta_\omega + \ln \pmb \beta_\zeta \\
+- \ln \pmb \beta_\gamma - \ln \pmb \beta_\omega - \ln \pmb \beta_\zeta + \pmb \gamma \beta_\gamma + \pmb \omega \beta_\omega + \pmb \zeta \beta_\zeta \qquad (B.17) \\
+\pmb F_\pi \approx - \sum_\tau \pmb s_{\pi\tau} \cdot(\zeta \ln \pmb A \cdot o_\tau + \pmb \omega \ln \pmb B_{\pi\tau}\pmb s_{\pi\tau -1} - \ln \pmb Z(\zeta) \cdot o_\tau - \ln Z(\pmb \omega)\pmb s_{\pi\tau-1})
+
+\end{equation}$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
