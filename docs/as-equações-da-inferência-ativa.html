@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-04" />
+<meta name="date" content="2022-08-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -384,6 +384,25 @@ F = \pmb \pi \cdot (F+ \ln \pmb \pi + \gamma \cdot \pmb G + \ln \pmb Z(\pmb \gam
 \pmb F_\pi \approx - \sum_\tau \pmb s_{\pi\tau} \cdot(\zeta \ln \pmb A \cdot o_\tau + \pmb \omega \ln \pmb B_{\pi\tau}\pmb s_{\pi\tau -1} - \ln \pmb Z(\zeta) \cdot o_\tau - \ln Z(\pmb \omega)\pmb s_{\pi\tau-1})
 
 \end{equation}\]</span>$$</p>
+<p>Na equação B.17, <span class="math inline">\(\pmb Z\)</span>representa funções de partição (ou seja, constantes de normalização) dadas pelo seguinte:</p>
+<p><span class="math display">\[ \pmb Z(\zeta)_j = \sum_i(A_{ij})^\zeta \\
+\pmb Z(\omega)_j = \sum_i(B_{\pi\tau ij})^\omega \\
+\pmb Z(\gamma_j = \sum_\pi exp(-\gamma \cdot \pmb G_\pi) \\
+\Rightarrow \qquad\qquad\qquad\qquad (B18) \\
+\partial_\zeta \ln \pmb Z(\zeta)\pmb s_\tau = o^\zeta_\tau \cdot \ln \pmb A \\
+\partial_\zeta \ln \pmb Z(\omega)\pmb s_{\pi\tau-1} = s^\omega_{\pi\tau} \cdot \ln \pmb B_\pi \\
+\partial_\gamma \ln \pmb Z(\gamma) = -\pi_o \cdot  \pmb G \\
+\pmb o_\tau^\zeta \triangleq \sigma(\zeta \ln \pmb A)\pmb s_\tau \\
+\pmb s_{\pi\tau}^\omega \triangleq \sigma( \omega \ln \pmb B_{\pi\tau}) \pmb s_{\pi\tau-1} \\
+\pmb \pi_o \triangleq \sigma(-\gamma \pmb G)\]</span></p>
+<p>Tomando a derivada parcial<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> em relação às precisões esperadas, obtém-se:</p>
+<p><span class="math display">\[\begin{Bmatrix} \partial_\zeta F\\ \partial_\omega F \\ \partial_\gamma F \end{Bmatrix} = 0
+\Leftrightarrow \begin{Bmatrix} \beta_\zeta \\ \beta_\omega \\ \beta_\gamma \end{Bmatrix}
+=\begin{Bmatrix} \sum_\tau(o^\zeta_\tau - o_\tau) \cdot ln \pmb A + \beta_\zeta \\ \sum_\tau \pi \cdot(s^\omega_{\pi\tau}-s_{\pi\tau}) \cdot \ln \pmb B_\pi \pmb s_{\pi\tau-1} + \beta_\omega \\ (\pi - \pi_0)\cdot G + \beta_\gamma  \end{Bmatrix} \qquad (B.19)\]</span></p>
+<p>Expressar essas atualizações como descidas de gradiente biologicamente plausíveis fornece as equações resultantes:</p>
+<p><span class="math display">\[\begin{Bmatrix} \pmb {\dot \beta}_\zeta \\ \pmb {\dot \beta}_\omega \\  \pmb {\dot \beta}_\gamma \end{Bmatrix}
+=\begin{Bmatrix} \sum_\tau(o^\zeta_\tau - o_\tau) \cdot ln \pmb A + \beta_\zeta - \pmb \beta_\zeta \\ \sum_\tau \pi \cdot(s^\omega_{\pi\tau}-s_{\pi\tau}) \cdot \ln \pmb B_\pi \pmb s_{\pi\tau-1} + \beta_\omega - \pmb \beta_\omega \\ (\pi - \pi_0)\cdot G + \beta_\gamma - \pmb \beta_\gamma  \end{Bmatrix} \qquad (B.19)\]</span></p>
+<p>Observe que a dimensionalidade implica em um vetor (linha) de precisões para A, onde cada estado (coluna de A) está associado ao seu próprio parâmetro de precisão.</p>
 
 </div>
 </div>
@@ -392,6 +411,7 @@ F = \pmb \pi \cdot (F+ \ln \pmb \pi + \gamma \cdot \pmb G + \ln \pmb Z(\pmb \gam
 <hr />
 <ol start="30">
 <li id="fn30"><p>Uma função exponencial normalizada<a href="as-equações-da-inferência-ativa.html#fnref30" class="footnote-back">↩︎</a></p></li>
+<li id="fn31"><p>Para concisão, omitimos alguns termos nas derivadas das funções de partição de log. Estamos autorizados a fazê-lo pela escolha da distribuição variacional, pois quaisquer termos polinomiais de ordem superior violariam a forma dessa distribuição.<a href="as-equações-da-inferência-ativa.html#fnref31" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

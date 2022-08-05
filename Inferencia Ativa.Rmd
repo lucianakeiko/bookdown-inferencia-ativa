@@ -2819,15 +2819,37 @@ F = \pmb \pi \cdot (F+ \ln \pmb \pi + \gamma \cdot \pmb G + \ln \pmb Z(\pmb \gam
 \end{equation}$$
 
 
+Na equação B.17, $\pmb Z$representa funções de partição (ou seja, constantes de normalização) dadas pelo seguinte:
+
+$$ \pmb Z(\zeta)_j = \sum_i(A_{ij})^\zeta \\
+\pmb Z(\omega)_j = \sum_i(B_{\pi\tau ij})^\omega \\
+\pmb Z(\gamma_j = \sum_\pi exp(-\gamma \cdot \pmb G_\pi) \\
+\Rightarrow \qquad\qquad\qquad\qquad (B18) \\
+\partial_\zeta \ln \pmb Z(\zeta)\pmb s_\tau = o^\zeta_\tau \cdot \ln \pmb A \\
+\partial_\zeta \ln \pmb Z(\omega)\pmb s_{\pi\tau-1} = s^\omega_{\pi\tau} \cdot \ln \pmb B_\pi \\
+\partial_\gamma \ln \pmb Z(\gamma) = -\pi_o \cdot  \pmb G \\
+\pmb o_\tau^\zeta \triangleq \sigma(\zeta \ln \pmb A)\pmb s_\tau \\
+\pmb s_{\pi\tau}^\omega \triangleq \sigma( \omega \ln \pmb B_{\pi\tau}) \pmb s_{\pi\tau-1} \\
+\pmb \pi_o \triangleq \sigma(-\gamma \pmb G)$$
 
 
+Tomando a derivada parcial[^B172] em relação às precisões esperadas, obtém-se:
 
 
+$$\begin{Bmatrix} \partial_\zeta F\\ \partial_\omega F \\ \partial_\gamma F \end{Bmatrix} = 0 
+\Leftrightarrow \begin{Bmatrix} \beta_\zeta \\ \beta_\omega \\ \beta_\gamma \end{Bmatrix}
+=\begin{Bmatrix} \sum_\tau(o^\zeta_\tau - o_\tau) \cdot ln \pmb A + \beta_\zeta \\ \sum_\tau \pi \cdot(s^\omega_{\pi\tau}-s_{\pi\tau}) \cdot \ln \pmb B_\pi \pmb s_{\pi\tau-1} + \beta_\omega \\ (\pi - \pi_0)\cdot G + \beta_\gamma  \end{Bmatrix} \qquad (B.19)$$
 
 
+[^B172]: Para concisão, omitimos alguns termos nas derivadas das funções de partição de log. Estamos autorizados a fazê-lo pela escolha da distribuição variacional, pois quaisquer termos polinomiais de ordem superior violariam a forma dessa distribuição.
+
+Expressar essas atualizações como descidas de gradiente biologicamente plausíveis fornece as equações resultantes:
 
 
+$$\begin{Bmatrix} \pmb {\dot \beta}_\zeta \\ \pmb {\dot \beta}_\omega \\  \pmb {\dot \beta}_\gamma \end{Bmatrix}
+=\begin{Bmatrix} \sum_\tau(o^\zeta_\tau - o_\tau) \cdot ln \pmb A + \beta_\zeta - \pmb \beta_\zeta \\ \sum_\tau \pi \cdot(s^\omega_{\pi\tau}-s_{\pi\tau}) \cdot \ln \pmb B_\pi \pmb s_{\pi\tau-1} + \beta_\omega - \pmb \beta_\omega \\ (\pi - \pi_0)\cdot G + \beta_\gamma - \pmb \beta_\gamma  \end{Bmatrix} \qquad (B.19)$$
 
+Observe que a dimensionalidade implica em um vetor (linha) de precisões para A, onde cada estado (coluna de A) está associado ao seu próprio parâmetro de precisão.
 
 
 
