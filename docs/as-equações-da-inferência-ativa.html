@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-05" />
+<meta name="date" content="2022-08-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -253,6 +253,7 @@
 <li class="chapter" data-level="B.2.2" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#planejamento-como-inferência-1"><i class="fa fa-check"></i><b>B.2.2</b> Planejamento como Inferência</a></li>
 <li class="chapter" data-level="B.2.3" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#aprendendo"><i class="fa fa-check"></i><b>B.2.3</b> Aprendendo</a></li>
 <li class="chapter" data-level="B.2.4" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#precisão"><i class="fa fa-check"></i><b>B.2.4</b> Precisão</a></li>
+<li class="chapter" data-level="B.2.5" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#energia-livre-esperada"><i class="fa fa-check"></i><b>B.2.5</b> Energia Livre Esperada</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
@@ -403,6 +404,28 @@ F = \pmb \pi \cdot (F+ \ln \pmb \pi + \gamma \cdot \pmb G + \ln \pmb Z(\pmb \gam
 <p><span class="math display">\[\begin{Bmatrix} \pmb {\dot \beta}_\zeta \\ \pmb {\dot \beta}_\omega \\  \pmb {\dot \beta}_\gamma \end{Bmatrix}
 =\begin{Bmatrix} \sum_\tau(o^\zeta_\tau - o_\tau) \cdot ln \pmb A + \beta_\zeta - \pmb \beta_\zeta \\ \sum_\tau \pi \cdot(s^\omega_{\pi\tau}-s_{\pi\tau}) \cdot \ln \pmb B_\pi \pmb s_{\pi\tau-1} + \beta_\omega - \pmb \beta_\omega \\ (\pi - \pi_0)\cdot G + \beta_\gamma - \pmb \beta_\gamma  \end{Bmatrix} \qquad (B.19)\]</span></p>
 <p>Observe que a dimensionalidade implica em um vetor (linha) de precisões para A, onde cada estado (coluna de A) está associado ao seu próprio parâmetro de precisão.</p>
+</div>
+<div id="energia-livre-esperada" class="section level3 hasAnchor" number="12.2.5">
+<h3><span class="header-section-number">B.2.5</span> Energia Livre Esperada<a href="as-equações-da-inferência-ativa.html#energia-livre-esperada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A energia livre esperada é discutida extensivamente no texto principal do livro. Nesta seção, complementamos essa discussão com duas coisas. Primeiro, oferecemos um breve esboço do pensamento atual sobre por que essa é a quantidade apropriada para definir crenças anteriores sobre políticas. Em segundo lugar, abordamos os detalhes de implementação para calcular essa quantidade.</p>
+<p>Embora simulações numéricas (do tipo ilustrado no capítulo 7) tenham estabelecido que a energia livre esperada é útil, a questão de por que ela é útil ainda é uma área de pesquisa ativa. Antecipando que esta discussão continuará a evoluir, aqui apresentamos um breve resumo da explicação mais parcimoniosa no momento da escrita (Da Costa et al. 2020; Friston, Da Costa et al. 2020). O ponto de partida é estipular que um sistema atinge algum estado estacionário (ver seção A.5.2) ou, equivalentemente, cumpre suas preferências (definidas aqui em relação aos estados latentes) em algum momento futuro (τ ):</p>
+<p><span class="math display">\[ Q(S_\tau)=\mathbb E_Q(\pi)[Q(S_\tau|\pi)]=P(S_\tau|C) \qquad\qquad (B.21) \]</span></p>
+<p>Nosso desafio é encontrar o <span class="math inline">\(Q(\pi)\)</span> que satisfaça a equação B.21. Para isso, notamos que a equação B.21 implica o seguinte:</p>
+<p><span class="math display">\[D_KL[Q(\pi|S_\tau)Q(S_\tau) || Q(\pi|S_\tau)P(S_\tau|C)]=0 \\
+\Longrightarrow
+\\ \mathbb E_{Q(\pi,S_\tau)}[\ln Q(\pi,S_\tau)] = \mathbb E_{Q(\pi,S_\tau)}[\ln Q(\pi|S_\tau) + \ln P(S_\tau|C)] \qquad (B.22)\]</span></p>
+<p>Em seguida, fatoramos o lado esquerdo para isolar o termo Q(π) em que estamos interessados:</p>
+<p><span class="math display">\[\\ \mathbb E_{Q(\pi)}[\ln Q(\pi)] = \mathbb E_{Q(\pi,S_\tau)}[\ln Q(\pi|S_\tau) + \ln P(S_\tau|C) - \ln P(S_\tau|\pi)] \qquad (B.23)\]</span></p>
+<p>Definimos uma variável <span class="math inline">\(\alpha\)</span> que representa a razão de duas entropias:</p>
+<p><span class="math display">\[ \alpha = \frac{\mathbb E_{Q(s_\tau)}[H[Q(\pi| S_\tau)]]}{\mathbb E_{Q(S_\tau,\pi)}[H[P(O_\tau| S_\tau)]]} \qquad (B.24)\]</span></p>
+<p>Heuristicamente, <span class="math inline">\(\alpha\)</span> expressa a gama relativa de resultados comportamentais (ou seja, políticas) que são plausíveis em um determinado estado, em comparação com a gama de resultados esperados nesse mesmo estado. Se muito grande, isso pode descrever uma criatura cujo comportamento tem pouca relação com o estado de seu mundo, apesar de observações sensoriais altamente precisas sendo geradas por esse mundo. Quando muito pequeno, isso pode descrever uma criatura que sempre se comporta da mesma maneira quando conhece o estado do mundo, mas raramente recebe dados precisos sobre esse mundo. Aqui, estipularemos que estamos interessados ​​em sistemas cujo <span class="math inline">\(α = 1\)</span> – implicando uma troca relativamente equilibrada e simétrica com seu mundo. Isso torna as duas entropias na equação B.24 iguais. Voltando à equação B.23:</p>
+<p><span class="math display">\[\mathbb E_{Q(\pi)}[\ln Q(\pi)] = - \mathbb E_{Q(s_\tau)}[] \\
++ \mathbb E_{Q(\pi,s_\tau)}[\ln P(S_\tau | C) - \ln Q(S_\tau |\pi)] \\
+=- \mathbb E_{Q(s_\tau,\pi)}[H[P(O_\tau, S_\tau)]] \\
+- \mathbb E_{Q(\pi)}[D_{KL}[Q(S_\tau|\pi)||P(S_\tau|C)]] \\\]</span></p>
+<p>A segunda linha segue da primeira e da equação B.24 com <span class="math inline">\(\alpha=1\)</span>. Vemos agora que a equação B.25 e, portanto, a equação B.21, é satisfeita escolhendo o seguinte:</p>
+<p>$$Q() = <em>{ambiguidade ; esperada} - </em>{Risco} (B.26)\</p>
+<p>$$</p>
 
 </div>
 </div>

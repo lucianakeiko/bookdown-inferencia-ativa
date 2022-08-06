@@ -317,21 +317,46 @@ $$\begin{Bmatrix} \pmb {\dot \beta}_\zeta \\ \pmb {\dot \beta}_\omega \\  \pmb {
 
 Observe que a dimensionalidade implica em um vetor (linha) de precisões para A, onde cada estado (coluna de A) está associado ao seu próprio parâmetro de precisão.
 
+### Energia Livre Esperada
+
+A energia livre esperada é discutida extensivamente no texto principal do livro. Nesta seção, complementamos essa discussão com duas coisas. Primeiro, oferecemos um breve esboço do pensamento atual sobre por que essa é a quantidade apropriada para definir crenças anteriores sobre políticas. Em segundo lugar, abordamos os detalhes de implementação para calcular essa quantidade.
+
+Embora simulações numéricas (do tipo ilustrado no capítulo 7) tenham estabelecido que a energia livre esperada é útil, a questão de por que ela é útil ainda é uma área de pesquisa ativa. Antecipando que esta discussão continuará a evoluir, aqui apresentamos um breve resumo da explicação mais parcimoniosa no momento da escrita (Da Costa et al. 2020; Friston, Da Costa et al. 2020). O ponto de partida é estipular que um sistema atinge algum estado estacionário (ver seção A.5.2) ou, equivalentemente, cumpre suas preferências (definidas aqui em relação aos estados latentes) em algum momento futuro (τ ):
 
 
 
+$$ Q(S_\tau)=\mathbb E_Q(\pi)[Q(S_\tau|\pi)]=P(S_\tau|C) \qquad\qquad (B.21) $$
 
 
 
+Nosso desafio é encontrar o $Q(\pi)$ que satisfaça a equação B.21. Para isso, notamos que a equação B.21 implica o seguinte:
+
+$$D_KL[Q(\pi|S_\tau)Q(S_\tau) || Q(\pi|S_\tau)P(S_\tau|C)]=0 \\ 
+\Longrightarrow 
+\\ \mathbb E_{Q(\pi,S_\tau)}[\ln Q(\pi,S_\tau)] = \mathbb E_{Q(\pi,S_\tau)}[\ln Q(\pi|S_\tau) + \ln P(S_\tau|C)] \qquad (B.22)$$
+
+Em seguida, fatoramos o lado esquerdo para isolar o termo Q(π) em que estamos interessados:
 
 
+$$\\ \mathbb E_{Q(\pi)}[\ln Q(\pi)] = \mathbb E_{Q(\pi,S_\tau)}[\ln Q(\pi|S_\tau) + \ln P(S_\tau|C) - \ln P(S_\tau|\pi)] \qquad (B.23)$$
+
+Definimos uma variável $\alpha$ que representa a razão de duas entropias:
+
+$$ \alpha = \frac{\mathbb E_{Q(s_\tau)}[H[Q(\pi| S_\tau)]]}{\mathbb E_{Q(S_\tau,\pi)}[H[P(O_\tau| S_\tau)]]} \qquad (B.24)$$
+
+Heuristicamente, $\alpha$ expressa a gama relativa de resultados comportamentais (ou seja, políticas) que são plausíveis em um determinado estado, em comparação com a gama de resultados esperados nesse mesmo estado. Se muito grande, isso pode descrever uma criatura cujo comportamento tem pouca relação com o estado de seu mundo, apesar de observações sensoriais altamente precisas sendo geradas por esse mundo. Quando muito pequeno, isso pode descrever uma criatura que sempre se comporta da mesma maneira quando conhece o estado do mundo, mas raramente recebe dados precisos sobre esse mundo. Aqui, estipularemos que estamos interessados ​​em sistemas cujo $α = 1$ – implicando uma troca relativamente equilibrada e simétrica com seu mundo. Isso torna as duas entropias na equação B.24 iguais. Voltando à equação B.23:
+
+$$\mathbb E_{Q(\pi)}[\ln Q(\pi)] = - \mathbb E_{Q(s_\tau)}[] \\
++ \mathbb E_{Q(\pi,s_\tau)}[\ln P(S_\tau | C) - \ln Q(S_\tau |\pi)] \\
+=- \mathbb E_{Q(s_\tau,\pi)}[H[P(O_\tau, S_\tau)]] \\
+- \mathbb E_{Q(\pi)}[D_{KL}[Q(S_\tau|\pi)||P(S_\tau|C)]] \\$$
+
+A segunda linha segue da primeira e da equação B.24 com $\alpha=1$. Vemos agora que a equação B.25 e, portanto, a equação B.21, é satisfeita escolhendo o seguinte:
 
 
+$$\ln Q(\pi) = \underbrace{a}_{ambiguidade \; esperada} - \underbrace{b}_{Risco}  \qquad (B.26)\\
 
-
-
-
-
+$$
 
 
 
