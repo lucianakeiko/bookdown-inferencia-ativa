@@ -354,12 +354,21 @@ $$\mathbb E_{Q(\pi)}[\ln Q(\pi)] = - \mathbb E_{Q(s_\tau)}[] \\
 A segunda linha segue da primeira e da equação B.24 com $\alpha=1$. Vemos agora que a equação B.25 e, portanto, a equação B.21, é satisfeita escolhendo o seguinte:
 
 
-$$\ln Q(\pi) = \underbrace{a}_{ambiguidade \; esperada} - \underbrace{b}_{Risco}  \qquad (B.26)\\
+$$\ln Q(\pi) = \underbrace{- \mathbb E_{Q(S_\tau|\pi)}[H[P(O_\tau |S_\tau]] }_{ambiguidade \; esperada} - \underbrace{D_{KL}[Q(S_\tau|\pi) || P(S\tau |C)]}_{Risco}  \qquad (B.26)\\
 
 $$
 
+Nosso passo final é observar a relação entre a quantidade do lado direito e a energia livre esperada – com preferências definidas em termos de observações no lugar de estados:
 
-
+$$
+\mathbb E_{Q(S_\tau\pi)} \\
+= \mathbb E_{Q(S_\tau\pi)} \\
++ \underbrace {\mathbb E_{Q(S_\tau\pi)P(O_\tau|S_\tau)}}_{=0} \\
+=\mathbb E_{Q} \qquad (B.27) \\
+=\mathbb E_{Q} \\
++ \mathbb E_{Q} \\
+\ge  \mathbb E_{Q} \\
+$$
 
 
 
