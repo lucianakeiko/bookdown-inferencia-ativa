@@ -2895,21 +2895,41 @@ $$
 Nosso passo final é observar a relação entre a quantidade do lado direito e a energia livre esperada – com preferências definidas em termos de observações no lugar de estados:
 
 $$
-\mathbb E_{Q(S_\tau\pi)} \\
-= \mathbb E_{Q(S_\tau\pi)} \\
-+ \underbrace {\mathbb E_{Q(S_\tau\pi)P(O_\tau|S_\tau)}}_{=0} \\
-=\mathbb E_{Q} \qquad (B.27) \\
-=\mathbb E_{Q} \\
-+ \mathbb E_{Q} \\
-\ge  \mathbb E_{Q} \\
+\mathbb E_{Q(S_\tau|\pi)}[H[P(O_\tau|S_\tau)]] + D_{KL}[Q(S_\tau|\pi)||S(S_\tau|C)] \\
+= \mathbb E_{Q(S_\tau|\pi)}[H[P(O_\tau|S_\tau)]]  + D_{KL}[Q(S_\tau|\pi)||S(S_\tau|C)] \\
++ \underbrace {\mathbb E_{Q(S_\tau\pi)P(O_\tau|S_\tau)}[\ln P(O_\tau|S_\tau)]-\mathbb E_{Q(S_\tau\pi)P(O_\tau|S_\tau)}[\ln P(O_\tau|S_\tau)]}_{=0} \\
+=\mathbb E_{Q(S_\tau|\pi)}[H[P(O_\tau|S_\tau)]] + D_{KL}[Q(O_\tau,S_\tau|\pi)||P(O_\tau,S_\tau|C)] \qquad (B.27) \\
+=\mathbb E_{Q(S_\tau|\pi)}[H[P(O_\tau|S_\tau)]] + D_{KL}[Q(O_\tau,S_\tau|\pi)||P(O_\tau|C)] \\
++ \mathbb E_{Q(O_\tau|\pi)}[D_{KL}[Q(S_\tau|O_\tau, \pi) || P(S_\tau|O_\tau, C)]] \\
+\ge  \mathbb E_{Q(S_\tau|\pi)}[H[P(O_\tau|S_\tau)]]+D_{KL}[Q(O_\tau|\pi)||P(O_\tau|C)]=G(\pi) \\
+$$
+
+As etapas da equação B.27 foram (talvez um pouco tediosas) incluídas em alguns detalhes, pois nossa experiência é que as pessoas muitas vezes lutam com esse resultado. A desigualdade na linha final surge da omissão da (não negativa) KL-Divergence na linha anterior. O principal resultado aqui é que a ambiguidade e o risco minimizados para as políticas mais plausíveis na equação B.26 atuam como um limite superior da energia livre esperada usada ao longo deste livro.
+
+Agora nos voltamos para a questão da implementação computacional. Aqui podemos simplesmente apelar para as identidades algébricas lineares que vimos na seção A.2. É simples, se expressarmos preferências como um vetor de probabilidades anteriores (C), expressar o termo pragmático da energia livre esperada da seguinte forma:
+
+$$H[Q(O_\tau|\pi)] - \mathbb E_{Q(S_\tau|\pi)}[H[P(O_\tau|S_\tau)]] \\
+=-\pmb o_\pi \cdot \ln \pmb o_\pi - \pmb H \cdot \pmb s_{\pi\tau} \qquad (B.29) \\
+\pmb H \triangleq - diag(\pmb A \cdot \ln \pmb A)
 $$
 
 
+Veja a Seção A.2.3 para uma explicação da última linha. Juntando as equações B.28 e B.29, a energia livre esperada é esta:
 
+$$
+\pmb G_\pi = \sum_\tau \pmb G_{\pi\tau}  \qquad (B.30)\\
+\pmb G_{\pi\tau} = \pmb H \cdot \pmb s_{\pi\tau} + \pmb o_{\pi\tau} \cdot(\ln \pmb o_{\pi\tau}- ln \pmb C_\tau)
+$$
 
+Quando precisamos levar em conta o aprendizado ativo, complementamos isso com ganho de informação de parâmetro. O ganho de informação associado aos parâmetros do modelo generativo (ou seja, novidade) pode ser derivado da seguinte forma. Usando a KL-Divergence entre duas distribuições de Dirichlet, podemos expressar o ganho de informação que ocorreria após uma dada combinação estado-resultado:
 
+$$
+W_{ij} \triangleq D_{KL}[P(A_{ij} | o=i, s=j) || P(A_{ij})] \\
+= \underbrace{( \ln \Gamma(a_{ij}) - \ln \Gamma(a_{ij}+1) )}_{- \ln a_{ij}} + \underbrace{( \ln \Gamma(a_{oj}+1) - \ln \Gamma(a_{oj}) )}_{+ \ln a_{0j}} \qquad (B.31) \\
++ \psi(a_{ij}+1) -  \psi(a_{0j}+1) \\
+a_{0j} \triangleq \sum_i a_{ij}
 
-
+$$
 
 
 
