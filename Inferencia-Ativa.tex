@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-08-08}
+\date{2022-08-09}
 
 \begin{document}
 \maketitle
@@ -3311,6 +3311,22 @@ W\_\{ij\} \triangleq D\_\{KL\}{[}P(A\_\{ij\} \textbar{} o=i, s=j) \textbar\textb
 = \underbrace{( \ln \Gamma(a_{ij}) - \ln \Gamma(a_{ij}+1) )}\emph{\{- \ln a}\{ij\}\} + \underbrace{( \ln \Gamma(a_{oj}+1) - \ln \Gamma(a_{oj}) )}\emph{\{+ \ln a}\{0j\}\} \qquad (B.31) \textbackslash{}
 + \psi(a\_\{ij\}+1) - \psi(a\_\{0j\}+1) \textbackslash{}
 a\_\{0j\} \triangleq \sum\emph{i a}\{ij\}
+
+\$\$
+
+Aqui usamos o fato de que, se soubéssemos que uma determinada combinação de estado-resultado ocorreu, adicionaríamos 1 ao parâmetro de Dirichlet associado. Isso nos permite usar uma identidade padrão de uma função log gamma (como indicado pelas chaves) para simplificar a expressão:
+
+\[
+W_{ij}=\ln \frac{a_0j}{a_ij} + \frac{\partial_{a_ij} \Gamma(a_{ij} + 1)}{\partial_{a_{ij}} \Gamma(a_{ij})} - \frac{\partial_{a_0j} \Gamma(a_{0j} + 1)}{\partial_{a_0j} \Gamma(a_{0j})} \qquad (B.32) \\
+= \ln \frac{a_0j}{a_ij} + \frac{1}{a_{ij}} + \frac{\partial_{a_{ij}} \Gamma(a_{ij})}{\Gamma(a_{ij})} - \frac{1}{a_{0j}} - \frac{\partial_{a_0j} \Gamma(a_{0j} )}{\Gamma(a_{0j})}
+\]
+
+Aqui usamos a identidade \(x\Gamma(x) = \Gamma(x+1)\) e uma aplicação da Regra do produto. Em seguida, usamos a identidade \(ψ(x)Γ(x) = ∂xΓ(x)\) e a aproximação \(ψ(x) ≈ \ln x − (2x)^{−1}\) para simplificar isso:
+
+\$\$
+
+\frac{1}{a_{ij}} - \frac{1}{a_{0j}} + \ln \frac{a_{0j}}{a_{ij}}+\psi(a\_\{ij\})-\psi(a\_\{0j\}) \qquad (B.33) \textbackslash{}
+\approx \frac{1}{2{a_{ij}}} - \frac{1}{2{a_{0j}}}
 
 \$\$
 

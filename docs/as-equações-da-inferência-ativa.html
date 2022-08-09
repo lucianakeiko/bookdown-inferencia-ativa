@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-08" />
+<meta name="date" content="2022-08-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -453,6 +453,16 @@ W_{ij} D_{KL}[P(A_{ij} | o=i, s=j) || P(A_{ij})] \
 = <em>{- a</em>{ij}} + <em>{+ a</em>{0j}} (B.31) \
 + (a_{ij}+1) - (a_{0j}+1) \
 a_{0j} <em>i a</em>{ij}</p>
+<p>$$</p>
+<p>Aqui usamos o fato de que, se soubéssemos que uma determinada combinação de estado-resultado ocorreu, adicionaríamos 1 ao parâmetro de Dirichlet associado. Isso nos permite usar uma identidade padrão de uma função log gamma (como indicado pelas chaves) para simplificar a expressão:</p>
+<p><span class="math display">\[
+W_{ij}=\ln \frac{a_0j}{a_ij} + \frac{\partial_{a_ij} \Gamma(a_{ij} + 1)}{\partial_{a_{ij}} \Gamma(a_{ij})} - \frac{\partial_{a_0j} \Gamma(a_{0j} + 1)}{\partial_{a_0j} \Gamma(a_{0j})} \qquad (B.32) \\
+= \ln \frac{a_0j}{a_ij} + \frac{1}{a_{ij}} + \frac{\partial_{a_{ij}} \Gamma(a_{ij})}{\Gamma(a_{ij})} - \frac{1}{a_{0j}} - \frac{\partial_{a_0j} \Gamma(a_{0j} )}{\Gamma(a_{0j})}
+\]</span></p>
+<p>Aqui usamos a identidade <span class="math inline">\(x\Gamma(x) = \Gamma(x+1)\)</span> e uma aplicação da Regra do produto. Em seguida, usamos a identidade <span class="math inline">\(ψ(x)Γ(x) = ∂xΓ(x)\)</span> e a aproximação <span class="math inline">\(ψ(x) ≈ \ln x − (2x)^{−1}\)</span> para simplificar isso:</p>
+<p>$$</p>
+<p> - + +(a_{ij})-(a_{0j}) (B.33) \
+- </p>
 <p>$$</p>
 
 </div>
