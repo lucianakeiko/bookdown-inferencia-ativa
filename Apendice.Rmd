@@ -414,13 +414,24 @@ $$
 
 $$
 
+O ganho de informação esperado é então o seguinte:
+
+$$ \mathbb E_{Q(O_\tau,S_\tau | \pi)}  [ D_{KL}[P(A| O_\tau, S_\tau) || P(A)] \approx \pmb o_{\pi\tau} \cdot \pmb W \pmb s_{\pi\tau} ] $$
+
+Essa expressão simples aumenta a energia livre esperada para garantir um comportamento de busca de novidades, além de escolhas pragmáticas e salientes.
+
+### Redução do Modelo Bayesiano
+
+No capítulo 7, abordamos brevemente a ideia de aprendizado de estrutura e redução de modelo. Aproveitamos a oportunidade para destrinchar os princípios com um pouco mais de profundidade aqui. A redução do modelo bayesiano é uma técnica usada para comparar modelos alternativos que diferem apenas em seus anteriores. Através do teorema de Bayes (ver capítulo 2), podemos expressar a razão da probabilidade conjunta de dados ( y) e alguns parâmetros (θ ) entre dois modelos alternativos de duas maneiras diferentes:
+
+$$ \frac{P(y|\theta)}{\tilde P(y|\theta)}
+=\frac{P(y|\theta)P(\theta)}{\tilde P(y|\theta)\tilde P(\theta)}=
+\frac{P(y|\theta)P(y)}{\tilde P(y|\theta)\tilde P(y)} \qquad (B.35)$$
+
+Se a única diferença entre os dois modelos for a anterior (isto é, $P(y | \theta) = \tilde P(y | \theta)$ ), então podemos cancelar a probabilidade. Ao reorganizar, isso fornece uma expressão para a probabilidade posterior sob anteriores alternativos (reduzidos) em termos da probabilidade posterior sob os anteriores originais (completos):
 
 
-
-
-
-
-
+$$ \tilde P(y | \theta) = \frac{P(y | \theta)P(y)\tilde P(\theta)}{\tilde P(y)P(\theta)} \qquad (B.36)$$
 
 
 
