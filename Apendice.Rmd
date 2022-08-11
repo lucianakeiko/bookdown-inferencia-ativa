@@ -432,11 +432,20 @@ Se a única diferença entre os dois modelos for a anterior (isto é, $P(y | \th
 
 
 $$ \tilde P(y | \theta) = \frac{P(y | \theta)P(y)\tilde P(\theta)}{\tilde P(y)P(\theta)} \qquad (B.36)$$
+Integrando ambos os lados em relação aos parâmetros, obtém-se:
+
+$$1 = \frac{P(y)}{\tilde P(y)}\mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] \Rightarrow  \qquad (B.37)\\
+\ln \tilde P(y) = \ln P(y) + \ln \mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] 
+$$
+
+Substituindo de volta na equação B.36 dá isto:
 
 
+$$ \ln \tilde P(\theta|y)=\ln P(\theta|y)+\ln \tilde P(\theta) - \ln P(\theta) - \ln \mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] \qquad (B.38)$$
+Juntas, as equações B.37 e B.38 significam que podemos encontrar a evidência do modelo e a posterior que teríamos se tivéssemos usado uma dada priorização reduzida, usando os resultados da inversão de um modelo completo. Podemos reexpressar essas equações em termos das grandezas variacionais introduzidas no capítulo 4:
 
-
-
+$$ F[P(\theta)]-F[\tilde P(\theta)] = \ln \mathbb E_{Q(\theta)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]  \qquad (B.39)\\ 
+\ln \tilde Q(\theta) = \ln Q(\theta) + \ln \tilde P(\theta)  - \ln P(\theta) - \ln \mathbb E_{Q(\theta)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]$$
 
 
 

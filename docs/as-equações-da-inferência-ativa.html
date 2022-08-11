@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-10" />
+<meta name="date" content="2022-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -476,7 +476,16 @@ W_{ij}=\ln \frac{a_0j}{a_ij} + \frac{\partial_{a_ij} \Gamma(a_{ij} + 1)}{\partia
 =\frac{P(y|\theta)P(\theta)}{\tilde P(y|\theta)\tilde P(\theta)}=
 \frac{P(y|\theta)P(y)}{\tilde P(y|\theta)\tilde P(y)} \qquad (B.35)\]</span></p>
 <p>Se a única diferença entre os dois modelos for a anterior (isto é, <span class="math inline">\(P(y | \theta) = \tilde P(y | \theta)\)</span> ), então podemos cancelar a probabilidade. Ao reorganizar, isso fornece uma expressão para a probabilidade posterior sob anteriores alternativos (reduzidos) em termos da probabilidade posterior sob os anteriores originais (completos):</p>
-<p><span class="math display">\[ \tilde P(y | \theta) = \frac{P(y | \theta)P(y)\tilde P(\theta)}{\tilde P(y)P(\theta)} \qquad (B.36)\]</span></p>
+<p><span class="math display">\[ \tilde P(y | \theta) = \frac{P(y | \theta)P(y)\tilde P(\theta)}{\tilde P(y)P(\theta)} \qquad (B.36)\]</span>
+Integrando ambos os lados em relação aos parâmetros, obtém-se:</p>
+<p><span class="math display">\[1 = \frac{P(y)}{\tilde P(y)}\mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] \Rightarrow  \qquad (B.37)\\
+\ln \tilde P(y) = \ln P(y) + \ln \mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]
+\]</span></p>
+<p>Substituindo de volta na equação B.36 dá isto:</p>
+<p><span class="math display">\[ \ln \tilde P(\theta|y)=\ln P(\theta|y)+\ln \tilde P(\theta) - \ln P(\theta) - \ln \mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] \qquad (B.38)\]</span>
+Juntas, as equações B.37 e B.38 significam que podemos encontrar a evidência do modelo e a posterior que teríamos se tivéssemos usado uma dada priorização reduzida, usando os resultados da inversão de um modelo completo. Podemos reexpressar essas equações em termos das grandezas variacionais introduzidas no capítulo 4:</p>
+<p><span class="math display">\[ F[P(\theta)]-F[\tilde P(\theta)] = \ln \mathbb E_{Q(\theta)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]  \qquad (B.39)\\
+\ln \tilde Q(\theta) = \ln Q(\theta) + \ln \tilde P(\theta)  - \ln P(\theta) - \ln \mathbb E_{Q(\theta)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]\]</span></p>
 
 </div>
 </div>

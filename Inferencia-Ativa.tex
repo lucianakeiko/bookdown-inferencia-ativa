@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-08-09}
+\date{2022-08-11}
 
 \begin{document}
 \maketitle
@@ -3327,6 +3327,41 @@ Aqui usamos a identidade \(x\Gamma(x) = \Gamma(x+1)\) e uma aplicação da Regra
 
 \frac{1}{a_{ij}} - \frac{1}{a_{0j}} + \ln \frac{a_{0j}}{a_{ij}}+\psi(a\_\{ij\})-\psi(a\_\{0j\}) \qquad (B.33) \textbackslash{}
 \approx \frac{1}{2{a_{ij}}} - \frac{1}{2{a_{0j}}}
+
+\$\$
+
+O ganho de informação esperado é então o seguinte:
+
+\[ \mathbb E_{Q(O_\tau,S_\tau | \pi)}  [ D_{KL}[P(A| O_\tau, S_\tau) || P(A)] \approx \pmb o_{\pi\tau} \cdot \pmb W \pmb s_{\pi\tau} ] \]
+
+Essa expressão simples aumenta a energia livre esperada para garantir um comportamento de busca de novidades, além de escolhas pragmáticas e salientes.
+
+\hypertarget{reduuxe7uxe3o-do-modelo-bayesiano}{%
+\subsection{Redução do Modelo Bayesiano}\label{reduuxe7uxe3o-do-modelo-bayesiano}}
+
+No capítulo 7, abordamos brevemente a ideia de aprendizado de estrutura e redução de modelo. Aproveitamos a oportunidade para destrinchar os princípios com um pouco mais de profundidade aqui. A redução do modelo bayesiano é uma técnica usada para comparar modelos alternativos que diferem apenas em seus anteriores. Através do teorema de Bayes (ver capítulo 2), podemos expressar a razão da probabilidade conjunta de dados ( y) e alguns parâmetros (θ ) entre dois modelos alternativos de duas maneiras diferentes:
+
+\[ \frac{P(y|\theta)}{\tilde P(y|\theta)}
+=\frac{P(y|\theta)P(\theta)}{\tilde P(y|\theta)\tilde P(\theta)}=
+\frac{P(y|\theta)P(y)}{\tilde P(y|\theta)\tilde P(y)} \qquad (B.35)\]
+
+Se a única diferença entre os dois modelos for a anterior (isto é, \(P(y | \theta) = \tilde P(y | \theta)\) ), então podemos cancelar a probabilidade. Ao reorganizar, isso fornece uma expressão para a probabilidade posterior sob anteriores alternativos (reduzidos) em termos da probabilidade posterior sob os anteriores originais (completos):
+
+\[ \tilde P(y | \theta) = \frac{P(y | \theta)P(y)\tilde P(\theta)}{\tilde P(y)P(\theta)} \qquad (B.36)\]
+Integrando ambos os lados em relação aos parâmetros, obtém-se:
+
+\[1 = \frac{P(y)}{\tilde P(y)}\mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] \Rightarrow  \qquad (B.37)\\
+\ln \tilde P(y) = \ln P(y) + \ln \mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] 
+\]
+
+Substituindo de volta na equação B.36 dá isto:
+
+\[ \ln \tilde P(\theta|y)=\ln P(\theta|y)+\ln \tilde P(\theta) - \ln P(\theta) - \ln \mathbb E_{P(\theta|y)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] \qquad (B.38)\]
+Juntas, as equações B.37 e B.38 significam que podemos encontrar a evidência do modelo e a posterior que teríamos se tivéssemos usado uma dada priorização reduzida, usando os resultados da inversão de um modelo completo. Podemos reexpressar essas equações em termos das grandezas variacionais introduzidas no capítulo 4:
+
+\$\$
+F{[}P(\theta){]}-F{[}\tilde P(\theta){]} = \ln \mathbb E\_\{Q(\theta)\}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]  \qquad (B.39)\textbackslash{}
+\ln \tilde Q(\theta) = \ln Q(\theta) + \ln \tilde P(\theta) - \ln P(\theta) - \ln \mathbb E\_\{Q(\theta)\}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big] 
 
 \$\$
 
