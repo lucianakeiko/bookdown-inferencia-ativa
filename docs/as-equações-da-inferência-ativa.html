@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-11" />
+<meta name="date" content="2022-08-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,7 +304,7 @@ Q ) e um modelo generativo (P). Isso nos permite expressar a energia livre par
 <p>Resumidamente, a primeira linha da equação B.3 define crenças sobre estados em termos de uma aproximação de campo médio (ver equação A.41), fatorada ao longo do tempo. Cada ponto no tempo está associado a uma crença sobre o que seria o estado ao perseguir uma política, dado pelo vetor sπτ, cujos elementos são as probabilidades de cada estado alternativo. A trajetória de observações na segunda linha depende de uma trajetória de estados ocultos, com a matriz (ou tensor, se os estados forem ainda fatorados) A indicando a distribuição sobre as observações para cada estado. Da mesma forma, a trajetória anterior dos estados sob um modelo compreende as probabilidades de transição sob aquela política (Bπτ) e as probabilidades iniciais dos estados (D). Substituindo-os na expressão de energia livre na Equação B.2, chegamos à seguinte expressão para a energia livre sob uma política:</p>
 <p><span class="math display">\[\bf F_\pi = \mathbf s_{\pi1}(\ln \mathbf s_{\pi1} - \ln \mathbf A\cdot o_1-\ln \mathbf D)+ \sum S_{\pi\tau} \cdot (\ln \mathbf s_{\pi\tau} - \ln \mathbf A \cdot o_{\tau} - \ln \mathbf B_{\pi\tau}\mathbf s_{\pi\tau-1} )\qquad\qquad\qquad(B.4)  \]</span>
 Observe que o produto escalar de um vetor de probabilidade com outra quantidade é equivalente à operação de expectativa. Consulte a seção A.2.1 se isso não estiver claro. A Equação B.4 trata os resultados como se fossem vetores de probabilidade, mas com um no elemento correspondente ao resultado observado e zeros em outro lugar (às vezes chamado de codificação one-hot ou vetor 1-in-k). O desafio agora é minimizar a energia livre em relação às nossas crenças sobre estados (sπτ) para garantir que a energia livre se torne uma boa aproximação de uma probabilidade marginal. Poderíamos fazer isso como na seção A.4.2 e minimizar em relação a cada fator de nossas crenças, um de cada vez, iterando até convergir. No entanto, como estamos interessados em esquemas biologicamente mais plausíveis, podemos construir um sistema dinâmico que converge na mesma solução. Essa abordagem é conhecida como gradiente descendente, pois seguimos os gradientes de energia livre para baixo até chegarmos ao mínimo.</p>
-<p>Para atualizar crenças sobre estados, tomamos o gradiente disso em relação às crenças atuais sobre estados. Em seguida, definimos uma variável auxiliar (v) que desempenha o papel de logaritmo e a configuramos para realizar um gradiente descendente na energia livre. Este log posterior é então passado por uma função softmax<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> (σ ) para convertê-lo em uma distribuição de probabilidade normalizada. Esse processo garante que as crenças sobre os estados mudem de tal forma que diminuam a energia livre.</p>
+<p>Para atualizar crenças sobre estados, tomamos o gradiente disso em relação às crenças atuais sobre estados. Em seguida, definimos uma variável auxiliar (v) que desempenha o papel de logaritmo e a configuramos para realizar um gradiente descendente na energia livre. Este log posterior é então passado por uma função softmax<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a> (σ ) para convertê-lo em uma distribuição de probabilidade normalizada. Esse processo garante que as crenças sobre os estados mudem de tal forma que diminuam a energia livre.</p>
 <p><span class="math display">\[ S_{\pi\tau} = \sigma(\mathbf V_{\pi\tau}) \mathbf V_{\pi\tau} \\
 \dot V_{\pi\tau} = - \nabla_{S_{_\pi\tau}}\mathbf F_\pi \qquad\qquad\qquad  (B.5) \\
 \nabla_{S{\pi\tau}}\mathbf F_\pi = \ln S_{\pi\tau} - ln A \cdot o_\tau - \ln \mathbf B_{\pi\tau}\mathbf s_{\pi\tau-1}- \ln \mathbf B_{\pi\tau+1}\mathbf \cdot s_{\pi\tau+1}\]</span></p>
@@ -397,7 +397,7 @@ F = \pmb \pi \cdot (F+ \ln \pmb \pi + \gamma \cdot \pmb G + \ln \pmb Z(\pmb \gam
 \pmb o_\tau^\zeta \triangleq \sigma(\zeta \ln \pmb A)\pmb s_\tau \\
 \pmb s_{\pi\tau}^\omega \triangleq \sigma( \omega \ln \pmb B_{\pi\tau}) \pmb s_{\pi\tau-1} \\
 \pmb \pi_o \triangleq \sigma(-\gamma \pmb G)\]</span></p>
-<p>Tomando a derivada parcial<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> em relação às precisões esperadas, obtém-se:</p>
+<p>Tomando a derivada parcial<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a> em relação às precisões esperadas, obtém-se:</p>
 <p><span class="math display">\[\begin{Bmatrix} \partial_\zeta F\\ \partial_\omega F \\ \partial_\gamma F \end{Bmatrix} = 0
 \Leftrightarrow \begin{Bmatrix} \beta_\zeta \\ \beta_\omega \\ \beta_\gamma \end{Bmatrix}
 =\begin{Bmatrix} \sum_\tau(o^\zeta_\tau - o_\tau) \cdot ln \pmb A + \beta_\zeta \\ \sum_\tau \pi \cdot(s^\omega_{\pi\tau}-s_{\pi\tau}) \cdot \ln \pmb B_\pi \pmb s_{\pi\tau-1} + \beta_\omega \\ (\pi - \pi_0)\cdot G + \beta_\gamma  \end{Bmatrix} \qquad (B.19)\]</span></p>
@@ -486,15 +486,27 @@ Integrando ambos os lados em relação aos parâmetros, obtém-se:</p>
 Juntas, as equações B.37 e B.38 significam que podemos encontrar a evidência do modelo e a posterior que teríamos se tivéssemos usado uma dada priorização reduzida, usando os resultados da inversão de um modelo completo. Podemos reexpressar essas equações em termos das grandezas variacionais introduzidas no capítulo 4:</p>
 <p><span class="math display">\[ F[P(\theta)]-F[\tilde P(\theta)] = \ln \mathbb E_{Q(\theta)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]  \qquad (B.39)\\
 \ln \tilde Q(\theta) = \ln Q(\theta) + \ln \tilde P(\theta)  - \ln P(\theta) - \ln \mathbb E_{Q(\theta)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]\]</span></p>
+<p>Para referência, oferecemos a forma da equação B.39 sob dois tipos diferentes de priorização. A primeira é uma distribuição normal<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></p>
+<p><span class="math display">\[
+P(\theta) = \mathcal{N}(\eta, \Sigma) \qquad\qquad\\
+\tilde P(\theta) = \mathcal{N}(\tilde\eta, \tilde\Sigma) \qquad\qquad\\
+Q(\theta) = \mathcal{N}(\mu, C) \qquad\qquad\\
+\tilde Q(\theta) = \mathcal{N}(\tilde\mu, \tilde C) \qquad (B.40)\\
+\tilde C^{-1}=\tilde P = P + \tilde \Pi - \Pi \\
+\tilde \mu = \tilde C(P\mu + \tilde\Pi\tilde\eta - \Pi\eta) \\
+\Delta F = -\frac{1}{2}\ln |\tilde\Pi P \tilde C \Sigma| +\frac{1}{2}(\mu\cdot P \mu +\tilde \eta \cdot \tilde\Pi \tilde \eta - \eta \cdot \Pi\eta - \tilde \mu\cdot\tilde P\tilde \mu)\]</span>
+Na prática, isso é usado na configuração de modelos mistos, com um componente contínuo e outro categórico. Se cada resultado categórico deste último estiver associado a um anterior contínuo, podemos avaliar eficientemente a evidência para cada um desses anteriores (e, portanto, resultados categóricos) sem ter que inverter cada modelo por sua vez. Consulte o capítulo 8 para obter um exemplo.</p>
+<p>Mais frequentemente, em uma configuração puramente POMDP, podemos estar interessados em comparar hipóteses sobre distribuições a priori de Dirichlet. Isso foi usado para simular a poda de elementos em uma matriz de probabilidade como uma metáfora para a poda sináptica durante o sono (Friston, Lin et al. 2017). A forma de redução do modelo Bayesiano para distribuições de Dirichlet é a seguinte:</p>
 
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Uma função exponencial normalizada<a href="as-equações-da-inferência-ativa.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Para concisão, omitimos alguns termos nas derivadas das funções de partição de log. Estamos autorizados a fazê-lo pela escolha da distribuição variacional, pois quaisquer termos polinomiais de ordem superior violariam a forma dessa distribuição.<a href="as-equações-da-inferência-ativa.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<ol start="30">
+<li id="fn30"><p>Uma função exponencial normalizada<a href="as-equações-da-inferência-ativa.html#fnref30" class="footnote-back">↩︎</a></p></li>
+<li id="fn31"><p>Para concisão, omitimos alguns termos nas derivadas das funções de partição de log. Estamos autorizados a fazê-lo pela escolha da distribuição variacional, pois quaisquer termos polinomiais de ordem superior violariam a forma dessa distribuição.<a href="as-equações-da-inferência-ativa.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<li id="fn32"><p>​O <span class="math inline">\(C\)</span> aqui é uma covariância e não deve ser confundido com uma preferência anterior, apesar da mesma notação nas seções anteriores.<a href="as-equações-da-inferência-ativa.html#fnref32" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

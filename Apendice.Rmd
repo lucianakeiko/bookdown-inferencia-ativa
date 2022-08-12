@@ -447,11 +447,23 @@ Juntas, as equações B.37 e B.38 significam que podemos encontrar a evidência 
 $$ F[P(\theta)]-F[\tilde P(\theta)] = \ln \mathbb E_{Q(\theta)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]  \qquad (B.39)\\ 
 \ln \tilde Q(\theta) = \ln Q(\theta) + \ln \tilde P(\theta)  - \ln P(\theta) - \ln \mathbb E_{Q(\theta)}\Big[\frac{\tilde P(\theta)}{P(\theta)}\Big]$$
 
+Para referência, oferecemos a forma da equação B.39 sob dois tipos diferentes de priorização. A primeira é uma distribuição normal[^2001]
+
+[^2001]: ​O $C$ aqui é uma covariância e não deve ser confundido com uma preferência anterior, apesar da mesma notação nas seções anteriores.
 
 
 
+$$
+P(\theta) = \mathcal{N}(\eta, \Sigma) \qquad\qquad\\
+\tilde P(\theta) = \mathcal{N}(\tilde\eta, \tilde\Sigma) \qquad\qquad\\
+Q(\theta) = \mathcal{N}(\mu, C) \qquad\qquad\\
+\tilde Q(\theta) = \mathcal{N}(\tilde\mu, \tilde C) \qquad (B.40)\\
+\tilde C^{-1}=\tilde P = P + \tilde \Pi - \Pi \\
+\tilde \mu = \tilde C(P\mu + \tilde\Pi\tilde\eta - \Pi\eta) \\
+\Delta F = -\frac{1}{2}\ln |\tilde\Pi P \tilde C \Sigma| +\frac{1}{2}(\mu\cdot P \mu +\tilde \eta \cdot \tilde\Pi \tilde \eta - \eta \cdot \Pi\eta - \tilde \mu\cdot\tilde P\tilde \mu)$$
+Na prática, isso é usado na configuração de modelos mistos, com um componente contínuo e outro categórico. Se cada resultado categórico deste último estiver associado a um anterior contínuo, podemos avaliar eficientemente a evidência para cada um desses anteriores (e, portanto, resultados categóricos) sem ter que inverter cada modelo por sua vez. Consulte o capítulo 8 para obter um exemplo.
 
-
+Mais frequentemente, em uma configuração puramente POMDP, podemos estar interessados em comparar hipóteses sobre distribuições a priori de Dirichlet. Isso foi usado para simular a poda de elementos em uma matriz de probabilidade como uma metáfora para a poda sináptica durante o sono (Friston, Lin et al. 2017). A forma de redução do modelo Bayesiano para distribuições de Dirichlet é a seguinte:
 
 
 
