@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-12" />
+<meta name="date" content="2022-08-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -256,6 +256,7 @@
 <li class="chapter" data-level="B.2.5" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#energia-livre-esperada"><i class="fa fa-check"></i><b>B.2.5</b> Energia Livre Esperada</a></li>
 <li class="chapter" data-level="B.2.6" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#redução-do-modelo-bayesiano"><i class="fa fa-check"></i><b>B.2.6</b> Redução do Modelo Bayesiano</a></li>
 </ul></li>
+<li class="chapter" data-level="B.3" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#filtragem-generalizada-ativa"><i class="fa fa-check"></i><b>B.3</b> Filtragem Generalizada (Ativa)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
@@ -494,11 +495,45 @@ Q(\theta) = \mathcal{N}(\mu, C) \qquad\qquad\\
 \tilde Q(\theta) = \mathcal{N}(\tilde\mu, \tilde C) \qquad (B.40)\\
 \tilde C^{-1}=\tilde P = P + \tilde \Pi - \Pi \\
 \tilde \mu = \tilde C(P\mu + \tilde\Pi\tilde\eta - \Pi\eta) \\
-\Delta F = -\frac{1}{2}\ln |\tilde\Pi P \tilde C \Sigma| +\frac{1}{2}(\mu\cdot P \mu +\tilde \eta \cdot \tilde\Pi \tilde \eta - \eta \cdot \Pi\eta - \tilde \mu\cdot\tilde P\tilde \mu)\]</span>
-Na prática, isso é usado na configuração de modelos mistos, com um componente contínuo e outro categórico. Se cada resultado categórico deste último estiver associado a um anterior contínuo, podemos avaliar eficientemente a evidência para cada um desses anteriores (e, portanto, resultados categóricos) sem ter que inverter cada modelo por sua vez. Consulte o capítulo 8 para obter um exemplo.</p>
+\Delta F = -\frac{1}{2}\ln |\tilde\Pi P \tilde C \Sigma| +\frac{1}{2}(\mu\cdot P \mu +\tilde \eta \cdot \tilde\Pi \tilde \eta - \eta \cdot \Pi\eta - \tilde \mu\cdot\tilde P\tilde \mu)\]</span></p>
+<p>Na prática, isso é usado na configuração de modelos mistos, com um componente contínuo e outro categórico. Se cada resultado categórico deste último estiver associado a um anterior contínuo, podemos avaliar eficientemente a evidência para cada um desses anteriores (e, portanto, resultados categóricos) sem ter que inverter cada modelo por sua vez. Consulte o capítulo 8 para obter um exemplo.</p>
 <p>Mais frequentemente, em uma configuração puramente POMDP, podemos estar interessados em comparar hipóteses sobre distribuições a priori de Dirichlet. Isso foi usado para simular a poda de elementos em uma matriz de probabilidade como uma metáfora para a poda sináptica durante o sono (Friston, Lin et al. 2017). A forma de redução do modelo Bayesiano para distribuições de Dirichlet é a seguinte:</p>
-
+<p><span class="math display">\[ P(\theta)=Dir(a) \qquad\qquad\qquad\qquad\qquad\\
+\tilde P(\theta) = Dir(\tilde a)
+\qquad\qquad\qquad\qquad\qquad\\
+Q(\theta)=Dir(\pmb a)  
+\qquad\qquad\qquad\qquad (B.41) \\
+\pmb{\tilde a} = \pmb a + \tilde a - a  
+\qquad\qquad\qquad\qquad\qquad \\
+\Delta F = ln B(\pmb a) - ln B(\pmb {\tilde a} )+ \ln B(\tilde a) - \ln B(a) \qquad\qquad\qquad\qquad\qquad \]</span></p>
+<p>Nesta expressão, B denota uma função beta. Resultados semelhantes podem ser derivados para uma variedade de distribuições (veja Friston, Parr e Zeidman 2018), mas as priors normal e Dirichlet são as mais comumente encontradas na Inferência Ativa.</p>
 </div>
+</div>
+<div id="filtragem-generalizada-ativa" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">B.3</span> Filtragem Generalizada (Ativa)<a href="as-equações-da-inferência-ativa.html#filtragem-generalizada-ativa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Passamos agora das inferências categóricas sob um modelo POMDP para o domínio contínuo. É aqui que algumas das preliminares do apêndice A realmente começam a valer a pena. Exploraremos a aproximação de Laplace e as coordenadas generalizadas de movimento, ambas apresentadas na seção A.3. Além disso, precisaremos construir matrizes de precisão incluindo diferentes ordens de movimento generalizado, como vimos na seção A.5.2. Das equações A.33 e A.34 podemos escrever a energia livre sob a aproximação de Laplace como segue:</p>
+<p><span class="math display">\[F[q,\tilde y] \approx -\frac{1}{2} \ln(2\pi)^k|\tilde \Sigma| - ln p(\tilde y, \tilde \mu)
+\qquad\qquad\qquad\qquad\qquad\qquad \\
+q(x) = \mathcal N(\tilde \mu, \tilde \Sigma^{-1})
+\qquad\qquad\qquad\qquad\qquad\qquad(B.42) \\
+\tilde \Sigma^{-1} = - \nabla_{\tilde x}(\nabla_{\tilde x} \ln p(\tilde y, \tilde x))^T \Big|_{\tilde x=\tilde \mu} \qquad\qquad\qquad\qquad\qquad\qquad\]</span></p>
+<p>Aqui expressamos a energia livre, usando a suposição de Laplace, para um modelo definido em coordenadas generalizadas. Sob a suposição de laplace, o único termo na primeira linha que varia com <span class="math inline">\(\mu\)</span> é o último. Este é o termo que expressa o modelo generativo. Nosso próximo passo é especificar a forma do modelo generativo:</p>
+<p><span class="math display">\[p(\tilde y, \tilde x, \tilde v) = p(\tilde y | \tilde x, \tilde v)p(\tilde x|\tilde v)p(\tilde v)
+\qquad\qquad\qquad\qquad\\
+p(\tilde y | \tilde x, \tilde v)= \mathcal N(\tilde g(\tilde x, \tilde v), \tilde\Pi_y)
+\qquad\qquad\qquad\qquad\\
+p(\tilde x | \tilde v) = \mathcal N(D \cdot \tilde f(\tilde x, \tilde v), \tilde \Pi_x)
+\qquad\qquad\qquad\qquad\\
+p(\tilde v) = \mathcal N(\tilde \eta, \tilde \Pi_x)
+\qquad\qquad\qquad\qquad (B.43)\\
+D\tilde x = \tilde f(\tilde x, \tilde v) +\tilde \omega_x
+\qquad\qquad\qquad\qquad\\
+\tilde y = \tilde g(\tilde x, \tilde v)+\tilde \omega_y
+\qquad\qquad\qquad\qquad\\\]</span></p>
+<p>Observe que agora temos duas variáveis ocultas, <span class="math inline">\(x\)</span> e <span class="math inline">\(v\)</span>. A diferença é que a primeira depende de uma equação de movimento <span class="math inline">\((f)\)</span>, enquanto a segunda depende de uma priori estática. O operador <span class="math inline">\(D\)</span> na penúltima linha é uma matriz com uns acima da diagonal principal. Em coordenadas generalizadas, isso equivale a tomar uma derivada temporal, pois cada elemento no vetor de derivadas temporais é deslocado para cima em um. As precisões generalizadas são construídas como na seção A.5.3. Substituindo as quantidades da equação B.43 em B.42, temos o seguinte:</p>
+<p><span class="math display">\[
+F[q, \tilde y] = \underbrace{\frac{1}{2} \tilde \epsilon_y \cdot \tilde \Pi_y \tilde \epsilon_y}_{- \ln p(\tilde y| \tilde \mu_x , \tilde \mu_v)} + \underbrace{\frac{1}{2} \tilde \epsilon_x \cdot \tilde \Pi_x \tilde \epsilon_x}_{- \ln p(\tilde x| \tilde \mu_x , \tilde \mu_v)} + \underbrace{\frac{1}{2} \tilde \epsilon_v \cdot \tilde \Pi_v \tilde \epsilon_v}_{- \ln p(\tilde \mu_v)}\]</span></p>
+
 </div>
 </div>
 <div class="footnotes">
