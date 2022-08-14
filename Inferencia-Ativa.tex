@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-08-13}
+\date{2022-08-14}
 
 \begin{document}
 \maketitle
@@ -3417,7 +3417,19 @@ D\tilde x = \tilde f(\tilde x, \tilde v) +\tilde \omega_x
 Observe que agora temos duas variáveis ocultas, \(x\) e \(v\). A diferença é que a primeira depende de uma equação de movimento \((f)\), enquanto a segunda depende de uma priori estática. O operador \(D\) na penúltima linha é uma matriz com uns acima da diagonal principal. Em coordenadas generalizadas, isso equivale a tomar uma derivada temporal, pois cada elemento no vetor de derivadas temporais é deslocado para cima em um. As precisões generalizadas são construídas como na seção A.5.3. Substituindo as quantidades da equação B.43 em B.42, temos o seguinte:
 
 \[
-F[q, \tilde y] = \underbrace{\frac{1}{2} \tilde \epsilon_y \cdot \tilde \Pi_y \tilde \epsilon_y}_{- \ln p(\tilde y| \tilde \mu_x , \tilde \mu_v)} + \underbrace{\frac{1}{2} \tilde \epsilon_x \cdot \tilde \Pi_x \tilde \epsilon_x}_{- \ln p(\tilde x| \tilde \mu_x , \tilde \mu_v)} + \underbrace{\frac{1}{2} \tilde \epsilon_v \cdot \tilde \Pi_v \tilde \epsilon_v}_{- \ln p(\tilde \mu_v)}\]
+F[q, \tilde y] = \underbrace{\frac{1}{2} \tilde \epsilon_y \cdot \tilde \Pi_y \tilde \epsilon_y}_{- \ln p(\tilde y| \tilde \mu_x , \tilde \mu_v)} + \underbrace{\frac{1}{2} \tilde \epsilon_x \cdot \tilde \Pi_x \tilde \epsilon_x}_{- \ln p(\tilde x| \tilde \mu_x , \tilde \mu_v)} + \underbrace{\frac{1}{2} \tilde \epsilon_v \cdot \tilde \Pi_v \tilde \epsilon_v}_{- \ln p(\tilde \mu_v)} \\
+\tilde \epsilon_y \triangleq \tilde y - \tilde g(\tilde \mu_x, \tilde \mu_v) \qquad (B.44)\\
+\tilde \epsilon_x \triangleq D \tilde \mu_x - \tilde f(\tilde \mu_x, \tilde \mu_v)\qquad\qquad\\
+\tilde \epsilon_v \triangleq  \tilde \mu_v - \tilde \eta \qquad\qquad\]
+Omitimos todas as constantes em relação a μ. A partir da equação B.44, podemos encontrar os gradientes da energia livre (usando identidades introduzidas na seção A.2.2):
+
+\[
+\nabla_{\tilde \mu_x}F[q,\tilde y] = - \nabla_{\tilde \mu_x}\tilde g \cdot \tilde \Pi_y \tilde \varepsilon_y + D\cdot \tilde \Pi_x \tilde \varepsilon_x - \nabla_{\tilde \mu_x}\tilde f \cdot \tilde \Pi_x \tilde \varepsilon_x \qquad\qquad (B.45) \\
+\nabla_{\tilde \mu_v}F[q,\tilde y] = - \nabla_{\tilde \mu_v}\tilde g \cdot \tilde \Pi_y \tilde \varepsilon_y + \nabla_{\tilde \mu_v} \tilde f\cdot \tilde \Pi_x \tilde \varepsilon_x + \tilde \Pi_v \tilde \varepsilon_v \qquad\qquad\qquad\qquad\]
+
+Podemos agora especificar um gradiente descendente para encontrar os valores de μ que minimizam a energia livre. No entanto, isso implicaria que quando a energia livre é minimizada, μ se torna estático. Claramente, isso é subótimo se acreditarmos que ordens superiores de movimento são diferentes de zero. Para explicar isso, podemos expressar um gradiente descendente em um referencial em movimento, de modo que quando a energia livre é minimizada, \(\mu\) continua a se mover com velocidade \(\mu'\):
+
+\[ \dot {\tilde \mu}^{(i)}_x - D \tilde \mu^{(i)}_x = \nabla_{\tilde \mu^{(i)}_x} \tilde g \cdot \tilde\Pi_v^{(i-1)}\tilde \varepsilon_v^{(i-1)} -D \]
 
 \cleardoublepage
 
