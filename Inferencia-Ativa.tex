@@ -83,7 +83,7 @@
 
 \title{Inferencia Ativa}
 \author{Thomas Parr, Giovanni Pezzulo, and Karl J. Friston}
-\date{2022-08-14}
+\date{2022-08-15}
 
 \begin{document}
 \maketitle
@@ -3429,7 +3429,45 @@ Omitimos todas as constantes em relação a μ. A partir da equação B.44, pode
 
 Podemos agora especificar um gradiente descendente para encontrar os valores de μ que minimizam a energia livre. No entanto, isso implicaria que quando a energia livre é minimizada, μ se torna estático. Claramente, isso é subótimo se acreditarmos que ordens superiores de movimento são diferentes de zero. Para explicar isso, podemos expressar um gradiente descendente em um referencial em movimento, de modo que quando a energia livre é minimizada, \(\mu\) continua a se mover com velocidade \(\mu'\):
 
-\[ \dot {\tilde \mu}^{(i)}_x - D \tilde \mu^{(i)}_x = \nabla_{\tilde \mu^{(i)}_x} \tilde g \cdot \tilde\Pi_v^{(i-1)}\tilde \varepsilon_v^{(i-1)} -D \]
+\[ \dot {\tilde \mu_x} - D \tilde \mu_x = \nabla_{\tilde \mu_x} \tilde g \cdot \tilde\Pi_y\tilde \varepsilon_y -D \cdot \tilde \Pi_x \tilde \varepsilon_x + \nabla_{\tilde \mu_x} \tilde f \cdot \tilde \Pi_x \tilde \varepsilon_x \qquad (B.46) \\
+\dot {\tilde \mu}_v - D \tilde \mu_v = \nabla_{\tilde \mu_v} \tilde g \cdot \tilde\Pi_y\tilde \varepsilon_y + \nabla_{\tilde \mu_v} \tilde f \cdot \tilde \Pi_x \tilde \varepsilon_x - \tilde \Pi_v \tilde \varepsilon_v \qquad \qquad
+\]
+
+A Equação B.46 especifica um esquema de codificação preditivo, no qual os erros de previsão geram atualizações nas expectativas, resolvendo esses erros. Esses esquemas podem ser estendidos para incluir vários níveis hierárquicos duplicando as equações de B.46 para um nível adicional, mas substituindo \(y\) por \(v\) do nível inferior:
+
+\$\$ \dot {\tilde \mu}\^{}\{(i)\}\_x - D \tilde \mu\textsuperscript{\{(i)\}\emph{x = \nabla}\{\tilde \mu}\{(i)\}\_x\} \tilde g \cdot \tilde\Pi\_v\^{}\{(i-1)\}\tilde \varepsilon\_v\^{}\{(i-1)\} -D \cdot \tilde \Pi\_x\^{}\{(i)\} \tilde \varepsilon\emph{x\^{}\{(i)\} + \nabla}\{\tilde \mu\_x\^{}\{(i)\}\} \tilde f\^{}\{(i)\} \cdot \tilde \Pi\_x\^{}\{(i)\} \tilde \varepsilon\_x\^{}\{(i)\} \qquad \qquad \textbackslash{}
+\dot {\tilde \mu}\^{}\{(i)\}\_v - D \tilde \mu\textsuperscript{\{(i)\}\emph{x = \nabla}\{\tilde \mu}\{(i)\}\_x\} \tilde g \cdot \tilde\Pi\_v\textsuperscript{\{(i-1)\}\tilde \varepsilon\emph{v\^{}\{(i-1)\} + \nabla}\{\tilde \mu}\{(i)\}\_v\}\tilde f\^{}\{(i)\} \cdot \tilde \Pi\_x\^{}\{(i)\} \tilde \varepsilon\_x\^{}\{(i)\} + \tilde \Pi\_v\^{}\{(i)\} \tilde \varepsilon\_v\^{}\{(i)\}\qquad (B.47) \textbackslash{}
+\tilde \varepsilon\_v\^{}\{(i)\} \triangleq \tilde \mu\_v\textsuperscript{\{(i)\}-\tilde g}\{(i+1)\}(\tilde \mu\_x\^{}\{(i+1)\} , \tilde \mu\_v\^{}\{(i+1)\}) \qquad \textbackslash{}
+\tilde \varepsilon\_x\^{}\{(i)\} \triangleq  D \tilde \mu\_x\textsuperscript{\{(i)\}-\tilde f}\{(i)\}(\tilde \mu\_x\^{}\{(i)\} , \tilde \mu\_v\^{}\{(i)\})
+
+\$\$
+Sob a Inferência Ativa, a energia livre é minimizada pela percepção, mas também pela ação. Como a única coisa que a ação muda é a entrada sensorial ( y), a maioria dos termos na equação B.44 são irrelevantes para a ação. Minimizar a energia livre em relação à ação resulta em:
+
+\[ \dot u = - \nabla_u \tilde y(u) \cdot \tilde \Pi_y \varepsilon_y \qquad (B.48)\]
+
+Juntas, as equações B.47 e B.48 fornecem uma descrição muito geral da Inferência Ativa para modelos de espaço de estados contínuos. Não discutiremos a questão do aprendizado ou modelos mistos nesta seção, pois eles estão resumidos nos quadros 8.2 e 8.3, respectivamente.
+
+\hypertarget{um-exemplo-comentado-do-cuxf3digo-matlab}{%
+\chapter{Um Exemplo Comentado do Código Matlab}\label{um-exemplo-comentado-do-cuxf3digo-matlab}}
+
+\hypertarget{introduuxe7uxe3o-12}{%
+\section{Introdução}\label{introduuxe7uxe3o-12}}
+
+Aqui nós fornecemos um exemplo comentado do código Matlab---usando as rotinas de inversão e plotagem padrão disponíveis no SPM12---necessárias para especificar e resolver um modelo generativo. Isso reproduz o exemplo de forrageamento T-maze no capítulo 7. Este apêndice, um pouco seco por si só, será mais útil para leitores que tentarem implementar este código no Matlab para que possam vê-lo funcionando. Recomendamos tentar ``quebrar'' esta demonstração jogando com diferentes valores de parâmetro e alterando o modelo generativo. Somente fazendo isso se desenvolverá um senso intuitivo da mecânica da Inferência Ativa.
+
+\hypertarget{preliminares}{%
+\section{Preliminares}\label{preliminares}}
+
+Presumimos que os leitores tenham alguma familiaridade com o Matlab e tenham baixado com sucesso o pacote de software SPM12 de \url{https://www}\hspace{0pt}.fil\hspace{0pt}.ion\hspace{0pt} .ucl\hspace{0pt}.ac\hspace{0pt}.uk\hspace{0pt}/spm\hspace{0pt}/. O primeiro passo é garantir que a pasta que contém as funções do SPM12 seja adicionada ao caminho do Matlab. Em seguida, abrimos um script Matlab e começamos a escrever nossa demonstração definindo uma função e dando-lhe um nome
+(aqui, demo\_AI\_book):
+
+\includegraphics{images/Figura_C1.png}
+
+A segunda linha na figura C.1 configura o gerador de números aleatórios para uma semente inicial padrão para que os mesmos números aleatórios sejam gerados toda vez que a função for usada. Normalmente fazemos isso para demonstrações, pois isso garante a reprodutibilidade. No entanto, isso pode ser omitido se estivermos executando essa função várias vezes para calcular algumas estatísticas resumidas de comportamento em várias tentativas. É uma boa prática incluir alguns comentários aqui que informem as pessoas sobre o script. Dado que este apêndice é dedicado à comentários deste script, omitimos esta documentação aqui. Em seguida, definimos algumas das constantes importantes que usaremos mais tarde. A vantagem de listá-los juntos aqui é que é fácil encontrá-los, caso queiramos alterá-las mais tarde. Definimos dois parâmetros que desempenharão o papel de probabilidades, cujo papel ficará claro na seção C.3:
+
+\includegraphics{images/Figura_C2.png}
+
+Esta definição garante \(a + b  =  1\). Agora estamos prontos para configurar as matrizes e vetores \(A\), \(B\), \(C\) e \(D\) que definem um modelo generativo. Nesta simulação simples, assumimos que esses parâmetros são os mesmos no modelo generativo e no processo generativo.
 
 \cleardoublepage
 

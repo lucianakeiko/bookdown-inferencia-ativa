@@ -1,7 +1,7 @@
 --- 
 title: "Inferencia Ativa"
 author: "Thomas Parr, Giovanni Pezzulo, and Karl J. Friston"
-date: "`r Sys.Date()`"
+date: "2022-08-15"
 output: 
   html_document: 
     theme: cosmo
@@ -21,12 +21,7 @@ cover-image: images/Figura_1_1.png
 ---
 
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+
 O Princípio da Energia Livre na Mente, Cérebro e Comportamento.
 
 # Conteúdo {-}

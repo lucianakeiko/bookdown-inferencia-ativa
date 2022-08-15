@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-14" />
+<meta name="date" content="2022-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="bases-matemáticas.html"/>
-<link rel="next" href="dicionário.html"/>
+<link rel="next" href="um-exemplo-comentado-do-código-matlab.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -257,6 +257,11 @@
 <li class="chapter" data-level="B.2.6" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#redução-do-modelo-bayesiano"><i class="fa fa-check"></i><b>B.2.6</b> Redução do Modelo Bayesiano</a></li>
 </ul></li>
 <li class="chapter" data-level="B.3" data-path="as-equações-da-inferência-ativa.html"><a href="as-equações-da-inferência-ativa.html#filtragem-generalizada-ativa"><i class="fa fa-check"></i><b>B.3</b> Filtragem Generalizada (Ativa)</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="um-exemplo-comentado-do-código-matlab.html"><a href="um-exemplo-comentado-do-código-matlab.html"><i class="fa fa-check"></i><b>C</b> Um Exemplo Comentado do Código Matlab</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="um-exemplo-comentado-do-código-matlab.html"><a href="um-exemplo-comentado-do-código-matlab.html#introdução-12"><i class="fa fa-check"></i><b>C.1</b> Introdução</a></li>
+<li class="chapter" data-level="C.2" data-path="um-exemplo-comentado-do-código-matlab.html"><a href="um-exemplo-comentado-do-código-matlab.html#preliminares"><i class="fa fa-check"></i><b>C.2</b> Preliminares</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
@@ -541,8 +546,18 @@ Omitimos todas as constantes em relação a μ. A partir da equação B.44, pode
 \nabla_{\tilde \mu_x}F[q,\tilde y] = - \nabla_{\tilde \mu_x}\tilde g \cdot \tilde \Pi_y \tilde \varepsilon_y + D\cdot \tilde \Pi_x \tilde \varepsilon_x - \nabla_{\tilde \mu_x}\tilde f \cdot \tilde \Pi_x \tilde \varepsilon_x \qquad\qquad (B.45) \\
 \nabla_{\tilde \mu_v}F[q,\tilde y] = - \nabla_{\tilde \mu_v}\tilde g \cdot \tilde \Pi_y \tilde \varepsilon_y + \nabla_{\tilde \mu_v} \tilde f\cdot \tilde \Pi_x \tilde \varepsilon_x + \tilde \Pi_v \tilde \varepsilon_v \qquad\qquad\qquad\qquad\]</span></p>
 <p>Podemos agora especificar um gradiente descendente para encontrar os valores de μ que minimizam a energia livre. No entanto, isso implicaria que quando a energia livre é minimizada, μ se torna estático. Claramente, isso é subótimo se acreditarmos que ordens superiores de movimento são diferentes de zero. Para explicar isso, podemos expressar um gradiente descendente em um referencial em movimento, de modo que quando a energia livre é minimizada, <span class="math inline">\(\mu\)</span> continua a se mover com velocidade <span class="math inline">\(\mu&#39;\)</span>:</p>
-<p><span class="math display">\[ \dot {\tilde \mu}^{(i)}_x - D \tilde \mu^{(i)}_x = \nabla_{\tilde \mu^{(i)}_x} \tilde g \cdot \tilde\Pi_v^{(i-1)}\tilde \varepsilon_v^{(i-1)} -D \]</span></p>
-
+<p><span class="math display">\[ \dot {\tilde \mu_x} - D \tilde \mu_x = \nabla_{\tilde \mu_x} \tilde g \cdot \tilde\Pi_y\tilde \varepsilon_y -D \cdot \tilde \Pi_x \tilde \varepsilon_x + \nabla_{\tilde \mu_x} \tilde f \cdot \tilde \Pi_x \tilde \varepsilon_x \qquad (B.46) \\
+\dot {\tilde \mu}_v - D \tilde \mu_v = \nabla_{\tilde \mu_v} \tilde g \cdot \tilde\Pi_y\tilde \varepsilon_y + \nabla_{\tilde \mu_v} \tilde f \cdot \tilde \Pi_x \tilde \varepsilon_x - \tilde \Pi_v \tilde \varepsilon_v \qquad \qquad
+\]</span></p>
+<p>A Equação B.46 especifica um esquema de codificação preditivo, no qual os erros de previsão geram atualizações nas expectativas, resolvendo esses erros. Esses esquemas podem ser estendidos para incluir vários níveis hierárquicos duplicando as equações de B.46 para um nível adicional, mas substituindo <span class="math inline">\(y\)</span> por <span class="math inline">\(v\)</span> do nível inferior:</p>
+<p>$$ ^{(i)}_x - D <sup>{(i)}<em>x = </em>{</sup>{(i)}_x} g _v^{(i-1)}_v^{(i-1)} -D _x^{(i)} <em>x^{(i)} + </em>{_x^{(i)}} f^{(i)} _x^{(i)} _x^{(i)} \
+^{(i)}_v - D <sup>{(i)}<em>x = </em>{</sup>{(i)}_x} g _v<sup>{(i-1)}<em>v^{(i-1)} + </em>{</sup>{(i)}_v}f^{(i)} _x^{(i)} _x^{(i)} + _v^{(i)} _v^{(i)}(B.47) \
+_v^{(i)} _v<sup>{(i)}-g</sup>{(i+1)}(_x^{(i+1)} , _v^{(i+1)}) \
+_x^{(i)} D _x<sup>{(i)}-f</sup>{(i)}(_x^{(i)} , _v^{(i)})</p>
+<p>$$
+Sob a Inferência Ativa, a energia livre é minimizada pela percepção, mas também pela ação. Como a única coisa que a ação muda é a entrada sensorial ( y), a maioria dos termos na equação B.44 são irrelevantes para a ação. Minimizar a energia livre em relação à ação resulta em:</p>
+<p><span class="math display">\[ \dot u = - \nabla_u \tilde y(u) \cdot \tilde \Pi_y \varepsilon_y \qquad (B.48)\]</span></p>
+<p>Juntas, as equações B.47 e B.48 fornecem uma descrição muito geral da Inferência Ativa para modelos de espaço de estados contínuos. Não discutiremos a questão do aprendizado ou modelos mistos nesta seção, pois eles estão resumidos nos quadros 8.2 e 8.3, respectivamente.</p>
 </div>
 </div>
 <div class="footnotes">
@@ -559,7 +574,7 @@ Omitimos todas as constantes em relação a μ. A partir da equação B.44, pode
         </div>
       </div>
 <a href="bases-matemáticas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dicionário.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="um-exemplo-comentado-do-código-matlab.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
