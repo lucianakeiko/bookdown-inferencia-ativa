@@ -23,7 +23,7 @@
 <meta name="author" content="Thomas Parr, Giovanni Pezzulo, and Karl J. Friston" />
 
 
-<meta name="date" content="2022-08-15" />
+<meta name="date" content="2022-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -262,6 +262,7 @@
 <ul>
 <li class="chapter" data-level="C.1" data-path="um-exemplo-comentado-do-código-matlab.html"><a href="um-exemplo-comentado-do-código-matlab.html#introdução-12"><i class="fa fa-check"></i><b>C.1</b> Introdução</a></li>
 <li class="chapter" data-level="C.2" data-path="um-exemplo-comentado-do-código-matlab.html"><a href="um-exemplo-comentado-do-código-matlab.html#preliminares"><i class="fa fa-check"></i><b>C.2</b> Preliminares</a></li>
+<li class="chapter" data-level="C.3" data-path="um-exemplo-comentado-do-código-matlab.html"><a href="um-exemplo-comentado-do-código-matlab.html#a-probabilidade"><i class="fa fa-check"></i><b>C.3</b> A probabilidade</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="dicionário.html"><a href="dicionário.html"><i class="fa fa-check"></i>Dicionário</a></li>
 <li class="divider"></li>
@@ -298,6 +299,11 @@
 <p>A segunda linha na figura C.1 configura o gerador de números aleatórios para uma semente inicial padrão para que os mesmos números aleatórios sejam gerados toda vez que a função for usada. Normalmente fazemos isso para demonstrações, pois isso garante a reprodutibilidade. No entanto, isso pode ser omitido se estivermos executando essa função várias vezes para calcular algumas estatísticas resumidas de comportamento em várias tentativas. É uma boa prática incluir alguns comentários aqui que informem as pessoas sobre o script. Dado que este apêndice é dedicado à comentários deste script, omitimos esta documentação aqui. Em seguida, definimos algumas das constantes importantes que usaremos mais tarde. A vantagem de listá-los juntos aqui é que é fácil encontrá-los, caso queiramos alterá-las mais tarde. Definimos dois parâmetros que desempenharão o papel de probabilidades, cujo papel ficará claro na seção C.3:</p>
 <p><img src="images/Figura_C2.png" /></p>
 <p>Esta definição garante <span class="math inline">\(a + b  =  1\)</span>. Agora estamos prontos para configurar as matrizes e vetores <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span> e <span class="math inline">\(D\)</span> que definem um modelo generativo. Nesta simulação simples, assumimos que esses parâmetros são os mesmos no modelo generativo e no processo generativo.</p>
+</div>
+<div id="a-probabilidade" class="section level2 hasAnchor" number="13.3">
+<h2><span class="header-section-number">C.3</span> A probabilidade<a href="um-exemplo-comentado-do-código-matlab.html#a-probabilidade" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Nosso foco aqui é como formalizar uma matriz de verossimilhança no Matlab, então não vamos dedicar muito espaço para descrever o modelo generativo ou o paradigma que ele descreve.</p>
+<p>(Esta descrição é dada na seção 7.2.) Nosso objetivo é traduzir as matrizes de verossimilhança das figuras 7.4 e 7.5 para uma linguagem que nossas rotinas de inversão entendam. Começamos com A1, que é escrito como A{1}, onde o termo entre colchetes { } corresponde ao sobrescrito (ou seja, modalidade de resultado); veja a figura C.3. Os elementos da matriz (ou tensor, mais tecnicamente) são endereçáveis usando três índices. Estes são o resultado, o primeiro estado oculto (localização) e o segundo estado oculto (contexto). Eles aparecem dentro de colchetes normais ( ). A matriz para o primeiro nível do segundo fator de estado oculto – o contexto no qual o estímulo atrativo está à direita – é então especificada com um índice 1 na terceira posição. O contexto em que está à esquerda é especificado com um índice 2 nesta posição:</p>
 
 </div>
 </div>

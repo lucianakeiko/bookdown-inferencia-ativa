@@ -558,3 +558,8 @@ A segunda linha na figura C.1 configura o gerador de números aleatórios para u
 
 Esta definição garante $a + b  =  1$. Agora estamos prontos para configurar as matrizes e vetores $A$, $B$, $C$ e $D$ que definem um modelo generativo. Nesta simulação simples, assumimos que esses parâmetros são os mesmos no modelo generativo e no processo generativo.
 
+## A probabilidade
+
+Nosso foco aqui é como formalizar uma matriz de verossimilhança no Matlab, então não vamos dedicar muito espaço para descrever o modelo generativo ou o paradigma que ele descreve.
+
+(Esta descrição é dada na seção 7.2.) Nosso objetivo é traduzir as matrizes de verossimilhança das figuras 7.4 e 7.5 para uma linguagem que nossas rotinas de inversão entendam. Começamos com A1, que é escrito como A{1}, onde o termo entre colchetes { } corresponde ao sobrescrito (ou seja, modalidade de resultado); veja a figura C.3. Os elementos da matriz (ou tensor, mais tecnicamente) são endereçáveis usando três índices. Estes são o resultado, o primeiro estado oculto (localização) e o segundo estado oculto (contexto). Eles aparecem dentro de colchetes normais ( ). A matriz para o primeiro nível do segundo fator de estado oculto – o contexto no qual o estímulo atrativo está à direita – é então especificada com um índice 1 na terceira posição. O contexto em que está à esquerda é especificado com um índice 2 nesta posição:
